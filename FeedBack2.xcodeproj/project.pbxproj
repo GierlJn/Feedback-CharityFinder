@@ -9,20 +9,19 @@
 /* Begin PBXBuildFile section */
 		B9664EA925247C9500637BDF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9664EA825247C9500637BDF /* AppDelegate.swift */; };
 		B9664EAB25247C9500637BDF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9664EAA25247C9500637BDF /* SceneDelegate.swift */; };
-		B9664EAD25247C9500637BDF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9664EAC25247C9500637BDF /* ViewController.swift */; };
 		B9664EB225247C9600637BDF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9664EB125247C9600637BDF /* Assets.xcassets */; };
 		B9664EB525247C9600637BDF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9664EB325247C9600637BDF /* LaunchScreen.storyboard */; };
 		B9664EBD2524826400637BDF /* FBTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9664EBC2524826400637BDF /* FBTabBarController.swift */; };
 		B9664EBF2524834500637BDF /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9664EBE2524834500637BDF /* SearchVC.swift */; };
 		B9664EC12524834E00637BDF /* FavouritesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9664EC02524834E00637BDF /* FavouritesVC.swift */; };
 		B9664EC32524864900637BDF /* FBButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9664EC22524864900637BDF /* FBButton.swift */; };
+		B9664EC525248B1000637BDF /* CharityListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9664EC425248B1000637BDF /* CharityListVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		B9664EA525247C9500637BDF /* FeedBack2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FeedBack2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9664EA825247C9500637BDF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B9664EAA25247C9500637BDF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		B9664EAC25247C9500637BDF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		B9664EB125247C9600637BDF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B9664EB425247C9600637BDF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B9664EB625247C9600637BDF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -30,6 +29,7 @@
 		B9664EBE2524834500637BDF /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		B9664EC02524834E00637BDF /* FavouritesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesVC.swift; sourceTree = "<group>"; };
 		B9664EC22524864900637BDF /* FBButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBButton.swift; sourceTree = "<group>"; };
+		B9664EC425248B1000637BDF /* CharityListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharityListVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,18 +62,34 @@
 		B9664EA725247C9500637BDF /* FeedBack2 */ = {
 			isa = PBXGroup;
 			children = (
-				B9664EA825247C9500637BDF /* AppDelegate.swift */,
-				B9664EAA25247C9500637BDF /* SceneDelegate.swift */,
-				B9664EAC25247C9500637BDF /* ViewController.swift */,
-				B9664EB125247C9600637BDF /* Assets.xcassets */,
-				B9664EB325247C9600637BDF /* LaunchScreen.storyboard */,
+				B9664EC725248BF400637BDF /* Support */,
+				B9664EC625248BCD00637BDF /* Screens */,
 				B9664EB625247C9600637BDF /* Info.plist */,
 				B9664EBC2524826400637BDF /* FBTabBarController.swift */,
-				B9664EBE2524834500637BDF /* SearchVC.swift */,
-				B9664EC02524834E00637BDF /* FavouritesVC.swift */,
 				B9664EC22524864900637BDF /* FBButton.swift */,
 			);
 			path = FeedBack2;
+			sourceTree = "<group>";
+		};
+		B9664EC625248BCD00637BDF /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				B9664EBE2524834500637BDF /* SearchVC.swift */,
+				B9664EC02524834E00637BDF /* FavouritesVC.swift */,
+				B9664EC425248B1000637BDF /* CharityListVC.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		B9664EC725248BF400637BDF /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				B9664EA825247C9500637BDF /* AppDelegate.swift */,
+				B9664EAA25247C9500637BDF /* SceneDelegate.swift */,
+				B9664EB125247C9600637BDF /* Assets.xcassets */,
+				B9664EB325247C9600637BDF /* LaunchScreen.storyboard */,
+			);
+			path = Support;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -146,13 +162,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B9664EAD25247C9500637BDF /* ViewController.swift in Sources */,
 				B9664EBF2524834500637BDF /* SearchVC.swift in Sources */,
 				B9664EC12524834E00637BDF /* FavouritesVC.swift in Sources */,
 				B9664EA925247C9500637BDF /* AppDelegate.swift in Sources */,
 				B9664EAB25247C9500637BDF /* SceneDelegate.swift in Sources */,
 				B9664EBD2524826400637BDF /* FBTabBarController.swift in Sources */,
 				B9664EC32524864900637BDF /* FBButton.swift in Sources */,
+				B9664EC525248B1000637BDF /* CharityListVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

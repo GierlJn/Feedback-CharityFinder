@@ -24,7 +24,12 @@ class SearchVC: UIViewController{
             actionButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             actionButton.heightAnchor.constraint(equalToConstant: 40),
             actionButton.widthAnchor.constraint(equalToConstant: 150)
-        
         ])
+        actionButton.addTarget(self, action: #selector(actionButtonPressed), for: .touchUpInside)
+    }
+    
+    @objc func actionButtonPressed(){
+        let charityListVC = CharityListVC()
+        navigationController?.pushViewController(charityListVC, animated: true)
     }
 }
