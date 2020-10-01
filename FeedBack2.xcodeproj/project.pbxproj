@@ -16,6 +16,8 @@
 		B9664EC12524834E00637BDF /* FavouritesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9664EC02524834E00637BDF /* FavouritesVC.swift */; };
 		B9664EC32524864900637BDF /* FBButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9664EC22524864900637BDF /* FBButton.swift */; };
 		B9664EC525248B1000637BDF /* CharityListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9664EC425248B1000637BDF /* CharityListVC.swift */; };
+		B9FF36A32525B0300065AC17 /* Charity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FF36A22525B0300065AC17 /* Charity.swift */; };
+		B9FF36A62525B1090065AC17 /* CharityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FF36A52525B1090065AC17 /* CharityCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		B9664EC02524834E00637BDF /* FavouritesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesVC.swift; sourceTree = "<group>"; };
 		B9664EC22524864900637BDF /* FBButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBButton.swift; sourceTree = "<group>"; };
 		B9664EC425248B1000637BDF /* CharityListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharityListVC.swift; sourceTree = "<group>"; };
+		B9FF36A22525B0300065AC17 /* Charity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Charity.swift; sourceTree = "<group>"; };
+		B9FF36A52525B1090065AC17 /* CharityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharityCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +66,8 @@
 		B9664EA725247C9500637BDF /* FeedBack2 */ = {
 			isa = PBXGroup;
 			children = (
+				B9FF36A42525B1010065AC17 /* Cells */,
+				B9FF36A12525B0250065AC17 /* Model */,
 				B9664EC725248BF400637BDF /* Support */,
 				B9664EC625248BCD00637BDF /* Screens */,
 				B9664EB625247C9600637BDF /* Info.plist */,
@@ -90,6 +96,22 @@
 				B9664EB325247C9600637BDF /* LaunchScreen.storyboard */,
 			);
 			path = Support;
+			sourceTree = "<group>";
+		};
+		B9FF36A12525B0250065AC17 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B9FF36A22525B0300065AC17 /* Charity.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B9FF36A42525B1010065AC17 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				B9FF36A52525B1090065AC17 /* CharityCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -164,8 +186,10 @@
 			files = (
 				B9664EBF2524834500637BDF /* SearchVC.swift in Sources */,
 				B9664EC12524834E00637BDF /* FavouritesVC.swift in Sources */,
+				B9FF36A62525B1090065AC17 /* CharityCell.swift in Sources */,
 				B9664EA925247C9500637BDF /* AppDelegate.swift in Sources */,
 				B9664EAB25247C9500637BDF /* SceneDelegate.swift in Sources */,
+				B9FF36A32525B0300065AC17 /* Charity.swift in Sources */,
 				B9664EBD2524826400637BDF /* FBTabBarController.swift in Sources */,
 				B9664EC32524864900637BDF /* FBButton.swift in Sources */,
 				B9664EC525248B1000637BDF /* CharityListVC.swift in Sources */,
