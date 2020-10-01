@@ -33,7 +33,7 @@ class CharityListVC: UIViewController{
         tableView.backgroundColor = .systemBackground
         tableView.register(CharityCell.self, forCellReuseIdentifier: CharityCell.reuseIdentifier)
         tableView.delegate = self
-        tableView.rowHeight = 150
+        tableView.rowHeight = 100
     }
     
     private func configureDataSource(){
