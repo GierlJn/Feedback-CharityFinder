@@ -18,6 +18,8 @@
 		B9664EC525248B1000637BDF /* CharityListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9664EC425248B1000637BDF /* CharityListVC.swift */; };
 		B9FF36A32525B0300065AC17 /* Charity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FF36A22525B0300065AC17 /* Charity.swift */; };
 		B9FF36A62525B1090065AC17 /* CharityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FF36A52525B1090065AC17 /* CharityCell.swift */; };
+		B9FF36A92525B8D70065AC17 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FF36A82525B8D70065AC17 /* NetworkManager.swift */; };
+		B9FF36AD2525BE2E0065AC17 /* FBError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FF36AC2525BE2E0065AC17 /* FBError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		B9664EC425248B1000637BDF /* CharityListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharityListVC.swift; sourceTree = "<group>"; };
 		B9FF36A22525B0300065AC17 /* Charity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Charity.swift; sourceTree = "<group>"; };
 		B9FF36A52525B1090065AC17 /* CharityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharityCell.swift; sourceTree = "<group>"; };
+		B9FF36A82525B8D70065AC17 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		B9FF36AC2525BE2E0065AC17 /* FBError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +70,8 @@
 		B9664EA725247C9500637BDF /* FeedBack2 */ = {
 			isa = PBXGroup;
 			children = (
+				B9FF36AB2525BE200065AC17 /* Utilities */,
+				B9FF36A72525B8CC0065AC17 /* Managers */,
 				B9FF36A42525B1010065AC17 /* Cells */,
 				B9FF36A12525B0250065AC17 /* Model */,
 				B9664EC725248BF400637BDF /* Support */,
@@ -112,6 +118,22 @@
 				B9FF36A52525B1090065AC17 /* CharityCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		B9FF36A72525B8CC0065AC17 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				B9FF36A82525B8D70065AC17 /* NetworkManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		B9FF36AB2525BE200065AC17 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				B9FF36AC2525BE2E0065AC17 /* FBError.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -186,6 +208,7 @@
 			files = (
 				B9664EBF2524834500637BDF /* SearchVC.swift in Sources */,
 				B9664EC12524834E00637BDF /* FavouritesVC.swift in Sources */,
+				B9FF36A92525B8D70065AC17 /* NetworkManager.swift in Sources */,
 				B9FF36A62525B1090065AC17 /* CharityCell.swift in Sources */,
 				B9664EA925247C9500637BDF /* AppDelegate.swift in Sources */,
 				B9664EAB25247C9500637BDF /* SceneDelegate.swift in Sources */,
@@ -193,6 +216,7 @@
 				B9664EBD2524826400637BDF /* FBTabBarController.swift in Sources */,
 				B9664EC32524864900637BDF /* FBButton.swift in Sources */,
 				B9664EC525248B1000637BDF /* CharityListVC.swift in Sources */,
+				B9FF36AD2525BE2E0065AC17 /* FBError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

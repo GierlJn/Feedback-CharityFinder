@@ -17,14 +17,24 @@ class CharityListVC: UIViewController{
     var tableView: UITableView!
     var dataSource: UITableViewDiffableDataSource<Section, Charity>!
     
-    let testData = [Charity(name: "Test1"), Charity(name: "Test2"), Charity(name: "Test3")]
+    let networkManager = NetworkManager()
     
     override func viewDidLoad() {
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.prefersLargeTitles = true
         configureViewController()
         configureDataSource()
-        updateData(charities: testData)
+        
+        networkManager.getCharities(urlString: "https://app.sogive.org/search.json?q=a") { [weak self] result in
+            guard let self = self else { return }
+            
+            switch(result){
+            case .failure(let error):
+                print(error)
+            case .success(let charities):
+                self.updateData(charities: charities)
+            }
+        }
     }
     
     private func configureViewController(){
