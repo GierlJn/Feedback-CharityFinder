@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B9273CD925270C6700FE7155 /* CharityInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9273CD825270C6700FE7155 /* CharityInfoView.swift */; };
+		B9273CDB25273EB000FE7155 /* FBTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9273CDA25273EB000FE7155 /* FBTextField.swift */; };
 		B9664EA925247C9500637BDF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9664EA825247C9500637BDF /* AppDelegate.swift */; };
 		B9664EAB25247C9500637BDF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9664EAA25247C9500637BDF /* SceneDelegate.swift */; };
 		B9664EB225247C9600637BDF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9664EB125247C9600637BDF /* Assets.xcassets */; };
@@ -25,6 +26,7 @@
 
 /* Begin PBXFileReference section */
 		B9273CD825270C6700FE7155 /* CharityInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharityInfoView.swift; sourceTree = "<group>"; };
+		B9273CDA25273EB000FE7155 /* FBTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBTextField.swift; sourceTree = "<group>"; };
 		B9664EA525247C9500637BDF /* FeedBack2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FeedBack2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9664EA825247C9500637BDF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B9664EAA25247C9500637BDF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -56,7 +58,9 @@
 		B9273CD725270C5800FE7155 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B9664EC22524864900637BDF /* FBButton.swift */,
 				B9273CD825270C6700FE7155 /* CharityInfoView.swift */,
+				B9273CDA25273EB000FE7155 /* FBTextField.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -89,7 +93,6 @@
 				B9664EC625248BCD00637BDF /* Screens */,
 				B9664EB625247C9600637BDF /* Info.plist */,
 				B9664EBC2524826400637BDF /* FBTabBarController.swift */,
-				B9664EC22524864900637BDF /* FBButton.swift */,
 			);
 			path = FeedBack2;
 			sourceTree = "<group>";
@@ -225,6 +228,7 @@
 				B9664EAB25247C9500637BDF /* SceneDelegate.swift in Sources */,
 				B9FF36A32525B0300065AC17 /* Charity.swift in Sources */,
 				B9664EBD2524826400637BDF /* FBTabBarController.swift in Sources */,
+				B9273CDB25273EB000FE7155 /* FBTextField.swift in Sources */,
 				B9664EC32524864900637BDF /* FBButton.swift in Sources */,
 				B9664EC525248B1000637BDF /* CharityListVC.swift in Sources */,
 				B9FF36AD2525BE2E0065AC17 /* FBError.swift in Sources */,
