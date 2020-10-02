@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		B9273CD925270C6700FE7155 /* CharityInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9273CD825270C6700FE7155 /* CharityInfoView.swift */; };
 		B9273CDB25273EB000FE7155 /* FBTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9273CDA25273EB000FE7155 /* FBTextField.swift */; };
+		B9273CDD252746F700FE7155 /* Impact.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9273CDC252746F700FE7155 /* Impact.swift */; };
+		B9273CDF2527470900FE7155 /* Charity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9273CDE2527470900FE7155 /* Charity.swift */; };
 		B9664EA925247C9500637BDF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9664EA825247C9500637BDF /* AppDelegate.swift */; };
 		B9664EAB25247C9500637BDF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9664EAA25247C9500637BDF /* SceneDelegate.swift */; };
 		B9664EB225247C9600637BDF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9664EB125247C9600637BDF /* Assets.xcassets */; };
@@ -18,7 +20,7 @@
 		B9664EC12524834E00637BDF /* FavouritesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9664EC02524834E00637BDF /* FavouritesVC.swift */; };
 		B9664EC32524864900637BDF /* FBButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9664EC22524864900637BDF /* FBButton.swift */; };
 		B9664EC525248B1000637BDF /* CharityListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9664EC425248B1000637BDF /* CharityListVC.swift */; };
-		B9FF36A32525B0300065AC17 /* Charity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FF36A22525B0300065AC17 /* Charity.swift */; };
+		B9FF36A32525B0300065AC17 /* RawServerResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FF36A22525B0300065AC17 /* RawServerResponse.swift */; };
 		B9FF36A62525B1090065AC17 /* CharityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FF36A52525B1090065AC17 /* CharityCell.swift */; };
 		B9FF36A92525B8D70065AC17 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FF36A82525B8D70065AC17 /* NetworkManager.swift */; };
 		B9FF36AD2525BE2E0065AC17 /* FBError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FF36AC2525BE2E0065AC17 /* FBError.swift */; };
@@ -27,6 +29,8 @@
 /* Begin PBXFileReference section */
 		B9273CD825270C6700FE7155 /* CharityInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharityInfoView.swift; sourceTree = "<group>"; };
 		B9273CDA25273EB000FE7155 /* FBTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBTextField.swift; sourceTree = "<group>"; };
+		B9273CDC252746F700FE7155 /* Impact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Impact.swift; sourceTree = "<group>"; };
+		B9273CDE2527470900FE7155 /* Charity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Charity.swift; sourceTree = "<group>"; };
 		B9664EA525247C9500637BDF /* FeedBack2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FeedBack2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9664EA825247C9500637BDF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B9664EAA25247C9500637BDF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -38,7 +42,7 @@
 		B9664EC02524834E00637BDF /* FavouritesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesVC.swift; sourceTree = "<group>"; };
 		B9664EC22524864900637BDF /* FBButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBButton.swift; sourceTree = "<group>"; };
 		B9664EC425248B1000637BDF /* CharityListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharityListVC.swift; sourceTree = "<group>"; };
-		B9FF36A22525B0300065AC17 /* Charity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Charity.swift; sourceTree = "<group>"; };
+		B9FF36A22525B0300065AC17 /* RawServerResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawServerResponse.swift; sourceTree = "<group>"; };
 		B9FF36A52525B1090065AC17 /* CharityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharityCell.swift; sourceTree = "<group>"; };
 		B9FF36A82525B8D70065AC17 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		B9FF36AC2525BE2E0065AC17 /* FBError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBError.swift; sourceTree = "<group>"; };
@@ -121,7 +125,9 @@
 		B9FF36A12525B0250065AC17 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				B9FF36A22525B0300065AC17 /* Charity.swift */,
+				B9FF36A22525B0300065AC17 /* RawServerResponse.swift */,
+				B9273CDC252746F700FE7155 /* Impact.swift */,
+				B9273CDE2527470900FE7155 /* Charity.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -226,11 +232,13 @@
 				B9FF36A62525B1090065AC17 /* CharityCell.swift in Sources */,
 				B9664EA925247C9500637BDF /* AppDelegate.swift in Sources */,
 				B9664EAB25247C9500637BDF /* SceneDelegate.swift in Sources */,
-				B9FF36A32525B0300065AC17 /* Charity.swift in Sources */,
+				B9FF36A32525B0300065AC17 /* RawServerResponse.swift in Sources */,
+				B9273CDF2527470900FE7155 /* Charity.swift in Sources */,
 				B9664EBD2524826400637BDF /* FBTabBarController.swift in Sources */,
 				B9273CDB25273EB000FE7155 /* FBTextField.swift in Sources */,
 				B9664EC32524864900637BDF /* FBButton.swift in Sources */,
 				B9664EC525248B1000637BDF /* CharityListVC.swift in Sources */,
+				B9273CDD252746F700FE7155 /* Impact.swift in Sources */,
 				B9FF36AD2525BE2E0065AC17 /* FBError.swift in Sources */,
 				B9273CD925270C6700FE7155 /* CharityInfoView.swift in Sources */,
 			);

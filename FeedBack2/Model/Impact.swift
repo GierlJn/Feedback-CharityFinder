@@ -1,5 +1,5 @@
 //
-//  Charity.swift
+//  Impact.swift
 //  FeedBack2
 //
 //  Created by Julian Gierl on 02.10.20.
@@ -8,9 +8,7 @@
 
 import Foundation
 
-struct Charity: Hashable{
-    var name: String
-    var id: String
-    var output: Impact
-    var logoUrl: String
+struct Impact: Hashable{
+    var impactDecsription: String
+    var costPerBeneficiary: Float
 }
