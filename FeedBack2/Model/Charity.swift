@@ -8,12 +8,12 @@
 
 import Foundation
 
-struct SoGiveSearchResponse{
+struct RawServerResponse{
     let charities: [Charity]
 }
 
 
-extension SoGiveSearchResponse: Decodable{
+extension RawServerResponse: Decodable{
     enum CodingKeys: String, CodingKey{
         case cargo
         
@@ -23,6 +23,7 @@ extension SoGiveSearchResponse: Decodable{
             enum HitsKeys: String, CodingKey{
                 case id = "@id"
                 case name = "name"
+                case logoUrl = "logo"
                 case displayName = "displayName"
                 case projects = "projects"
                 
@@ -57,17 +58,16 @@ extension SoGiveSearchResponse: Decodable{
             let id = try charityContainer.decode(String.self, forKey: .id)
             let name = try? charityContainer.decode(String.self, forKey: .name)
             let displayName = try? charityContainer.decode(String.self, forKey: .displayName)
+            let logoUrl = try charityContainer.decode(String.self, forKey: .logoUrl)
             let charityName = displayName ?? name
-            var selectedOutput: Output?
+            var selectedImpact: Impact?
             
             var projectsContainer = try charityContainer.nestedUnkeyedContainer(forKey: .projects)
+            
             while !projectsContainer.isAtEnd{
                 let projectsContainer2 = try projectsContainer.nestedContainer(keyedBy: CodingKeys.CargoKeys.HitsKeys.ProjectKeys.self)
-                
                 var outputsContainer = try projectsContainer2.nestedUnkeyedContainer(forKey: .outputs)
-                
-                
-                var outputs = [Output]()
+                var allAvailableImpacts = [Impact]()
                 while !outputsContainer.isAtEnd{
                     let outputsContainer2 = try outputsContainer.nestedContainer(keyedBy: CodingKeys.CargoKeys.HitsKeys.ProjectKeys.OutputKeys.self)
                     
@@ -77,30 +77,24 @@ extension SoGiveSearchResponse: Decodable{
                     let costPerBeneficiary = try? costPerBeneficiaryContainer?.decode(Float.self, forKey: .value)
                     
                     if(impactDecsription != nil && costPerBeneficiary != nil){
-                        let output = Output(impactDecsription: impactDecsription!, costPerBeneficiary: costPerBeneficiary!)
-                        outputs.append(output)
+                        let output = Impact(impactDecsription: impactDecsription!, costPerBeneficiary: costPerBeneficiary!)
+                        allAvailableImpacts.append(output)
                     }
-                    selectedOutput = outputs.first
-                    selectedOutput = outputs.first(where: {$0.costPerBeneficiary > selectedOutput!.costPerBeneficiary}) ?? selectedOutput
+                    selectedImpact = allAvailableImpacts.first
+                    selectedImpact = allAvailableImpacts.first(where: {$0.costPerBeneficiary > selectedImpact!.costPerBeneficiary}) ?? selectedImpact
                 }
             }
             
-            
-            
-            
-            if(charityName != nil && selectedOutput != nil){
-                let charity = Charity(name: charityName!, id: id, output: selectedOutput!)
+            if(charityName != nil && selectedImpact != nil){
+                let charity = Charity(name: charityName!, id: id, output: selectedImpact!, logoUrl: logoUrl)
                 charities.append(charity)
             }
         }
         self.charities = charities
     }
-    
-
-    
 }
 
-struct Output: Hashable{
+struct Impact: Hashable{
     var impactDecsription: String
     var costPerBeneficiary: Float
 }
@@ -110,7 +104,8 @@ struct Output: Hashable{
 struct Charity: Hashable{
     var name: String
     var id: String
-    var output: Output
+    var output: Impact
+    var logoUrl: String
 }
 
 

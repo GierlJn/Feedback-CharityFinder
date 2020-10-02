@@ -19,22 +19,15 @@ class CharityListVC: UIViewController{
     
     let networkManager = NetworkManager()
     
+    var donationAmount: Float = 0.0
+    
     override func viewDidLoad() {
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.prefersLargeTitles = true
         configureViewController()
         configureDataSource()
         
-        networkManager.getCharities(urlString: "https://app.sogive.org/search.json?q=high") { [weak self] result in
-            guard let self = self else { return }
-            
-            switch(result){
-            case .failure(let error):
-                print(error)
-            case .success(let charities):
-                self.updateData(charities: charities)
-            }
-        }
+        getCharities()
     }
     
     private func configureViewController(){
@@ -43,7 +36,7 @@ class CharityListVC: UIViewController{
         tableView.backgroundColor = .systemBackground
         tableView.register(CharityCell.self, forCellReuseIdentifier: CharityCell.reuseIdentifier)
         tableView.delegate = self
-        tableView.rowHeight = 100
+        tableView.rowHeight = 140
     }
     
     private func configureDataSource(){
@@ -52,6 +45,18 @@ class CharityListVC: UIViewController{
             cell.set(charity: charity)
             return cell
         })
+    }
+    
+    private func getCharities() {
+        networkManager.getCharities(urlString: "https://app.sogive.org/search.json?q=high") { [weak self] result in
+            guard let self = self else { return }
+            switch(result){
+            case .failure(let error):
+                print(error)
+            case .success(let charities):
+                self.updateData(charities: charities)
+            }
+        }
     }
     
     private func updateData(charities: [Charity]){

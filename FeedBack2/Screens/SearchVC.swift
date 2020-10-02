@@ -42,6 +42,12 @@ class SearchVC: UIViewController{
     
     @objc func actionButtonPressed(){
         let charityListVC = CharityListVC()
+        
+        if(!textfield.text!.isEmpty){
+            charityListVC.donationAmount = Float(textfield.text ?? "0.0")!
+            charityListVC.title = textfield.text ?? "0.0"
+        }
+        
         navigationController?.pushViewController(charityListVC, animated: true)
     }
 }

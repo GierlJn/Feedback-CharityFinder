@@ -40,7 +40,7 @@ class NetworkManager{
             
             do{
                 let decoder = JSONDecoder()
-                let jsonResponse = try decoder.decode(SoGiveSearchResponse.self, from: data)
+                let jsonResponse = try decoder.decode(RawServerResponse.self, from: data)
                 completed(.success(jsonResponse.charities))
                 return
             }catch{
