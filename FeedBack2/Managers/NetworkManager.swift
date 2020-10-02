@@ -6,7 +6,7 @@
 //  Copyright © 2020 Julian Gierl. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class NetworkManager{
     
@@ -48,40 +48,28 @@ class NetworkManager{
                 return
             }
         }
+        task.resume()
+    }
+    
+    func downloadLogo(urlString: String, completed: @escaping(Result<UIImage, FBError>) -> Void){
+        guard let url = URL(string: urlString) else {
+            completed(.failure(.unableToConnect))
+            return
+        }
         
-        
-        
-        
+        let task = URLSession.shared.dataTask(with: url) { [weak self] (data, response, error) in
+            guard let self = self,
+                error == nil,
+                let response = response as? HTTPURLResponse, response.statusCode == 200,
+                let data = data,
+                let image = UIImage(data: data) else {
+                    completed(.failure(.invalidData))
+                    return
+            }
+            ImageCache.shared.setImage(image: image, key: urlString)
+            completed(.success(image))
+        }
         task.resume()
     }
     
 }
-extension Data {
-    var prettyPrintedJSONString: NSString? { /// NSString gives us a nice sanitized debugDescription
-        guard let object = try? JSONSerialization.jsonObject(with: self, options: []),
-              let data = try? JSONSerialization.data(withJSONObject: object, options: [.prettyPrinted]),
-              let prettyPrintedString = NSString(data: data, encoding: String.Encoding.utf8.rawValue) else { return nil }
-
-        return prettyPrintedString
-    }
-}
-
-//private extension NetworkManager {
-//    func decode(_ data: Data) {
-//        let decoder = JSONDecoder()
-//        //decoder.dateDecodingStrategy = .formatted(DateFormatter.fullISO8601)
-//        launches = (try? decoder.decode([Launch].self, from: data)) ?? []
-//        for launch in launches {
-//            fetchPatch(for: launch)
-//        }
-//    }
-//
-//    func fetchPatch(for launch: Launch) {
-//        let request = NetworkRequest(url: launch.patchURL)
-//        request.execute { [weak self] (data) in
-//            guard let data = data else { return }
-//            guard let index = self?.launches.firstIndex(where: { $0.id == launch.id }) else { return }
-//            self?.launches[index].patch = UIImage(data: data)
-//        }
-//    }
-//}
