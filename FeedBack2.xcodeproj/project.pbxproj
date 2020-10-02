@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B9273CD925270C6700FE7155 /* CharityInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9273CD825270C6700FE7155 /* CharityInfoView.swift */; };
 		B9664EA925247C9500637BDF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9664EA825247C9500637BDF /* AppDelegate.swift */; };
 		B9664EAB25247C9500637BDF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9664EAA25247C9500637BDF /* SceneDelegate.swift */; };
 		B9664EB225247C9600637BDF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9664EB125247C9600637BDF /* Assets.xcassets */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B9273CD825270C6700FE7155 /* CharityInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharityInfoView.swift; sourceTree = "<group>"; };
 		B9664EA525247C9500637BDF /* FeedBack2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FeedBack2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9664EA825247C9500637BDF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B9664EAA25247C9500637BDF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -51,6 +53,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B9273CD725270C5800FE7155 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B9273CD825270C6700FE7155 /* CharityInfoView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		B9664E9C25247C9500637BDF = {
 			isa = PBXGroup;
 			children = (
@@ -70,6 +80,7 @@
 		B9664EA725247C9500637BDF /* FeedBack2 */ = {
 			isa = PBXGroup;
 			children = (
+				B9273CD725270C5800FE7155 /* Views */,
 				B9FF36AB2525BE200065AC17 /* Utilities */,
 				B9FF36A72525B8CC0065AC17 /* Managers */,
 				B9FF36A42525B1010065AC17 /* Cells */,
@@ -217,6 +228,7 @@
 				B9664EC32524864900637BDF /* FBButton.swift in Sources */,
 				B9664EC525248B1000637BDF /* CharityListVC.swift in Sources */,
 				B9FF36AD2525BE2E0065AC17 /* FBError.swift in Sources */,
+				B9273CD925270C6700FE7155 /* CharityInfoView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -25,7 +25,7 @@ class CharityListVC: UIViewController{
         configureViewController()
         configureDataSource()
         
-        networkManager.getCharities(urlString: "https://app.sogive.org/search.json?q=a") { [weak self] result in
+        networkManager.getCharities(urlString: "https://app.sogive.org/search.json?q=high") { [weak self] result in
             guard let self = self else { return }
             
             switch(result){
@@ -63,5 +63,8 @@ class CharityListVC: UIViewController{
 }
 
 extension CharityListVC: UITableViewDelegate{
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //
+    }
 }
 
