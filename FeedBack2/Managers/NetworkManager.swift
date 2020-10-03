@@ -40,8 +40,8 @@ class NetworkManager{
             
             do{
                 let decoder = JSONDecoder()
-                let jsonResponse = try decoder.decode(RawServerResponse.self, from: data)
-                completed(.success(jsonResponse.charities))
+                let rawServerResponse = try decoder.decode(ServerResponse.self, from: data)
+                completed(.success(try self.decodeRawServerResponse(rawServerResponse)))
                 return
             }catch{
                 completed(.failure(.invalidData))
@@ -49,6 +49,34 @@ class NetworkManager{
             }
         }
         task.resume()
+    }
+    
+    private func decodeRawServerResponse(_ rawServerResponse: ServerResponse) throws -> [Charity] {
+        guard let cargo = rawServerResponse.cargo else { throw FBError.invalidData }
+        guard let hits = cargo.hits else { throw FBError.invalidData }
+        var charities = [Charity]()
+        for hit in hits {
+            var charityMainOutput: Output?
+            if let projects = hit.projects{
+                if var outputs = projects.first?.outputs{
+                    outputs.removeAll(where: {$0.costPerBeneficiary == nil || $0.name == nil})
+                    charityMainOutput = outputs.first
+                    for output in outputs{
+                        if let value = output.costPerBeneficiary?.value{
+                            if(value > (charityMainOutput?.costPerBeneficiary!.value)!){
+                                charityMainOutput = output
+                            }
+                        }
+                    }
+                }
+            }
+            let name = hit.displayName ?? hit.name
+            if(charityMainOutput != nil && name != nil){
+                let charity = Charity(name: name!, id: hit.id!, output: charityMainOutput!, logoUrl: hit.logo!)
+                charities.append(charity)
+            }
+        }
+        return charities
     }
     
     func downloadLogo(urlString: String, completed: @escaping(Result<UIImage, FBError>) -> Void){

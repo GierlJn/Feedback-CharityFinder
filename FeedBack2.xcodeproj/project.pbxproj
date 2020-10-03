@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B912457225284C26002B85C5 /* ServerResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B912457125284C26002B85C5 /* ServerResponse.swift */; };
 		B9273CD925270C6700FE7155 /* CharityInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9273CD825270C6700FE7155 /* CharityInfoView.swift */; };
 		B9273CDB25273EB000FE7155 /* FBTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9273CDA25273EB000FE7155 /* FBTextField.swift */; };
-		B9273CDD252746F700FE7155 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9273CDC252746F700FE7155 /* Project.swift */; };
+		B9273CDD252746F700FE7155 /* ImpactProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9273CDC252746F700FE7155 /* ImpactProject.swift */; };
 		B9273CDF2527470900FE7155 /* Charity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9273CDE2527470900FE7155 /* Charity.swift */; };
 		B9273CE12527474000FE7155 /* FBLogoImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9273CE02527474000FE7155 /* FBLogoImageView.swift */; };
 		B9273CE525274B1700FE7155 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9273CE425274B1700FE7155 /* ImageCache.swift */; };
@@ -29,9 +30,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B912457125284C26002B85C5 /* ServerResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerResponse.swift; sourceTree = "<group>"; };
 		B9273CD825270C6700FE7155 /* CharityInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharityInfoView.swift; sourceTree = "<group>"; };
 		B9273CDA25273EB000FE7155 /* FBTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBTextField.swift; sourceTree = "<group>"; };
-		B9273CDC252746F700FE7155 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
+		B9273CDC252746F700FE7155 /* ImpactProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactProject.swift; sourceTree = "<group>"; };
 		B9273CDE2527470900FE7155 /* Charity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Charity.swift; sourceTree = "<group>"; };
 		B9273CE02527474000FE7155 /* FBLogoImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBLogoImageView.swift; sourceTree = "<group>"; };
 		B9273CE425274B1700FE7155 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
@@ -131,8 +133,9 @@
 			isa = PBXGroup;
 			children = (
 				B9FF36A22525B0300065AC17 /* RawServerResponse.swift */,
-				B9273CDC252746F700FE7155 /* Project.swift */,
+				B9273CDC252746F700FE7155 /* ImpactProject.swift */,
 				B9273CDE2527470900FE7155 /* Charity.swift */,
+				B912457125284C26002B85C5 /* ServerResponse.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -246,8 +249,9 @@
 				B9273CDB25273EB000FE7155 /* FBTextField.swift in Sources */,
 				B9664EC32524864900637BDF /* FBButton.swift in Sources */,
 				B9664EC525248B1000637BDF /* CharityListVC.swift in Sources */,
-				B9273CDD252746F700FE7155 /* Project.swift in Sources */,
+				B9273CDD252746F700FE7155 /* ImpactProject.swift in Sources */,
 				B9FF36AD2525BE2E0065AC17 /* FBError.swift in Sources */,
+				B912457225284C26002B85C5 /* ServerResponse.swift in Sources */,
 				B9273CD925270C6700FE7155 /* CharityInfoView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

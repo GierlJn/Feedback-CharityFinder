@@ -28,7 +28,7 @@ class CharityCell: UITableViewCell{
     
     func set(charity: Charity){
         titleLabel.text = charity.name
-        impactDescriptionLabel.text = charity.output.projectDecsription
+        impactDescriptionLabel.text = charity.output.name
         logoImageView.setLogoImage(logoUrl: charity.logoUrl)
     }
     
