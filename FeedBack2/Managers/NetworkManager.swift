@@ -58,17 +58,20 @@ class NetworkManager{
         for hit in hits {
             var charityMainOutput: Output?
             if let projects = hit.projects{
-                if var outputs = projects.first?.outputs{
-                    outputs.removeAll(where: {$0.costPerBeneficiary == nil || $0.name == nil})
-                    charityMainOutput = outputs.first
-                    for output in outputs{
-                        if let value = output.costPerBeneficiary?.value{
-                            if(value > (charityMainOutput?.costPerBeneficiary!.value)!){
-                                charityMainOutput = output
+                for project in projects{
+                    if var outputs = project.outputs{
+                        outputs.removeAll(where: {$0.costPerBeneficiary == nil || $0.name == nil})
+                        charityMainOutput = outputs.first
+                        for output in outputs{
+                            if let value = output.costPerBeneficiary?.value{
+                                if(value > (charityMainOutput?.costPerBeneficiary!.value)!){
+                                    charityMainOutput = output
+                                }
                             }
                         }
                     }
                 }
+                
             }
             let name = hit.displayName ?? hit.name
             if(charityMainOutput != nil && name != nil){
