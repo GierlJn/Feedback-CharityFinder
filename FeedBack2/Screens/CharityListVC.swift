@@ -49,7 +49,7 @@ class CharityListVC: UIViewController{
     }
     
     private func getCharities() {
-        networkManager.getCharities(urlString: "https://app.sogive.org/search.json?q=animals") { [weak self] result in
+        networkManager.getCharities(urlString: "https://app.sogive.org/search.json?q=high") { [weak self] result in
             guard let self = self else { return }
             switch(result){
             case .failure(let error):
