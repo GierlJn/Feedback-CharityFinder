@@ -61,10 +61,10 @@ class NetworkManager{
                 for project in projects{
                     if var outputs = project.outputs{
                         outputs.removeAll(where: {$0.costPerBeneficiary == nil || $0.name == nil})
-                        charityMainOutput = outputs.first
+                        //charityMainOutput = outputs.first
                         for output in outputs{
                             if let value = output.costPerBeneficiary?.value{
-                                if(value > (charityMainOutput?.costPerBeneficiary!.value)!){
+                                if(value > charityMainOutput?.costPerBeneficiary!.value ?? 0.0){
                                     charityMainOutput = output
                                 }
                             }

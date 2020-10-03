@@ -9,7 +9,11 @@
 import Foundation
 
 class DonationManager{
-    static func calculateValue(for donation: Float, impactValue: Float)->Float{
-        return donation * impactValue
+    static func calculateValue(for donation: Float, impactValue: Float)->Int{
+        if(donation == 0.0){
+            return 0
+        }else{
+            return Int(impactValue / donation)
+        }
     }
 }
