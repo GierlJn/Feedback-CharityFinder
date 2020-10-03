@@ -19,7 +19,6 @@ class CharityCell: UITableViewCell{
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configureLogoImageView()
         configureLabels()
-        
     }
     
     required init?(coder: NSCoder) {
@@ -47,8 +46,6 @@ class CharityCell: UITableViewCell{
             impactDescriptionLabel.leadingAnchor.constraint(equalTo: logoImageView.trailingAnchor, constant: 10),
             impactDescriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
             impactDescriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10)
-            
-            
         ])
     }
     

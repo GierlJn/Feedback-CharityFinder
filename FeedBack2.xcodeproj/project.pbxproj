@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B912457225284C26002B85C5 /* ServerResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B912457125284C26002B85C5 /* ServerResponse.swift */; };
+		B912457525287599002B85C5 /* FBBodyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B912457425287599002B85C5 /* FBBodyLabel.swift */; };
 		B9273CD925270C6700FE7155 /* CharityInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9273CD825270C6700FE7155 /* CharityInfoView.swift */; };
 		B9273CDB25273EB000FE7155 /* FBTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9273CDA25273EB000FE7155 /* FBTextField.swift */; };
 		B9273CDD252746F700FE7155 /* ImpactProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9273CDC252746F700FE7155 /* ImpactProject.swift */; };
@@ -23,7 +24,6 @@
 		B9664EC12524834E00637BDF /* FavouritesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9664EC02524834E00637BDF /* FavouritesVC.swift */; };
 		B9664EC32524864900637BDF /* FBButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9664EC22524864900637BDF /* FBButton.swift */; };
 		B9664EC525248B1000637BDF /* CharityListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9664EC425248B1000637BDF /* CharityListVC.swift */; };
-		B9FF36A32525B0300065AC17 /* RawServerResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FF36A22525B0300065AC17 /* RawServerResponse.swift */; };
 		B9FF36A62525B1090065AC17 /* CharityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FF36A52525B1090065AC17 /* CharityCell.swift */; };
 		B9FF36A92525B8D70065AC17 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FF36A82525B8D70065AC17 /* NetworkManager.swift */; };
 		B9FF36AD2525BE2E0065AC17 /* FBError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FF36AC2525BE2E0065AC17 /* FBError.swift */; };
@@ -31,6 +31,7 @@
 
 /* Begin PBXFileReference section */
 		B912457125284C26002B85C5 /* ServerResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerResponse.swift; sourceTree = "<group>"; };
+		B912457425287599002B85C5 /* FBBodyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBBodyLabel.swift; sourceTree = "<group>"; };
 		B9273CD825270C6700FE7155 /* CharityInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharityInfoView.swift; sourceTree = "<group>"; };
 		B9273CDA25273EB000FE7155 /* FBTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBTextField.swift; sourceTree = "<group>"; };
 		B9273CDC252746F700FE7155 /* ImpactProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactProject.swift; sourceTree = "<group>"; };
@@ -48,7 +49,6 @@
 		B9664EC02524834E00637BDF /* FavouritesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesVC.swift; sourceTree = "<group>"; };
 		B9664EC22524864900637BDF /* FBButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBButton.swift; sourceTree = "<group>"; };
 		B9664EC425248B1000637BDF /* CharityListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharityListVC.swift; sourceTree = "<group>"; };
-		B9FF36A22525B0300065AC17 /* RawServerResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawServerResponse.swift; sourceTree = "<group>"; };
 		B9FF36A52525B1090065AC17 /* CharityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharityCell.swift; sourceTree = "<group>"; };
 		B9FF36A82525B8D70065AC17 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		B9FF36AC2525BE2E0065AC17 /* FBError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBError.swift; sourceTree = "<group>"; };
@@ -65,6 +65,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B912457325287588002B85C5 /* Labels */ = {
+			isa = PBXGroup;
+			children = (
+				B912457425287599002B85C5 /* FBBodyLabel.swift */,
+			);
+			path = Labels;
+			sourceTree = "<group>";
+		};
 		B9273CD725270C5800FE7155 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -95,6 +103,7 @@
 		B9664EA725247C9500637BDF /* FeedBack2 */ = {
 			isa = PBXGroup;
 			children = (
+				B912457325287588002B85C5 /* Labels */,
 				B9273CD725270C5800FE7155 /* Views */,
 				B9FF36AB2525BE200065AC17 /* Utilities */,
 				B9FF36A72525B8CC0065AC17 /* Managers */,
@@ -132,7 +141,6 @@
 		B9FF36A12525B0250065AC17 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				B9FF36A22525B0300065AC17 /* RawServerResponse.swift */,
 				B9273CDC252746F700FE7155 /* ImpactProject.swift */,
 				B9273CDE2527470900FE7155 /* Charity.swift */,
 				B912457125284C26002B85C5 /* ServerResponse.swift */,
@@ -236,13 +244,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				B9664EBF2524834500637BDF /* SearchVC.swift in Sources */,
+				B912457525287599002B85C5 /* FBBodyLabel.swift in Sources */,
 				B9664EC12524834E00637BDF /* FavouritesVC.swift in Sources */,
 				B9273CE525274B1700FE7155 /* ImageCache.swift in Sources */,
 				B9FF36A92525B8D70065AC17 /* NetworkManager.swift in Sources */,
 				B9FF36A62525B1090065AC17 /* CharityCell.swift in Sources */,
 				B9664EA925247C9500637BDF /* AppDelegate.swift in Sources */,
 				B9664EAB25247C9500637BDF /* SceneDelegate.swift in Sources */,
-				B9FF36A32525B0300065AC17 /* RawServerResponse.swift in Sources */,
 				B9273CE12527474000FE7155 /* FBLogoImageView.swift in Sources */,
 				B9273CDF2527470900FE7155 /* Charity.swift in Sources */,
 				B9664EBD2524826400637BDF /* FBTabBarController.swift in Sources */,
