@@ -44,7 +44,7 @@ class SearchVC: UIViewController{
         let charityListVC = CharityListVC()
         
         if(!textfield.text!.isEmpty){
-            charityListVC.donationAmount = Float(textfield.text ?? "0.0")!
+            charityListVC.enteredDonation = Float(textfield.text ?? "0.0")!
             charityListVC.title = textfield.text ?? "0.0"
         }
         

@@ -19,7 +19,7 @@ class CharityListVC: UIViewController{
     
     let networkManager = NetworkManager()
     
-    var donationAmount: Float = 0.0
+    var enteredDonation: Float = 0.0
     
     override func viewDidLoad() {
         view.backgroundColor = .systemBackground
@@ -40,9 +40,10 @@ class CharityListVC: UIViewController{
     }
     
     private func configureDataSource(){
-        dataSource = UITableViewDiffableDataSource(tableView: tableView, cellProvider: { (tableView, indexPath, charity) -> UITableViewCell? in
+        dataSource = UITableViewDiffableDataSource(tableView: tableView, cellProvider: { [weak self](tableView, indexPath, charity) -> UITableViewCell? in
+            guard let self = self else  { return nil}
             let cell = tableView.dequeueReusableCell(withIdentifier: CharityCell.reuseIdentifier, for: indexPath) as! CharityCell
-            cell.set(charity: charity)
+            cell.set(charity: charity, enteredDonation: self.enteredDonation)
             return cell
         })
     }

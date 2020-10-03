@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		B912457225284C26002B85C5 /* ServerResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B912457125284C26002B85C5 /* ServerResponse.swift */; };
 		B912457525287599002B85C5 /* FBBodyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B912457425287599002B85C5 /* FBBodyLabel.swift */; };
+		B912457725287863002B85C5 /* DonationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B912457625287863002B85C5 /* DonationManager.swift */; };
 		B9273CD925270C6700FE7155 /* CharityInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9273CD825270C6700FE7155 /* CharityInfoView.swift */; };
 		B9273CDB25273EB000FE7155 /* FBTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9273CDA25273EB000FE7155 /* FBTextField.swift */; };
 		B9273CDD252746F700FE7155 /* ImpactProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9273CDC252746F700FE7155 /* ImpactProject.swift */; };
@@ -32,6 +33,7 @@
 /* Begin PBXFileReference section */
 		B912457125284C26002B85C5 /* ServerResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerResponse.swift; sourceTree = "<group>"; };
 		B912457425287599002B85C5 /* FBBodyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBBodyLabel.swift; sourceTree = "<group>"; };
+		B912457625287863002B85C5 /* DonationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationManager.swift; sourceTree = "<group>"; };
 		B9273CD825270C6700FE7155 /* CharityInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharityInfoView.swift; sourceTree = "<group>"; };
 		B9273CDA25273EB000FE7155 /* FBTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBTextField.swift; sourceTree = "<group>"; };
 		B9273CDC252746F700FE7155 /* ImpactProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactProject.swift; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 			isa = PBXGroup;
 			children = (
 				B9FF36A82525B8D70065AC17 /* NetworkManager.swift */,
+				B912457625287863002B85C5 /* DonationManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -251,6 +254,7 @@
 				B9FF36A62525B1090065AC17 /* CharityCell.swift in Sources */,
 				B9664EA925247C9500637BDF /* AppDelegate.swift in Sources */,
 				B9664EAB25247C9500637BDF /* SceneDelegate.swift in Sources */,
+				B912457725287863002B85C5 /* DonationManager.swift in Sources */,
 				B9273CE12527474000FE7155 /* FBLogoImageView.swift in Sources */,
 				B9273CDF2527470900FE7155 /* Charity.swift in Sources */,
 				B9664EBD2524826400637BDF /* FBTabBarController.swift in Sources */,

@@ -12,7 +12,7 @@ class CharityCell: UITableViewCell{
     static let reuseIdentifier = "CharityCell"
     
     let titleLabel = UILabel(frame: .zero)
-    let impactDescriptionLabel = UILabel(frame: .zero)
+    let impactDescriptionLabel = FBBodyLabel(frame: .zero)
     let logoImageView = FBLogoImageView(frame: .zero)
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -25,9 +25,10 @@ class CharityCell: UITableViewCell{
         fatalError("init(coder:) has not been implemented")
     }
     
-    func set(charity: Charity){
+    func set(charity: Charity, enteredDonation: Float){
         titleLabel.text = charity.name
-        impactDescriptionLabel.text = charity.output.name
+        let calculatedImpact = DonationManager.calculateValue(for: charity.output.costPerBeneficiary?.value ?? 0.0, impactValue: enteredDonation)
+        impactDescriptionLabel.text = "\(calculatedImpact) \(charity.output.name ?? "")"
         logoImageView.setLogoImage(logoUrl: charity.logoUrl)
     }
     
@@ -36,6 +37,7 @@ class CharityCell: UITableViewCell{
         contentView.addSubview(impactDescriptionLabel)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         impactDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+        impactDescriptionLabel.numberOfLines = 2
         
         NSLayoutConstraint.activate([
             titleLabel.leadingAnchor.constraint(equalTo: logoImageView.trailingAnchor, constant: 10),
