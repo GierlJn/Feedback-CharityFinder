@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Impact: Hashable{
-    var impactDecsription: String
+struct Project: Hashable{
+    var projectDecsription: String
     var costPerBeneficiary: Float
 }

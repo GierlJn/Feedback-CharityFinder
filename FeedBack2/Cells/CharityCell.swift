@@ -13,10 +13,12 @@ class CharityCell: UITableViewCell{
     
     let titleLabel = UILabel(frame: .zero)
     let impactDescriptionLabel = UILabel(frame: .zero)
+    let logoImageView = FBLogoImageView(frame: .zero)
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        configure()
+        configureLogoImageView()
+        configureLabels()
         
     }
     
@@ -26,21 +28,37 @@ class CharityCell: UITableViewCell{
     
     func set(charity: Charity){
         titleLabel.text = charity.name
-        impactDescriptionLabel.text = charity.output.impactDecsription
+        impactDescriptionLabel.text = charity.output.projectDecsription
+        logoImageView.setLogoImage(logoUrl: charity.logoUrl)
     }
     
-    private func configure(){
+    private func configureLabels(){
         contentView.addSubview(titleLabel)
         contentView.addSubview(impactDescriptionLabel)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         impactDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            titleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            titleLabel.leadingAnchor.constraint(equalTo: logoImageView.trailingAnchor, constant: 10),
+            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 30),
+            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            titleLabel.heightAnchor.constraint(equalToConstant: 50),
             
-            impactDescriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10)
+            impactDescriptionLabel.leadingAnchor.constraint(equalTo: logoImageView.trailingAnchor, constant: 10),
+            impactDescriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
+            impactDescriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10)
             
+            
+        ])
+    }
+    
+    private func configureLogoImageView(){
+        contentView.addSubview(logoImageView)
+        NSLayoutConstraint.activate([
+            logoImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            logoImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            logoImageView.heightAnchor.constraint(equalToConstant: 100),
+            logoImageView.widthAnchor.constraint(equalToConstant: 100)
         ])
     }
 }

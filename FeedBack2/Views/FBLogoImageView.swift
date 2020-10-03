@@ -22,6 +22,7 @@ class FBLogoImageView: UIImageView{
     }
     
     private func configure(){
+        translatesAutoresizingMaskIntoConstraints = false
         layer.cornerRadius = 15
         clipsToBounds = true
     }
@@ -43,7 +44,10 @@ class FBLogoImageView: UIImageView{
             case .failure(let error):
                 print(error)
             case .success(let logoImage):
-                self.image = logoImage
+                ImageCache.shared.setImage(image: logoImage, key: logoUrl)
+                DispatchQueue.main.async {
+                    self.image = logoImage
+                }
             }
         }
     }

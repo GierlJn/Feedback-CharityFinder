@@ -33,7 +33,7 @@ extension RawServerResponse: Decodable{
                     
                     enum OutputKeys: String, CodingKey{
                         case costPerBeneficiary = "costPerBeneficiary"
-                        case impactDescription = "name"
+                        case projectDescription = "name"
                         
                         enum CostPerBeneficiaryKeys: String, CodingKey{
                             case value = "value"
@@ -56,34 +56,36 @@ extension RawServerResponse: Decodable{
             let name = try? charityContainer.decode(String.self, forKey: .name)
             let displayName = try? charityContainer.decode(String.self, forKey: .displayName)
             let logoUrl = try charityContainer.decode(String.self, forKey: .logoUrl)
-            let charityName = displayName ?? name
-            var selectedImpact: Impact?
+            let charityName = displayName ?? name // JSON response is inconsistent
+            var mainProject: Project? // Sometimes there are more than one project, therefore choose the one with the highest value
             
-            var projectsContainer = try charityContainer.nestedUnkeyedContainer(forKey: .projects)
+            var projectsUnkeyedContainer = try charityContainer.nestedUnkeyedContainer(forKey: .projects)
             
-            while !projectsContainer.isAtEnd{
-                let projectsContainer2 = try projectsContainer.nestedContainer(keyedBy: CodingKeys.CargoKeys.HitsKeys.ProjectKeys.self)
-                var outputsContainer = try projectsContainer2.nestedUnkeyedContainer(forKey: .outputs)
-                var allAvailableImpacts = [Impact]()
-                while !outputsContainer.isAtEnd{
-                    let outputsContainer2 = try outputsContainer.nestedContainer(keyedBy: CodingKeys.CargoKeys.HitsKeys.ProjectKeys.OutputKeys.self)
+            while !projectsUnkeyedContainer.isAtEnd{
+                let projectNestedContainer = try projectsUnkeyedContainer.nestedContainer(keyedBy: CodingKeys.CargoKeys.HitsKeys.ProjectKeys.self)
+                var outputsUnkeyedContainer = try projectNestedContainer.nestedUnkeyedContainer(forKey: .outputs)
+                
+                var fetchedProjects = [Project]()
+                
+                while !outputsUnkeyedContainer.isAtEnd{
+                    let outputNestedContainer = try outputsUnkeyedContainer.nestedContainer(keyedBy: CodingKeys.CargoKeys.HitsKeys.ProjectKeys.OutputKeys.self)
                     
-                    let impactDecsription = try? outputsContainer2.decode(String.self, forKey: .impactDescription)
+                    let projectDescription = try? outputNestedContainer.decode(String.self, forKey: .projectDescription)
                     
-                    let costPerBeneficiaryContainer = try? outputsContainer2.nestedContainer(keyedBy: CodingKeys.CargoKeys.HitsKeys.ProjectKeys.OutputKeys.CostPerBeneficiaryKeys.self, forKey: .costPerBeneficiary)
-                    let costPerBeneficiary = try? costPerBeneficiaryContainer?.decode(Float.self, forKey: .value)
+                    let costPerBeneficiaryNestedContainer = try? outputNestedContainer.nestedContainer(keyedBy: CodingKeys.CargoKeys.HitsKeys.ProjectKeys.OutputKeys.CostPerBeneficiaryKeys.self, forKey: .costPerBeneficiary)
+                    let costPerBeneficiary = try? costPerBeneficiaryNestedContainer?.decode(Float.self, forKey: .value)
                     
-                    if(impactDecsription != nil && costPerBeneficiary != nil){
-                        let output = Impact(impactDecsription: impactDecsription!, costPerBeneficiary: costPerBeneficiary!)
-                        allAvailableImpacts.append(output)
+                    if(projectDescription != nil && costPerBeneficiary != nil){
+                        let output = Project(projectDecsription: projectDescription!, costPerBeneficiary: costPerBeneficiary!)
+                        fetchedProjects.append(output)
                     }
-                    selectedImpact = allAvailableImpacts.first
-                    selectedImpact = allAvailableImpacts.first(where: {$0.costPerBeneficiary > selectedImpact!.costPerBeneficiary}) ?? selectedImpact
+                    mainProject = fetchedProjects.first
+                    mainProject = fetchedProjects.first(where: {$0.costPerBeneficiary > mainProject!.costPerBeneficiary}) ?? mainProject
                 }
             }
             
-            if(charityName != nil && selectedImpact != nil){
-                let charity = Charity(name: charityName!, id: id, output: selectedImpact!, logoUrl: logoUrl)
+            if(charityName != nil && mainProject != nil){
+                let charity = Charity(name: charityName!, id: id, output: mainProject!, logoUrl: logoUrl)
                 charities.append(charity)
             }
         }
