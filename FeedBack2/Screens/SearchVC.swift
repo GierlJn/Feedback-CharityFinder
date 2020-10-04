@@ -25,7 +25,7 @@ class SearchVC: UIViewController{
             actionButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -150),
             actionButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             actionButton.heightAnchor.constraint(equalToConstant: 40),
-            actionButton.widthAnchor.constraint(equalToConstant: 200)
+            actionButton.widthAnchor.constraint(equalToConstant: 280)
         ])
         actionButton.addTarget(self, action: #selector(actionButtonPressed), for: .touchUpInside)
     }
@@ -36,7 +36,7 @@ class SearchVC: UIViewController{
             textfield.bottomAnchor.constraint(equalTo: actionButton.topAnchor, constant: -50),
             textfield.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             textfield.heightAnchor.constraint(equalToConstant: 40),
-            textfield.widthAnchor.constraint(equalToConstant: 200)
+            textfield.widthAnchor.constraint(equalToConstant: 280)
         ])
     }
     
