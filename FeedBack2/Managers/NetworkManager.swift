@@ -46,7 +46,7 @@ class NetworkManager{
         task.resume()
     }
     
-    func getCharityInfo(urlString: String, completed: @escaping (Result<Charity, FBError>) -> Void){
+    func getCharityInfo(urlString: String, completed: @escaping (Result<InfoCharity, FBError>) -> Void){
         guard let url = URL(string: urlString) else {
             completed(.failure(.unableToConnect))
             return
@@ -69,7 +69,19 @@ class NetworkManager{
             }
             do{
                 let decoder = JSONDecoder()
-                //let rawServerResponse = try decoder.decode(SearchResponse.self, from: data)
+                let rawServerResponse = try decoder.decode(InfoResponse.self, from: data)
+                guard let cargo = rawServerResponse.cargo else { throw FBError.invalidData }
+                guard let singleImpact = cargo.simpleImpact else { throw FBError.invalidData }
+                guard let costPerBeneficiary = singleImpact.costPerBeneficiary else { throw FBError.invalidData }
+                guard let name = cargo.name else { throw FBError.invalidData }
+                guard let id = cargo.id else { throw FBError.invalidData }
+                guard let logo = cargo.logo else { throw FBError.invalidData }
+                
+                
+                
+                let charity = InfoCharity(name: name, id: id, logoUrl: logo, singleImpact: singleImpact)
+                
+                completed(.success(charity))
                 //completed(.success(try self.decodeRawServerResponse(rawServerResponse)))
                 return
             }catch{
@@ -104,7 +116,7 @@ class NetworkManager{
             }
             let name = hit.displayName ?? hit.name
             if(charityMainOutput != nil && name != nil && hit.id != nil && hit.logo != nil){
-                let charity = Charity(name: name!, id: hit.id!, output: charityMainOutput!, logoUrl: hit.logo!)
+                let charity = Charity(name: name!, id: hit.id!, logoUrl: hit.logo!, output: charityMainOutput!)
                 charities.append(charity)
             }
         }

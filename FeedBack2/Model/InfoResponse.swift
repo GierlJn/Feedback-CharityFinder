@@ -55,7 +55,7 @@ struct InfoCargo : Decodable {
 }
 
 
-struct SimpleImpact : Decodable {
+struct SimpleImpact : Decodable, Hashable {
 
         let type : String?
         let costPerBeneficiary : InfoCostPerBeneficiary?
@@ -79,7 +79,7 @@ struct SimpleImpact : Decodable {
 
 }
 
-struct InfoCostPerBeneficiary : Codable {
+struct InfoCostPerBeneficiary : Codable, Hashable {
 
         let value : String?
     
