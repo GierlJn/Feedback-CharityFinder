@@ -17,30 +17,25 @@ class NetworkManager{
             completed(.failure(.unableToConnect))
             return
         }
-        
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             if error != nil{
                 completed(.failure(.invalidData))
             }
-            
             guard let response = response as? HTTPURLResponse else{
                 completed(.failure(.invalidResponse))
                 return
             }
-                
             guard response.statusCode == 200 else{
                 completed(.failure(.invalidResponseCode(Int(response.statusCode))))
                 return 
             }
-            
             guard let data = data else {
                 completed(.failure(.invalidData))
                 return
             }
-            
             do{
                 let decoder = JSONDecoder()
-                let rawServerResponse = try decoder.decode(ServerResponse.self, from: data)
+                let rawServerResponse = try decoder.decode(SearchResponse.self, from: data)
                 completed(.success(try self.decodeRawServerResponse(rawServerResponse)))
                 return
             }catch{
@@ -51,7 +46,41 @@ class NetworkManager{
         task.resume()
     }
     
-    private func decodeRawServerResponse(_ rawServerResponse: ServerResponse) throws -> [Charity] {
+    func getCharityInfo(urlString: String, completed: @escaping (Result<Charity, FBError>) -> Void){
+        guard let url = URL(string: urlString) else {
+            completed(.failure(.unableToConnect))
+            return
+        }
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            if error != nil{
+                completed(.failure(.invalidData))
+            }
+            guard let response = response as? HTTPURLResponse else{
+                completed(.failure(.invalidResponse))
+                return
+            }
+            guard response.statusCode == 200 else{
+                completed(.failure(.invalidResponseCode(Int(response.statusCode))))
+                return
+            }
+            guard let data = data else {
+                completed(.failure(.invalidData))
+                return
+            }
+            do{
+                let decoder = JSONDecoder()
+                //let rawServerResponse = try decoder.decode(SearchResponse.self, from: data)
+                //completed(.success(try self.decodeRawServerResponse(rawServerResponse)))
+                return
+            }catch{
+                completed(.failure(.invalidData))
+                return
+            }
+        }
+        task.resume()
+    }
+    
+    private func decodeRawServerResponse(_ rawServerResponse: SearchResponse) throws -> [Charity] {
         guard let cargo = rawServerResponse.cargo else { throw FBError.invalidData }
         guard let hits = cargo.hits else { throw FBError.invalidData }
         var charities = [Charity]()
@@ -74,7 +103,7 @@ class NetworkManager{
                 
             }
             let name = hit.displayName ?? hit.name
-            if(charityMainOutput != nil && name != nil){
+            if(charityMainOutput != nil && name != nil && hit.id != nil && hit.logo != nil){
                 let charity = Charity(name: name!, id: hit.id!, output: charityMainOutput!, logoUrl: hit.logo!)
                 charities.append(charity)
             }

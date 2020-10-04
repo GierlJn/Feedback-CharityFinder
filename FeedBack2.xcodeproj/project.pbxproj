@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B912457225284C26002B85C5 /* ServerResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B912457125284C26002B85C5 /* ServerResponse.swift */; };
+		B912457225284C26002B85C5 /* SearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B912457125284C26002B85C5 /* SearchResponse.swift */; };
 		B912457525287599002B85C5 /* FBBodyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B912457425287599002B85C5 /* FBBodyLabel.swift */; };
 		B912457725287863002B85C5 /* DonationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B912457625287863002B85C5 /* DonationManager.swift */; };
 		B9273CD925270C6700FE7155 /* CharityInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9273CD825270C6700FE7155 /* CharityInfoView.swift */; };
@@ -17,6 +17,7 @@
 		B9273CE12527474000FE7155 /* FBLogoImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9273CE02527474000FE7155 /* FBLogoImageView.swift */; };
 		B9273CE525274B1700FE7155 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9273CE425274B1700FE7155 /* ImageCache.swift */; };
 		B95B9E4E2529C34900DF6368 /* CharityInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95B9E4D2529C34900DF6368 /* CharityInfoVC.swift */; };
+		B95B9E502529D62300DF6368 /* InfoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95B9E4F2529D62300DF6368 /* InfoResponse.swift */; };
 		B9664EA925247C9500637BDF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9664EA825247C9500637BDF /* AppDelegate.swift */; };
 		B9664EAB25247C9500637BDF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9664EAA25247C9500637BDF /* SceneDelegate.swift */; };
 		B9664EB225247C9600637BDF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9664EB125247C9600637BDF /* Assets.xcassets */; };
@@ -32,7 +33,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		B912457125284C26002B85C5 /* ServerResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerResponse.swift; sourceTree = "<group>"; };
+		B912457125284C26002B85C5 /* SearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResponse.swift; sourceTree = "<group>"; };
 		B912457425287599002B85C5 /* FBBodyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBBodyLabel.swift; sourceTree = "<group>"; };
 		B912457625287863002B85C5 /* DonationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationManager.swift; sourceTree = "<group>"; };
 		B9273CD825270C6700FE7155 /* CharityInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharityInfoView.swift; sourceTree = "<group>"; };
@@ -42,6 +43,7 @@
 		B9273CE02527474000FE7155 /* FBLogoImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBLogoImageView.swift; sourceTree = "<group>"; };
 		B9273CE425274B1700FE7155 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		B95B9E4D2529C34900DF6368 /* CharityInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharityInfoVC.swift; sourceTree = "<group>"; };
+		B95B9E4F2529D62300DF6368 /* InfoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoResponse.swift; sourceTree = "<group>"; };
 		B9664EA525247C9500637BDF /* FeedBack2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FeedBack2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9664EA825247C9500637BDF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B9664EAA25247C9500637BDF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -148,7 +150,8 @@
 			children = (
 				B9273CDC252746F700FE7155 /* ImpactProject.swift */,
 				B9273CDE2527470900FE7155 /* Charity.swift */,
-				B912457125284C26002B85C5 /* ServerResponse.swift */,
+				B912457125284C26002B85C5 /* SearchResponse.swift */,
+				B95B9E4F2529D62300DF6368 /* InfoResponse.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -267,8 +270,9 @@
 				B9664EC525248B1000637BDF /* CharityListVC.swift in Sources */,
 				B9273CDD252746F700FE7155 /* ImpactProject.swift in Sources */,
 				B9FF36AD2525BE2E0065AC17 /* FBError.swift in Sources */,
-				B912457225284C26002B85C5 /* ServerResponse.swift in Sources */,
+				B912457225284C26002B85C5 /* SearchResponse.swift in Sources */,
 				B9273CD925270C6700FE7155 /* CharityInfoView.swift in Sources */,
+				B95B9E502529D62300DF6368 /* InfoResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

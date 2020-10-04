@@ -21,6 +21,8 @@ class CharityListVC: UIViewController{
     
     var enteredDonation: Float = 0.0
     
+    var charities = [Charity]()
+    
     override func viewDidLoad() {
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -55,9 +57,14 @@ class CharityListVC: UIViewController{
             case .failure(let error):
                 print(error)
             case .success(let charities):
-                self.updateData(charities: charities)
+                self.updateUI(with: charities)
             }
         }
+    }
+    
+    private func updateUI(with charities: [Charity]){
+        self.charities = charities
+        self.updateData(charities: charities)
     }
     
     private func updateData(charities: [Charity]){
@@ -70,7 +77,12 @@ class CharityListVC: UIViewController{
 
 extension CharityListVC: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //
+        let charity = charities[indexPath.item]
+        let charityInfoVC = CharityInfoVC()
+        charityInfoVC.charityId = charity.id
+        
+        let navigationController = UINavigationController(rootViewController: charityInfoVC)
+        present(navigationController, animated: true)
     }
 }
 

@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct ServerResponse : Decodable {
+struct SearchResponse : Decodable {
 
         let cargo : Cargo?
         let success : Bool?

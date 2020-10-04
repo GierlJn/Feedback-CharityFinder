@@ -11,6 +11,6 @@ import Foundation
 struct Charity: Hashable{
     var name: String
     var id: String
-    var output: Output
     var logoUrl: String
+    var output: Output
 }
