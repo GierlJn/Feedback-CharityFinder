@@ -79,7 +79,8 @@ extension CharityListVC: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let charity = charities[indexPath.item]
         let charityInfoVC = CharityInfoVC()
-        charityInfoVC.charityId = charity.id
+        //charityInfoVC.charityId = charity.id
+        charityInfoVC.charity = charity
         
         let navigationController = UINavigationController(rootViewController: charityInfoVC)
         present(navigationController, animated: true)

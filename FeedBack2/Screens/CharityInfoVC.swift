@@ -11,13 +11,20 @@ import UIKit
 class CharityInfoVC: UIViewController{
     
     var charityId: String = ""
-    
     var networkManger = NetworkManager()
+    var charity: Charity?
     
     override func viewDidLoad() {
         view.backgroundColor = .systemBackground
-        title = charityId
+        guard let charity = charity else { return }
+        title = charity.name
+    }
+    
+    private func configure(){
         
+    }
+    
+    fileprivate func getCharityInfo() {
         let url = "https://app.sogive.org/charity/" + charityId + ".json"
         networkManger.getCharityInfo(urlString: url) { (result) in
             switch(result){
