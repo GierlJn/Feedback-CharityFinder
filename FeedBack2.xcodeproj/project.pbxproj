@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -28,6 +28,8 @@
 		B9664EC12524834E00637BDF /* FavouritesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9664EC02524834E00637BDF /* FavouritesVC.swift */; };
 		B9664EC32524864900637BDF /* FBButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9664EC22524864900637BDF /* FBButton.swift */; };
 		B9664EC525248B1000637BDF /* CharityListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9664EC425248B1000637BDF /* CharityListVC.swift */; };
+		B9A1C0F5252B1D48004E3AEE /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = B9A1C0F4252B1D48004E3AEE /* SnapKit */; };
+		B9A1C0F7252B2A40004E3AEE /* FBImpactImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A1C0F6252B2A40004E3AEE /* FBImpactImageView.swift */; };
 		B9FF36A62525B1090065AC17 /* CharityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FF36A52525B1090065AC17 /* CharityCell.swift */; };
 		B9FF36A92525B8D70065AC17 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FF36A82525B8D70065AC17 /* NetworkManager.swift */; };
 		B9FF36AD2525BE2E0065AC17 /* FBError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FF36AC2525BE2E0065AC17 /* FBError.swift */; };
@@ -57,6 +59,7 @@
 		B9664EC02524834E00637BDF /* FavouritesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesVC.swift; sourceTree = "<group>"; };
 		B9664EC22524864900637BDF /* FBButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBButton.swift; sourceTree = "<group>"; };
 		B9664EC425248B1000637BDF /* CharityListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharityListVC.swift; sourceTree = "<group>"; };
+		B9A1C0F6252B2A40004E3AEE /* FBImpactImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBImpactImageView.swift; sourceTree = "<group>"; };
 		B9FF36A52525B1090065AC17 /* CharityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharityCell.swift; sourceTree = "<group>"; };
 		B9FF36A82525B8D70065AC17 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		B9FF36AC2525BE2E0065AC17 /* FBError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBError.swift; sourceTree = "<group>"; };
@@ -67,6 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B9A1C0F5252B1D48004E3AEE /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,6 +92,7 @@
 				B9273CD825270C6700FE7155 /* CharityInfoView.swift */,
 				B9273CDA25273EB000FE7155 /* FBTextField.swift */,
 				B9273CE02527474000FE7155 /* FBLogoImageView.swift */,
+				B9A1C0F6252B2A40004E3AEE /* FBImpactImageView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -201,6 +206,9 @@
 			dependencies = (
 			);
 			name = FeedBack2;
+			packageProductDependencies = (
+				B9A1C0F4252B1D48004E3AEE /* SnapKit */,
+			);
 			productName = FeedBack2;
 			productReference = B9664EA525247C9500637BDF /* FeedBack2.app */;
 			productType = "com.apple.product-type.application";
@@ -229,6 +237,9 @@
 				Base,
 			);
 			mainGroup = B9664E9C25247C9500637BDF;
+			packageReferences = (
+				B9A1C0F3252B1D48004E3AEE /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = B9664EA625247C9500637BDF /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -269,6 +280,7 @@
 				B9273CDF2527470900FE7155 /* Charity.swift in Sources */,
 				B95B9E4E2529C34900DF6368 /* CharityInfoVC.swift in Sources */,
 				B9664EBD2524826400637BDF /* FBTabBarController.swift in Sources */,
+				B9A1C0F7252B2A40004E3AEE /* FBImpactImageView.swift in Sources */,
 				B9273CDB25273EB000FE7155 /* FBTextField.swift in Sources */,
 				B9664EC32524864900637BDF /* FBButton.swift in Sources */,
 				B9664EC525248B1000637BDF /* CharityListVC.swift in Sources */,
@@ -466,6 +478,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B9A1C0F3252B1D48004E3AEE /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B9A1C0F4252B1D48004E3AEE /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B9A1C0F3252B1D48004E3AEE /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B9664E9D25247C9500637BDF /* Project object */;
 }
