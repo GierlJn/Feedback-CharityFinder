@@ -14,4 +14,5 @@ struct InfoCharity: Hashable{
     var logoUrl: String
     var singleImpact: SimpleImpact
     var imageUrl: String?
+    var description: String
 }

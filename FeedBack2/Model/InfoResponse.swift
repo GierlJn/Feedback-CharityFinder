@@ -35,7 +35,7 @@ struct InfoCargo : Decodable {
 
         enum CodingKeys: String, CodingKey {
                 case id = "@id"
-                case descriptionField = "description"
+                case descriptionField = "summaryDescription"
                 case images = "images"
                 case logo = "logo"
                 case name = "name"
