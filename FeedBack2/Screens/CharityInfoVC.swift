@@ -77,7 +77,10 @@ class CharityInfoVC: UIViewController{
             self.contentView.bringSubviewToFront(self.logoImageView)
             if (infoCharity.imageUrl != nil){
                 self.impactImageView.setImage(imageUrl: infoCharity.imageUrl!)
-            }
+            }else{
+                self.impactImageView.setImage(imageUrl: charity.logoUrl)
+                self.logoImageView.isHidden = true
+        }
             
             self.impactImageView.snp.makeConstraints { (make) in
                 make.left.equalTo(self.view.snp.left)

@@ -98,6 +98,7 @@ class NetworkManager{
         var charities = [Charity]()
         for hit in hits {
             var charityMainOutput: Output?
+            let name = hit.displayName ?? hit.name
             if let projects = hit.projects{
                 for project in projects{
                     if var outputs = project.outputs{
@@ -113,7 +114,6 @@ class NetworkManager{
                 }
                 
             }
-            let name = hit.displayName ?? hit.name
             if(charityMainOutput != nil && name != nil && hit.id != nil && hit.logo != nil){
                 let charity = Charity(name: name!, id: hit.id!, logoUrl: hit.logo!, output: charityMainOutput!)
                 charities.append(charity)
