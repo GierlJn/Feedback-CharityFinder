@@ -72,17 +72,15 @@ class NetworkManager{
                 let rawServerResponse = try decoder.decode(InfoResponse.self, from: data)
                 guard let cargo = rawServerResponse.cargo else { throw FBError.invalidData }
                 guard let singleImpact = cargo.simpleImpact else { throw FBError.invalidData }
-                guard let costPerBeneficiary = singleImpact.costPerBeneficiary else { throw FBError.invalidData }
+                //guard let costPerBeneficiary = singleImpact.costPerBeneficiary else { throw FBError.invalidData }
                 guard let name = cargo.name else { throw FBError.invalidData }
                 guard let id = cargo.id else { throw FBError.invalidData }
                 guard let logo = cargo.logo else { throw FBError.invalidData }
                 
                 
-                
-                let charity = InfoCharity(name: name, id: id, logoUrl: logo, singleImpact: singleImpact)
+                let charity = InfoCharity(name: name, id: id, logoUrl: logo, singleImpact: singleImpact, imageUrl: cargo.images)
                 
                 completed(.success(charity))
-                //completed(.success(try self.decodeRawServerResponse(rawServerResponse)))
                 return
             }catch{
                 completed(.failure(.invalidData))
@@ -102,7 +100,6 @@ class NetworkManager{
                 for project in projects{
                     if var outputs = project.outputs{
                         outputs.removeAll(where: {$0.costPerBeneficiary == nil || $0.name == nil})
-                        //charityMainOutput = outputs.first
                         for output in outputs{
                             if let value = output.costPerBeneficiary?.value{
                                 if(value > charityMainOutput?.costPerBeneficiary!.value ?? 0.0){
@@ -123,7 +120,36 @@ class NetworkManager{
         return charities
     }
     
-    func downloadLogo(urlString: String, completed: @escaping(Result<UIImage, FBError>) -> Void){
+//    func downloadLogo(urlString: String, completed: @escaping(Result<UIImage, FBError>) -> Void){
+//        guard let url = URL(string: urlString) else {
+//            completed(.failure(.unableToConnect))
+//            return
+//        }
+//
+//        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+//            guard error == nil else {
+//                completed(.failure(.invalidResponse))
+//                return
+//            }
+//            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+//                completed(.failure(.invalidResponse))
+//                return
+//            }
+//            guard let data = data else {
+//                completed(.failure(.invalidData))
+//                return
+//            }
+//            guard let image = UIImage(data: data) else {
+//                completed(.failure(.invalidData))
+//                return
+//            }
+//            ImageCache.shared.setImage(image: image, key: urlString)
+//            completed(.success(image))
+//        }
+//        task.resume()
+//    }
+    
+    func downloadImage(urlString: String, completed: @escaping(Result<UIImage, FBError>) -> Void){
         guard let url = URL(string: urlString) else {
             completed(.failure(.unableToConnect))
             return
@@ -146,7 +172,7 @@ class NetworkManager{
                 completed(.failure(.invalidData))
                 return
             }
-            ImageCache.shared.setImage(image: image, key: urlString)
+            //ImageCache.shared.setImage(image: image, key: urlString)
             completed(.success(image))
         }
         task.resume()
