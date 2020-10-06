@@ -29,6 +29,7 @@ class CharityCell: UITableViewCell{
         titleLabel.text = charity.name
         let calculatedImpact = DonationManager.calculateValue(for: charity.output.costPerBeneficiary?.value ?? 0.0, impactValue: enteredDonation)
         impactDescriptionLabel.text = "\(calculatedImpact) \(charity.output.name?.lowercased() ?? "")"
+        
         logoImageView.setLogoImage(logoUrl: charity.logoUrl)
     }
     

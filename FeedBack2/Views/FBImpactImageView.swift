@@ -10,7 +10,7 @@ import UIKit
 
 class FBImpactImageView: UIImageView{
     
-    //let placeholderImage = UIImage(named: "avatar-placeholder")
+    static let placeholderImage = UIImage(named: "avatar-placeholder")
     
     override init(frame: CGRect) {
         super.init(frame: frame)

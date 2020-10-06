@@ -15,14 +15,14 @@ class CharityInfoVC: UIViewController{
     var impactImageView = FBImpactImageView(frame: .zero)
     var descriptionLabel = FBBodyLabel(textAlignment: .left)
     var titleLabel = FBTitleLabel(textAlignment: .left)
-
+    
     let scrollView = UIScrollView()
     let contentView = UIView()
     
     var charityId: String = ""
     var networkManger = NetworkManager()
     var charity: Charity!
-
+    
     
     
     override func viewDidLoad() {
@@ -52,13 +52,19 @@ class CharityInfoVC: UIViewController{
                 print(error)
             case .success(let infoCharity):
                 DispatchQueue.main.async {
-                self.configureLogoImageView()
-                self.configureImpactImageView(infoCharity)
-                self.configureTitleLabel()
-                self.configureDescriptionLabel(infoCharity)
+                    self.configureViews(infoCharity: infoCharity)
                 }
             }
         }
+    }
+    
+    private func configureViews(infoCharity: InfoCharity) {
+        self.configureLogoImageView()
+        self.configureImpactImageView(infoCharity)
+        
+        
+        self.configureTitleLabel()
+        self.configureDescriptionLabel(infoCharity)
     }
     
     private func configureLogoImageView(){
@@ -73,21 +79,21 @@ class CharityInfoVC: UIViewController{
     }
     
     private func configureImpactImageView(_ infoCharity: InfoCharity){
-            self.contentView.addSubview(self.impactImageView)
-            self.contentView.bringSubviewToFront(self.logoImageView)
-            if (infoCharity.imageUrl != nil){
-                self.impactImageView.setImage(imageUrl: infoCharity.imageUrl!)
-            }else{
-                self.impactImageView.setImage(imageUrl: charity.logoUrl)
-                self.logoImageView.isHidden = true
+        self.contentView.addSubview(self.impactImageView)
+        self.contentView.bringSubviewToFront(self.logoImageView)
+        if (infoCharity.imageUrl != nil){
+            self.impactImageView.setImage(imageUrl: infoCharity.imageUrl!)
+        }else{
+            self.impactImageView.setImage(imageUrl: charity.logoUrl)
+            self.logoImageView.isHidden = true
         }
-            
-            self.impactImageView.snp.makeConstraints { (make) in
-                make.left.equalTo(self.view.snp.left)
-                make.right.equalTo(self.view.snp.right)
-                make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(20)
-                make.height.equalTo(150)
-            }
+        
+        self.impactImageView.snp.makeConstraints { (make) in
+            make.left.equalTo(self.view.snp.left)
+            make.right.equalTo(self.view.snp.right)
+            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(20)
+            make.height.equalTo(150)
+        }
     }
     
     private func configureTitleLabel(){

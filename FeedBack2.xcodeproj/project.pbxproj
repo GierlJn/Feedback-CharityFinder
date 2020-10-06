@@ -32,6 +32,7 @@
 		B9A1C0F7252B2A40004E3AEE /* FBImpactImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A1C0F6252B2A40004E3AEE /* FBImpactImageView.swift */; };
 		B9A1C0FA252B3E82004E3AEE /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A1C0F9252B3E82004E3AEE /* UIView+Ext.swift */; };
 		B9A1C0FC252B470C004E3AEE /* FBTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A1C0FB252B470C004E3AEE /* FBTitleLabel.swift */; };
+		B9A1C0FF252B4CD5004E3AEE /* SwiftSVG in Frameworks */ = {isa = PBXBuildFile; productRef = B9A1C0FE252B4CD5004E3AEE /* SwiftSVG */; };
 		B9FF36A62525B1090065AC17 /* CharityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FF36A52525B1090065AC17 /* CharityCell.swift */; };
 		B9FF36A92525B8D70065AC17 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FF36A82525B8D70065AC17 /* NetworkManager.swift */; };
 		B9FF36AD2525BE2E0065AC17 /* FBError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FF36AC2525BE2E0065AC17 /* FBError.swift */; };
@@ -75,6 +76,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B9A1C0F5252B1D48004E3AEE /* SnapKit in Frameworks */,
+				B9A1C0FF252B4CD5004E3AEE /* SwiftSVG in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -222,6 +224,7 @@
 			name = FeedBack2;
 			packageProductDependencies = (
 				B9A1C0F4252B1D48004E3AEE /* SnapKit */,
+				B9A1C0FE252B4CD5004E3AEE /* SwiftSVG */,
 			);
 			productName = FeedBack2;
 			productReference = B9664EA525247C9500637BDF /* FeedBack2.app */;
@@ -253,6 +256,7 @@
 			mainGroup = B9664E9C25247C9500637BDF;
 			packageReferences = (
 				B9A1C0F3252B1D48004E3AEE /* XCRemoteSwiftPackageReference "SnapKit" */,
+				B9A1C0FD252B4CD5004E3AEE /* XCRemoteSwiftPackageReference "SwiftSVG" */,
 			);
 			productRefGroup = B9664EA625247C9500637BDF /* Products */;
 			projectDirPath = "";
@@ -504,6 +508,14 @@
 				minimumVersion = 5.0.1;
 			};
 		};
+		B9A1C0FD252B4CD5004E3AEE /* XCRemoteSwiftPackageReference "SwiftSVG" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mchoe/SwiftSVG";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.3.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -511,6 +523,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B9A1C0F3252B1D48004E3AEE /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		B9A1C0FE252B4CD5004E3AEE /* SwiftSVG */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B9A1C0FD252B4CD5004E3AEE /* XCRemoteSwiftPackageReference "SwiftSVG" */;
+			productName = SwiftSVG;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
