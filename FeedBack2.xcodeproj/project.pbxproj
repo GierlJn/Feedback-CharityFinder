@@ -30,6 +30,7 @@
 		B9664EC525248B1000637BDF /* CharityListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9664EC425248B1000637BDF /* CharityListVC.swift */; };
 		B967FD6D252D9DE70031442F /* DonationBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B967FD6C252D9DE70031442F /* DonationBarVC.swift */; };
 		B995A1B9252DEBF90037E0FB /* StatusBarViewOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = B995A1B8252DEBF90037E0FB /* StatusBarViewOne.swift */; };
+		B995A1BB252DF01B0037E0FB /* StatusBarViewTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B995A1BA252DF01B0037E0FB /* StatusBarViewTwo.swift */; };
 		B9A1C0F5252B1D48004E3AEE /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = B9A1C0F4252B1D48004E3AEE /* SnapKit */; };
 		B9A1C0F7252B2A40004E3AEE /* FBImpactImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A1C0F6252B2A40004E3AEE /* FBImpactImageView.swift */; };
 		B9A1C0FA252B3E82004E3AEE /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A1C0F9252B3E82004E3AEE /* UIView+Ext.swift */; };
@@ -67,6 +68,7 @@
 		B9664EC425248B1000637BDF /* CharityListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharityListVC.swift; sourceTree = "<group>"; };
 		B967FD6C252D9DE70031442F /* DonationBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationBarVC.swift; sourceTree = "<group>"; };
 		B995A1B8252DEBF90037E0FB /* StatusBarViewOne.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarViewOne.swift; sourceTree = "<group>"; };
+		B995A1BA252DF01B0037E0FB /* StatusBarViewTwo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarViewTwo.swift; sourceTree = "<group>"; };
 		B9A1C0F6252B2A40004E3AEE /* FBImpactImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBImpactImageView.swift; sourceTree = "<group>"; };
 		B9A1C0F9252B3E82004E3AEE /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
 		B9A1C0FB252B470C004E3AEE /* FBTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBTitleLabel.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 				B9A1C0F6252B2A40004E3AEE /* FBImpactImageView.swift */,
 				B967FD6C252D9DE70031442F /* DonationBarVC.swift */,
 				B995A1B8252DEBF90037E0FB /* StatusBarViewOne.swift */,
+				B995A1BA252DF01B0037E0FB /* StatusBarViewTwo.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -296,6 +299,7 @@
 				B95B9E52252A0DFB00DF6368 /* InfoCharity.swift in Sources */,
 				B9664EBF2524834500637BDF /* SearchVC.swift in Sources */,
 				B912457525287599002B85C5 /* FBBodyLabel.swift in Sources */,
+				B995A1BB252DF01B0037E0FB /* StatusBarViewTwo.swift in Sources */,
 				B9664EC12524834E00637BDF /* FavouritesVC.swift in Sources */,
 				B9273CE525274B1700FE7155 /* ImageCache.swift in Sources */,
 				B9FF36A92525B8D70065AC17 /* NetworkManager.swift in Sources */,

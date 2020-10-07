@@ -16,9 +16,6 @@ class StatusBarViewOne: UIView{
     
     let fundAmountButton = UIButton()
     let mayFundLabel = FBTitleLabel(textAlignment: .left)
-    var donationAmount: Float = 1.0
-    var value: Float = 1.0
-    var currency: String = "$"
     var delegate: StatusBarViewOneDelegate?
     
     override init(frame: CGRect) {
@@ -35,9 +32,12 @@ class StatusBarViewOne: UIView{
         configureMayFundLabel()
     }
     
+    func set(donationAmount: String, currency: String){
+        fundAmountButton.setTitle("\(donationAmount) \(currency)", for: .normal)
+    }
+    
     private func configureFundAmountButton(){
         addSubview(fundAmountButton)
-        fundAmountButton.setTitle("\(donationAmount) \(currency)", for: .normal)
         fundAmountButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .title1)
         fundAmountButton.setTitleColor(.black, for: .normal)
         fundAmountButton.addTarget(self, action: #selector(fundAmountButtonPressed), for: .touchUpInside)
