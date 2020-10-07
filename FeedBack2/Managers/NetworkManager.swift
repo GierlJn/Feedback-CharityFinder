@@ -77,9 +77,11 @@ class NetworkManager{
                 guard let id = cargo.id else { throw FBError.invalidData }
                 guard let logo = cargo.logo else { throw FBError.invalidData }
                 guard let description = cargo.descriptionField else { throw FBError.invalidData}
+                guard let url = cargo.url else { throw FBError.invalidData}
+
                 #warning("Refactor")
                 
-                let charity = InfoCharity(name: name, id: id, logoUrl: logo, singleImpact: singleImpact, imageUrl: cargo.images, description: description)
+                let charity = InfoCharity(name: name, id: id, logoUrl: logo, singleImpact: singleImpact, imageUrl: cargo.images, description: description, url: url)
                 
                 completed(.success(charity))
                 return
@@ -113,8 +115,9 @@ class NetworkManager{
                 }
                 
             }
-            if(charityMainOutput != nil && name != nil && hit.id != nil && hit.logo != nil){
-                let charity = Charity(name: name!, id: hit.id!, logoUrl: hit.logo!, output: charityMainOutput!)
+            if(charityMainOutput != nil && name != nil && hit.id != nil && hit.logo != nil && hit.url != nil){
+                #warning("refactor")
+                let charity = Charity(name: name!, id: hit.id!, logoUrl: hit.logo!, output: charityMainOutput!, url: hit.url!)
                 charities.append(charity)
             }
         }

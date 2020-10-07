@@ -130,7 +130,7 @@ class CharityInfoVC: UIViewController{
     }
     
     @objc private func donateActionButtonPressed(){
-        guard let url = URL(string: charity.logoUrl) else {
+        guard let url = URL(string: charity.url) else {
             print("error")
             #warning("handle error")
             return

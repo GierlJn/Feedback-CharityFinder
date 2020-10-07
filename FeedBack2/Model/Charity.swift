@@ -13,4 +13,5 @@ struct Charity: Hashable{
     var id: String
     var logoUrl: String
     var output: Output
+    var url: String
 }
