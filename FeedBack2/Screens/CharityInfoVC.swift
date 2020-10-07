@@ -9,8 +9,13 @@
 import UIKit
 import SnapKit
 
+protocol DonationBarViewDelegate {
+    func donationButtonPressed()
+    func trackDonationButtonPressed()
+}
+
 class CharityInfoVC: UIViewController{
-    
+
     var logoImageView = FBLogoImageView(frame: .zero)
     var impactImageView = FBImpactImageView(frame: .zero)
     var descriptionLabel = FBBodyLabel(textAlignment: .left)
@@ -19,23 +24,47 @@ class CharityInfoVC: UIViewController{
     
     let scrollView = UIScrollView()
     let contentView = UIView()
-    
+    var donationBarView = UIView()
     var charityId: String = ""
+    var enteredDonation: Float = 1.0
+    
     var networkManger = NetworkManager()
     var charity: Charity!
     
-    
-    
+
     override func viewDidLoad() {
         view.backgroundColor = .systemBackground
+        configureDonationBarView()
         configureScrollView()
         getCharityInfo()
+    }
+    
+    private func configureDonationBarView(){
+        view.addSubview(donationBarView)
+        let donationBarVC = DonationBarVC()
+        donationBarVC.charity = charity
+        
+        self.add(childVC: donationBarVC, to: donationBarView)
+        
+        donationBarView.snp.makeConstraints { (maker) in
+            maker.left.equalTo(self.view.snp.left)
+            maker.right.equalTo(self.view.snp.right)
+            maker.bottom.equalTo(self.view.snp.bottom)
+            maker.height.equalTo(200)
+        }
     }
     
     private func configureScrollView(){
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
-        scrollView.pinToEdges(of: self.view)
+        //scrollView.pinToEdges(of: self.view)
+        scrollView.snp.makeConstraints { (maker) in
+            maker.top.equalTo(self.view.snp.top)
+            maker.left.equalTo(self.view.snp.left)
+            maker.right.equalTo(self.view.snp.right)
+            maker.bottom.equalTo(donationBarView.snp.top)
+        }
+        
         contentView.pinToEdges(of: scrollView)
         contentView.snp.makeConstraints { (maker) in
             maker.width.equalTo(scrollView.snp.width)
@@ -139,4 +168,20 @@ class CharityInfoVC: UIViewController{
         presentSafariVC(with: url)
     }
     
+}
+
+extension CharityInfoVC: DonationBarViewDelegate{
+    func donationButtonPressed() {
+        guard let url = URL(string: charity.url) else {
+            print("error")
+            #warning("handle error")
+            return
+        }
+        
+        presentSafariVC(with: url)
+    }
+    
+    func trackDonationButtonPressed() {
+        //
+    }
 }

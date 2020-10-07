@@ -19,7 +19,7 @@ class CharityListVC: UIViewController{
     
     let networkManager = NetworkManager()
     
-    var enteredDonation: Float = 0.0
+    var enteredDonation: Float = 1.0
     
     var charities = [Charity]()
     
@@ -80,6 +80,7 @@ extension CharityListVC: UITableViewDelegate{
         let charity = charities[indexPath.item]
         let charityInfoVC = CharityInfoVC()
         charityInfoVC.charity = charity
+        charityInfoVC.enteredDonation = enteredDonation
         
         let navigationController = UINavigationController(rootViewController: charityInfoVC)
         present(navigationController, animated: true)
