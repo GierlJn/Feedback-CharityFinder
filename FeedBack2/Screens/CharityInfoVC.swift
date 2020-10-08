@@ -16,7 +16,7 @@ protocol DonationBarViewDelegate {
 
 class CharityInfoVC: UIViewController{
 
-    var logoImageView = FBLogoImageView(frame: .zero)
+    //var logoImageView = FBLogoImageView(frame: .zero)
     var impactImageView = FBImpactImageView(frame: .zero)
     var descriptionLabel = FBTextView(textAlignment: .left)
     var titleLabel = FBTitleLabel(textAlignment: .left)
@@ -56,7 +56,7 @@ class CharityInfoVC: UIViewController{
     private func configureScrollView(){
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
-        //scrollView.pinToEdges(of: self.view)
+        
         scrollView.snp.makeConstraints { (maker) in
             maker.top.equalTo(self.view.snp.top)
             maker.left.equalTo(self.view.snp.left)
@@ -87,37 +87,37 @@ class CharityInfoVC: UIViewController{
     }
     
     private func configureViews(with infoCharity: InfoCharity) {
-        self.configureLogoImageView()
+        //self.configureLogoImageView()
         self.configureImpactImageView(infoCharity)
         self.configureTitleLabel()
         self.configureDescriptionLabel(infoCharity)
     }
     
-    private func configureLogoImageView(){
-        contentView.addSubview(logoImageView)
-        logoImageView.setLogoImage(logoUrl: charity.logoUrl)
-        logoImageView.layer.cornerRadius = 20
-        logoImageView.snp.makeConstraints { (make) -> Void in
-            make.width.height.equalTo(50)
-            make.left.equalTo(self.view.snp.left).offset(20)
-            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(20)
-        }
-    }
+//    private func configureLogoImageView(){
+//        contentView.addSubview(logoImageView)
+//        logoImageView.setLogoImage(logoUrl: charity.logoUrl)
+//        logoImageView.layer.cornerRadius = 20
+//        logoImageView.snp.makeConstraints { (make) -> Void in
+//            make.width.height.equalTo(50)
+//            make.left.equalTo(self.view.snp.left).offset(20)
+//            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(20)
+//        }
+//    }
     
     private func configureImpactImageView(_ infoCharity: InfoCharity){
         self.contentView.addSubview(self.impactImageView)
-        self.contentView.bringSubviewToFront(self.logoImageView)
+        //self.contentView.bringSubviewToFront(self.logoImageView)
         if (infoCharity.imageUrl != nil){
             self.impactImageView.setImage(imageUrl: infoCharity.imageUrl!)
         }else{
             self.impactImageView.setImage(imageUrl: charity.logoUrl)
-            self.logoImageView.isHidden = true
+            //self.logoImageView.isHidden = true
         }
         
         self.impactImageView.snp.makeConstraints { (make) in
             make.left.equalTo(self.view.snp.left)
             make.right.equalTo(self.view.snp.right)
-            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(20)
+            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
             make.height.equalTo(150)
         }
     }
