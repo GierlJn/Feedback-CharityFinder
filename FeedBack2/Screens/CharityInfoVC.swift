@@ -44,10 +44,6 @@ class CharityInfoVC: UIViewController{
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.left.square.fill"), style: .plain, target: self, action: #selector(backButtonPressed))
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.horizontal.3"), style: .plain, target: self, action: #selector(accessoryButtonPressed))
         navigationController?.navigationBar.tintColor = .white
-        
-        
-//        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward.circle.fill"), style: .plain, target: self, action: #selector(backButtonPressed))
-        
     }
     
     private func configureDonationBarView(){
