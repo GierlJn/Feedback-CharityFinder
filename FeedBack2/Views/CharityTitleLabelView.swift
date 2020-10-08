@@ -10,7 +10,7 @@ import UIKit
 
 class CharityTitleLabelView: UIView{
     
-    let titleLabel = FBTitleLabel(textAlignment: .right)
+    let titleLabel = FBTitleLabel(textAlignment: .left)
     let favoriteIconImageView = UIImageView()
     
     override init(frame: CGRect) {
@@ -28,9 +28,10 @@ class CharityTitleLabelView: UIView{
     
     private func configure(){
         addSubview(favoriteIconImageView)
+        favoriteIconImageView.image = UIImage(systemName: "bookmark")
         favoriteIconImageView.snp.makeConstraints { (maker) in
             maker.right.equalTo(self.snp.right).offset(-16)
-            maker.size.equalTo(50)
+            maker.size.equalTo(20)
             maker.centerY.equalTo(self.snp.centerY)
         }
         
@@ -39,7 +40,7 @@ class CharityTitleLabelView: UIView{
             maker.right.equalTo(favoriteIconImageView.snp.left).offset(-16)
             maker.top.equalTo(self.snp.top).offset(16)
             maker.bottom.equalTo(self.snp.bottom).offset(-16)
-            maker.left.equalTo(self.snp.left).offset(50)
+            maker.left.equalTo(self.snp.left).offset(60)
         }
     }
     

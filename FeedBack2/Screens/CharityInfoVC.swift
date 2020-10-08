@@ -17,7 +17,7 @@ class CharityInfoVC: UIViewController{
 
     var impactImageView = FBImpactImageView(frame: .zero)
     var descriptionLabel = FBTextView(textAlignment: .left)
-    var titleLabel = FBTitleLabel(textAlignment: .left)
+    var charityTitleLabelView = CharityTitleLabelView()
     var donationBarView = DonationBarView()
     
     let scrollView = UIScrollView()
@@ -32,6 +32,7 @@ class CharityInfoVC: UIViewController{
     override func viewDidLoad() {
         view.setGradientBackgroundColor(colors: [.lightBlueBackgroundGradientStart, .lightBlueBackgroundGradientEnd], axis: .horizontal)
         configureNavigationBar()
+        
         configureDonationBarView()
         configureScrollView()
         getCharityInfo()
@@ -52,7 +53,7 @@ class CharityInfoVC: UIViewController{
             maker.left.equalTo(self.view.snp.left)
             maker.right.equalTo(self.view.snp.right)
             maker.bottom.equalTo(self.view.snp.bottom)
-            maker.height.equalTo(100)
+            maker.height.equalTo(80)
         }
         donationBarView.actionButton.setGradientBackgroundColor(colors: [.buttonDarkBlueGradientStart, .buttonDarkBlueGradientEnd], axis: .horizontal, cornerRadius: 7)
     }
@@ -92,7 +93,7 @@ class CharityInfoVC: UIViewController{
     
     private func configureViews(with infoCharity: InfoCharity) {
         self.configureImpactImageView(infoCharity)
-        self.configureTitleLabel()
+        self.configureTitleLabelView()
         self.configureDescriptionLabel(infoCharity)
     }
 
@@ -114,15 +115,27 @@ class CharityInfoVC: UIViewController{
         }
     }
     
-    private func configureTitleLabel(){
-        contentView.addSubview(titleLabel)
-        titleLabel.text = charity.name
-        titleLabel.snp.makeConstraints { (maker) in
-            maker.top.equalTo(impactImageView.snp.bottom).offset(10)
-            maker.left.equalTo(contentView.snp.left).offset(20)
-            maker.right.equalTo(contentView.snp.right).offset(-20)
+    private func configureTitleLabelView(){
+        contentView.addSubview(charityTitleLabelView)
+        charityTitleLabelView.set(title: charity.name)
+        charityTitleLabelView.backgroundColor = .white
+        charityTitleLabelView.layer.cornerRadius = 7
+        
+        charityTitleLabelView.snp.makeConstraints { (maker) in
+            maker.centerY.equalTo(impactImageView.snp.bottom)
+            maker.width.equalTo(400)
             maker.height.equalTo(60)
+            maker.right.equalTo(contentView.snp.right).offset(-16)
         }
+        
+//        contentView.addSubview(titleLabel)
+//        titleLabel.text = charity.name
+//        titleLabel.snp.makeConstraints { (maker) in
+//            maker.top.equalTo(impactImageView.snp.bottom).offset(10)
+//            maker.left.equalTo(contentView.snp.left).offset(20)
+//            maker.right.equalTo(contentView.snp.right).offset(-20)
+//            maker.height.equalTo(60)
+//        }
     }
     
     private func configureDescriptionLabel(_ infoCharity: InfoCharity){
@@ -132,7 +145,7 @@ class CharityInfoVC: UIViewController{
         //descriptionLabel.isOpaque = false
         descriptionLabel.sizeToFit()
         descriptionLabel.snp.makeConstraints { (maker) in
-            maker.top.equalTo(titleLabel.snp.bottom).offset(5)
+            maker.top.equalTo(charityTitleLabelView.snp.bottom).offset(16)
             maker.left.equalTo(contentView.snp.left).offset(20)
             maker.right.equalTo(contentView.snp.right).offset(-20)
             maker.bottom.equalTo(contentView.snp.bottom).offset(-15)
