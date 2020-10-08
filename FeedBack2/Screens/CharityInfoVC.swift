@@ -31,23 +31,23 @@ class CharityInfoVC: UIViewController{
     
     override func viewDidLoad() {
         view.setGradientBackgroundColor(colors: [.lightBlueBackgroundGradientStart, .lightBlueBackgroundGradientEnd], axis: .horizontal)
-        setNeedsStatusBarAppearanceUpdate()
-        self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        self.navigationController!.navigationBar.shadowImage = UIImage()
-        self.navigationController!.navigationBar.isTranslucent = true
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(backButtonPressed))
-        
+        configureNavigationBar()
         configureDonationBarView()
         configureScrollView()
         getCharityInfo()
     }
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
-    
-    @objc func backButtonPressed(){
-        self.dismiss(animated: true)
+    private func configureNavigationBar(){
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.isTranslucent = true
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.left.square.fill"), style: .plain, target: self, action: #selector(backButtonPressed))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.horizontal.3"), style: .plain, target: self, action: #selector(accessoryButtonPressed))
+        navigationController?.navigationBar.tintColor = .white
+        
+        
+//        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward.circle.fill"), style: .plain, target: self, action: #selector(backButtonPressed))
+        
     }
     
     private func configureDonationBarView(){
@@ -95,7 +95,6 @@ class CharityInfoVC: UIViewController{
     }
     
     private func configureViews(with infoCharity: InfoCharity) {
-        //self.configureLogoImageView()
         self.configureImpactImageView(infoCharity)
         self.configureTitleLabel()
         self.configureDescriptionLabel(infoCharity)
@@ -104,7 +103,6 @@ class CharityInfoVC: UIViewController{
     
     private func configureImpactImageView(_ infoCharity: InfoCharity){
         self.contentView.addSubview(self.impactImageView)
-        //self.contentView.bringSubviewToFront(self.logoImageView)
         if (infoCharity.imageUrl != nil){
             self.impactImageView.setImage(imageUrl: infoCharity.imageUrl!)
         }else{
@@ -144,7 +142,15 @@ class CharityInfoVC: UIViewController{
             maker.bottom.equalTo(contentView.snp.bottom).offset(-15)
         }
     }
-
+    
+    @objc func backButtonPressed(){
+        self.dismiss(animated: true)
+    }
+    
+    @objc func accessoryButtonPressed(){
+        
+    }
+    
     
 }
 
@@ -155,11 +161,6 @@ extension CharityInfoVC: DonationBarViewDelegate{
             #warning("handle error")
             return
         }
-        
         presentSafariVC(with: url)
-    }
-    
-    func trackDonationButtonPressed() {
-        //
     }
 }
