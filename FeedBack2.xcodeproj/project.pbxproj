@@ -16,6 +16,8 @@
 		B9273CDF2527470900FE7155 /* Charity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9273CDE2527470900FE7155 /* Charity.swift */; };
 		B9273CE12527474000FE7155 /* FBLogoImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9273CE02527474000FE7155 /* FBLogoImageView.swift */; };
 		B9273CE525274B1700FE7155 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9273CE425274B1700FE7155 /* ImageCache.swift */; };
+		B956D493252F0FFE00F6E0D6 /* UIButton+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B956D492252F0FFE00F6E0D6 /* UIButton+Ext.swift */; };
+		B956D495252F114C00F6E0D6 /* DonationStatusBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B956D494252F114C00F6E0D6 /* DonationStatusBar.swift */; };
 		B95B9E4E2529C34900DF6368 /* CharityInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95B9E4D2529C34900DF6368 /* CharityInfoVC.swift */; };
 		B95B9E502529D62300DF6368 /* InfoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95B9E4F2529D62300DF6368 /* InfoResponse.swift */; };
 		B95B9E52252A0DFB00DF6368 /* InfoCharity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95B9E51252A0DFB00DF6368 /* InfoCharity.swift */; };
@@ -54,6 +56,8 @@
 		B9273CDE2527470900FE7155 /* Charity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Charity.swift; sourceTree = "<group>"; };
 		B9273CE02527474000FE7155 /* FBLogoImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBLogoImageView.swift; sourceTree = "<group>"; };
 		B9273CE425274B1700FE7155 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
+		B956D492252F0FFE00F6E0D6 /* UIButton+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Ext.swift"; sourceTree = "<group>"; };
+		B956D494252F114C00F6E0D6 /* DonationStatusBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationStatusBar.swift; sourceTree = "<group>"; };
 		B95B9E4D2529C34900DF6368 /* CharityInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharityInfoVC.swift; sourceTree = "<group>"; };
 		B95B9E4F2529D62300DF6368 /* InfoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoResponse.swift; sourceTree = "<group>"; };
 		B95B9E51252A0DFB00DF6368 /* InfoCharity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCharity.swift; sourceTree = "<group>"; };
@@ -116,6 +120,7 @@
 				B967FD6C252D9DE70031442F /* DonationBarVC.swift */,
 				B995A1B8252DEBF90037E0FB /* StatusBarViewOne.swift */,
 				B995A1BA252DF01B0037E0FB /* StatusBarViewTwo.swift */,
+				B956D494252F114C00F6E0D6 /* DonationStatusBar.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -182,6 +187,7 @@
 				B9A1C0F9252B3E82004E3AEE /* UIView+Ext.swift */,
 				B9F2274B252EE62200A25EC5 /* Colors+Ext.swift */,
 				B9A57BD6252C58920034ADE6 /* UIViewController+Ext.swift */,
+				B956D492252F0FFE00F6E0D6 /* UIButton+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -305,6 +311,7 @@
 				B95B9E52252A0DFB00DF6368 /* InfoCharity.swift in Sources */,
 				B9664EBF2524834500637BDF /* SearchVC.swift in Sources */,
 				B912457525287599002B85C5 /* FBBodyLabel.swift in Sources */,
+				B956D493252F0FFE00F6E0D6 /* UIButton+Ext.swift in Sources */,
 				B995A1BB252DF01B0037E0FB /* StatusBarViewTwo.swift in Sources */,
 				B9664EC12524834E00637BDF /* FavouritesVC.swift in Sources */,
 				B9F2274C252EE62200A25EC5 /* Colors+Ext.swift in Sources */,
@@ -324,6 +331,7 @@
 				B9664EBD2524826400637BDF /* FBTabBarController.swift in Sources */,
 				B9A1C0F7252B2A40004E3AEE /* FBImpactImageView.swift in Sources */,
 				B9273CDB25273EB000FE7155 /* FBTextField.swift in Sources */,
+				B956D495252F114C00F6E0D6 /* DonationStatusBar.swift in Sources */,
 				B9664EC32524864900637BDF /* FBButton.swift in Sources */,
 				B9664EC525248B1000637BDF /* CharityListVC.swift in Sources */,
 				B9273CDD252746F700FE7155 /* ImpactProject.swift in Sources */,

@@ -11,19 +11,17 @@ import SnapKit
 
 protocol DonationBarViewDelegate {
     func donationButtonPressed()
-    func trackDonationButtonPressed()
 }
 
 class CharityInfoVC: UIViewController{
 
-    //var logoImageView = FBLogoImageView(frame: .zero)
     var impactImageView = FBImpactImageView(frame: .zero)
     var descriptionLabel = FBTextView(textAlignment: .left)
     var titleLabel = FBTitleLabel(textAlignment: .left)
+    var donationBarView = DonationBarView()
     
     let scrollView = UIScrollView()
     let contentView = UIView()
-    var donationBarView = UIView()
     var charityId: String = ""
     var enteredDonation: Float = 1.0
     
@@ -31,16 +29,13 @@ class CharityInfoVC: UIViewController{
     var charity: Charity!
     
     
-    
-
     override func viewDidLoad() {
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .lightBlueBackground
         setNeedsStatusBarAppearanceUpdate()
         self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController!.navigationBar.shadowImage = UIImage()
         self.navigationController!.navigationBar.isTranslucent = true
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(backButtonPressed))
-        
         
         configureDonationBarView()
         configureScrollView()
@@ -57,16 +52,12 @@ class CharityInfoVC: UIViewController{
     
     private func configureDonationBarView(){
         view.addSubview(donationBarView)
-        let donationBarVC = DonationBarVC()
-        donationBarVC.charity = charity
-        
-        self.add(childVC: donationBarVC, to: donationBarView)
-        
+        donationBarView.backgroundColor = .lightBlueBackground
         donationBarView.snp.makeConstraints { (maker) in
             maker.left.equalTo(self.view.snp.left)
             maker.right.equalTo(self.view.snp.right)
             maker.bottom.equalTo(self.view.snp.bottom)
-            maker.height.equalTo(160)
+            maker.height.equalTo(100)
         }
     }
     
@@ -109,17 +100,7 @@ class CharityInfoVC: UIViewController{
         self.configureTitleLabel()
         self.configureDescriptionLabel(infoCharity)
     }
-    
-//    private func configureLogoImageView(){
-//        contentView.addSubview(logoImageView)
-//        logoImageView.setLogoImage(logoUrl: charity.logoUrl)
-//        logoImageView.layer.cornerRadius = 20
-//        logoImageView.snp.makeConstraints { (make) -> Void in
-//            make.width.height.equalTo(50)
-//            make.left.equalTo(self.view.snp.left).offset(20)
-//            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(20)
-//        }
-//    }
+
     
     private func configureImpactImageView(_ infoCharity: InfoCharity){
         self.contentView.addSubview(self.impactImageView)
@@ -154,6 +135,7 @@ class CharityInfoVC: UIViewController{
         contentView.addSubview(descriptionLabel)
         descriptionLabel.text = infoCharity.description
         //descriptionLabel.numberOfLines = 0
+        descriptionLabel.backgroundColor = .lightBlueBackground
         descriptionLabel.sizeToFit()
         descriptionLabel.snp.makeConstraints { (maker) in
             maker.top.equalTo(titleLabel.snp.bottom).offset(5)

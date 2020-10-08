@@ -15,6 +15,8 @@ extension UIColor {
     static var columbiaBlue: UIColor { return UIColor(rgb: 0xC4D7F2)}
     static var cambridgeBlue: UIColor { return UIColor(rgb: 0xA3C4BC)}
     static var turquoiseGreen: UIColor { return UIColor(rgb: 0xBFD7B5)}
+    static var lightBlueBackground: UIColor { return UIColor(rgb: 0xEAD7ED)}
+    static var buttonDarkBlue: UIColor { return UIColor(rgb: 0x5637D1)}
     
     convenience init(red: Int, green: Int, blue: Int) {
         assert(red >= 0 && red <= 255, "Invalid red component")
