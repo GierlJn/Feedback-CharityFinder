@@ -30,7 +30,7 @@ class CharityInfoVC: UIViewController{
     
     
     override func viewDidLoad() {
-        view.backgroundColor = .lightBlueBackground
+        view.setGradientBackgroundColor(colors: [.lightBlueBackgroundGradientStart, .lightBlueBackgroundGradientEnd], axis: .horizontal)
         setNeedsStatusBarAppearanceUpdate()
         self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController!.navigationBar.shadowImage = UIImage()
@@ -134,8 +134,8 @@ class CharityInfoVC: UIViewController{
     private func configureDescriptionLabel(_ infoCharity: InfoCharity){
         contentView.addSubview(descriptionLabel)
         descriptionLabel.text = infoCharity.description
-        //descriptionLabel.numberOfLines = 0
-        descriptionLabel.backgroundColor = .lightBlueBackground
+        //descriptionLabel.backgroundColor = .init(white: 0, alpha: 0)
+        //descriptionLabel.isOpaque = false
         descriptionLabel.sizeToFit()
         descriptionLabel.snp.makeConstraints { (maker) in
             maker.top.equalTo(titleLabel.snp.bottom).offset(5)

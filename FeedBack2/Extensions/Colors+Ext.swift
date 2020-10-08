@@ -19,6 +19,8 @@ extension UIColor {
     static var buttonDarkBlue: UIColor { return UIColor(rgb: 0x5637D1)}
     static var buttonDarkBlueGradientStart: UIColor { return UIColor(rgb: 0xAE71E0)}
     static var buttonDarkBlueGradientEnd: UIColor { return UIColor(rgb: 0x7573FF)}
+    static var lightBlueBackgroundGradientStart: UIColor { return UIColor(rgb: 0xFDE4EF)}
+    static var lightBlueBackgroundGradientEnd: UIColor { return UIColor(rgb: 0xEEE4FE)}
     
     convenience init(red: Int, green: Int, blue: Int) {
         assert(red >= 0 && red <= 255, "Invalid red component")
