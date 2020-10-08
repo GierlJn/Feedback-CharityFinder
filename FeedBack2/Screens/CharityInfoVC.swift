@@ -18,9 +18,8 @@ class CharityInfoVC: UIViewController{
 
     var logoImageView = FBLogoImageView(frame: .zero)
     var impactImageView = FBImpactImageView(frame: .zero)
-    var descriptionLabel = FBBodyLabel(textAlignment: .left)
+    var descriptionLabel = FBTextView(textAlignment: .left)
     var titleLabel = FBTitleLabel(textAlignment: .left)
-    let donateActionButton = FBButton(title: "Donate", backgroundColor: .systemBlue)
     
     let scrollView = UIScrollView()
     let contentView = UIView()
@@ -92,7 +91,6 @@ class CharityInfoVC: UIViewController{
         self.configureImpactImageView(infoCharity)
         self.configureTitleLabel()
         self.configureDescriptionLabel(infoCharity)
-        self.configureActionButton()
     }
     
     private func configureLogoImageView(){
@@ -138,35 +136,16 @@ class CharityInfoVC: UIViewController{
     private func configureDescriptionLabel(_ infoCharity: InfoCharity){
         contentView.addSubview(descriptionLabel)
         descriptionLabel.text = infoCharity.description
-        descriptionLabel.numberOfLines = 0
+        //descriptionLabel.numberOfLines = 0
         descriptionLabel.sizeToFit()
         descriptionLabel.snp.makeConstraints { (maker) in
             maker.top.equalTo(titleLabel.snp.bottom).offset(5)
             maker.left.equalTo(contentView.snp.left).offset(20)
             maker.right.equalTo(contentView.snp.right).offset(-20)
+            maker.bottom.equalTo(contentView.snp.bottom).offset(-15)
         }
     }
-    
-    private func configureActionButton(){
-        contentView.addSubview(donateActionButton)
-        donateActionButton.addTarget(self, action: #selector(donateActionButtonPressed), for: .touchUpInside)
-        donateActionButton.snp.makeConstraints { (maker) in
-            maker.top.equalTo(descriptionLabel.snp.bottom).offset(20)
-            maker.centerX.equalTo(contentView.snp.centerX)
-            maker.width.equalTo(250)
-            maker.height.equalTo(50)
-        }
-    }
-    
-    @objc private func donateActionButtonPressed(){
-        guard let url = URL(string: charity.url) else {
-            print("error")
-            #warning("handle error")
-            return
-        }
-        
-        presentSafariVC(with: url)
-    }
+
     
 }
 
