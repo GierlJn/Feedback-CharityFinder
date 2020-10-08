@@ -83,6 +83,9 @@ extension CharityListVC: UITableViewDelegate{
         charityInfoVC.enteredDonation = enteredDonation
         
         let navigationController = UINavigationController(rootViewController: charityInfoVC)
+        
+        navigationController.modalPresentationStyle = .fullScreen
+        navigationController.navigationBar.barStyle = .black
         present(navigationController, animated: true)
     }
 }

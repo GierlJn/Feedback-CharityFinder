@@ -30,12 +30,29 @@ class CharityInfoVC: UIViewController{
     var networkManger = NetworkManager()
     var charity: Charity!
     
+    
+    
 
     override func viewDidLoad() {
         view.backgroundColor = .systemBackground
+        setNeedsStatusBarAppearanceUpdate()
+        self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController!.navigationBar.shadowImage = UIImage()
+        self.navigationController!.navigationBar.isTranslucent = true
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(backButtonPressed))
+        
+        
         configureDonationBarView()
         configureScrollView()
         getCharityInfo()
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
+    @objc func backButtonPressed(){
+        self.dismiss(animated: true)
     }
     
     private func configureDonationBarView(){
@@ -49,7 +66,7 @@ class CharityInfoVC: UIViewController{
             maker.left.equalTo(self.view.snp.left)
             maker.right.equalTo(self.view.snp.right)
             maker.bottom.equalTo(self.view.snp.bottom)
-            maker.height.equalTo(200)
+            maker.height.equalTo(160)
         }
     }
     
@@ -117,8 +134,8 @@ class CharityInfoVC: UIViewController{
         self.impactImageView.snp.makeConstraints { (make) in
             make.left.equalTo(self.view.snp.left)
             make.right.equalTo(self.view.snp.right)
-            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
-            make.height.equalTo(150)
+            make.top.equalTo(self.view.snp.top)
+            make.height.equalTo(200)
         }
     }
     
