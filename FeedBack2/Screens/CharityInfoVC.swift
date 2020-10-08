@@ -19,6 +19,7 @@ class CharityInfoVC: UIViewController{
     var descriptionLabel = FBTextView(textAlignment: .left)
     var charityTitleLabelView = CharityTitleLabelView()
     var donationBarView = DonationBarView()
+    var outputOverviewStackView = OutputOverViewContainerView()
     
     let scrollView = UIScrollView()
     let contentView = UIView()
@@ -94,6 +95,7 @@ class CharityInfoVC: UIViewController{
     private func configureViews(with infoCharity: InfoCharity) {
         self.configureImpactImageView(infoCharity)
         self.configureTitleLabelView()
+        self.configureOutputOverviewStackView()
         self.configureDescriptionLabel(infoCharity)
     }
 
@@ -127,15 +129,20 @@ class CharityInfoVC: UIViewController{
             maker.height.equalTo(60)
             maker.right.equalTo(contentView.snp.right).offset(-16)
         }
+    }
+    
+    private func configureOutputOverviewStackView(){
+        let outputs = [charity.output, charity.output, charity.output]
+        outputOverviewStackView.set(outputs: outputs)
+        contentView.addSubview(outputOverviewStackView)
+        let height = 150
+        outputOverviewStackView.snp.makeConstraints { (maker) in
+            maker.height.equalTo(height)
+            maker.top.equalTo(charityTitleLabelView.snp.bottom).offset(16)
+            maker.left.equalTo(contentView.snp.left).offset(20)
+            maker.right.equalTo(contentView.snp.right).offset(-20)
+        }
         
-//        contentView.addSubview(titleLabel)
-//        titleLabel.text = charity.name
-//        titleLabel.snp.makeConstraints { (maker) in
-//            maker.top.equalTo(impactImageView.snp.bottom).offset(10)
-//            maker.left.equalTo(contentView.snp.left).offset(20)
-//            maker.right.equalTo(contentView.snp.right).offset(-20)
-//            maker.height.equalTo(60)
-//        }
     }
     
     private func configureDescriptionLabel(_ infoCharity: InfoCharity){
@@ -145,7 +152,7 @@ class CharityInfoVC: UIViewController{
         //descriptionLabel.isOpaque = false
         descriptionLabel.sizeToFit()
         descriptionLabel.snp.makeConstraints { (maker) in
-            maker.top.equalTo(charityTitleLabelView.snp.bottom).offset(16)
+            maker.top.equalTo(outputOverviewStackView.snp.bottom).offset(16)
             maker.left.equalTo(contentView.snp.left).offset(20)
             maker.right.equalTo(contentView.snp.right).offset(-20)
             maker.bottom.equalTo(contentView.snp.bottom).offset(-15)
