@@ -52,13 +52,13 @@ class CharityInfoVC: UIViewController{
     
     private func configureDonationBarView(){
         view.addSubview(donationBarView)
-        donationBarView.backgroundColor = .lightBlueBackground
         donationBarView.snp.makeConstraints { (maker) in
             maker.left.equalTo(self.view.snp.left)
             maker.right.equalTo(self.view.snp.right)
             maker.bottom.equalTo(self.view.snp.bottom)
             maker.height.equalTo(100)
         }
+        donationBarView.actionButton.setGradientBackgroundColor(colors: [.buttonDarkBlueGradientStart, .buttonDarkBlueGradientEnd], axis: .horizontal, cornerRadius: 7)
     }
     
     private func configureScrollView(){

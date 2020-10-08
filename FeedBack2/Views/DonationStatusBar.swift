@@ -10,11 +10,12 @@ import UIKit
 
 class DonationBarView: UIView{
     
-    let actionButton = FBButton(title: "Donate", backgroundColor: .buttonDarkBlue)
+    let actionButton = FBButton(title: "Donate")
     var delegate: DonationBarViewDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
+        
         configure()
     }
     
@@ -26,6 +27,7 @@ class DonationBarView: UIView{
         addSubview(actionButton)
         actionButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .title1)
         actionButton.addTarget(self, action: #selector(actionButtonPressed), for: .touchUpInside)
+        
         let padding = 16
         
         actionButton.snp.makeConstraints { (maker) in

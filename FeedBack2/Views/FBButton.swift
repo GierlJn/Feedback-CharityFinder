@@ -25,6 +25,12 @@ class FBButton: UIButton{
         self.backgroundColor = backgroundColor
     }
     
+    convenience init(title: String){
+        self.init(frame: .zero)
+        setTitle(title, for: .normal)
+    }
+    
+    
     private func configure(){
         translatesAutoresizingMaskIntoConstraints = false
         layer.cornerRadius = 7
