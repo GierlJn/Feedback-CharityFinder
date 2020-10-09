@@ -142,12 +142,12 @@ class CharityInfoVC: UIViewController{
             maker.left.equalTo(contentView.snp.left).offset(20)
             maker.right.equalTo(contentView.snp.right).offset(-20)
         }
-        
     }
     
     private func configureDescriptionLabel(_ infoCharity: InfoCharity){
         contentView.addSubview(descriptionLabel)
         descriptionLabel.text = infoCharity.description
+        descriptionLabel.textColor = .mainTextColor
         //descriptionLabel.backgroundColor = .init(white: 0, alpha: 0)
         //descriptionLabel.isOpaque = false
         descriptionLabel.sizeToFit()

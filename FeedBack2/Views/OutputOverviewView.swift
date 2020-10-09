@@ -38,16 +38,21 @@ class OutputOverviewView: UIView{
     private func configure(){
         addSubview(iconImageView)
         iconImageView.image = UIImage(systemName: "house.fill")
+        iconImageView.tintColor = .mainTextColor
         iconImageView.snp.makeConstraints { (maker) in
             maker.left.equalTo(self.snp.left)
             maker.size.equalTo(30)
             maker.centerY.equalTo(self.snp.centerY)
         }
         
-        mayFundLabel.font = .systemFont(ofSize: 12)
-        mayFundLabel.text = "Your 123$ donation may fund"
-        impactLabel.text = "123 animals saved"
+        mayFundLabel.font = .boldSystemFont(ofSize: 12)
+        mayFundLabel.text = "Estimated 123 animals saved"
+        mayFundLabel.textColor = .mainTextColor
+        
+        impactLabel.text = "For every 1$ donated"
         impactLabel.font = .systemFont(ofSize: 12)
+        impactLabel.textColor = .mainTextColor
+        impactLabel.alpha = 0.8
         
         addSubview(labelsStackView)
         labelsStackView.axis = .vertical
