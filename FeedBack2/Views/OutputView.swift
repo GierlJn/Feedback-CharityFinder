@@ -37,7 +37,7 @@ class OutputView: UIView{
     
     private func configure(){
         addSubview(iconImageView)
-        iconImageView.image = UIImage(systemName: "house.fill")
+        iconImageView.image = UIImage(systemName: "heart.fill")
         iconImageView.tintColor = .mainTextColor
         iconImageView.snp.makeConstraints { (maker) in
             maker.left.equalTo(self.snp.left)
@@ -46,7 +46,7 @@ class OutputView: UIView{
         }
         
         mayFundLabel.font = .boldSystemFont(ofSize: 12)
-        let valueLabelText = "1 \(output.name ?? "")"
+        let valueLabelText = "1 \(output.name?.removePluralParanthesis() ?? "")"
         
         mayFundLabel.text = valueLabelText
         mayFundLabel.textColor = .mainTextColor

@@ -38,7 +38,7 @@ class OutputOverViewContainerView: UIStackView{
         self.spacing = 5
         
         for output in outputs{
-            let outputOverView = OutputOverviewView(output: output)
+            let outputOverView = OutputView(output: output)
             outputOverView.snp.makeConstraints { (maker) in
                 maker.height.equalTo(30)
             }

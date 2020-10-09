@@ -17,7 +17,7 @@
 		B9273CE12527474000FE7155 /* FBLogoImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9273CE02527474000FE7155 /* FBLogoImageView.swift */; };
 		B9273CE525274B1700FE7155 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9273CE425274B1700FE7155 /* ImageCache.swift */; };
 		B956D495252F114C00F6E0D6 /* DonationStatusBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B956D494252F114C00F6E0D6 /* DonationStatusBar.swift */; };
-		B956D497252F313000F6E0D6 /* OutputOverviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B956D496252F313000F6E0D6 /* OutputOverviewView.swift */; };
+		B956D497252F313000F6E0D6 /* OutputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B956D496252F313000F6E0D6 /* OutputView.swift */; };
 		B956D499252F31B900F6E0D6 /* CharityTitleLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B956D498252F31B900F6E0D6 /* CharityTitleLabelView.swift */; };
 		B956D49B252F4A9A00F6E0D6 /* OutputOverViewContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B956D49A252F4A9A00F6E0D6 /* OutputOverViewContainerView.swift */; };
 		B95B9E4E2529C34900DF6368 /* CharityInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95B9E4D2529C34900DF6368 /* CharityInfoVC.swift */; };
@@ -33,6 +33,8 @@
 		B9664EC32524864900637BDF /* FBButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9664EC22524864900637BDF /* FBButton.swift */; };
 		B9664EC525248B1000637BDF /* CharityListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9664EC425248B1000637BDF /* CharityListVC.swift */; };
 		B967FD6D252D9DE70031442F /* DonationBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B967FD6C252D9DE70031442F /* DonationBarVC.swift */; };
+		B971B23325305A0500660923 /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B971B23225305A0500660923 /* String+Ext.swift */; };
+		B971B23625305F2C00660923 /* Currrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = B971B23525305F2C00660923 /* Currrency.swift */; };
 		B995A1B9252DEBF90037E0FB /* StatusBarViewOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = B995A1B8252DEBF90037E0FB /* StatusBarViewOne.swift */; };
 		B995A1BB252DF01B0037E0FB /* StatusBarViewTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B995A1BA252DF01B0037E0FB /* StatusBarViewTwo.swift */; };
 		B9A1C0F5252B1D48004E3AEE /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = B9A1C0F4252B1D48004E3AEE /* SnapKit */; };
@@ -59,7 +61,7 @@
 		B9273CE02527474000FE7155 /* FBLogoImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBLogoImageView.swift; sourceTree = "<group>"; };
 		B9273CE425274B1700FE7155 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		B956D494252F114C00F6E0D6 /* DonationStatusBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationStatusBar.swift; sourceTree = "<group>"; };
-		B956D496252F313000F6E0D6 /* OutputOverviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputOverviewView.swift; sourceTree = "<group>"; };
+		B956D496252F313000F6E0D6 /* OutputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputView.swift; sourceTree = "<group>"; };
 		B956D498252F31B900F6E0D6 /* CharityTitleLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharityTitleLabelView.swift; sourceTree = "<group>"; };
 		B956D49A252F4A9A00F6E0D6 /* OutputOverViewContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputOverViewContainerView.swift; sourceTree = "<group>"; };
 		B95B9E4D2529C34900DF6368 /* CharityInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharityInfoVC.swift; sourceTree = "<group>"; };
@@ -77,6 +79,8 @@
 		B9664EC22524864900637BDF /* FBButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBButton.swift; sourceTree = "<group>"; };
 		B9664EC425248B1000637BDF /* CharityListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharityListVC.swift; sourceTree = "<group>"; };
 		B967FD6C252D9DE70031442F /* DonationBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationBarVC.swift; sourceTree = "<group>"; };
+		B971B23225305A0500660923 /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
+		B971B23525305F2C00660923 /* Currrency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currrency.swift; sourceTree = "<group>"; };
 		B995A1B8252DEBF90037E0FB /* StatusBarViewOne.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarViewOne.swift; sourceTree = "<group>"; };
 		B995A1BA252DF01B0037E0FB /* StatusBarViewTwo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarViewTwo.swift; sourceTree = "<group>"; };
 		B9A1C0F6252B2A40004E3AEE /* FBImpactImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBImpactImageView.swift; sourceTree = "<group>"; };
@@ -125,7 +129,7 @@
 				B995A1B8252DEBF90037E0FB /* StatusBarViewOne.swift */,
 				B995A1BA252DF01B0037E0FB /* StatusBarViewTwo.swift */,
 				B956D494252F114C00F6E0D6 /* DonationStatusBar.swift */,
-				B956D496252F313000F6E0D6 /* OutputOverviewView.swift */,
+				B956D496252F313000F6E0D6 /* OutputView.swift */,
 				B956D498252F31B900F6E0D6 /* CharityTitleLabelView.swift */,
 				B956D49A252F4A9A00F6E0D6 /* OutputOverViewContainerView.swift */,
 			);
@@ -194,6 +198,7 @@
 				B9A1C0F9252B3E82004E3AEE /* UIView+Ext.swift */,
 				B9F2274B252EE62200A25EC5 /* Colors+Ext.swift */,
 				B9A57BD6252C58920034ADE6 /* UIViewController+Ext.swift */,
+				B971B23225305A0500660923 /* String+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -232,6 +237,7 @@
 			children = (
 				B9FF36AC2525BE2E0065AC17 /* FBError.swift */,
 				B9273CE425274B1700FE7155 /* ImageCache.swift */,
+				B971B23525305F2C00660923 /* Currrency.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -322,7 +328,7 @@
 				B956D49B252F4A9A00F6E0D6 /* OutputOverViewContainerView.swift in Sources */,
 				B9F2274C252EE62200A25EC5 /* Colors+Ext.swift in Sources */,
 				B9273CE525274B1700FE7155 /* ImageCache.swift in Sources */,
-				B956D497252F313000F6E0D6 /* OutputOverviewView.swift in Sources */,
+				B956D497252F313000F6E0D6 /* OutputView.swift in Sources */,
 				B9FF36A92525B8D70065AC17 /* NetworkManager.swift in Sources */,
 				B9A1C0FA252B3E82004E3AEE /* UIView+Ext.swift in Sources */,
 				B9FF36A62525B1090065AC17 /* CharityCell.swift in Sources */,
@@ -332,12 +338,14 @@
 				B912457725287863002B85C5 /* DonationManager.swift in Sources */,
 				B9F22749252EE05900A25EC5 /* FBTextView.swift in Sources */,
 				B9273CE12527474000FE7155 /* FBLogoImageView.swift in Sources */,
+				B971B23325305A0500660923 /* String+Ext.swift in Sources */,
 				B9273CDF2527470900FE7155 /* Charity.swift in Sources */,
 				B9A57BD7252C58920034ADE6 /* UIViewController+Ext.swift in Sources */,
 				B95B9E4E2529C34900DF6368 /* CharityInfoVC.swift in Sources */,
 				B9664EBD2524826400637BDF /* FBTabBarController.swift in Sources */,
 				B956D499252F31B900F6E0D6 /* CharityTitleLabelView.swift in Sources */,
 				B9A1C0F7252B2A40004E3AEE /* FBImpactImageView.swift in Sources */,
+				B971B23625305F2C00660923 /* Currrency.swift in Sources */,
 				B9273CDB25273EB000FE7155 /* FBTextField.swift in Sources */,
 				B956D495252F114C00F6E0D6 /* DonationStatusBar.swift in Sources */,
 				B9664EC32524864900637BDF /* FBButton.swift in Sources */,
