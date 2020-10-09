@@ -46,7 +46,7 @@ class OutputView: UIView{
         }
         
         mayFundLabel.font = .boldSystemFont(ofSize: 12)
-        let valueLabelText = "1 \(output.name?.cleanOutputName(with: Currency.euro) ?? "")"
+        let valueLabelText = "1 \(output.name?.formatOutputName(with: PersistenceManager.retrieveCurrency()) ?? "")"
         
         mayFundLabel.text = valueLabelText
         mayFundLabel.textColor = .mainTextColor

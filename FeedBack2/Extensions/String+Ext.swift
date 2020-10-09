@@ -16,7 +16,7 @@ extension String{
     
     var withoutParanthesis: String { self.replacingOccurrences(of: "\\([^()]*\\)", with: "", options: .regularExpression) }
     
-    func cleanOutputName(with currency: Currency)->String{ self.withoutParanthesis.replaceCurrencyWording(with: currency).lowercased().firstUppercased.condensed }
+    func formatOutputName(with currency: Currency)->String{ self.withoutParanthesis.replaceCurrencyWording(with: currency).lowercased().firstUppercased.condensed }
     
     func replaceCurrencyWording(with currency: Currency)->String{ return self.replacingOccurrences(of: "pound", with: currency.rawValue) }
 }
