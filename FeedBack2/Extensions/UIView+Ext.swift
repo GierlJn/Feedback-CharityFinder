@@ -113,5 +113,13 @@ extension UIView {
     private func tanx(_ 𝜽: CGFloat) -> CGFloat {
         return tan(𝜽 * CGFloat.pi / 180)
     }
-
+    
+    //MARK: Round corners
+    
+    func roundCorners(_ corners: UIRectCorner, radius: CGFloat) {
+             let path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+             let mask = CAShapeLayer()
+             mask.path = path.cgPath
+             self.layer.mask = mask
+        }
 }

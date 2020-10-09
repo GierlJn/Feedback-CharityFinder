@@ -40,7 +40,7 @@ class CharityTitleLabelView: UIView{
             maker.right.equalTo(favoriteIconImageView.snp.left).offset(-16)
             maker.top.equalTo(self.snp.top).offset(16)
             maker.bottom.equalTo(self.snp.bottom).offset(-16)
-            maker.left.equalTo(self.snp.left).offset(60)
+            maker.left.equalTo(self.snp.left).offset(20)
         }
     }
     

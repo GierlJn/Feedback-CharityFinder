@@ -124,10 +124,11 @@ class CharityInfoVC: UIViewController{
         charityTitleLabelView.set(title: charity.name)
         charityTitleLabelView.backgroundColor = .white
         charityTitleLabelView.layer.cornerRadius = 7
+        charityTitleLabelView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner]
         
         charityTitleLabelView.snp.makeConstraints { (maker) in
             maker.centerY.equalTo(impactImageView.snp.bottom)
-            maker.width.equalTo(400)
+            maker.left.equalTo(contentView.snp.left)
             maker.height.equalTo(60)
             maker.right.equalTo(contentView.snp.right).offset(-16)
         }
