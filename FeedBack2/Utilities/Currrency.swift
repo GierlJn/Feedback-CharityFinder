@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum Currency: String{
+enum Currency: String, Codable{
     case dollar = "dollar"
     case euro = "euro"
     case pound = "pound"

@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Charity: Hashable{
+struct Charity: Hashable, Codable{
     var name: String
     var id: String
     var logoUrl: String

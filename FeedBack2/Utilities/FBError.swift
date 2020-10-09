@@ -19,6 +19,7 @@ enum FBError: Error {
     case invalidResponseCode(Int)
     case invalidResponse
     case invalidData
+    case unableToFavourite
     
     var errorMessage: String{
         switch self {
@@ -30,6 +31,8 @@ enum FBError: Error {
             return "Response data not valid"
         case .invalidResponse:
             return "Response data not valid"
+        case .unableToFavourite:
+            return "Could not be added to favourites"
         }
     }
     
