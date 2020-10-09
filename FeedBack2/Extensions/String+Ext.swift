@@ -10,9 +10,13 @@ import Foundation
 
 extension String{
     
-    func cleanOutputName(with currency: Currency)->String{ self.removePluralParanthesis().replaceCurrencyWording(with: currency).lowercased() }
+    var firstUppercased: String { return prefix(1).uppercased() + dropFirst() }
     
-    func removePluralParanthesis()->String{ self.replacingOccurrences(of: "\\([^()]*\\)", with: "", options: [.regularExpression]) }
+    var condensed: String { return replacingOccurrences(of: "[\\s\n]+", with: " ", options: .regularExpression)}
+    
+    func cleanOutputName(with currency: Currency)->String{ self.removePluralParanthesis().replaceCurrencyWording(with: currency).lowercased().firstUppercased.condensed }
+    
+    func removePluralParanthesis()->String{ self.replacingOccurrences(of: "\\([^()]*\\)", with: "", options: .regularExpression) }
     
     func replaceCurrencyWording(with currency: Currency)->String{ return self.replacingOccurrences(of: "pound", with: currency.rawValue) }
 }
