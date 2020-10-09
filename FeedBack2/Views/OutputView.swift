@@ -46,12 +46,16 @@ class OutputView: UIView{
         }
         
         mayFundLabel.font = .boldSystemFont(ofSize: 12)
-        let valueLabelText = "1 \(output.name?.removePluralParanthesis() ?? "")"
+        let valueLabelText = "1 \(output.name?.cleanOutputName(with: Currency.euro) ?? "")"
         
         mayFundLabel.text = valueLabelText
         mayFundLabel.textColor = .mainTextColor
         
-        impactLabel.text = "For every \(output.costPerBeneficiary?.value ?? 0)$ donated"
+        let value = output.costPerBeneficiary?.value
+        if(value != nil){
+            let formatted = String(format: "%.2f", value!)
+            impactLabel.text = "For every \(formatted)\(Currency.euro.symbol) donated"
+        }
         impactLabel.font = .systemFont(ofSize: 12)
         impactLabel.textColor = .mainTextColor
         impactLabel.alpha = 0.8
