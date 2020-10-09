@@ -46,10 +46,12 @@ class OutputOverviewView: UIView{
         }
         
         mayFundLabel.font = .boldSystemFont(ofSize: 12)
-        mayFundLabel.text = "Estimated 123 animals saved"
+        let valueLabelText = "1 \(output.name ?? "")"
+        
+        mayFundLabel.text = valueLabelText
         mayFundLabel.textColor = .mainTextColor
         
-        impactLabel.text = "For every 1$ donated"
+        impactLabel.text = "For every \(output.costPerBeneficiary?.value ?? 0)$ donated"
         impactLabel.font = .systemFont(ofSize: 12)
         impactLabel.textColor = .mainTextColor
         impactLabel.alpha = 0.8

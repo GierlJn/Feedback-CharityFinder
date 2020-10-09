@@ -39,7 +39,7 @@ class DonationBarVC: UIViewController{
         stackView.addArrangedSubview(addDonationActionButton)
         
         statusBarViewOne.set(donationAmount: "1", currency: "$")
-        statusBarViewTwo.set(calculatedImpact: "4.20", impactDescription: charity.output.name ?? "")
+        statusBarViewTwo.set(calculatedImpact: "4.20", impactDescription: charity.mainOutput.name ?? "")
     }
     
     private func layoutUI(){

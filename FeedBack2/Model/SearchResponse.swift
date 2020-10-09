@@ -78,7 +78,7 @@ struct Hit : Decodable {
 
 
 struct Project : Codable {
-    
+
     let outputs : [Output]?
     
     enum CodingKeys: String, CodingKey {

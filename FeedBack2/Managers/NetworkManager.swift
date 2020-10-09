@@ -78,7 +78,7 @@ class NetworkManager{
                 guard let logo = cargo.logo else { throw FBError.invalidData }
                 guard let description = cargo.descriptionField else { throw FBError.invalidData}
                 guard let url = cargo.url else { throw FBError.invalidData}
-
+                
                 #warning("Refactor")
                 
                 let charity = InfoCharity(name: name, id: id, logoUrl: logo, singleImpact: singleImpact, imageUrl: cargo.images, description: description, url: url)
@@ -98,14 +98,16 @@ class NetworkManager{
         guard let hits = cargo.hits else { throw FBError.invalidData }
         var charities = [Charity]()
         for hit in hits {
+            var charityOutputs = [Output]()
             var charityMainOutput: Output?
             let name = hit.displayName ?? hit.name
             if let projects = hit.projects{
                 for project in projects{
-                    if var outputs = project.outputs{
-                        outputs.removeAll(where: {$0.costPerBeneficiary == nil || $0.name == nil})
-                        for output in outputs{
+                    if var projectOutputs = project.outputs{
+                        projectOutputs.removeAll(where: {$0.costPerBeneficiary == nil || $0.name == nil})
+                        for output in projectOutputs{
                             if let value = output.costPerBeneficiary?.value{
+                                charityOutputs.append(output)
                                 if(value > charityMainOutput?.costPerBeneficiary!.value ?? 0.0){
                                     charityMainOutput = output
                                 }
@@ -117,7 +119,7 @@ class NetworkManager{
             }
             if(charityMainOutput != nil && name != nil && hit.id != nil && hit.logo != nil && hit.url != nil){
                 #warning("refactor")
-                let charity = Charity(name: name!, id: hit.id!, logoUrl: hit.logo!, output: charityMainOutput!, url: hit.url!)
+                let charity = Charity(name: name!, id: hit.id!, logoUrl: hit.logo!, mainOutput: charityMainOutput!, outputs: charityOutputs, url: hit.url!)
                 charities.append(charity)
             }
         }
@@ -129,7 +131,7 @@ class NetworkManager{
             completed(.failure(.unableToConnect))
             return
         }
-
+        
         
         
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
