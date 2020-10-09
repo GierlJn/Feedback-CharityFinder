@@ -20,6 +20,7 @@ class CharityInfoVC: UIViewController{
     var charityTitleLabelView = CharityTitleLabelView()
     var donationBarView = DonationBarView()
     var outputOverviewStackView = OutputOverViewContainerView()
+    var aboutHeaderLabel = FBTitleLabel(textAlignment: .left)
     
     let scrollView = UIScrollView()
     let contentView = UIView()
@@ -96,6 +97,7 @@ class CharityInfoVC: UIViewController{
         self.configureImpactImageView(infoCharity)
         self.configureTitleLabelView()
         self.configureOutputOverviewStackView()
+        self.configureAboutHeaderLabel()
         self.configureDescriptionLabel(infoCharity)
     }
 
@@ -144,6 +146,17 @@ class CharityInfoVC: UIViewController{
         }
     }
     
+    private func configureAboutHeaderLabel(){
+        contentView.addSubview(aboutHeaderLabel)
+        aboutHeaderLabel.text = "About Charity"
+        aboutHeaderLabel.snp.makeConstraints { (maker) in
+            maker.top.equalTo(outputOverviewStackView.snp.bottom).offset(16)
+            maker.left.equalTo(contentView.snp.left).offset(20)
+            maker.right.equalTo(contentView.snp.right).offset(-20)
+            maker.height.equalTo(50)
+        }
+    }
+    
     private func configureDescriptionLabel(_ infoCharity: InfoCharity){
         contentView.addSubview(descriptionLabel)
         descriptionLabel.text = infoCharity.description
@@ -152,7 +165,7 @@ class CharityInfoVC: UIViewController{
         //descriptionLabel.isOpaque = false
         descriptionLabel.sizeToFit()
         descriptionLabel.snp.makeConstraints { (maker) in
-            maker.top.equalTo(outputOverviewStackView.snp.bottom).offset(16)
+            maker.top.equalTo(aboutHeaderLabel.snp.bottom).offset(8)
             maker.left.equalTo(contentView.snp.left).offset(20)
             maker.right.equalTo(contentView.snp.right).offset(-20)
             maker.bottom.equalTo(contentView.snp.bottom).offset(-15)
