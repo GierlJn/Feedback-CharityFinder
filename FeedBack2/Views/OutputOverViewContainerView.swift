@@ -34,11 +34,14 @@ class OutputOverViewContainerView: UIStackView{
     
     private func configure(){
         self.axis = .vertical
-        self.distribution = .fillEqually
+        self.distribution = .equalCentering
+        self.spacing = 5
         
         for output in outputs{
             let outputOverView = OutputOverviewView(output: output)
-            
+            outputOverView.snp.makeConstraints { (maker) in
+                maker.height.equalTo(30)
+            }
             addArrangedSubview(outputOverView)
         }
     }

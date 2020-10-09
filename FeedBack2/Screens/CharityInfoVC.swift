@@ -135,7 +135,7 @@ class CharityInfoVC: UIViewController{
         let outputs = [charity.output, charity.output, charity.output]
         outputOverviewStackView.set(outputs: outputs)
         contentView.addSubview(outputOverviewStackView)
-        let height = 150
+        let height = 120
         outputOverviewStackView.snp.makeConstraints { (maker) in
             maker.height.equalTo(height)
             maker.top.equalTo(charityTitleLabelView.snp.bottom).offset(16)
