@@ -27,26 +27,33 @@ class FBImpactImageView: UIImageView{
         clipsToBounds = true
     }
     
-    func setImage(imageUrl: String){
+    func setImage(imageUrl: String, completed: @escaping(FBError?) -> Void){
         let image = ImageCache.shared.getImage(for: imageUrl)
         if(image != nil){
-            self.image = image
+            DispatchQueue.main.async {
+                self.image = image
+                completed(nil)
+            }
         }else{
-            downloadLogoImage(imageUrl)
+            downloadLogoImage(imageUrl) { (error) in
+                completed(error)
+            }
         }
     }
     
-    private func downloadLogoImage(_ imageUrl: String) {
+    private func downloadLogoImage(_ imageUrl: String, completed: @escaping(FBError?) -> Void) {
         let networkManager = NetworkManager()
         networkManager.downloadImage(urlString: imageUrl) { [weak self](result) in
             guard let self = self else {return}
             switch(result){
             case .failure(let error):
+                completed(error)
                 print(error)
             case .success(let logoImage):
                 ImageCache.shared.setImage(image: logoImage, key: imageUrl)
                 DispatchQueue.main.async {
                     self.image = logoImage
+                    completed(nil)
                 }
             }
         }

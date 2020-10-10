@@ -34,9 +34,6 @@ class CharityInfoVC: UIViewController{
     override func viewDidLoad() {
         view.setGradientBackgroundColor(colors: [.lightBlueBackgroundGradientStart, .lightBlueBackgroundGradientEnd], axis: .horizontal)
         configureNavigationBar()
-        
-        configureDonationBarView()
-        configureScrollView()
         getCharityInfo()
     }
     
@@ -45,7 +42,6 @@ class CharityInfoVC: UIViewController{
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.isTranslucent = true
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.left.square.fill"), style: .plain, target: self, action: #selector(backButtonPressed))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.horizontal.3"), style: .plain, target: self, action: #selector(accessoryButtonPressed))
         navigationController?.navigationBar.tintColor = .white
     }
     
@@ -79,6 +75,7 @@ class CharityInfoVC: UIViewController{
     }
     
     private func getCharityInfo() {
+        showLoadingView()
         let url = "https://app.sogive.org/charity/" + charity.id + ".json"
         networkManger.getCharityInfo(urlString: url) { [weak self] (result) in
             guard let self = self else { return }
@@ -87,29 +84,35 @@ class CharityInfoVC: UIViewController{
                 print(error)
             case .success(let infoCharity):
                 DispatchQueue.main.async {
-                    self.configureViews(with: infoCharity)
+                    if (infoCharity.imageUrl != nil){
+                    self.impactImageView.setImage(imageUrl: infoCharity.imageUrl!) { (error) in
+                            self.hideLoadingView()
+                            self.configureViews(with: infoCharity)
+                        }
+                    }
                 }
             }
         }
     }
     
     private func configureViews(with infoCharity: InfoCharity) {
-        self.configureImpactImageView(infoCharity)
-        self.configureTitleLabelView()
-        self.configureOutputOverviewStackView()
-        self.configureAboutHeaderLabel()
-        self.configureDescriptionLabel(infoCharity)
+        addRightBarButtonItem()
+        configureDonationBarView()
+        configureScrollView()
+        configureImpactImageView(infoCharity)
+        configureTitleLabelView()
+        configureOutputOverviewStackView()
+        configureAboutHeaderLabel()
+        configureDescriptionLabel(infoCharity)
+    }
+    
+    private func addRightBarButtonItem(){
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.horizontal.3"), style: .plain, target: self, action: #selector(accessoryButtonPressed))
     }
 
     
     private func configureImpactImageView(_ infoCharity: InfoCharity){
         self.contentView.addSubview(self.impactImageView)
-        if (infoCharity.imageUrl != nil){
-            self.impactImageView.setImage(imageUrl: infoCharity.imageUrl!)
-        }else{
-            self.impactImageView.setImage(imageUrl: charity.logoUrl)
-            //self.logoImageView.isHidden = true
-        }
         
         self.impactImageView.snp.makeConstraints { (make) in
             make.left.equalTo(self.view.snp.left)
@@ -117,6 +120,7 @@ class CharityInfoVC: UIViewController{
             make.top.equalTo(self.view.snp.top)
             make.height.equalTo(200)
         }
+        
     }
     
     private func configureTitleLabelView(){
@@ -147,7 +151,7 @@ class CharityInfoVC: UIViewController{
     
     private func configureAboutHeaderLabel(){
         contentView.addSubview(aboutHeaderLabel)
-        aboutHeaderLabel.text = "About Charity"
+        aboutHeaderLabel.text = "About the Charity"
         aboutHeaderLabel.snp.makeConstraints { (maker) in
             maker.top.equalTo(outputOverviewStackView.snp.bottom).offset(16)
             maker.left.equalTo(contentView.snp.left).offset(20)
@@ -160,8 +164,8 @@ class CharityInfoVC: UIViewController{
         contentView.addSubview(descriptionLabel)
         descriptionLabel.text = infoCharity.description
         descriptionLabel.textColor = .mainTextColor
-        //descriptionLabel.backgroundColor = .init(white: 0, alpha: 0)
-        //descriptionLabel.isOpaque = false
+        descriptionLabel.backgroundColor = .init(white: 0, alpha: 0)
+        descriptionLabel.isOpaque = false
         descriptionLabel.sizeToFit()
         descriptionLabel.snp.makeConstraints { (maker) in
             maker.top.equalTo(aboutHeaderLabel.snp.bottom).offset(8)
