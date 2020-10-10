@@ -10,8 +10,6 @@ import UIKit
 
 class FBLogoImageView: UIImageView{
     
-    static let placeholderImage = UIImage(named: "avatar-placeholder")
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
@@ -43,7 +41,7 @@ class FBLogoImageView: UIImageView{
             case .failure(let error):
                 print(error)
                 DispatchQueue.main.async {
-                    self.image = FBLogoImageView.placeholderImage
+                    self.image = Images.logo_placeholder
                 }
             case .success(let logoImage):
                 ImageCache.shared.setImage(image: logoImage, key: logoUrl)

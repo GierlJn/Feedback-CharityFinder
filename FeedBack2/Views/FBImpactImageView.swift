@@ -10,8 +10,6 @@ import UIKit
 
 class FBImpactImageView: UIImageView{
     
-    static let placeholderImage = UIImage(named: "avatar-placeholder")
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
@@ -30,7 +28,7 @@ class FBImpactImageView: UIImageView{
     func setImage(imageUrl: String?, completed: @escaping(FBError?) -> Void){
         guard let imageUrl = imageUrl else {
             DispatchQueue.main.async {
-                self.image = UIImage(named: "charity-image-placeholder-dark")
+                self.image = Images.image_placeholder
             }
             completed(.invalidData)
             return
@@ -46,7 +44,7 @@ class FBImpactImageView: UIImageView{
             downloadLogoImage(imageUrl) { (error) in
                 if(error != nil){
                     DispatchQueue.main.async {
-                        self.image = UIImage(named: "charity-image-placeholder-dark")
+                        self.image = Images.image_placeholder
                     }
                 }else {
                     completed(error)
