@@ -12,7 +12,7 @@ class CharityCell: UITableViewCell{
     static let reuseIdentifier = "CharityCell"
     
     let titleLabel = UILabel(frame: .zero)
-    let impactDescriptionLabel = FBBodyLabel(frame: .zero)
+    let impactDescriptionLabel = FBSubTitleLabel(frame: .zero)
     let logoImageView = FBLogoImageView(frame: .zero)
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

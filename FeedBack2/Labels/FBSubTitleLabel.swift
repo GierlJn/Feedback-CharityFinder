@@ -2,13 +2,13 @@
 //  FBTitleLabel.swift
 //  FeedBack2
 //
-//  Created by Julian Gierl on 05.10.20.
+//  Created by Julian Gierl on 03.10.20.
 //  Copyright © 2020 Julian Gierl. All rights reserved.
 //
 
 import UIKit
 
-class FBTitleLabel: UILabel{
+class FBSubTitleLabel: UILabel{
     override init(frame: CGRect) {
         super.init(frame: .zero)
         configure()
@@ -21,14 +21,17 @@ class FBTitleLabel: UILabel{
     convenience init(textAlignment: NSTextAlignment){
         self.init(frame: .zero)
         self.textAlignment = textAlignment
+        configure()
     }
     
     private func configure(){
-        textColor = .label
-        font = UIFont.preferredFont(forTextStyle: .title1)
+        textColor = .secondaryLabel
+        font = UIFont.preferredFont(forTextStyle: .body)
         adjustsFontSizeToFitWidth = true
-        minimumScaleFactor = 0.6
-        lineBreakMode = .byTruncatingTail
+        minimumScaleFactor = 0.75
+        lineBreakMode = .byWordWrapping
         translatesAutoresizingMaskIntoConstraints = false
     }
 }
+
+

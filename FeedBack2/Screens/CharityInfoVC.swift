@@ -16,7 +16,7 @@ protocol DonationBarViewDelegate {
 class CharityInfoVC: UIViewController{
 
     var impactImageView = FBImpactImageView(frame: .zero)
-    var descriptionLabel = FBTextView(textAlignment: .left)
+    var descriptionLabel = FBTextLabel()
     var charityTitleLabelView = CharityTitleLabelView()
     var donationBarView = DonationBarView()
     var outputOverviewStackView = OutputOverViewContainerView()
@@ -61,7 +61,7 @@ class CharityInfoVC: UIViewController{
         scrollView.addSubview(contentView)
         
         scrollView.snp.makeConstraints { (maker) in
-            maker.top.equalTo(self.view.snp.top)
+            maker.top.equalTo(impactImageView.snp.bottom)
             maker.left.equalTo(self.view.snp.left)
             maker.right.equalTo(self.view.snp.right)
             maker.bottom.equalTo(donationBarView.snp.top)
@@ -70,7 +70,7 @@ class CharityInfoVC: UIViewController{
         contentView.pinToEdges(of: scrollView)
         contentView.snp.makeConstraints { (maker) in
             maker.width.equalTo(scrollView.snp.width)
-            maker.height.equalTo(600)
+            maker.height.equalTo(500)
         }
     }
     
@@ -96,8 +96,8 @@ class CharityInfoVC: UIViewController{
     private func configureViews(with infoCharity: InfoCharity) {
         addRightBarButtonItem()
         configureDonationBarView()
-        configureScrollView()
         configureImpactImageView(infoCharity)
+        configureScrollView()
         configureTitleLabelView()
         configureOutputOverviewStackView()
         configureAboutHeaderLabel()
@@ -110,7 +110,7 @@ class CharityInfoVC: UIViewController{
 
     
     private func configureImpactImageView(_ infoCharity: InfoCharity){
-        self.contentView.addSubview(self.impactImageView)
+        self.view.addSubview(self.impactImageView)
         
         self.impactImageView.snp.makeConstraints { (make) in
             make.left.equalTo(self.view.snp.left)
@@ -122,7 +122,7 @@ class CharityInfoVC: UIViewController{
     }
     
     private func configureTitleLabelView(){
-        contentView.addSubview(charityTitleLabelView)
+        self.view.addSubview(charityTitleLabelView)
         charityTitleLabelView.set(title: charity.name)
         charityTitleLabelView.backgroundColor = .white
         charityTitleLabelView.layer.cornerRadius = 7
@@ -130,9 +130,9 @@ class CharityInfoVC: UIViewController{
         
         charityTitleLabelView.snp.makeConstraints { (maker) in
             maker.centerY.equalTo(impactImageView.snp.bottom)
-            maker.left.equalTo(contentView.snp.left)
+            maker.left.equalTo(self.view.snp.left)
+            maker.right.equalTo(self.view.snp.right).offset(-16)
             maker.height.equalTo(60)
-            maker.right.equalTo(contentView.snp.right).offset(-16)
         }
     }
     
@@ -141,7 +141,7 @@ class CharityInfoVC: UIViewController{
         contentView.addSubview(outputOverviewStackView)
         outputOverviewStackView.snp.makeConstraints { (maker) in
             maker.height.equalTo(35)
-            maker.top.equalTo(charityTitleLabelView.snp.bottom).offset(16)
+            maker.top.equalTo(contentView.snp.top).offset(64)
             maker.left.equalTo(contentView.snp.left).offset(20)
             maker.right.equalTo(contentView.snp.right).offset(-20)
         }
@@ -161,16 +161,13 @@ class CharityInfoVC: UIViewController{
     private func configureDescriptionLabel(_ infoCharity: InfoCharity){
         contentView.addSubview(descriptionLabel)
         descriptionLabel.text = infoCharity.description
-        descriptionLabel.textColor = .mainTextColor
-        descriptionLabel.backgroundColor = .init(white: 0, alpha: 0)
-        descriptionLabel.isOpaque = false
-        descriptionLabel.sizeToFit()
+        
         descriptionLabel.snp.makeConstraints { (maker) in
             maker.top.equalTo(aboutHeaderLabel.snp.bottom).offset(8)
             maker.left.equalTo(contentView.snp.left).offset(20)
             maker.right.equalTo(contentView.snp.right).offset(-20)
-            maker.bottom.equalTo(contentView.snp.bottom).offset(-15)
         }
+        descriptionLabel.sizeToFit()
     }
     
     @objc func backButtonPressed(){

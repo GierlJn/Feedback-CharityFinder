@@ -1,14 +1,14 @@
 //
-//  FBTitleLabel.swift
+//  FBTextLabel.swift
 //  FeedBack2
 //
-//  Created by Julian Gierl on 03.10.20.
+//  Created by Julian Gierl on 10.10.20.
 //  Copyright © 2020 Julian Gierl. All rights reserved.
 //
 
 import UIKit
 
-class FBSubTitleLabel: UILabel{
+class FBTextLabel: UILabel{
     override init(frame: CGRect) {
         super.init(frame: .zero)
         configure()
@@ -18,18 +18,14 @@ class FBSubTitleLabel: UILabel{
         fatalError("init(coder:) has not been implemented")
     }
     
-    convenience init(textAlignment: NSTextAlignment){
-        self.init(frame: .zero)
-        self.textAlignment = textAlignment
-        configure()
-    }
-    
     private func configure(){
-        textColor = .secondaryLabel
+        textColor = .mainTextColor
         font = UIFont.preferredFont(forTextStyle: .body)
-        adjustsFontSizeToFitWidth = true
-        minimumScaleFactor = 0.75
+        isOpaque = false
+        numberOfLines = 0
+        textAlignment = .left
         lineBreakMode = .byWordWrapping
-        translatesAutoresizingMaskIntoConstraints = false
+        backgroundColor = .init(white: 0, alpha: 0)
+        
     }
 }

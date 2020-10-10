@@ -11,7 +11,7 @@ import UIKit
 class StatusBarViewTwo: UIView{
     
     let impactValueLabel = UILabel()
-    let impactDescriptionLabel = FBBodyLabel(textAlignment: .left)
+    let impactDescriptionLabel = FBSubTitleLabel(textAlignment: .left)
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
