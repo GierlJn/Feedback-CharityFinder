@@ -84,12 +84,10 @@ class CharityInfoVC: UIViewController{
                 print(error)
             case .success(let infoCharity):
                 DispatchQueue.main.async {
-                    if (infoCharity.imageUrl != nil){
-                    self.impactImageView.setImage(imageUrl: infoCharity.imageUrl!) { (error) in
+                    self.impactImageView.setImage(imageUrl: infoCharity.imageUrl) { (error) in
                             self.hideLoadingView()
                             self.configureViews(with: infoCharity)
                         }
-                    }
                 }
             }
         }

@@ -27,7 +27,15 @@ class FBImpactImageView: UIImageView{
         clipsToBounds = true
     }
     
-    func setImage(imageUrl: String, completed: @escaping(FBError?) -> Void){
+    func setImage(imageUrl: String?, completed: @escaping(FBError?) -> Void){
+        guard let imageUrl = imageUrl else {
+            DispatchQueue.main.async {
+                self.image = UIImage(named: "charity-image-placeholder-dark")
+            }
+            completed(.invalidData)
+            return
+        }
+        
         let image = ImageCache.shared.getImage(for: imageUrl)
         if(image != nil){
             DispatchQueue.main.async {
@@ -36,7 +44,13 @@ class FBImpactImageView: UIImageView{
             }
         }else{
             downloadLogoImage(imageUrl) { (error) in
-                completed(error)
+                if(error != nil){
+                    DispatchQueue.main.async {
+                        self.image = UIImage(named: "charity-image-placeholder-dark")
+                    }
+                }else {
+                    completed(error)
+                }
             }
         }
     }
@@ -48,7 +62,6 @@ class FBImpactImageView: UIImageView{
             switch(result){
             case .failure(let error):
                 completed(error)
-                print(error)
             case .success(let logoImage):
                 ImageCache.shared.setImage(image: logoImage, key: imageUrl)
                 DispatchQueue.main.async {
