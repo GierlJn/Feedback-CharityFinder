@@ -23,11 +23,15 @@ class DonationBarView: UIView{
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func layoutSubviews() {
+//        actionButton.setGradientBackgroundColor(colors: [.buttonDarkBlueGradientStart, .buttonDarkBlueGradientEnd], axis: .horizontal, cornerRadius: 7)
+    }
+    
     private func configure(){
         addSubview(actionButton)
         actionButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .title1)
         actionButton.addTarget(self, action: #selector(actionButtonPressed), for: .touchUpInside)
-        
+
         let padding = 16
         
         actionButton.snp.makeConstraints { (maker) in

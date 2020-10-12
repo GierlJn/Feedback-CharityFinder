@@ -10,7 +10,7 @@ import UIKit
 
 class SearchVC: UIViewController{
     
-    let actionButton = FBButton(title: "Get Impact", backgroundColor: .systemBlue)
+    let actionButton = FBButton(title: "Get Impact")
     let textfield = FBTextField(placeholder: "Enter amount to donate")
     
     override func viewDidLoad() {

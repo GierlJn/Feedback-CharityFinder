@@ -32,7 +32,6 @@
 		B9664EC12524834E00637BDF /* FavouritesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9664EC02524834E00637BDF /* FavouritesVC.swift */; };
 		B9664EC32524864900637BDF /* FBButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9664EC22524864900637BDF /* FBButton.swift */; };
 		B9664EC525248B1000637BDF /* CharityListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9664EC425248B1000637BDF /* CharityListVC.swift */; };
-		B967FD6D252D9DE70031442F /* DonationBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B967FD6C252D9DE70031442F /* DonationBarVC.swift */; };
 		B971B23325305A0500660923 /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B971B23225305A0500660923 /* String+Ext.swift */; };
 		B971B23625305F2C00660923 /* Currrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = B971B23525305F2C00660923 /* Currrency.swift */; };
 		B971B23925306C2600660923 /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B971B23825306C2600660923 /* PersistenceManager.swift */; };
@@ -82,7 +81,6 @@
 		B9664EC02524834E00637BDF /* FavouritesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesVC.swift; sourceTree = "<group>"; };
 		B9664EC22524864900637BDF /* FBButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBButton.swift; sourceTree = "<group>"; };
 		B9664EC425248B1000637BDF /* CharityListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharityListVC.swift; sourceTree = "<group>"; };
-		B967FD6C252D9DE70031442F /* DonationBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationBarVC.swift; sourceTree = "<group>"; };
 		B971B23225305A0500660923 /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
 		B971B23525305F2C00660923 /* Currrency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currrency.swift; sourceTree = "<group>"; };
 		B971B23825306C2600660923 /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
@@ -129,12 +127,11 @@
 		B9273CD725270C5800FE7155 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				B9664EC22524864900637BDF /* FBButton.swift */,
+				B9C12F41253467AF0023CD11 /* Buttons */,
 				B9273CD825270C6700FE7155 /* CharityInfoView.swift */,
 				B9273CDA25273EB000FE7155 /* FBTextField.swift */,
 				B9273CE02527474000FE7155 /* FBLogoImageView.swift */,
 				B9A1C0F6252B2A40004E3AEE /* FBImpactImageView.swift */,
-				B967FD6C252D9DE70031442F /* DonationBarVC.swift */,
 				B995A1B8252DEBF90037E0FB /* StatusBarViewOne.swift */,
 				B995A1BA252DF01B0037E0FB /* StatusBarViewTwo.swift */,
 				B956D494252F114C00F6E0D6 /* DonationStatusBar.swift */,
@@ -211,6 +208,14 @@
 				B971B23225305A0500660923 /* String+Ext.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		B9C12F41253467AF0023CD11 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				B9664EC22524864900637BDF /* FBButton.swift */,
+			);
+			path = Buttons;
 			sourceTree = "<group>";
 		};
 		B9FF36A12525B0250065AC17 /* Model */ = {
@@ -366,7 +371,6 @@
 				B9664EC525248B1000637BDF /* CharityListVC.swift in Sources */,
 				B9273CDD252746F700FE7155 /* ImpactProject.swift in Sources */,
 				B9FF36AD2525BE2E0065AC17 /* FBError.swift in Sources */,
-				B967FD6D252D9DE70031442F /* DonationBarVC.swift in Sources */,
 				B912457225284C26002B85C5 /* SearchResponse.swift in Sources */,
 				B9273CD925270C6700FE7155 /* CharityInfoView.swift in Sources */,
 				B971B23925306C2600660923 /* PersistenceManager.swift in Sources */,
