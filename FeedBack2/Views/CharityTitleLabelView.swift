@@ -18,6 +18,13 @@ class CharityTitleLabelView: UIView{
         configure()
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        backgroundColor = .white
+        layer.cornerRadius = 7
+        layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner]
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -38,8 +45,8 @@ class CharityTitleLabelView: UIView{
         addSubview(titleLabel)
         titleLabel.snp.makeConstraints { (maker) in
             maker.right.equalTo(favoriteIconImageView.snp.left).offset(-16)
-            maker.top.equalTo(self.snp.top).offset(16)
-            maker.bottom.equalTo(self.snp.bottom).offset(-16)
+            maker.top.equalTo(self.snp.top).offset(10)
+            maker.bottom.equalTo(self.snp.bottom).offset(-10)
             maker.left.equalTo(self.snp.left).offset(20)
         }
     }

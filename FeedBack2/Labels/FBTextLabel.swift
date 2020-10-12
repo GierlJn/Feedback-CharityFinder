@@ -20,7 +20,7 @@ class FBTextLabel: UILabel{
     
     private func configure(){
         textColor = .mainTextColor
-        font = UIFont.preferredFont(forTextStyle: .body)
+        font = UIFont.preferredFont(forTextStyle: .footnote)
         isOpaque = false
         numberOfLines = 0
         textAlignment = .left

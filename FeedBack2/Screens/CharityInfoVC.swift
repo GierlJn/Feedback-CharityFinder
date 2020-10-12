@@ -32,11 +32,13 @@ class CharityInfoVC: UIViewController{
     
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         configureNavigationBar()
         getCharityInfo()
     }
     
     override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         view.setGradientBackgroundColor(colors: [.lightBlueBackgroundGradientStart, .lightBlueBackgroundGradientEnd], axis: .horizontal)
     }
     
@@ -126,15 +128,13 @@ class CharityInfoVC: UIViewController{
     private func configureTitleLabelView(){
         self.view.addSubview(charityTitleLabelView)
         charityTitleLabelView.set(title: charity.name)
-        charityTitleLabelView.backgroundColor = .white
-        charityTitleLabelView.layer.cornerRadius = 7
-        charityTitleLabelView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner]
+
         
         charityTitleLabelView.snp.makeConstraints { (maker) in
             maker.centerY.equalTo(impactImageView.snp.bottom)
             maker.left.equalTo(self.view.snp.left)
             maker.right.equalTo(self.view.snp.right).offset(-16)
-            maker.height.equalTo(60)
+            maker.height.equalTo(50)
         }
     }
     
@@ -143,7 +143,7 @@ class CharityInfoVC: UIViewController{
         contentView.addSubview(outputOverviewStackView)
         outputOverviewStackView.snp.makeConstraints { (maker) in
             maker.height.equalTo(35)
-            maker.top.equalTo(contentView.snp.top).offset(64)
+            maker.top.equalTo(contentView.snp.top).offset(55)
             maker.left.equalTo(contentView.snp.left).offset(20)
             maker.right.equalTo(contentView.snp.right).offset(-20)
         }
@@ -151,7 +151,7 @@ class CharityInfoVC: UIViewController{
     
     private func configureAboutHeaderLabel(){
         contentView.addSubview(aboutHeaderLabel)
-        aboutHeaderLabel.text = "About the Charity"
+        aboutHeaderLabel.text = "About Charity"
         aboutHeaderLabel.snp.makeConstraints { (maker) in
             maker.top.equalTo(outputOverviewStackView.snp.bottom).offset(16)
             maker.left.equalTo(contentView.snp.left).offset(20)
@@ -163,9 +163,8 @@ class CharityInfoVC: UIViewController{
     private func configureDescriptionLabel(_ infoCharity: InfoCharity){
         contentView.addSubview(descriptionLabel)
         descriptionLabel.text = infoCharity.description
-        
         descriptionLabel.snp.makeConstraints { (maker) in
-            maker.top.equalTo(aboutHeaderLabel.snp.bottom).offset(8)
+            maker.top.equalTo(aboutHeaderLabel.snp.bottom)
             maker.left.equalTo(contentView.snp.left).offset(20)
             maker.right.equalTo(contentView.snp.right).offset(-20)
         }
