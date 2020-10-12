@@ -33,7 +33,7 @@ class FBButton: UIButton{
     }
     
     private func configure(){
-       backgroundColor = .buttonDarkBlueGradientEnd
+        backgroundColor = .buttonDarkBlueGradientEnd
         translatesAutoresizingMaskIntoConstraints = false
         layer.cornerRadius = 7
         titleLabel?.font = .systemFont(ofSize: 20)
@@ -49,26 +49,3 @@ class FBButton: UIButton{
     
 }
 
-extension CALayer {
-    func applySketchShadow(
-        color: UIColor = .black,
-        alpha: Float = 0.5,
-        x: CGFloat = 0,
-        y: CGFloat = 2,
-        blur: CGFloat = 4,
-        spread: CGFloat = 0)
-    {
-        shadowColor = color.cgColor
-        shadowOpacity = alpha
-        shadowOffset = CGSize(width: x, height: y)
-        shadowRadius = blur / 2.0
-        if spread == 0 {
-            shadowPath = nil
-        } else {
-            let dx = -spread
-            let rect = bounds.insetBy(dx: dx, dy: dx)
-            shadowPath = UIBezierPath(rect: rect).cgPath
-        }
-        masksToBounds = false
-    }
-}
