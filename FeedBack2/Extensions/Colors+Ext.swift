@@ -19,8 +19,8 @@ extension UIColor {
     static var buttonDarkBlue: UIColor { return UIColor(rgb: 0x5637D1)}
     static var buttonDarkBlueGradientStart: UIColor { return UIColor(rgb: 0xAE71E0)}
     static var buttonDarkBlueGradientEnd: UIColor { return UIColor(rgb: 0x7573FF)}
-    static var lightBlueBackgroundGradientStart: UIColor { return UIColor(rgb: 0xEAD7ED)}
-    static var lightBlueBackgroundGradientEnd: UIColor { return UIColor(rgb: 0xABB7DB)}
+    static var lightBlueBackgroundGradientStart: UIColor { return UIColor(rgb: 0xFFF6FF)}
+    static var lightBlueBackgroundGradientEnd: UIColor { return UIColor(rgb: 0xEAD7ED)}
     static var mainTextColor: UIColor { return UIColor(rgb: 0x676568)}
     
     
