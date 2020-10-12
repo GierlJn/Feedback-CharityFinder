@@ -32,9 +32,12 @@ class CharityInfoVC: UIViewController{
     
     
     override func viewDidLoad() {
-        view.setGradientBackgroundColor(colors: [.lightBlueBackgroundGradientStart, .lightBlueBackgroundGradientEnd], axis: .horizontal)
         configureNavigationBar()
         getCharityInfo()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        view.setGradientBackgroundColor(colors: [.lightBlueBackgroundGradientStart, .lightBlueBackgroundGradientEnd], axis: .horizontal)
     }
     
     private func configureNavigationBar(){
