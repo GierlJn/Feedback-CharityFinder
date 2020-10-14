@@ -38,7 +38,7 @@ class OutputView: UIView{
     private func configure(){
         addSubview(iconImageView)
         iconImageView.image = UIImage(systemName: "heart.fill")
-        iconImageView.tintColor = .mainTextColor
+        iconImageView.tintColor = .iconColor
         iconImageView.snp.makeConstraints { (maker) in
             maker.left.equalTo(self.snp.left)
             maker.size.equalTo(30)

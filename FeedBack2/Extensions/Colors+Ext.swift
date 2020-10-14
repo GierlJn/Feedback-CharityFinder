@@ -22,6 +22,7 @@ extension UIColor {
     static var lightBlueBackgroundGradientStart: UIColor { return UIColor(rgb: 0xFFF6FF)}
     static var lightBlueBackgroundGradientEnd: UIColor { return UIColor(rgb: 0xEAD7ED)}
     static var mainTextColor: UIColor { return UIColor(rgb: 0x676568)}
+    static var iconColor: UIColor { return UIColor(rgb: 0xFF797A)}
     
     
     convenience init(red: Int, green: Int, blue: Int) {

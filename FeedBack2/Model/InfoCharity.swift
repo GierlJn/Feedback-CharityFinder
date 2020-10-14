@@ -16,4 +16,5 @@ struct InfoCharity: Hashable{
     var imageUrl: String?
     var description: String
     var url: String
+    var tags: String
 }
