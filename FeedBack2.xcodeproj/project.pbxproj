@@ -48,6 +48,8 @@
 		B9A1C0FC252B470C004E3AEE /* FBTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A1C0FB252B470C004E3AEE /* FBTitleLabel.swift */; };
 		B9A1C0FF252B4CD5004E3AEE /* SwiftSVG in Frameworks */ = {isa = PBXBuildFile; productRef = B9A1C0FE252B4CD5004E3AEE /* SwiftSVG */; };
 		B9A57BD7252C58920034ADE6 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A57BD6252C58920034ADE6 /* UIViewController+Ext.swift */; };
+		B9EBADFD2536EEE60070705F /* NewSearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EBADFC2536EEE60070705F /* NewSearchVC.swift */; };
+		B9EBAE012536F1250070705F /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EBAE002536F1250070705F /* HeaderView.swift */; };
 		B9F22749252EE05900A25EC5 /* FBTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F22748252EE05900A25EC5 /* FBTextView.swift */; };
 		B9F2274C252EE62200A25EC5 /* Colors+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F2274B252EE62200A25EC5 /* Colors+Ext.swift */; };
 		B9FF36A62525B1090065AC17 /* CharityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FF36A52525B1090065AC17 /* CharityCell.swift */; };
@@ -97,6 +99,8 @@
 		B9A1C0F9252B3E82004E3AEE /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
 		B9A1C0FB252B470C004E3AEE /* FBTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBTitleLabel.swift; sourceTree = "<group>"; };
 		B9A57BD6252C58920034ADE6 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
+		B9EBADFC2536EEE60070705F /* NewSearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSearchVC.swift; sourceTree = "<group>"; };
+		B9EBAE002536F1250070705F /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		B9F22748252EE05900A25EC5 /* FBTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBTextView.swift; sourceTree = "<group>"; };
 		B9F2274B252EE62200A25EC5 /* Colors+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Colors+Ext.swift"; sourceTree = "<group>"; };
 		B9FF36A52525B1090065AC17 /* CharityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharityCell.swift; sourceTree = "<group>"; };
@@ -132,6 +136,7 @@
 		B9273CD725270C5800FE7155 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B9EBADFF2536F1190070705F /* SearchVC */,
 				B9C12F41253467AF0023CD11 /* Buttons */,
 				B9273CD825270C6700FE7155 /* CharityInfoView.swift */,
 				B9273CDA25273EB000FE7155 /* FBTextField.swift */,
@@ -190,6 +195,7 @@
 				B9664EC02524834E00637BDF /* FavouritesVC.swift */,
 				B9664EC425248B1000637BDF /* CharityListVC.swift */,
 				B95B9E4D2529C34900DF6368 /* CharityInfoVC.swift */,
+				B9EBADFC2536EEE60070705F /* NewSearchVC.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -222,6 +228,14 @@
 				B9664EC22524864900637BDF /* FBButton.swift */,
 			);
 			path = Buttons;
+			sourceTree = "<group>";
+		};
+		B9EBADFF2536F1190070705F /* SearchVC */ = {
+			isa = PBXGroup;
+			children = (
+				B9EBAE002536F1250070705F /* HeaderView.swift */,
+			);
+			path = SearchVC;
 			sourceTree = "<group>";
 		};
 		B9FF36A12525B0250065AC17 /* Model */ = {
@@ -345,10 +359,12 @@
 			files = (
 				B95B9E52252A0DFB00DF6368 /* InfoCharity.swift in Sources */,
 				B9664EBF2524834500637BDF /* SearchVC.swift in Sources */,
+				B9EBADFD2536EEE60070705F /* NewSearchVC.swift in Sources */,
 				B912457525287599002B85C5 /* FBSubTitleLabel.swift in Sources */,
 				B995A1BB252DF01B0037E0FB /* StatusBarViewTwo.swift in Sources */,
 				B9664EC12524834E00637BDF /* FavouritesVC.swift in Sources */,
 				B956D49B252F4A9A00F6E0D6 /* OutputOverViewContainerView.swift in Sources */,
+				B9EBAE012536F1250070705F /* HeaderView.swift in Sources */,
 				B9F2274C252EE62200A25EC5 /* Colors+Ext.swift in Sources */,
 				B9273CE525274B1700FE7155 /* ImageCache.swift in Sources */,
 				B956D497252F313000F6E0D6 /* OutputView.swift in Sources */,

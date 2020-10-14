@@ -11,4 +11,5 @@ import UIKit
 enum Images {
     static let image_placeholder = UIImage(named: "charity-image-placeholder-dark")
     static let logo_placeholder = UIImage(named: "logo-placeholder-dark")
+    static let searchActionButton = UIImage(systemName: "slider.horizontal.3")
 }

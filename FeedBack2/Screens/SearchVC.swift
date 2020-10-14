@@ -11,7 +11,7 @@ import UIKit
 class SearchVC: UIViewController{
     
     let actionButton = FBButton(title: "Get Impact")
-    let textfield = FBTextField(placeholder: "Enter amount to donate")
+    let textfield = FBTextField()
     
     override func viewDidLoad() {
         view.backgroundColor = .systemBackground

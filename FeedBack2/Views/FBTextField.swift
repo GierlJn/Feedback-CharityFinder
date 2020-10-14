@@ -20,11 +20,6 @@ class FBTextField: UITextField{
         fatalError("init(coder:) has not been implemented")
     }
     
-    convenience init(placeholder: String){
-        self.init()
-        self.placeholder = placeholder
-    }
-    
     private func configure(){
         translatesAutoresizingMaskIntoConstraints = false
         
@@ -35,7 +30,7 @@ class FBTextField: UITextField{
         textColor = .label
         tintColor = .label
         textAlignment = .center
-        font = UIFont.preferredFont(forTextStyle: .title2)
+        font = UIFont.preferredFont(forTextStyle: .body)
         adjustsFontSizeToFitWidth = true
         minimumFontSize = 12
         
@@ -44,6 +39,16 @@ class FBTextField: UITextField{
         returnKeyType = .go
         clearButtonMode = .whileEditing
         
-       
+        configurePlaceholder()
+    }
+    
+    fileprivate func configurePlaceholder() {
+        let magnifyingGlassAttachment = NSTextAttachment(data: nil, ofType: nil)
+        magnifyingGlassAttachment.image = UIImage(systemName: "magnifyingglass")?.withTintColor(.systemGray)
+        let magnifyingGlassString = NSAttributedString(attachment: magnifyingGlassAttachment)
+        let attributedText = NSMutableAttributedString(attributedString: magnifyingGlassString)
+        let searchString = NSAttributedString(string: "  Search Charity here")
+        attributedText.append(searchString)
+        attributedPlaceholder = attributedText
     }
 }
