@@ -14,11 +14,11 @@ enum Categories: CaseIterable {
     var category: Category{
         switch(self){
         case .all:
-            return Category(name: "all", parameter: "all")
+            return Category(name: "All", parameter: "all")
         case .animals:
-            return Category(name: "animals", parameter: "animals")
+            return Category(name: "Animals", parameter: "animals")
         case .health:
-            return Category(name: "health", parameter: "health")
+            return Category(name: "Health", parameter: "health")
         }
     }
     
