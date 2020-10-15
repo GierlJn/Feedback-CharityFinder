@@ -50,6 +50,8 @@
 		B9A57BD7252C58920034ADE6 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A57BD6252C58920034ADE6 /* UIViewController+Ext.swift */; };
 		B9EBADFD2536EEE60070705F /* NewSearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EBADFC2536EEE60070705F /* NewSearchVC.swift */; };
 		B9EBAE012536F1250070705F /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EBAE002536F1250070705F /* HeaderView.swift */; };
+		B9EBAE04253708CC0070705F /* SearchCategoriesStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EBAE03253708CC0070705F /* SearchCategoriesStackView.swift */; };
+		B9EBAE08253713C10070705F /* CategoryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EBAE07253713C10070705F /* CategoryButton.swift */; };
 		B9F22749252EE05900A25EC5 /* FBTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F22748252EE05900A25EC5 /* FBTextView.swift */; };
 		B9F2274C252EE62200A25EC5 /* Colors+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F2274B252EE62200A25EC5 /* Colors+Ext.swift */; };
 		B9FF36A62525B1090065AC17 /* CharityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FF36A52525B1090065AC17 /* CharityCell.swift */; };
@@ -101,6 +103,8 @@
 		B9A57BD6252C58920034ADE6 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 		B9EBADFC2536EEE60070705F /* NewSearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSearchVC.swift; sourceTree = "<group>"; };
 		B9EBAE002536F1250070705F /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		B9EBAE03253708CC0070705F /* SearchCategoriesStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCategoriesStackView.swift; sourceTree = "<group>"; };
+		B9EBAE07253713C10070705F /* CategoryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryButton.swift; sourceTree = "<group>"; };
 		B9F22748252EE05900A25EC5 /* FBTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBTextView.swift; sourceTree = "<group>"; };
 		B9F2274B252EE62200A25EC5 /* Colors+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Colors+Ext.swift"; sourceTree = "<group>"; };
 		B9FF36A52525B1090065AC17 /* CharityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharityCell.swift; sourceTree = "<group>"; };
@@ -129,6 +133,7 @@
 				B9A1C0FB252B470C004E3AEE /* FBTitleLabel.swift */,
 				B9F22748252EE05900A25EC5 /* FBTextView.swift */,
 				B97AAFF72531BF4C00FCBC28 /* FBTextLabel.swift */,
+				B9EBAE07253713C10070705F /* CategoryButton.swift */,
 			);
 			path = Labels;
 			sourceTree = "<group>";
@@ -234,6 +239,7 @@
 			isa = PBXGroup;
 			children = (
 				B9EBAE002536F1250070705F /* HeaderView.swift */,
+				B9EBAE03253708CC0070705F /* SearchCategoriesStackView.swift */,
 			);
 			path = SearchVC;
 			sourceTree = "<group>";
@@ -378,6 +384,7 @@
 				B912457725287863002B85C5 /* DonationManager.swift in Sources */,
 				B9F22749252EE05900A25EC5 /* FBTextView.swift in Sources */,
 				B9273CE12527474000FE7155 /* FBLogoImageView.swift in Sources */,
+				B9EBAE04253708CC0070705F /* SearchCategoriesStackView.swift in Sources */,
 				B971B23325305A0500660923 /* String+Ext.swift in Sources */,
 				B9273CDF2527470900FE7155 /* Charity.swift in Sources */,
 				B9A57BD7252C58920034ADE6 /* UIViewController+Ext.swift in Sources */,
@@ -401,6 +408,7 @@
 				B914C77E2536E69B00FAC66B /* TagLabel.swift in Sources */,
 				B971B23C25308EFF00660923 /* FBLoadingView.swift in Sources */,
 				B995A1B9252DEBF90037E0FB /* StatusBarViewOne.swift in Sources */,
+				B9EBAE08253713C10070705F /* CategoryButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

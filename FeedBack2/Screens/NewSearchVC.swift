@@ -12,11 +12,15 @@ class NewSearchVC: UIViewController{
     
     let textfield = FBTextField()
     let headerView = SearchHeaderView()
+    let categoriesView = SearchCategoriesStackView()
+    
+    var searchCategory = SearchParameters.all 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavigationBar()
         configureHeaderView()
+        configureCategoriesView()
     }
     
     private func configureNavigationBar(){
@@ -39,6 +43,16 @@ class NewSearchVC: UIViewController{
             maker.left.equalTo(view.snp.left)
             maker.right.equalTo(view.snp.right)
             maker.height.equalTo(200)
+        }
+    }
+    
+    private func configureCategoriesView(){
+        view.addSubview(categoriesView)
+        categoriesView.snp.makeConstraints { (maker) in
+            maker.top.equalTo(headerView.snp.bottom).offset(50)
+            maker.left.equalTo(view.snp.left).offset(20)
+            maker.right.equalTo(view.snp.right).offset(20)
+            maker.height.equalTo(50)
         }
     }
 }

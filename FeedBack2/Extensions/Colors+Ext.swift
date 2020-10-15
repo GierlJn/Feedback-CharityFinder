@@ -23,7 +23,7 @@ extension UIColor {
     static var lightBlueBackgroundGradientEnd: UIColor { return UIColor(rgb: 0xEAD7ED)}
     static var mainTextColor: UIColor { return UIColor(rgb: 0x676568)}
     static var iconColor: UIColor { return UIColor(rgb: 0xFF797A)}
-    
+    static var categoriesTransparentColor: UIColor { return UIColor(rgb: 0xFEF9FC)}
     
     convenience init(red: Int, green: Int, blue: Int) {
         assert(red >= 0 && red <= 255, "Invalid red component")
