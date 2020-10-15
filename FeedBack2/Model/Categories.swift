@@ -21,6 +21,10 @@ enum Categories: CaseIterable {
             return Category(name: "health", parameter: "health")
         }
     }
+    
+    static var allCategories: [Category] {
+        return Categories.allCases.map { $0.category }
+    }
 }
 
 struct Category: Equatable {

@@ -16,7 +16,7 @@ class SearchCategoriesStackView: UIView, CategoryButtonDelegate{
 
     var scrollView = UIScrollView()
     var stackView = UIStackView()
-    var categories = Categories.allCases
+    var categories = Categories.allCategories
     var delegate: SearchCategoriesDelegate?
     
     
@@ -50,7 +50,7 @@ class SearchCategoriesStackView: UIView, CategoryButtonDelegate{
     private func addButtons() {
         for category in categories{
             let categoryButton = CategoryButton()
-            categoryButton.set(category: category.category)
+            categoryButton.set(category: category)
             categoryButton.sizeToFit()
             categoryButton.delegate = self
             categoryButtons.append(categoryButton)
