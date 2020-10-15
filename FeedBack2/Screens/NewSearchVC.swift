@@ -14,7 +14,7 @@ class NewSearchVC: UIViewController{
     let headerView = SearchHeaderView()
     let categoriesView = SearchCategoriesStackView()
     
-    var searchCategory = SearchParameters.all 
+    var searchCategory = Categories.all.category
     
     override func viewDidLoad() {
         super.viewDidLoad()

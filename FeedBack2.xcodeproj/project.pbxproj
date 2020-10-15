@@ -18,6 +18,7 @@
 		B9273CDF2527470900FE7155 /* Charity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9273CDE2527470900FE7155 /* Charity.swift */; };
 		B9273CE12527474000FE7155 /* FBLogoImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9273CE02527474000FE7155 /* FBLogoImageView.swift */; };
 		B9273CE525274B1700FE7155 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9273CE425274B1700FE7155 /* ImageCache.swift */; };
+		B93BA92C25385C45006A08BE /* Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93BA92B25385C45006A08BE /* Categories.swift */; };
 		B956D495252F114C00F6E0D6 /* DonationStatusBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B956D494252F114C00F6E0D6 /* DonationStatusBar.swift */; };
 		B956D497252F313000F6E0D6 /* OutputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B956D496252F313000F6E0D6 /* OutputView.swift */; };
 		B956D499252F31B900F6E0D6 /* CharityTitleLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B956D498252F31B900F6E0D6 /* CharityTitleLabelView.swift */; };
@@ -71,6 +72,7 @@
 		B9273CDE2527470900FE7155 /* Charity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Charity.swift; sourceTree = "<group>"; };
 		B9273CE02527474000FE7155 /* FBLogoImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBLogoImageView.swift; sourceTree = "<group>"; };
 		B9273CE425274B1700FE7155 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
+		B93BA92B25385C45006A08BE /* Categories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Categories.swift; sourceTree = "<group>"; };
 		B956D494252F114C00F6E0D6 /* DonationStatusBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationStatusBar.swift; sourceTree = "<group>"; };
 		B956D496252F313000F6E0D6 /* OutputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputView.swift; sourceTree = "<group>"; };
 		B956D498252F31B900F6E0D6 /* CharityTitleLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharityTitleLabelView.swift; sourceTree = "<group>"; };
@@ -252,6 +254,7 @@
 				B912457125284C26002B85C5 /* SearchResponse.swift */,
 				B95B9E4F2529D62300DF6368 /* InfoResponse.swift */,
 				B95B9E51252A0DFB00DF6368 /* InfoCharity.swift */,
+				B93BA92B25385C45006A08BE /* Categories.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -398,6 +401,7 @@
 				B97AAFF82531BF4C00FCBC28 /* FBTextLabel.swift in Sources */,
 				B9664EC32524864900637BDF /* FBButton.swift in Sources */,
 				B9664EC525248B1000637BDF /* CharityListVC.swift in Sources */,
+				B93BA92C25385C45006A08BE /* Categories.swift in Sources */,
 				B9273CDD252746F700FE7155 /* ImpactProject.swift in Sources */,
 				B9FF36AD2525BE2E0065AC17 /* FBError.swift in Sources */,
 				B914C77B2536DFB600FAC66B /* TagView.swift in Sources */,

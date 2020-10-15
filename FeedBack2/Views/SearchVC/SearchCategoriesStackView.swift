@@ -16,12 +16,12 @@ class SearchCategoriesStackView: UIView, CategoryButtonDelegate{
 
     var scrollView = UIScrollView()
     var stackView = UIStackView()
-    var categories = [SearchParameters.all, SearchParameters.animals, SearchParameters.health]
+    var categories = Categories.allCases
     var delegate: SearchCategoriesDelegate?
     
     
     var categoryButtons = [CategoryButton]()
-    var selectedCategory = SearchParameters.all {
+    var selectedCategory = Categories.all.category {
         didSet {
             delegate?.categoryHasChanged(category: selectedCategory)
         }
@@ -39,21 +39,18 @@ class SearchCategoriesStackView: UIView, CategoryButtonDelegate{
     private func configure(){
         addSubview(scrollView)
         scrollView.addSubview(stackView)
-        
         scrollView.pinToEdges(of: self)
         stackView.pinToEdges(of: scrollView)
-        
         stackView.spacing = 12
         
         addButtons()
-        
         setInitialButtonAsSelected()
     }
     
-    fileprivate func addButtons() {
+    private func addButtons() {
         for category in categories{
             let categoryButton = CategoryButton()
-            categoryButton.set(category: category)
+            categoryButton.set(category: category.category)
             categoryButton.sizeToFit()
             categoryButton.delegate = self
             categoryButtons.append(categoryButton)
