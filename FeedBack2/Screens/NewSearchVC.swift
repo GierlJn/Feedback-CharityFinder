@@ -10,6 +10,9 @@ import UIKit
 
 class NewSearchVC: UIViewController{
     
+    let charityController = CharityController()
+    var collectionView: UICollectionView! = nil
+    
     let textfield = FBTextField()
     let headerView = SearchHeaderView()
     let categoriesView = SearchCategoriesStackView()

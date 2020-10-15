@@ -20,6 +20,7 @@
 		B9273CE525274B1700FE7155 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9273CE425274B1700FE7155 /* ImageCache.swift */; };
 		B93BA92C25385C45006A08BE /* Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93BA92B25385C45006A08BE /* Categories.swift */; };
 		B93BA93125387E43006A08BE /* ExploreCharityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93BA93025387E43006A08BE /* ExploreCharityCell.swift */; };
+		B93BA9342538804E006A08BE /* CharityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93BA9332538804E006A08BE /* CharityController.swift */; };
 		B956D495252F114C00F6E0D6 /* DonationStatusBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B956D494252F114C00F6E0D6 /* DonationStatusBar.swift */; };
 		B956D497252F313000F6E0D6 /* OutputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B956D496252F313000F6E0D6 /* OutputView.swift */; };
 		B956D499252F31B900F6E0D6 /* CharityTitleLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B956D498252F31B900F6E0D6 /* CharityTitleLabelView.swift */; };
@@ -75,6 +76,7 @@
 		B9273CE425274B1700FE7155 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		B93BA92B25385C45006A08BE /* Categories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Categories.swift; sourceTree = "<group>"; };
 		B93BA93025387E43006A08BE /* ExploreCharityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreCharityCell.swift; sourceTree = "<group>"; };
+		B93BA9332538804E006A08BE /* CharityController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharityController.swift; sourceTree = "<group>"; };
 		B956D494252F114C00F6E0D6 /* DonationStatusBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationStatusBar.swift; sourceTree = "<group>"; };
 		B956D496252F313000F6E0D6 /* OutputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputView.swift; sourceTree = "<group>"; };
 		B956D498252F31B900F6E0D6 /* CharityTitleLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharityTitleLabelView.swift; sourceTree = "<group>"; };
@@ -276,6 +278,7 @@
 				B9FF36A82525B8D70065AC17 /* NetworkManager.swift */,
 				B912457625287863002B85C5 /* DonationManager.swift */,
 				B971B23825306C2600660923 /* PersistenceManager.swift */,
+				B93BA9332538804E006A08BE /* CharityController.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -408,6 +411,7 @@
 				B93BA92C25385C45006A08BE /* Categories.swift in Sources */,
 				B9273CDD252746F700FE7155 /* ImpactProject.swift in Sources */,
 				B9FF36AD2525BE2E0065AC17 /* FBError.swift in Sources */,
+				B93BA9342538804E006A08BE /* CharityController.swift in Sources */,
 				B914C77B2536DFB600FAC66B /* TagView.swift in Sources */,
 				B912457225284C26002B85C5 /* SearchResponse.swift in Sources */,
 				B9273CD925270C6700FE7155 /* CharityInfoView.swift in Sources */,
