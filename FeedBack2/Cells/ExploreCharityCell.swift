@@ -26,8 +26,8 @@ class ExploreCharityCell: UICollectionViewCell{
 
 extension ExploreCharityCell {
     func configure(){
-        
-        
+        addSubview(imageView)
+        addSubview(titleLabel)
         let spacing = 10
         imageView.snp.makeConstraints { (maker) in
             maker.top.equalTo(contentView.snp.top)
