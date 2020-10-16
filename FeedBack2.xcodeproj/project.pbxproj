@@ -51,6 +51,7 @@
 		B9A1C0FC252B470C004E3AEE /* FBTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A1C0FB252B470C004E3AEE /* FBTitleLabel.swift */; };
 		B9A1C0FF252B4CD5004E3AEE /* SwiftSVG in Frameworks */ = {isa = PBXBuildFile; productRef = B9A1C0FE252B4CD5004E3AEE /* SwiftSVG */; };
 		B9A57BD7252C58920034ADE6 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A57BD6252C58920034ADE6 /* UIViewController+Ext.swift */; };
+		B9B2C8D225397CF600F4131F /* ShowCaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B2C8D125397CF600F4131F /* ShowCaseVC.swift */; };
 		B9EBADFD2536EEE60070705F /* NewSearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EBADFC2536EEE60070705F /* NewSearchVC.swift */; };
 		B9EBAE012536F1250070705F /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EBAE002536F1250070705F /* HeaderView.swift */; };
 		B9EBAE04253708CC0070705F /* SearchCategoriesStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EBAE03253708CC0070705F /* SearchCategoriesStackView.swift */; };
@@ -107,6 +108,7 @@
 		B9A1C0F9252B3E82004E3AEE /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
 		B9A1C0FB252B470C004E3AEE /* FBTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBTitleLabel.swift; sourceTree = "<group>"; };
 		B9A57BD6252C58920034ADE6 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
+		B9B2C8D125397CF600F4131F /* ShowCaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowCaseVC.swift; sourceTree = "<group>"; };
 		B9EBADFC2536EEE60070705F /* NewSearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSearchVC.swift; sourceTree = "<group>"; };
 		B9EBAE002536F1250070705F /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		B9EBAE03253708CC0070705F /* SearchCategoriesStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCategoriesStackView.swift; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 			children = (
 				B9EBAE002536F1250070705F /* HeaderView.swift */,
 				B9EBAE03253708CC0070705F /* SearchCategoriesStackView.swift */,
+				B9B2C8D125397CF600F4131F /* ShowCaseVC.swift */,
 			);
 			path = SearchVC;
 			sourceTree = "<group>";
@@ -395,6 +398,7 @@
 				B9F22749252EE05900A25EC5 /* FBTextView.swift in Sources */,
 				B9273CE12527474000FE7155 /* FBLogoImageView.swift in Sources */,
 				B9EBAE04253708CC0070705F /* SearchCategoriesStackView.swift in Sources */,
+				B9B2C8D225397CF600F4131F /* ShowCaseVC.swift in Sources */,
 				B971B23325305A0500660923 /* String+Ext.swift in Sources */,
 				B9273CDF2527470900FE7155 /* Charity.swift in Sources */,
 				B9A57BD7252C58920034ADE6 /* UIViewController+Ext.swift in Sources */,
