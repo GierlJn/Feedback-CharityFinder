@@ -51,7 +51,7 @@ class NewSearchVC: UIViewController{
             maker.top.equalTo(view.snp.top)
             maker.left.equalTo(view.snp.left)
             maker.right.equalTo(view.snp.right)
-            maker.height.equalTo(200)
+            maker.height.equalTo(160)
         }
     }
     
@@ -61,7 +61,7 @@ class NewSearchVC: UIViewController{
             maker.top.equalTo(headerView.snp.bottom).offset(50)
             maker.left.equalTo(view.snp.left).offset(20)
             maker.right.equalTo(view.snp.right).offset(20)
-            maker.height.equalTo(50)
+            maker.height.equalTo(40)
         }
     }
 }
@@ -69,25 +69,25 @@ class NewSearchVC: UIViewController{
 extension NewSearchVC {
     func createLayout() -> UICollectionViewLayout {
         let sectionProvider = { (sectionIndex: Int,
-            layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
+                                 layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                 heightDimension: .fractionalHeight(1.0))
+                                                  heightDimension: .fractionalHeight(1.0))
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
-
+            
             // if we have the space, adapt and go 2-up + peeking 3rd item
             let groupFractionalWidth = CGFloat(layoutEnvironment.container.effectiveContentSize.width > 500 ?
-                0.425 : 0.85)
+                                                0.325 : 0.65)
             let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(groupFractionalWidth),
-                                                  heightDimension: .absolute(250))
+                                                   heightDimension: .absolute(200))
             let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-
+            
             let section = NSCollectionLayoutSection(group: group)
             section.orthogonalScrollingBehavior = .continuous
             section.interGroupSpacing = 20
             section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20)
-
+            
             let titleSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                  heightDimension: .estimated(44))
+                                                   heightDimension: .estimated(44))
             let titleSupplementary = NSCollectionLayoutBoundarySupplementaryItem(
                 layoutSize: titleSize,
                 elementKind: NewSearchVC.titleElementKind,
@@ -95,10 +95,10 @@ extension NewSearchVC {
             section.boundarySupplementaryItems = [titleSupplementary]
             return section
         }
-
+        
         let config = UICollectionViewCompositionalLayoutConfiguration()
         config.interSectionSpacing = 20
-
+        
         let layout = UICollectionViewCompositionalLayout(
             sectionProvider: sectionProvider, configuration: config)
         return layout
@@ -114,26 +114,26 @@ extension NewSearchVC {
         NSLayoutConstraint.activate([
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            collectionView.topAnchor.constraint(equalTo: categoriesView.bottomAnchor, constant: 20),
+            collectionView.topAnchor.constraint(equalTo: categoriesView.bottomAnchor, constant: 10),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-            ])
+        ])
     }
     
     func configureDataSource() {
         
         let cellRegistration = UICollectionView.CellRegistration
-        <ExploreCharityCell, CharityController.CharityC> { (cell, indexPath, video) in
+        <ExploreCharityCell, CharityController.CharityC> { (cell, indexPath, charity) in
             // Populate the cell with our item description.
             
-            cell.titleLabel.text = video.title
-            cell.imageView.image = video.image
+            cell.titleLabel.text = charity.title
+            cell.imageView.image = charity.image
         }
         
         dataSource = UICollectionViewDiffableDataSource
         <CharityController.CharityCollection, CharityController.CharityC>(collectionView: collectionView) {
-            (collectionView: UICollectionView, indexPath: IndexPath, video: CharityController.CharityC) -> UICollectionViewCell? in
+            (collectionView: UICollectionView, indexPath: IndexPath, charity: CharityController.CharityC) -> UICollectionViewCell? in
             // Return the cell.
-            return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: video)
+            return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: charity)
         }
         
         let supplementaryRegistration = UICollectionView.SupplementaryRegistration
@@ -141,8 +141,8 @@ extension NewSearchVC {
             (supplementaryView, string, indexPath) in
             if let snapshot = self.currentSnapshot {
                 // Populate the view with our section's description.
-                let videoCategory = snapshot.sectionIdentifiers[indexPath.section]
-                supplementaryView.label.text = videoCategory.title
+                let charityCategory = snapshot.sectionIdentifiers[indexPath.section]
+                supplementaryView.label.text = charityCategory.title
             }
         }
         
@@ -152,7 +152,7 @@ extension NewSearchVC {
         }
         
         currentSnapshot = NSDiffableDataSourceSnapshot
-            <CharityController.CharityCollection, CharityController.CharityC>()
+        <CharityController.CharityCollection, CharityController.CharityC>()
         charityController.collections.forEach {
             let collection = $0
             currentSnapshot.appendSections([collection])
@@ -164,8 +164,9 @@ extension NewSearchVC {
 
 class TitleSupplementaryView: UICollectionReusableView {
     let label = UILabel()
+    let viewAllButton = UIButton()
     static let reuseIdentifier = "title-supplementary-reuse-identifier"
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
@@ -179,14 +180,23 @@ extension TitleSupplementaryView {
     func configure() {
         addSubview(label)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.adjustsFontForContentSizeCategory = true
+        //label.adjustsFontForContentSizeCategory = true
         let inset = CGFloat(10)
         NSLayoutConstraint.activate([
             label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: inset),
-            label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -inset),
             label.topAnchor.constraint(equalTo: topAnchor, constant: inset),
             label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -inset)
         ])
-        label.font = UIFont.preferredFont(forTextStyle: .title3)
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+        
+        addSubview(viewAllButton)
+        viewAllButton.setTitle("View All", for: .normal)
+        viewAllButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .footnote)
+        viewAllButton.setTitleColor(.blue, for: .normal)
+        viewAllButton.snp.makeConstraints { (maker) in
+            maker.top.equalTo(snp.top).offset(inset)
+            maker.right.equalTo(snp.right).offset(-inset)
+            maker.bottom.equalTo(snp.bottom).offset(-inset)
+        }
     }
 }
