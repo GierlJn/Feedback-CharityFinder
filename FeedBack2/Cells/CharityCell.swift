@@ -14,6 +14,8 @@ class CharityCell: UITableViewCell{
     let titleLabel = UILabel(frame: .zero)
     let impactDescriptionLabel = FBSubTitleLabel(frame: .zero)
     let logoImageView = FBLogoImageView(frame: .zero)
+    let padding = 10
+    let enteredDonation: Float = 1.0
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -25,11 +27,14 @@ class CharityCell: UITableViewCell{
         fatalError("init(coder:) has not been implemented")
     }
     
-    func set(charity: Charity, enteredDonation: Float){
+    func set(charity: Charity){
         titleLabel.text = charity.name
-        let calculatedImpact = DonationManager.calculateValue(for: charity.mainOutput.costPerBeneficiary?.value ?? 0.0, impactValue: enteredDonation)
-        impactDescriptionLabel.text = "\(calculatedImpact) \(charity.mainOutput.name?.lowercased() ?? "")"
+        //let calculatedImpact = DonationManager.calculateValue(for: charity.mainOutput.costPerBeneficiary?.value ?? 0.0, impactValue: enteredDonation)
+        let value = charity.mainOutput.costPerBeneficiary?.value
+        let formatted = String(format: "%.2f", value!)
+        let valueLabelText = "1 \(charity.mainOutput.name?.formatOutputName(with: PersistenceManager.retrieveCurrency()) ?? "")"
         
+        impactDescriptionLabel.text = "\(valueLabelText ) for every \(formatted)\(PersistenceManager.retrieveCurrency().symbol) donated"
         logoImageView.setLogoImage(logoUrl: charity.logoUrl)
     }
     
@@ -54,11 +59,12 @@ class CharityCell: UITableViewCell{
     
     private func configureLogoImageView(){
         contentView.addSubview(logoImageView)
-        NSLayoutConstraint.activate([
-            logoImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            logoImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            logoImageView.heightAnchor.constraint(equalToConstant: 100),
-            logoImageView.widthAnchor.constraint(equalToConstant: 100)
-        ])
+        logoImageView.snp.makeConstraints { (maker) in
+            maker.size.equalTo(100)
+            maker.left.equalTo(padding)
+            maker.top.equalTo(padding)
+            maker.bottom.equalTo(-padding)
+            
+        }
     }
 }

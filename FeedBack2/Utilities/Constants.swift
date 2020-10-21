@@ -14,4 +14,4 @@ enum Images {
     static let searchActionButton = UIImage(systemName: "slider.horizontal.3")
 }
 
-
+let userCurrency = Currency.euro

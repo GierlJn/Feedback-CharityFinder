@@ -54,7 +54,7 @@ class OutputView: UIView{
         let value = output.costPerBeneficiary?.value
         if(value != nil){
             let formatted = String(format: "%.2f", value!)
-            impactLabel.text = "For every \(formatted)\(Currency.euro.symbol) donated"
+            impactLabel.text = "For every \(formatted)\(userCurrency.symbol) donated"
         }
         impactLabel.font = .systemFont(ofSize: 12)
         impactLabel.textColor = .mainTextColor

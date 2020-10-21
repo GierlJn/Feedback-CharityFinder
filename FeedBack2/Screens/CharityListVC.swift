@@ -16,11 +16,7 @@ class CharityListVC: UIViewController{
     
     var tableView: UITableView!
     var dataSource: UITableViewDiffableDataSource<Section, Charity>!
-    
     let networkManager = NetworkManager()
-    
-    var enteredDonation: Float = 1.0
-    
     var charities = [Charity]()
     
     override func viewDidLoad() {
@@ -43,7 +39,7 @@ class CharityListVC: UIViewController{
         dataSource = UITableViewDiffableDataSource(tableView: tableView, cellProvider: { [weak self](tableView, indexPath, charity) -> UITableViewCell? in
             guard let self = self else  { return nil}
             let cell = tableView.dequeueReusableCell(withIdentifier: CharityCell.reuseIdentifier, for: indexPath) as! CharityCell
-            cell.set(charity: charity, enteredDonation: self.enteredDonation)
+            cell.set(charity: charity)
             return cell
         })
     }
@@ -78,7 +74,7 @@ extension CharityListVC: UITableViewDelegate{
         let charity = charities[indexPath.item]
         let charityInfoVC = CharityInfoVC()
         charityInfoVC.charity = charity
-        charityInfoVC.enteredDonation = enteredDonation
+        //charityInfoVC.enteredDonation = enteredDonation
         
         let navigationController = UINavigationController(rootViewController: charityInfoVC)
         
