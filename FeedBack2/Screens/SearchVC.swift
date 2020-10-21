@@ -23,6 +23,7 @@ class SearchVC: UIViewController{
     let contentView = UIView()
     
     let charityListVC = CharityListVC()
+    let showcaseVC = ShowCaseVC()
     var searchCategory = Categories.all.category
     
     override func viewDidLoad() {
@@ -48,59 +49,58 @@ class SearchVC: UIViewController{
 }
 
 
-    extension SearchVC{
-        private func configureHeaderView(){
-            view.addSubview(headerView)
-            headerView.backgroundColor = .buttonDarkBlueGradientEnd
-            headerView.snp.makeConstraints { (maker) in
-                maker.top.equalTo(view.snp.top)
-                maker.left.equalTo(view.snp.left)
-                maker.right.equalTo(view.snp.right)
-                maker.height.equalTo(160)
-            }
-        }
-        
-        private func configureCategoriesView(){
-            categoriesView.searchVCdelegate = self
-            view.addSubview(categoriesView)
-            categoriesView.snp.makeConstraints { (maker) in
-                maker.top.equalTo(headerView.snp.bottom).offset(50)
-                maker.left.equalTo(view.snp.left).offset(20)
-                maker.right.equalTo(view.snp.right).offset(20)
-                maker.height.equalTo(40)
-            }
-        }
-        
-        private func configureShowCaseVC(){
-            let showcaseVC = ShowCaseVC()
-            add(childVC: showcaseVC, to: showCaseView)
-            contentView.addSubview(showCaseView)
-            showCaseView.pinToEdges(of: contentView)
-        }
-        
-        private func configureContentView(){
-            view.addSubview(contentView)
-            contentView.snp.makeConstraints { (maker) in
-                maker.top.equalTo(categoriesView.snp.bottom).offset(10)
-                maker.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
-                maker.left.equalTo(view.snp.left)
-                maker.right.equalTo(view.snp.right)
-            }
-        }
-        
-        private func configureListVC(){
-            contentView.addSubview(listView)
-            listView.pinToEdges(of: contentView)
-            add(childVC: charityListVC, to: listView)
-            
-        }
-        
-        private func hideShowCaseView(){
-            showCaseView.removeFromSuperview()
+extension SearchVC{
+    private func configureHeaderView(){
+        view.addSubview(headerView)
+        headerView.backgroundColor = .buttonDarkBlueGradientEnd
+        headerView.snp.makeConstraints { (maker) in
+            maker.top.equalTo(view.snp.top)
+            maker.left.equalTo(view.snp.left)
+            maker.right.equalTo(view.snp.right)
+            maker.height.equalTo(160)
         }
     }
     
+    private func configureCategoriesView(){
+        categoriesView.searchVCdelegate = self
+        view.addSubview(categoriesView)
+        categoriesView.snp.makeConstraints { (maker) in
+            maker.top.equalTo(headerView.snp.bottom).offset(50)
+            maker.left.equalTo(view.snp.left).offset(20)
+            maker.right.equalTo(view.snp.right).offset(20)
+            maker.height.equalTo(40)
+        }
+    }
     
+    private func configureShowCaseVC(){
+        add(childVC: showcaseVC, to: showCaseView)
+        contentView.addSubview(showCaseView)
+        showCaseView.pinToEdges(of: contentView)
+    }
+    
+    private func configureContentView(){
+        view.addSubview(contentView)
+        contentView.snp.makeConstraints { (maker) in
+            maker.top.equalTo(categoriesView.snp.bottom).offset(10)
+            maker.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+            maker.left.equalTo(view.snp.left)
+            maker.right.equalTo(view.snp.right)
+        }
+    }
+    
+    private func configureListVC(){
+        contentView.addSubview(listView)
+        listView.pinToEdges(of: contentView)
+        add(childVC: charityListVC, to: listView)
+        
+    }
+    
+    private func hideShowCaseView(){
+        showCaseView.removeFromSuperview()
+    }
+}
+
+
 
 
 extension SearchVC: SearchVCDelegate{
@@ -108,11 +108,12 @@ extension SearchVC: SearchVCDelegate{
         if(!showCaseView.isHidden){
             hideShowCaseView()
             configureListVC()
+
         }
-       charityListVC.getCharities(searchParameter: category.parameter)
+        charityListVC.getCharities(searchParameter: category.parameter)
     }
     
-
+    
     
     
 }

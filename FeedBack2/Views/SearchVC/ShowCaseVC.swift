@@ -24,7 +24,6 @@ class ShowCaseVC: UIViewController{
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        //view.setGradientBackgroundColor(colors: [.lightBlueBackgroundGradientStart, .lightBlueBackgroundGradientEnd], axis: .horizontal)
     }
 }
 
@@ -36,10 +35,7 @@ extension ShowCaseVC {
                                                   heightDimension: .fractionalHeight(1.0))
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
             
-            // if we have the space, adapt and go 2-up + peeking 3rd item
-            let groupFractionalWidth = CGFloat(layoutEnvironment.container.effectiveContentSize.width > 500 ?
-                                                0.325 : 0.65)
-            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(groupFractionalWidth),
+            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5),
                                                    heightDimension: .absolute(200))
             let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
             
@@ -74,22 +70,17 @@ extension ShowCaseVC {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.backgroundColor = .init(white: 0, alpha: 0)
         view.addSubview(collectionView)
-        NSLayoutConstraint.activate([
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
+        collectionView.pinToEdges(of: view)
     }
     
     func configureDataSource() {
         
         let cellRegistration = UICollectionView.CellRegistration
         <ExploreCharityCell, CharityController.CharityC> { (cell, indexPath, charity) in
-            // Populate the cell with our item description.
-            
             cell.titleLabel.text = charity.title
             cell.imageView.image = charity.image
+            cell.layer.cornerRadius = 8
+            cell.clipsToBounds = true
         }
         
         dataSource = UICollectionViewDiffableDataSource

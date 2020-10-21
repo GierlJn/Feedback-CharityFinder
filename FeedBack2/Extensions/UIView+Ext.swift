@@ -18,6 +18,12 @@ extension UIView{
             make.bottom.equalTo(superView.snp.bottom)
         }
     }
+    
+    func addSubviews(_ views: UIView...){
+        for view in views{
+            addSubview(view)
+        }
+    }
 }
 
 extension UIView {
