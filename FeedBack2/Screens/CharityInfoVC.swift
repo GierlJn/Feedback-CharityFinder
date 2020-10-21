@@ -21,8 +21,8 @@ class CharityInfoVC: UIViewController{
     var donationBarView = DonationBarView()
     var outputOverviewStackView = OutputOverViewContainerView()
     var aboutHeaderLabel = FBTitleLabel(textAlignment: .left)
-    var tagView = TagView(color: .buttonDarkBlue)
-    var locationTagView = TagView(color: .iconColor)
+    var tagView = TagView(color: .lightGray)
+    var locationTagView = TagView(color: .systemGray)
     
     
     let scrollView = UIScrollView()
@@ -193,8 +193,8 @@ class CharityInfoVC: UIViewController{
         outputOverviewStackView.snp.makeConstraints { (maker) in
             maker.height.equalTo(30)
             maker.top.equalTo(descriptionLabel.snp.bottom).offset(50)
-            maker.left.equalTo(contentView.snp.left).offset(20)
-            maker.right.equalTo(contentView.snp.right).offset(-20)
+            maker.left.equalTo(contentView.snp.left).offset(100)
+            maker.right.equalTo(contentView.snp.right).offset(100)
         }
     }
     
