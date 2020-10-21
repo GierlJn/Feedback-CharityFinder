@@ -30,7 +30,6 @@ class CharityCell: UITableViewCell{
     
     func set(charity: Charity){
         titleLabel.text = charity.name
-        //let calculatedImpact = DonationManager.calculateValue(for: charity.mainOutput.costPerBeneficiary?.value ?? 0.0, impactValue: enteredDonation)
         let value = charity.mainOutput.costPerBeneficiary?.value
         let formatted = String(format: "%.2f", value!)
         let valueLabelText = "1 \(charity.mainOutput.name?.formatOutputName(with: PersistenceManager.retrieveCurrency()) ?? "")"
@@ -47,15 +46,15 @@ class CharityCell: UITableViewCell{
         
         titleLabel.snp.makeConstraints { (maker) in
             maker.top.equalTo(padding)
-            maker.left.equalTo(logoImageView.snp.right).offset(10)
+            maker.left.equalTo(logoImageView.snp.right).offset(15)
             maker.right.equalTo(-padding)
-            maker.height.equalTo(40)
+            maker.height.equalTo(20)
         }
         
         impactDescriptionLabel.snp.makeConstraints { (maker) in
             maker.top.equalTo(titleLabel.snp.bottom)
-            maker.left.equalTo(logoImageView.snp.right).offset(10)
-            maker.bottom.equalTo(-padding)
+            maker.left.equalTo(logoImageView.snp.right).offset(15)
+            maker.height.equalTo(50)
             maker.right.equalTo(-padding)
         }
         
@@ -64,10 +63,9 @@ class CharityCell: UITableViewCell{
     private func configureLogoImageView(){
         contentView.addSubview(logoImageView)
         logoImageView.snp.makeConstraints { (maker) in
-            maker.size.equalTo(100)
+            maker.size.equalTo(80)
             maker.left.equalTo(padding)
-            maker.centerY.equalTo(snp.centerY)
-            
+            maker.top.equalTo(padding)
         }
     }
 }

@@ -21,7 +21,8 @@ class FBLogoImageView: UIImageView{
     
     private func configure(){
         translatesAutoresizingMaskIntoConstraints = false
-        layer.cornerRadius = 7
+        layer.cornerRadius = 16
+        clipsToBounds = true
     }
     
     func setLogoImage(logoUrl: String){

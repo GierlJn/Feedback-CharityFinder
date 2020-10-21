@@ -32,7 +32,7 @@ class CharityListVC: UIViewController{
         tableView.backgroundColor = .init(white: 0, alpha: 0 )
         tableView.register(CharityCell.self, forCellReuseIdentifier: CharityCell.reuseIdentifier)
         tableView.delegate = self
-        tableView.rowHeight = 150
+        tableView.rowHeight = 120
         tableView.removeExcessCells()
         
         
