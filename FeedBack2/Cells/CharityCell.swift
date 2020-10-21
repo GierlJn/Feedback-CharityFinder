@@ -66,8 +66,7 @@ class CharityCell: UITableViewCell{
         logoImageView.snp.makeConstraints { (maker) in
             maker.size.equalTo(100)
             maker.left.equalTo(padding)
-            maker.top.equalTo(padding)
-            maker.bottom.equalTo(-padding)
+            maker.centerY.equalTo(snp.centerY)
             
         }
     }

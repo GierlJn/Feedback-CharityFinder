@@ -17,8 +17,11 @@ class NewSearchVC: UIViewController{
     let textfield = FBTextField()
     let headerView = SearchHeaderView()
     let categoriesView = SearchCategoriesStackView()
+    
     let showCaseView = UIView()
     let listView = UIView()
+    let contentView = UIView()
+    
     let charityListVC = CharityListVC()
     var searchCategory = Categories.all.category
     
@@ -27,6 +30,7 @@ class NewSearchVC: UIViewController{
         configureNavigationBar()
         configureHeaderView()
         configureCategoriesView()
+        configureContentView()
         configureShowCaseVC()
     }
     
@@ -70,25 +74,25 @@ class NewSearchVC: UIViewController{
         private func configureShowCaseVC(){
             let showcaseVC = ShowCaseVC()
             add(childVC: showcaseVC, to: showCaseView)
-            view.addSubview(showCaseView)
-            showCaseView.snp.makeConstraints { (maker) in
+            contentView.addSubview(showCaseView)
+            showCaseView.pinToEdges(of: contentView)
+        }
+        
+        private func configureContentView(){
+            view.addSubview(contentView)
+            contentView.snp.makeConstraints { (maker) in
                 maker.top.equalTo(categoriesView.snp.bottom).offset(10)
-                maker.bottom.equalTo(view.snp.bottom)
+                maker.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
                 maker.left.equalTo(view.snp.left)
                 maker.right.equalTo(view.snp.right)
             }
-            
         }
         
         private func configureListVC(){
+            contentView.addSubview(listView)
+            listView.pinToEdges(of: contentView)
             add(childVC: charityListVC, to: listView)
-            view.addSubview(listView)
-            listView.snp.makeConstraints { (maker) in
-                maker.top.equalTo(categoriesView.snp.bottom).offset(10)
-                maker.bottom.equalTo(view.snp.bottom)
-                maker.left.equalTo(view.snp.left)
-                maker.right.equalTo(view.snp.right)
-            }
+            
         }
         
         private func hideShowCaseView(){
@@ -105,7 +109,7 @@ extension NewSearchVC: SearchVCDelegate{
             hideShowCaseView()
             configureListVC()
         }
-        charityListVC.getCharities(searchParameter: category.parameter)
+       charityListVC.getCharities(searchParameter: category.parameter)
     }
     
 

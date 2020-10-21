@@ -14,27 +14,28 @@ class CharityListVC: UIViewController{
         case main
     }
     
-    var tableView: UITableView!
+    var tableView = UITableView()
     var dataSource: UITableViewDiffableDataSource<Section, Charity>!
     let networkManager = NetworkManager()
     var charities = [Charity]()
     
     override func viewDidLoad() {
-        navigationController?.navigationBar.prefersLargeTitles = true
-        configureViewController()
+        configureTableViewController()
         configureDataSource()
     }
     
 
     
-    private func configureViewController(){
-        tableView = UITableView(frame: view.bounds, style: .plain)
+    private func configureTableViewController(){
         view.addSubview(tableView)
-        tableView.backgroundColor = .init(white: 0, alpha: 0)
+        tableView.pinToEdges(of: view)
+        tableView.backgroundColor = .init(white: 0, alpha: 0 )
         tableView.register(CharityCell.self, forCellReuseIdentifier: CharityCell.reuseIdentifier)
         tableView.delegate = self
         tableView.rowHeight = 150
         tableView.removeExcessCells()
+        
+        
     }
     
     private func configureDataSource(){
@@ -75,8 +76,6 @@ extension CharityListVC: UITableViewDelegate{
         let charity = charities[indexPath.item]
         let charityInfoVC = CharityInfoVC()
         charityInfoVC.charity = charity
-        //charityInfoVC.enteredDonation = enteredDonation
-        
         let navigationController = UINavigationController(rootViewController: charityInfoVC)
         
         navigationController.modalPresentationStyle = .fullScreen
