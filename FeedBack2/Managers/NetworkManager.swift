@@ -76,13 +76,15 @@ class NetworkManager{
                 guard let name = cargo.name else { throw FBError.invalidData }
                 guard let id = cargo.id else { throw FBError.invalidData }
                 guard let logo = cargo.logo else { throw FBError.invalidData }
-                guard let description = cargo.descriptionField else { throw FBError.invalidData}
+                guard let summaryDescription = cargo.summaryDescription else { throw FBError.invalidData}
                 guard let url = cargo.url else { throw FBError.invalidData}
                 guard let tags = cargo.tags else { throw FBError.invalidData }
+                guard let geoTags = cargo.geoTags else { throw FBError.invalidData }
+                let description = cargo.description
                 
                 #warning("Refactor")
                 
-                let charity = InfoCharity(name: name, id: id, logoUrl: logo, singleImpact: singleImpact, imageUrl: cargo.images, description: description, url: url, tags: tags)
+                let charity = InfoCharity(name: name, id: id, logoUrl: logo, singleImpact: singleImpact, imageUrl: cargo.images, summaryDescription: summaryDescription, description: description, url: url, tags: tags, geoTags: geoTags)
                 
                 completed(.success(charity))
                 return

@@ -175,7 +175,7 @@ class CharityInfoVC: UIViewController{
     
     private func configureDescriptionLabel(_ infoCharity: InfoCharity){
         contentView.addSubview(descriptionLabel)
-        descriptionLabel.text = infoCharity.description
+        descriptionLabel.text = infoCharity.summaryDescription + "\n\n" + String(infoCharity.description ?? "")  
         descriptionLabel.snp.makeConstraints { (maker) in
             maker.top.equalTo(aboutHeaderLabel.snp.bottom)
             maker.left.equalTo(contentView.snp.left).offset(20)

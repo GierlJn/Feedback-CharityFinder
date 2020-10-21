@@ -25,8 +25,10 @@ struct InfoResponse : Decodable {
 struct InfoCargo : Decodable {
     
     let id : String?
-    let descriptionField : String?
+    let summaryDescription : String?
+    var description : String?
     var tags : String?
+    var geoTags: String?
     let images : String?
     let logo : String?
     let name : String?
@@ -37,7 +39,9 @@ struct InfoCargo : Decodable {
     enum CodingKeys: String, CodingKey {
         case id = "@id"
         case descriptionField = "summaryDescription"
+        case description = "description"
         case tags = "whyTags"
+        case geoTags = "whereTags"
         case images = "images"
         case logo = "logo"
         case name = "name"
@@ -48,8 +52,10 @@ struct InfoCargo : Decodable {
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         id = try values.decodeIfPresent(String.self, forKey: .id)
-        descriptionField = try values.decodeIfPresent(String.self, forKey: .descriptionField)
+        summaryDescription = try values.decodeIfPresent(String.self, forKey: .descriptionField)
+        description = try values.decodeIfPresent(String.self, forKey: .description)
         tags = try values.decodeIfPresent(String.self, forKey: .tags)
+        geoTags = try values.decodeIfPresent(String.self, forKey: .geoTags)
         images = try values.decodeIfPresent(String.self, forKey: .images)
         logo = try values.decodeIfPresent(String.self, forKey: .logo)
         name = try values.decodeIfPresent(String.self, forKey: .name)
