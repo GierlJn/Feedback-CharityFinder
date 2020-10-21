@@ -10,7 +10,6 @@ import UIKit
 
 class NewSearchVC: UIViewController{
     
-
     let textfield = FBTextField()
     let headerView = SearchHeaderView()
     let categoriesView = SearchCategoriesStackView()
