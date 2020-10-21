@@ -28,8 +28,6 @@ class CharityListVC: UIViewController{
         navigationController?.navigationBar.prefersLargeTitles = true
         configureViewController()
         configureDataSource()
-        
-        getCharities()
     }
     
     private func configureViewController(){
@@ -50,8 +48,8 @@ class CharityListVC: UIViewController{
         })
     }
     
-    private func getCharities() {
-        networkManager.getCharities(urlString: "https://app.sogive.org/search.json?q=impact:high") { [weak self] result in
+    func getCharities(searchParameter: String) {
+        networkManager.getCharities(urlString: "https://app.sogive.org/search.json?q=\(searchParameter)") { [weak self] result in
             guard let self = self else { return }
             switch(result){
             case .failure(let error):

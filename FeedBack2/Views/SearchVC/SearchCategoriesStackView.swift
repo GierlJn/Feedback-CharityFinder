@@ -18,12 +18,13 @@ class SearchCategoriesStackView: UIView, CategoryButtonDelegate{
     var stackView = UIStackView()
     var categories = Categories.allCategories
     var delegate: SearchCategoriesDelegate?
-    
+    var searchVCdelegate: SearchVCDelegate?
     
     var categoryButtons = [CategoryButton]()
     var selectedCategory = Categories.all.category {
         didSet {
             delegate?.categoryHasChanged(category: selectedCategory)
+            searchVCdelegate?.categoryChanged(category: selectedCategory)
         }
     }
     
