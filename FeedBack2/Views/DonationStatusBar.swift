@@ -24,7 +24,7 @@ class DonationBarView: UIView{
     }
     
     override func layoutSubviews() {
-//        actionButton.setGradientBackgroundColor(colors: [.buttonDarkBlueGradientStart, .buttonDarkBlueGradientEnd], axis: .horizontal, cornerRadius: 7)
+        //actionButton.setGradientBackgroundColor(colors: [.buttonDarkBlueGradientStart, .buttonDarkBlueGradientEnd], axis: .horizontal, cornerRadius: 7)
     }
     
     private func configure(){
@@ -38,7 +38,7 @@ class DonationBarView: UIView{
             maker.left.equalTo(self.snp.left).offset(padding*2)
             maker.right.equalTo(self.snp.right).offset(-padding*2)
             maker.top.equalTo(self.snp.top).offset(padding)
-            maker.bottom.equalTo(self.snp.bottom).offset(-padding)
+            maker.bottom.equalTo(self.snp.bottom).offset(-padding*2)
         }
     }
     

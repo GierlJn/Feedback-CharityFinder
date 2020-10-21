@@ -13,9 +13,15 @@ class TagView: UIView{
     var scrollView = UIScrollView()
     var stackView = UIStackView()
     var tags = [String]()
+    var color: UIColor = .label
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
+    }
+    
+    convenience init(color: UIColor) {
+        self.init(frame: .zero)
+        self.color = color
         configure()
     }
     
@@ -31,10 +37,13 @@ class TagView: UIView{
     private func configure(){
         addSubview(scrollView)
         scrollView.addSubview(stackView)
-        
         scrollView.pinToEdges(of: self)
-        stackView.pinToEdges(of: scrollView)
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: -30, right: 0)
         
+
+        stackView.pinToEdges(of: scrollView)
         stackView.spacing = 12
     }
     
@@ -43,7 +52,7 @@ class TagView: UIView{
             let textLabel = TagLabel()
             textLabel.text = tag
             textLabel.sizeToFit()
-            
+            textLabel.backgroundColor = color
             stackView.addArrangedSubview(textLabel)
         }
     }

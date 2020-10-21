@@ -15,6 +15,7 @@ class OutputView: UIView{
     var mayFundLabel = UILabel()
     var impactLabel = UILabel()
     var labelsStackView = UIStackView()
+    var viewColor: UIColor = .iconColor
     
     private override init(frame: CGRect) {
         super.init(frame: .zero)
@@ -24,21 +25,17 @@ class OutputView: UIView{
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(output: Output) {
+    init(output: Output, color: UIColor) {
         self.init()
         self.output = output
-        configure()
-    }
-    
-    func set(output: Output) {
-        self.output = output
+        self.viewColor = color
         configure()
     }
     
     private func configure(){
         addSubview(iconImageView)
         iconImageView.image = UIImage(systemName: "heart.fill")
-        iconImageView.tintColor = .iconColor
+        iconImageView.tintColor = viewColor
         iconImageView.snp.makeConstraints { (maker) in
             maker.left.equalTo(self.snp.left)
             maker.size.equalTo(30)

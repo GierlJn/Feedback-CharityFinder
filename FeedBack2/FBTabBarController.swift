@@ -18,7 +18,7 @@ class FBTabBarController: UITabBarController{
     
     
     private func createSearchVC() -> UINavigationController{
-        let searchVC = NewSearchVC()
+        let searchVC = SearchVC()
         searchVC.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 0)
         return UINavigationController(rootViewController: searchVC)
     }

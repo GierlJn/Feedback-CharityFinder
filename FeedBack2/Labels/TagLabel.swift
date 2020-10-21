@@ -34,7 +34,6 @@ class TagLabel: UILabel{
     }
     
     private func configure(){
-        backgroundColor = .iconColor
         layer.masksToBounds = true
         layer.cornerRadius = 7
         font = UIFont.preferredFont(forTextStyle: .footnote)

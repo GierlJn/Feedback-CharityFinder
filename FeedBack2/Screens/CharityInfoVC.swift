@@ -21,7 +21,9 @@ class CharityInfoVC: UIViewController{
     var donationBarView = DonationBarView()
     var outputOverviewStackView = OutputOverViewContainerView()
     var aboutHeaderLabel = FBTitleLabel(textAlignment: .left)
-    var tagView = TagView()
+    var tagView = TagView(color: .buttonDarkBlue)
+    var locationTagView = TagView(color: .iconColor)
+    
     
     let scrollView = UIScrollView()
     let contentView = UIView()
@@ -57,7 +59,7 @@ class CharityInfoVC: UIViewController{
             maker.left.equalTo(self.view.snp.left)
             maker.right.equalTo(self.view.snp.right)
             maker.bottom.equalTo(self.view.snp.bottom)
-            maker.height.equalTo(80)
+            maker.height.equalTo(100)
         }
     }
     
@@ -105,9 +107,10 @@ class CharityInfoVC: UIViewController{
         configureScrollView()
         configureTitleLabelView()
         configureTagView(infoCharity)
-        configureOutputOverviewStackView()
+        configureLocationTagView(infoCharity)
         configureAboutHeaderLabel()
         configureDescriptionLabel(infoCharity)
+        configureOutputOverviewStackView()
     }
     
     private func addRightBarButtonItem(){
@@ -144,19 +147,19 @@ class CharityInfoVC: UIViewController{
         contentView.addSubview(tagView)
         tagView.set(tags: infoCharity.tags)
         tagView.snp.makeConstraints { (maker) in
-            maker.height.equalTo(25)
+            maker.height.equalTo(30)
             maker.top.equalTo(contentView.snp.top).offset(45)
             maker.left.equalTo(contentView.snp.left).offset(20)
             maker.right.equalTo(contentView.snp.right).offset(-20)
         }
     }
     
-    private func configureOutputOverviewStackView(){
-        outputOverviewStackView.set(outputs: [charity.mainOutput])
-        contentView.addSubview(outputOverviewStackView)
-        outputOverviewStackView.snp.makeConstraints { (maker) in
+    private func configureLocationTagView(_ infoCharity: InfoCharity){
+        contentView.addSubview(locationTagView)
+        locationTagView.set(tags: infoCharity.geoTags)
+        locationTagView.snp.makeConstraints { (maker) in
             maker.height.equalTo(30)
-            maker.top.equalTo(tagView.snp.bottom).offset(25)
+            maker.top.equalTo(tagView.snp.bottom).offset(10)
             maker.left.equalTo(contentView.snp.left).offset(20)
             maker.right.equalTo(contentView.snp.right).offset(-20)
         }
@@ -166,7 +169,7 @@ class CharityInfoVC: UIViewController{
         contentView.addSubview(aboutHeaderLabel)
         aboutHeaderLabel.text = "About Charity"
         aboutHeaderLabel.snp.makeConstraints { (maker) in
-            maker.top.equalTo(outputOverviewStackView.snp.bottom).offset(16)
+            maker.top.equalTo(locationTagView.snp.bottom).offset(25)
             maker.left.equalTo(contentView.snp.left).offset(20)
             maker.right.equalTo(contentView.snp.right).offset(-20)
             maker.height.equalTo(50)
@@ -175,13 +178,24 @@ class CharityInfoVC: UIViewController{
     
     private func configureDescriptionLabel(_ infoCharity: InfoCharity){
         contentView.addSubview(descriptionLabel)
-        descriptionLabel.text = infoCharity.summaryDescription + "\n\n" + String(infoCharity.description ?? "")  
+        descriptionLabel.text = infoCharity.summaryDescription + "\n\n" + String(infoCharity.description ?? "")
         descriptionLabel.snp.makeConstraints { (maker) in
             maker.top.equalTo(aboutHeaderLabel.snp.bottom)
             maker.left.equalTo(contentView.snp.left).offset(20)
             maker.right.equalTo(contentView.snp.right).offset(-20)
         }
         descriptionLabel.sizeToFit()
+    }
+    
+    private func configureOutputOverviewStackView(){
+        outputOverviewStackView.set(outputs: [charity.mainOutput])
+        contentView.addSubview(outputOverviewStackView)
+        outputOverviewStackView.snp.makeConstraints { (maker) in
+            maker.height.equalTo(30)
+            maker.top.equalTo(descriptionLabel.snp.bottom).offset(50)
+            maker.left.equalTo(contentView.snp.left).offset(20)
+            maker.right.equalTo(contentView.snp.right).offset(-20)
+        }
     }
     
     @objc func backButtonPressed(){

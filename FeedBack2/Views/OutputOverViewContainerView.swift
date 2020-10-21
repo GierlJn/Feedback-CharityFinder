@@ -17,12 +17,6 @@ class OutputOverViewContainerView: UIStackView{
         //configure()
     }
     
-    convenience init(outputs: [Output]) {
-        self.init(frame: .zero)
-        self.outputs = outputs
-        configure()
-    }
-    
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -38,7 +32,7 @@ class OutputOverViewContainerView: UIStackView{
         self.spacing = 5
         
         for output in outputs{
-            let outputOverView = OutputView(output: output)
+            let outputOverView = OutputView(output: output, color: .iconColor)
             outputOverView.snp.makeConstraints { (maker) in
                 maker.height.equalTo(30)
             }
