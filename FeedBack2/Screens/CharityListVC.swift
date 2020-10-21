@@ -20,24 +20,25 @@ class CharityListVC: UIViewController{
     var charities = [Charity]()
     
     override func viewDidLoad() {
-        view.backgroundColor = .systemBackground
         navigationController?.navigationBar.prefersLargeTitles = true
         configureViewController()
         configureDataSource()
     }
     
+
+    
     private func configureViewController(){
         tableView = UITableView(frame: view.bounds, style: .plain)
         view.addSubview(tableView)
-        tableView.backgroundColor = .systemBackground
+        tableView.backgroundColor = .init(white: 0, alpha: 0)
         tableView.register(CharityCell.self, forCellReuseIdentifier: CharityCell.reuseIdentifier)
         tableView.delegate = self
-        tableView.rowHeight = 140
+        tableView.rowHeight = 150
+        tableView.removeExcessCells()
     }
     
     private func configureDataSource(){
-        dataSource = UITableViewDiffableDataSource(tableView: tableView, cellProvider: { [weak self](tableView, indexPath, charity) -> UITableViewCell? in
-            guard let self = self else  { return nil}
+        dataSource = UITableViewDiffableDataSource(tableView: tableView, cellProvider: { (tableView, indexPath, charity) -> UITableViewCell? in
             let cell = tableView.dequeueReusableCell(withIdentifier: CharityCell.reuseIdentifier, for: indexPath) as! CharityCell
             cell.set(charity: charity)
             return cell

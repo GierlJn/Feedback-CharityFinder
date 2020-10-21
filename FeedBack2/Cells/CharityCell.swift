@@ -11,16 +11,17 @@ import UIKit
 class CharityCell: UITableViewCell{
     static let reuseIdentifier = "CharityCell"
     
-    let titleLabel = UILabel(frame: .zero)
+    let titleLabel = FBTitleLabel(frame: .zero)
     let impactDescriptionLabel = FBSubTitleLabel(frame: .zero)
     let logoImageView = FBLogoImageView(frame: .zero)
-    let padding = 10
+    let padding = 20
     let enteredDonation: Float = 1.0
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configureLogoImageView()
         configureLabels()
+        backgroundColor = .init(white: 0, alpha: 0)
     }
     
     required init?(coder: NSCoder) {
@@ -41,20 +42,23 @@ class CharityCell: UITableViewCell{
     private func configureLabels(){
         contentView.addSubview(titleLabel)
         contentView.addSubview(impactDescriptionLabel)
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        impactDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+
         impactDescriptionLabel.numberOfLines = 2
         
-        NSLayoutConstraint.activate([
-            titleLabel.leadingAnchor.constraint(equalTo: logoImageView.trailingAnchor, constant: 10),
-            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 30),
-            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
-            titleLabel.heightAnchor.constraint(equalToConstant: 50),
-            
-            impactDescriptionLabel.leadingAnchor.constraint(equalTo: logoImageView.trailingAnchor, constant: 10),
-            impactDescriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
-            impactDescriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10)
-        ])
+        titleLabel.snp.makeConstraints { (maker) in
+            maker.top.equalTo(padding)
+            maker.left.equalTo(logoImageView.snp.right).offset(10)
+            maker.right.equalTo(-padding)
+            maker.height.equalTo(40)
+        }
+        
+        impactDescriptionLabel.snp.makeConstraints { (maker) in
+            maker.top.equalTo(titleLabel.snp.bottom)
+            maker.left.equalTo(logoImageView.snp.right).offset(10)
+            maker.bottom.equalTo(-padding)
+            maker.right.equalTo(-padding)
+        }
+        
     }
     
     private func configureLogoImageView(){

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B904D32C25401FD60071E6CA /* UITableView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B904D32B25401FD60071E6CA /* UITableView+Ext.swift */; };
 		B912457225284C26002B85C5 /* SearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B912457125284C26002B85C5 /* SearchResponse.swift */; };
 		B912457525287599002B85C5 /* FBSubTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B912457425287599002B85C5 /* FBSubTitleLabel.swift */; };
 		B912457725287863002B85C5 /* DonationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B912457625287863002B85C5 /* DonationManager.swift */; };
@@ -63,6 +64,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B904D32B25401FD60071E6CA /* UITableView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Ext.swift"; sourceTree = "<group>"; };
 		B912457125284C26002B85C5 /* SearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResponse.swift; sourceTree = "<group>"; };
 		B912457425287599002B85C5 /* FBSubTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBSubTitleLabel.swift; sourceTree = "<group>"; };
 		B912457625287863002B85C5 /* DonationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationManager.swift; sourceTree = "<group>"; };
@@ -228,6 +230,7 @@
 				B9F2274B252EE62200A25EC5 /* Colors+Ext.swift */,
 				B9A57BD6252C58920034ADE6 /* UIViewController+Ext.swift */,
 				B971B23225305A0500660923 /* String+Ext.swift */,
+				B904D32B25401FD60071E6CA /* UITableView+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -379,6 +382,7 @@
 				B9664EC12524834E00637BDF /* FavouritesVC.swift in Sources */,
 				B93BA93125387E43006A08BE /* ExploreCharityCell.swift in Sources */,
 				B956D49B252F4A9A00F6E0D6 /* OutputOverViewContainerView.swift in Sources */,
+				B904D32C25401FD60071E6CA /* UITableView+Ext.swift in Sources */,
 				B9EBAE012536F1250070705F /* HeaderView.swift in Sources */,
 				B9F2274C252EE62200A25EC5 /* Colors+Ext.swift in Sources */,
 				B9273CE525274B1700FE7155 /* ImageCache.swift in Sources */,
