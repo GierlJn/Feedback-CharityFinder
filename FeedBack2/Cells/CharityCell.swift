@@ -12,15 +12,17 @@ class CharityCell: UITableViewCell{
     static let reuseIdentifier = "CharityCell"
     
     let titleLabel = FBTitleLabel(frame: .zero)
-    let impactDescriptionLabel = FBSubTitleLabel(frame: .zero)
+    //let impactDescriptionLabel = FBSubTitleLabel(frame: .zero)
     let logoImageView = FBLogoImageView(frame: .zero)
     let padding = 20
     let enteredDonation: Float = 1.0
+    let favouriteButton = UIButton()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configureLogoImageView()
         configureLabels()
+        configureButton()
         backgroundColor = .init(white: 0, alpha: 0)
     }
     
@@ -30,35 +32,40 @@ class CharityCell: UITableViewCell{
     
     func set(charity: Charity){
         titleLabel.text = charity.name
-        let value = charity.mainOutput.costPerBeneficiary?.value
-        let formatted = String(format: "%.2f", value!)
-        let valueLabelText = "1 \(charity.mainOutput.name?.formatOutputName(with: PersistenceManager.retrieveCurrency()) ?? "")"
-        
-        impactDescriptionLabel.text = "\(valueLabelText ) for every \(formatted)\(PersistenceManager.retrieveCurrency().symbol) donated"
+        //let value = charity.mainOutput.costPerBeneficiary?.value
+        //let formatted = String(format: "%.2f", value!)
+        //let valueLabelText = "1 \(charity.mainOutput.name?.formatOutputName(with: PersistenceManager.retrieveCurrency()) ?? "")"
+        //let text = "\(valueLabelText ) for every \(formatted)\(PersistenceManager.retrieveCurrency().symbol) donated"
+        //impactDescriptionLabel.text = "\(charity.name)"
         logoImageView.setLogoImage(logoUrl: charity.logoUrl)
     }
     
     private func configureLabels(){
         contentView.addSubview(titleLabel)
-        contentView.addSubview(impactDescriptionLabel)
+        //contentView.addSubview(impactDescriptionLabel)
 
-        impactDescriptionLabel.numberOfLines = 2
+        //impactDescriptionLabel.numberOfLines = 2
         
         titleLabel.snp.makeConstraints { (maker) in
-            maker.top.equalTo(padding)
+            maker.centerY.equalTo(snp.centerY)
             maker.left.equalTo(logoImageView.snp.right).offset(15)
             maker.right.equalTo(-padding)
-            maker.height.equalTo(20)
+            maker.height.equalTo(40)
         }
         
-        impactDescriptionLabel.snp.makeConstraints { (maker) in
-            maker.top.equalTo(titleLabel.snp.bottom)
-            maker.left.equalTo(logoImageView.snp.right).offset(15)
-            maker.height.equalTo(50)
-            maker.right.equalTo(-padding)
-        }
+//        impactDescriptionLabel.snp.makeConstraints { (maker) in
+//            maker.top.equalTo(titleLabel.snp.bottom)
+//            maker.left.equalTo(logoImageView.snp.right).offset(15)
+//            maker.height.equalTo(50)
+//            maker.right.equalTo(-padding)
+//        }
+    }
+    
+    private func configureButton(){
         
     }
+    
+    
     
     private func configureLogoImageView(){
         contentView.addSubview(logoImageView)

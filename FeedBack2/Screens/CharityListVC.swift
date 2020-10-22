@@ -24,8 +24,6 @@ class CharityListVC: UIViewController{
         configureDataSource()
     }
     
-
-    
     private func configureTableViewController(){
         view.addSubview(tableView)
         tableView.pinToEdges(of: view)
@@ -34,8 +32,6 @@ class CharityListVC: UIViewController{
         tableView.delegate = self
         tableView.rowHeight = 120
         tableView.removeExcessCells()
-        
-        
     }
     
     private func configureDataSource(){
@@ -47,7 +43,7 @@ class CharityListVC: UIViewController{
     }
     
     func getCharities(searchParameter: String) {
-        networkManager.getCharities(urlString: "https://app.sogive.org/search.json?q=\(searchParameter)") { [weak self] result in
+        networkManager.getCharities(searchParameter: searchParameter) { [weak self] result in
             guard let self = self else { return }
             switch(result){
             case .failure(let error):

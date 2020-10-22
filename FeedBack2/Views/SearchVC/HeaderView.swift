@@ -25,7 +25,9 @@ class SearchHeaderView: UIView{
         fatalError("init(coder:) has not been implemented")
     }
     
+    
     private func configure(){
+        //setGradientBackgroundColor(colors: [.buttonDarkBlueGradientStart, .buttonDarkBlueGradientEnd], axis: .horizontal)
         configureLabel()
         configureSearchView()
     }
@@ -61,17 +63,10 @@ class SearchHeaderView: UIView{
             maker.size.equalTo(50)
         }
         
-       // searchButton.backgroundColor = .yellow
         searchButton.setImage(Images.searchActionButton, for: .normal)
         searchButton.backgroundColor = .systemGray
         searchButton.layer.cornerRadius = 7
         searchButton.tintColor = .white
-
-
-        
-
-        
-  
 
     }
 

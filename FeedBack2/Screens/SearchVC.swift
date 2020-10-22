@@ -45,6 +45,7 @@ class SearchVC: UIViewController{
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         view.setGradientBackgroundColor(colors: [.lightBlueBackgroundGradientStart, .lightBlueBackgroundGradientEnd], axis: .horizontal)
+        headerView.setGradientBackgroundColor(colors: [.buttonDarkBlueGradientStart, .buttonDarkBlueGradientEnd], axis: .horizontal)
     }
 }
 
@@ -52,7 +53,7 @@ class SearchVC: UIViewController{
 extension SearchVC{
     private func configureHeaderView(){
         view.addSubview(headerView)
-        headerView.backgroundColor = .buttonDarkBlueGradientEnd
+        
         headerView.snp.makeConstraints { (maker) in
             maker.top.equalTo(view.snp.top)
             maker.left.equalTo(view.snp.left)

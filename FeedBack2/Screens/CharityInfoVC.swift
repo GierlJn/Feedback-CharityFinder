@@ -83,8 +83,7 @@ class CharityInfoVC: UIViewController{
     
     private func getCharityInfo() {
         showLoadingView()
-        let url = "https://app.sogive.org/charity/" + charity.id + ".json"
-        networkManger.getCharityInfo(urlString: url) { [weak self] (result) in
+        networkManger.getCharityInfo(charityId: charity.id) { [weak self] (result) in
             guard let self = self else { return }
             switch(result){
             case .failure(let error):
@@ -193,8 +192,8 @@ class CharityInfoVC: UIViewController{
         outputOverviewStackView.snp.makeConstraints { (maker) in
             maker.height.equalTo(30)
             maker.top.equalTo(descriptionLabel.snp.bottom).offset(50)
-            maker.left.equalTo(contentView.snp.left).offset(100)
-            maker.right.equalTo(contentView.snp.right).offset(100)
+            maker.left.equalTo(contentView.snp.left).offset(20)
+            maker.right.equalTo(contentView.snp.right).offset(-20)
         }
     }
     

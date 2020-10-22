@@ -54,6 +54,7 @@ struct Hit : Decodable {
     let logo : String?
     let name : String?
     var url : String?
+    var estimatedImpact: String?
     let projects : [Project]?
     
     enum CodingKeys: String, CodingKey {
@@ -63,6 +64,7 @@ struct Hit : Decodable {
         case name = "name"
         case projects = "projects"
         case url = "url"
+        case estimatedImpact = "impact"
     }
     
     init(from decoder: Decoder) throws {
@@ -73,6 +75,7 @@ struct Hit : Decodable {
         name = try values.decodeIfPresent(String.self, forKey: .name)
         url = try values.decodeIfPresent(String.self, forKey: .url)
         projects = try values.decodeIfPresent([Project].self, forKey: .projects)
+        estimatedImpact = try values.decodeIfPresent(String.self, forKey: .estimatedImpact)
     }
 }
 

@@ -12,9 +12,11 @@ import SwiftSVG
 class NetworkManager{
     
     typealias Handler = (Result<[Charity], FBError>) -> Void
+    var baseSearchUrl = "https://app.sogive.org/search.json?q="
+    var baseCharityInfoUrl = "https://app.sogive.org/charity/"
     
-    func getCharities(urlString: String, completed: @escaping Handler){
-        guard let url = URL(string: urlString) else {
+    func getCharities(searchParameter: String, completed: @escaping Handler){
+        guard let url = URL(string: "\(baseSearchUrl)\(searchParameter)") else {
             completed(.failure(.unableToConnect))
             return
         }
@@ -47,8 +49,8 @@ class NetworkManager{
         task.resume()
     }
     
-    func getCharityInfo(urlString: String, completed: @escaping (Result<InfoCharity, FBError>) -> Void){
-        guard let url = URL(string: urlString) else {
+    func getCharityInfo(charityId: String, completed: @escaping (Result<InfoCharity, FBError>) -> Void){
+        guard let url = URL(string: "\(baseCharityInfoUrl)\(charityId)/.json") else {
             completed(.failure(.unableToConnect))
             return
         }
@@ -122,7 +124,7 @@ class NetworkManager{
             }
             if(charityMainOutput != nil && name != nil && hit.id != nil && hit.logo != nil && hit.url != nil){
                 #warning("refactor")
-                let charity = Charity(name: name!, id: hit.id!, logoUrl: hit.logo!, mainOutput: charityMainOutput!, outputs: charityOutputs, url: hit.url!)
+                let charity = Charity(name: name!, id: hit.id!, logoUrl: hit.logo!, mainOutput: charityMainOutput!, outputs: charityOutputs, url: hit.url!, impactEstimation: hit.estimatedImpact)
                 charities.append(charity)
             }
         }

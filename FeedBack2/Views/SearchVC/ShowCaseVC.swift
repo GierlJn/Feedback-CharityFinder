@@ -16,10 +16,13 @@ class ShowCaseVC: UIViewController{
     var currentSnapshot: NSDiffableDataSourceSnapshot<CharityController.CharityCollection, CharityController.CharityC>! = nil
     static let titleElementKind = "title-element-kind"
     
+    let networkManager = NetworkManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureHierarchy()
         configureDataSource()
+        getCharities()
     }
     
     override func viewDidLayoutSubviews() {
@@ -113,6 +116,10 @@ extension ShowCaseVC {
             currentSnapshot.appendItems(collection.videos)
         }
         dataSource.apply(currentSnapshot, animatingDifferences: false)
+    }
+    
+    func getCharities(){
+        //networkManager.getCharities(searchParameter: <#T##String#>, completed: <#T##NetworkManager.Handler##NetworkManager.Handler##(Result<[Charity], FBError>) -> Void#>)
     }
 }
 
