@@ -10,7 +10,7 @@ import UIKit
 
 class OutputView: UIView{
     
-    var output: Output!
+    var output: SimpleImpact!
     var iconImageView = UIImageView()
     var mayFundLabel = UILabel()
     var impactLabel = UILabel()
@@ -25,7 +25,7 @@ class OutputView: UIView{
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(output: Output, color: UIColor) {
+    init(output: SimpleImpact, color: UIColor) {
         self.init()
         self.output = output
         self.viewColor = color
@@ -50,8 +50,7 @@ class OutputView: UIView{
         
         let value = output.costPerBeneficiary?.value
         if(value != nil){
-            let formatted = String(format: "%.2f", value!)
-            impactLabel.text = "For every \(formatted)\(userCurrency.symbol) donated"
+            impactLabel.text = "For every \(value ?? "")\(userCurrency.symbol) donated"
         }
         impactLabel.font = .systemFont(ofSize: 12)
         impactLabel.textColor = .mainTextColor

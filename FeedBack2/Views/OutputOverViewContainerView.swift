@@ -10,7 +10,7 @@ import UIKit
 
 class OutputOverViewContainerView: UIStackView{
     
-    var outputs: [Output]!
+    var outputs: [SimpleImpact]!
     
     private override init(frame: CGRect) {
         super.init(frame: .zero)
@@ -21,7 +21,7 @@ class OutputOverViewContainerView: UIStackView{
         fatalError("init(coder:) has not been implemented")
     }
     
-    func set(outputs: [Output]) {
+    func set(outputs: [SimpleImpact]) {
         self.outputs = outputs
         configure()
     }

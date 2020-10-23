@@ -25,7 +25,7 @@ extension JSONDecoder{
         let hits = cargo.hits
         
         for hit in hits {
-            var charityOutputs = [Output]()
+            var outputsForCharity = [Output]()
             var charityMainOutput: Output?
             let name = hit.displayName ?? hit.name
             if let projects = hit.projects{
@@ -34,7 +34,7 @@ extension JSONDecoder{
                         projectOutputs.removeAll(where: {$0.costPerBeneficiary == nil || $0.name == nil})
                         for output in projectOutputs{
                             if let value = output.costPerBeneficiary?.value{
-                                charityOutputs.append(output)
+                                outputsForCharity.append(output)
                                 if(value > charityMainOutput?.costPerBeneficiary!.value ?? 0.0){
                                     charityMainOutput = output
                                 }
@@ -46,7 +46,7 @@ extension JSONDecoder{
             }
             if(charityMainOutput != nil && name != nil && hit.id != nil && hit.logo != nil && hit.url != nil){
                 #warning("refactor")
-                let charity = Charity(name: name!, id: hit.id!, logoUrl: hit.logo!, mainOutput: charityMainOutput!, outputs: charityOutputs, url: hit.url!, impactEstimation: hit.estimatedImpact)
+                let charity = Charity(name: name!, id: hit.id!, logoUrl: hit.logo!, mainOutput: charityMainOutput!, outputs: outputsForCharity, url: hit.url!, impactEstimation: hit.estimatedImpact)
                 charities.append(charity)
             }
         }

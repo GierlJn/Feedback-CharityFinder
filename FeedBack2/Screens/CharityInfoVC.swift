@@ -109,7 +109,7 @@ class CharityInfoVC: UIViewController{
         configureLocationTagView(infoCharity)
         configureAboutHeaderLabel()
         configureDescriptionLabel(infoCharity)
-        configureOutputOverviewStackView()
+        configureOutputOverviewStackView(infoCharity)
     }
     
     private func addRightBarButtonItem(){
@@ -186,8 +186,8 @@ class CharityInfoVC: UIViewController{
         descriptionLabel.sizeToFit()
     }
     
-    private func configureOutputOverviewStackView(){
-        outputOverviewStackView.set(outputs: [charity.mainOutput])
+    private func configureOutputOverviewStackView(_ infoCharity: InfoCharity){
+        outputOverviewStackView.set(outputs: [infoCharity.singleImpact])
         contentView.addSubview(outputOverviewStackView)
         outputOverviewStackView.snp.makeConstraints { (maker) in
             maker.height.equalTo(30)
