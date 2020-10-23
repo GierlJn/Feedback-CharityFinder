@@ -18,20 +18,13 @@ class ShowCaseVC: UIViewController{
     
     let networkManager = NetworkManager()
     
+    var firstCharityDataReceived = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureHierarchy()
         configureDataSource()
-        charityController.loadHighImpactCharities { [weak self] (result) in
-            guard let self = self else { return }
-            
-            switch result{
-            case .failure(let error):
-                print(error)
-            case .success(let charities):
-                self.applyCurrentSnapshot()
-            }
-        }
+        loadCharities()
     }
     
     override func viewDidLayoutSubviews() {
@@ -129,6 +122,36 @@ extension ShowCaseVC {
             currentSnapshot.appendItems(collection.charities)
         }
         dataSource.apply(currentSnapshot, animatingDifferences: false)
+    }
+    
+    fileprivate func loadCharities() {
+        charityController.loadHighImpactCharities { [weak self] (result) in
+            guard let self = self else { return }
+            
+            switch result{
+            case .failure(let error):
+                print(error)
+            case .success(let _):
+                if(self.firstCharityDataReceived){
+                    self.applyCurrentSnapshot()
+                }
+                self.firstCharityDataReceived = true
+            }
+        }
+        
+        charityController.loadSecoundaryCharities{ [weak self] (result) in
+            guard let self = self else { return }
+            
+            switch result{
+            case .failure(let error):
+                print(error)
+            case .success(let _):
+                if(self.firstCharityDataReceived){
+                    self.applyCurrentSnapshot()
+                }
+                self.firstCharityDataReceived = true
+            }
+        }
     }
     
     

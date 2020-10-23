@@ -15,7 +15,7 @@ class CharityController {
     struct CharityCollection: Hashable {
         let title: String
         let charities: [Charity]
-
+        let position: Int
         let identifier = UUID()
         func hash(into hasher: inout Hasher) {
             hasher.combine(identifier)
@@ -38,18 +38,33 @@ class CharityController {
                 print(error)
                 completed(.failure(error))
             case .success(let charities):
-                self.generateCharityCollections(for: charities)
+                self.generateCharityCollections(for: charities, title: "High Impact", positionIndex: 0)
                 completed(.success(charities))
             }
         }
     }
     
+    func loadSecoundaryCharities( completed: @escaping Handler){
+        networkManager.getCharities(searchParameter: "animals") { [weak self] (result) in
+            guard let self = self else { return }
+            switch result{
+            case .failure(let error):
+                print(error)
+                completed(.failure(error))
+            case .success(let charities):
+                self.generateCharityCollections(for: charities, title: "Animals", positionIndex: 1)
+                completed(.success(charities))
+            }
+        }
+    }
     
 }
 
 
 extension CharityController {
-    func generateCharityCollections(for charities: [Charity]){
-        _collections.append(CharityCollection(title: "High impact", charities: charities))
+    func generateCharityCollections(for charities: [Charity], title: String, positionIndex: Int){
+        _collections.append(CharityCollection(title: title, charities: charities, position: positionIndex))
+        _collections.sort { $0.position < $1.position }
+        
     }
 }
