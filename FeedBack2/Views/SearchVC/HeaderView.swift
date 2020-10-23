@@ -74,8 +74,9 @@ class SearchHeaderView: UIView{
         }
         
         searchButton.setImage(Images.searchActionButton, for: .normal)
-        searchButton.backgroundColor = .systemGray
+        searchButton.setGradientBackgroundColor(colors: [.hedaerViewGradientStart, .headerViewGradientEnd], axis: .custom(angle: CGFloat(90)))
         searchButton.layer.cornerRadius = 7
+        searchButton.clipsToBounds = true
         searchButton.tintColor = .white
 
     }
