@@ -43,15 +43,16 @@ class OutputView: UIView{
         }
         
         mayFundLabel.font = .boldSystemFont(ofSize: 12)
-        let valueLabelText = "1 \(output.name?.formatOutputName(with: PersistenceManager.retrieveCurrency()) ?? "")"
+        let valueLabelText = "1 \(output.name.formatOutputName(with: PersistenceManager.retrieveCurrency()))"
         
         mayFundLabel.text = valueLabelText
         mayFundLabel.textColor = .mainTextColor
         
-        let value = output.costPerBeneficiary?.value
-        if(value != nil){
-            impactLabel.text = "For every \(value ?? "")\(userCurrency.symbol) donated"
-        }
+        let value = output.costPerBeneficiary.value
+        let floatValue = Float(value) ?? 1.0
+        let formatted = String(format: "%.2f", floatValue)
+        impactLabel.text = "For every \(formatted)\(userCurrency.symbol) donated"
+        
         impactLabel.font = .systemFont(ofSize: 12)
         impactLabel.textColor = .mainTextColor
         impactLabel.alpha = 0.8

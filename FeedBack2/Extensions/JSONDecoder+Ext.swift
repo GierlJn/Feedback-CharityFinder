@@ -19,6 +19,18 @@ extension JSONDecoder{
         }
     }
     
+    func decodeReceivedDataToInfoCharity(data: Data) throws -> InfoCharity {
+        do{
+            let decoder = JSONDecoder()
+            let rawServerResponse = try decoder.decode(InfoResponse.self, from: data)
+            let cargo = rawServerResponse.cargo
+            let charity = InfoCharity(name: cargo.name, id: cargo.id, summaryDescription: cargo.summaryDescription, logoUrl: cargo.logo, singleImpact: cargo.simpleImpact, imageUrl: cargo.images, description: cargo.description, url: cargo.url, tags: cargo.tags ?? "No tags", geoTags: cargo.geoTags ?? "Worldwide")
+            return charity
+        }catch{
+            throw FBError.invalidData
+        }
+    }
+    
     private func decodeRawServerResponse(_ rawServerResponse: SearchResponse) throws -> [Charity] {
         var charities = [Charity]()
         let cargo = rawServerResponse.cargo

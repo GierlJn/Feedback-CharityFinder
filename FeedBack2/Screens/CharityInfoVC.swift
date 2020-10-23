@@ -144,7 +144,7 @@ class CharityInfoVC: UIViewController{
     
     private func configureTagView(_ infoCharity: InfoCharity){
         contentView.addSubview(tagView)
-        tagView.set(tags: infoCharity.tags)
+        tagView.set(tags: infoCharity.tags!)
         tagView.snp.makeConstraints { (maker) in
             maker.height.equalTo(30)
             maker.top.equalTo(contentView.snp.top).offset(45)
@@ -155,7 +155,7 @@ class CharityInfoVC: UIViewController{
     
     private func configureLocationTagView(_ infoCharity: InfoCharity){
         contentView.addSubview(locationTagView)
-        locationTagView.set(tags: infoCharity.geoTags)
+        locationTagView.set(tags: infoCharity.geoTags!)
         locationTagView.snp.makeConstraints { (maker) in
             maker.height.equalTo(30)
             maker.top.equalTo(tagView.snp.bottom).offset(10)
@@ -176,8 +176,29 @@ class CharityInfoVC: UIViewController{
     }
     
     private func configureDescriptionLabel(_ infoCharity: InfoCharity){
+        let summaryDescription = infoCharity.summaryDescription ?? ""
+        let description = infoCharity.description ?? ""
+        var labelText = ""
+        
+        if(!summaryDescription.isEmpty){
+            labelText.append(summaryDescription)
+        }
+        
+        if(!summaryDescription.isEmpty && !description.isEmpty){
+            labelText.append("\n\n" + description)
+        }
+        
+        if(summaryDescription.isEmpty && !description.isEmpty){
+            labelText.append(description)
+        }
+        
+        if(description.isEmpty && summaryDescription.isEmpty){
+            labelText = "No description available"
+        }
+        
         contentView.addSubview(descriptionLabel)
-        descriptionLabel.text = infoCharity.summaryDescription + "\n\n" + String(infoCharity.description ?? "")
+        descriptionLabel.text = labelText
+        
         descriptionLabel.snp.makeConstraints { (maker) in
             maker.top.equalTo(aboutHeaderLabel.snp.bottom)
             maker.left.equalTo(contentView.snp.left).offset(20)
@@ -187,7 +208,8 @@ class CharityInfoVC: UIViewController{
     }
     
     private func configureOutputOverviewStackView(_ infoCharity: InfoCharity){
-        outputOverviewStackView.set(outputs: [infoCharity.singleImpact])
+        guard let impact = infoCharity.singleImpact else { return }
+        outputOverviewStackView.set(outputs: [impact])
         contentView.addSubview(outputOverviewStackView)
         outputOverviewStackView.snp.makeConstraints { (maker) in
             maker.height.equalTo(30)

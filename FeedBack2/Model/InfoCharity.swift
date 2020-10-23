@@ -11,12 +11,12 @@ import Foundation
 struct InfoCharity: Hashable{
     var name: String
     var id: String
-    var logoUrl: String
-    var singleImpact: SimpleImpact
+    var summaryDescription: String?
+    var logoUrl: String?
+    var singleImpact: SimpleImpact?
     var imageUrl: String?
-    var summaryDescription: String
     var description: String?
-    var url: String
-    var tags: String
-    var geoTags: String
+    var url: String?
+    var tags: String?
+    var geoTags: String?
 }

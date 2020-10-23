@@ -74,22 +74,7 @@ class NetworkManager{
             }
             do{
                 let decoder = JSONDecoder()
-                let rawServerResponse = try decoder.decode(InfoResponse.self, from: data)
-                guard let cargo = rawServerResponse.cargo else { throw FBError.invalidData }
-                guard let singleImpact = cargo.simpleImpact else { throw FBError.invalidData }
-                guard let name = cargo.name else { throw FBError.invalidData }
-                guard let id = cargo.id else { throw FBError.invalidData }
-                guard let logo = cargo.logo else { throw FBError.invalidData }
-                guard let summaryDescription = cargo.summaryDescription else { throw FBError.invalidData}
-                guard let url = cargo.url else { throw FBError.invalidData}
-                guard let tags = cargo.tags else { throw FBError.invalidData }
-                guard let geoTags = cargo.geoTags else { throw FBError.invalidData }
-                let description = cargo.description
-                
-                #warning("Refactor")
-                
-                let charity = InfoCharity(name: name, id: id, logoUrl: logo, singleImpact: singleImpact, imageUrl: cargo.images, summaryDescription: summaryDescription, description: description, url: url, tags: tags, geoTags: geoTags)
-                
+                let charity = try decoder.decodeReceivedDataToInfoCharity(data: data)
                 completed(.success(charity))
                 return
             }catch{
