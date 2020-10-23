@@ -31,6 +31,10 @@ extension UIView {
     enum axis {
         case vertical, horizontal, custom(angle: CGFloat)
     }
+    
+    func removeGradientBackground(){
+        layer.sublayers?.filter { $0.name == "gradientLayer" }.forEach { $0.removeFromSuperlayer() }
+    }
 
     func setGradientBackgroundColor(colors: [UIColor], axis: axis, cornerRadius: CGFloat? = nil, apply: ((UIView) -> ())? = nil) {
         layer.sublayers?.filter { $0.name == "gradientLayer" }.forEach { $0.removeFromSuperlayer() }

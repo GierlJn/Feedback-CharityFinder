@@ -18,7 +18,13 @@ class CategoryButton: UIButton{
     
     override var isSelected: Bool {
         didSet {
-            backgroundColor = isSelected ? UIColor.buttonDarkBlueGradientEnd : UIColor.categoriesTransparentColor
+            //backgroundColor = isSelected ? UIColor.buttonDarkBlueGradientEnd : UIColor.categoriesTransparentColor
+            if(isSelected){
+                setGradientBackgroundColor(colors: [.hedaerViewGradientStart, .headerViewGradientEnd], axis: .custom(angle: CGFloat(90)))
+            }else{
+                removeGradientBackground()
+                backgroundColor = UIColor.categoriesTransparentColor
+            }
         }
     }
     
@@ -30,7 +36,8 @@ class CategoryButton: UIButton{
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        addShadow()
+        //addShadow()
+        //
     }
     
     required init?(coder: NSCoder) {
