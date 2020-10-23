@@ -10,8 +10,8 @@ import Foundation
 
 struct SearchResponse : Decodable {
 
-        let cargo : Cargo?
-        let success : Bool?
+        let cargo : Cargo
+        let success : Bool
 
         enum CodingKeys: String, CodingKey {
                 case cargo = "cargo"
@@ -20,15 +20,15 @@ struct SearchResponse : Decodable {
     
         init(from decoder: Decoder) throws {
                 let values = try decoder.container(keyedBy: CodingKeys.self)
-                cargo = try values.decodeIfPresent(Cargo.self, forKey: .cargo)
-                success = try values.decodeIfPresent(Bool.self, forKey: .success)
+                cargo = try values.decode(Cargo.self, forKey: .cargo)
+                success = try values.decode(Bool.self, forKey: .success)
         }
 
 }
 
 struct Cargo : Decodable {
     
-    let hits : [Hit]?
+    let hits : [Hit]
     let total : Int?
     
     
@@ -40,8 +40,8 @@ struct Cargo : Decodable {
     
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        total = try values.decodeIfPresent(Int.self, forKey: .total)
-        hits = try values.decodeIfPresent([Hit].self, forKey: .hits)
+        total = try values.decode(Int.self, forKey: .total)
+        hits = try values.decode([Hit].self, forKey: .hits)
         
     }
     

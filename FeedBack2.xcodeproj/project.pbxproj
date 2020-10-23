@@ -37,6 +37,7 @@
 		B9664EC12524834E00637BDF /* FavouritesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9664EC02524834E00637BDF /* FavouritesVC.swift */; };
 		B9664EC32524864900637BDF /* FBButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9664EC22524864900637BDF /* FBButton.swift */; };
 		B9664EC525248B1000637BDF /* CharityListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9664EC425248B1000637BDF /* CharityListVC.swift */; };
+		B970E95A2542C9F200241F4E /* JSONDecoder+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B970E9592542C9F200241F4E /* JSONDecoder+Ext.swift */; };
 		B971B23325305A0500660923 /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B971B23225305A0500660923 /* String+Ext.swift */; };
 		B971B23625305F2C00660923 /* Currrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = B971B23525305F2C00660923 /* Currrency.swift */; };
 		B971B23925306C2600660923 /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B971B23825306C2600660923 /* PersistenceManager.swift */; };
@@ -96,6 +97,7 @@
 		B9664EC02524834E00637BDF /* FavouritesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesVC.swift; sourceTree = "<group>"; };
 		B9664EC22524864900637BDF /* FBButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBButton.swift; sourceTree = "<group>"; };
 		B9664EC425248B1000637BDF /* CharityListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharityListVC.swift; sourceTree = "<group>"; };
+		B970E9592542C9F200241F4E /* JSONDecoder+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONDecoder+Ext.swift"; sourceTree = "<group>"; };
 		B971B23225305A0500660923 /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
 		B971B23525305F2C00660923 /* Currrency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currrency.swift; sourceTree = "<group>"; };
 		B971B23825306C2600660923 /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
@@ -231,6 +233,7 @@
 				B9A57BD6252C58920034ADE6 /* UIViewController+Ext.swift */,
 				B971B23225305A0500660923 /* String+Ext.swift */,
 				B904D32B25401FD60071E6CA /* UITableView+Ext.swift */,
+				B970E9592542C9F200241F4E /* JSONDecoder+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -411,6 +414,7 @@
 				B956D495252F114C00F6E0D6 /* DonationStatusBar.swift in Sources */,
 				B97AAFF82531BF4C00FCBC28 /* FBTextLabel.swift in Sources */,
 				B9664EC32524864900637BDF /* FBButton.swift in Sources */,
+				B970E95A2542C9F200241F4E /* JSONDecoder+Ext.swift in Sources */,
 				B9664EC525248B1000637BDF /* CharityListVC.swift in Sources */,
 				B93BA92C25385C45006A08BE /* Categories.swift in Sources */,
 				B9273CDD252746F700FE7155 /* ImpactProject.swift in Sources */,

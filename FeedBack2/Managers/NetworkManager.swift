@@ -38,8 +38,10 @@ class NetworkManager{
             }
             do{
                 let decoder = JSONDecoder()
-                let rawServerResponse = try decoder.decode(SearchResponse.self, from: data)
-                completed(.success(try self.decodeRawServerResponse(rawServerResponse)))
+//                let rawServerResponse = try decoder.decode(SearchResponse.self, from: data)
+                let charities = try decoder.decodeReceivedCharitiyDataToCharities(data: data)
+                
+                completed(.success(charities))
                 return
             }catch{
                 completed(.failure(.invalidData))
@@ -98,38 +100,7 @@ class NetworkManager{
         task.resume()
     }
     
-    private func decodeRawServerResponse(_ rawServerResponse: SearchResponse) throws -> [Charity] {
-        guard let cargo = rawServerResponse.cargo else { throw FBError.invalidData }
-        guard let hits = cargo.hits else { throw FBError.invalidData }
-        var charities = [Charity]()
-        for hit in hits {
-            var charityOutputs = [Output]()
-            var charityMainOutput: Output?
-            let name = hit.displayName ?? hit.name
-            if let projects = hit.projects{
-                for project in projects{
-                    if var projectOutputs = project.outputs{
-                        projectOutputs.removeAll(where: {$0.costPerBeneficiary == nil || $0.name == nil})
-                        for output in projectOutputs{
-                            if let value = output.costPerBeneficiary?.value{
-                                charityOutputs.append(output)
-                                if(value > charityMainOutput?.costPerBeneficiary!.value ?? 0.0){
-                                    charityMainOutput = output
-                                }
-                            }
-                        }
-                    }
-                }
-                
-            }
-            if(charityMainOutput != nil && name != nil && hit.id != nil && hit.logo != nil && hit.url != nil){
-                #warning("refactor")
-                let charity = Charity(name: name!, id: hit.id!, logoUrl: hit.logo!, mainOutput: charityMainOutput!, outputs: charityOutputs, url: hit.url!, impactEstimation: hit.estimatedImpact)
-                charities.append(charity)
-            }
-        }
-        return charities
-    }
+    
     
     func downloadImage(urlString: String, completed: @escaping(Result<UIImage, FBError>) -> Void){
         guard let url = URL(string: urlString) else {
