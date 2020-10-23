@@ -38,6 +38,7 @@
 		B9664EC32524864900637BDF /* FBButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9664EC22524864900637BDF /* FBButton.swift */; };
 		B9664EC525248B1000637BDF /* CharityListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9664EC425248B1000637BDF /* CharityListVC.swift */; };
 		B970E95A2542C9F200241F4E /* JSONDecoder+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B970E9592542C9F200241F4E /* JSONDecoder+Ext.swift */; };
+		B970E95F2542E41F00241F4E /* AnimatedGradientView in Frameworks */ = {isa = PBXBuildFile; productRef = B970E95E2542E41F00241F4E /* AnimatedGradientView */; };
 		B971B23325305A0500660923 /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B971B23225305A0500660923 /* String+Ext.swift */; };
 		B971B23625305F2C00660923 /* Currrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = B971B23525305F2C00660923 /* Currrency.swift */; };
 		B971B23925306C2600660923 /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B971B23825306C2600660923 /* PersistenceManager.swift */; };
@@ -129,6 +130,7 @@
 			files = (
 				B9A1C0F5252B1D48004E3AEE /* SnapKit in Frameworks */,
 				B9A1C0FF252B4CD5004E3AEE /* SwiftSVG in Frameworks */,
+				B970E95F2542E41F00241F4E /* AnimatedGradientView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -319,6 +321,7 @@
 			packageProductDependencies = (
 				B9A1C0F4252B1D48004E3AEE /* SnapKit */,
 				B9A1C0FE252B4CD5004E3AEE /* SwiftSVG */,
+				B970E95E2542E41F00241F4E /* AnimatedGradientView */,
 			);
 			productName = FeedBack2;
 			productReference = B9664EA525247C9500637BDF /* FeedBack2.app */;
@@ -351,6 +354,7 @@
 			packageReferences = (
 				B9A1C0F3252B1D48004E3AEE /* XCRemoteSwiftPackageReference "SnapKit" */,
 				B9A1C0FD252B4CD5004E3AEE /* XCRemoteSwiftPackageReference "SwiftSVG" */,
+				B970E95D2542E41F00241F4E /* XCRemoteSwiftPackageReference "AnimatedGradientView" */,
 			);
 			productRefGroup = B9664EA625247C9500637BDF /* Products */;
 			projectDirPath = "";
@@ -622,6 +626,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		B970E95D2542E41F00241F4E /* XCRemoteSwiftPackageReference "AnimatedGradientView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/rwbutler/AnimatedGradientView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 		B9A1C0F3252B1D48004E3AEE /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit";
@@ -641,6 +653,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		B970E95E2542E41F00241F4E /* AnimatedGradientView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B970E95D2542E41F00241F4E /* XCRemoteSwiftPackageReference "AnimatedGradientView" */;
+			productName = AnimatedGradientView;
+		};
 		B9A1C0F4252B1D48004E3AEE /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = B9A1C0F3252B1D48004E3AEE /* XCRemoteSwiftPackageReference "SnapKit" */;

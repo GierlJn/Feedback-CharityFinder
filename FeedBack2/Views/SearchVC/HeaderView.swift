@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import AnimatedGradientView
 
 class SearchHeaderView: UIView{
     
+    let backgroundView = AnimatedGradientView()
     let label = FBTitleLabel(textAlignment: .left)
     
     let searchStackView = UIStackView()
@@ -27,9 +29,17 @@ class SearchHeaderView: UIView{
     
     
     private func configure(){
-        //setGradientBackgroundColor(colors: [.buttonDarkBlueGradientStart, .buttonDarkBlueGradientEnd], axis: .horizontal)
+        configureBackgroundView()
         configureLabel()
         configureSearchView()
+    }
+    
+    fileprivate func configureBackgroundView(){
+        addSubview(backgroundView)
+        backgroundView.pinToEdges(of: self)
+        backgroundView.colors = [[UIColor.hedaerViewGradientStart, UIColor.headerViewGradientEnd]]
+        backgroundView.direction = .right
+        backgroundView.type = .conic
     }
     
     fileprivate func configureLabel() {

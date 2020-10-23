@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 protocol SearchVCDelegate{
     func categoryChanged(category: Category)
 }
@@ -30,6 +31,7 @@ class SearchVC: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         configureNavigationBar()
         configureHeaderView()
         configureCategoriesView()
@@ -49,7 +51,8 @@ class SearchVC: UIViewController{
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         view.setGradientBackgroundColor(colors: [.lightBlueBackgroundGradientStart, .lightBlueBackgroundGradientEnd], axis: .horizontal)
-        headerView.setGradientBackgroundColor(colors: [.buttonDarkBlueGradientStart, .buttonDarkBlueGradientEnd], axis: .horizontal)
+        //headerView.setGradientBackgroundColor(colors: [.buttonDarkBlueGradientStart, .buttonDarkBlueGradientEnd], axis: .horizontal)
+        
     }
 }
 
@@ -62,7 +65,7 @@ extension SearchVC{
             maker.top.equalTo(view.snp.top)
             maker.left.equalTo(view.snp.left)
             maker.right.equalTo(view.snp.right)
-            maker.height.equalTo(160)
+            maker.height.equalTo(200)
         }
     }
     
