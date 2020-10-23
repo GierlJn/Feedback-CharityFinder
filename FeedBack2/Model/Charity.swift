@@ -11,10 +11,8 @@ import Foundation
 struct Charity: Hashable, Codable{
     var name: String
     var id: String
-    var logoUrl: String
-    var mainOutput: Output
-    var outputs: [Output]
-    var url: String
+    var logoUrl: String?
+    var url: String?
     var impactEstimation: String?
     
     

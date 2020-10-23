@@ -49,7 +49,7 @@ struct Cargo : Decodable {
 
 struct Hit : Decodable {
     
-    let id : String?
+    let id : String
     let displayName : String?
     let logo : String?
     let name : String?
@@ -69,7 +69,7 @@ struct Hit : Decodable {
     
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        id = try values.decodeIfPresent(String.self, forKey: .id)
+        id = try values.decode(String.self, forKey: .id)
         displayName = try values.decodeIfPresent(String.self, forKey: .displayName)
         logo = try values.decodeIfPresent(String.self, forKey: .logo)
         name = try values.decodeIfPresent(String.self, forKey: .name)

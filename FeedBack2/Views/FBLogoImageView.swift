@@ -31,7 +31,13 @@ class FBLogoImageView: UIImageView{
         clipsToBounds = true
     }
     
-    func setLogoImage(logoUrl: String){
+    func setLogoImage(logoUrl: String?){
+        guard let logoUrl = logoUrl else {
+            DispatchQueue.main.async {
+                self.image = Images.image_placeholder!.withAlignmentRectInsets(UIEdgeInsets(top: self.insetValue, left: self.insetValue, bottom: self.insetValue, right: self.insetValue))
+            }
+            return
+        }
         let logoImage = ImageCache.shared.getImage(for: logoUrl)
         if(logoImage != nil){
             self.image = logoImage!.withAlignmentRectInsets(UIEdgeInsets(top: self.insetValue, left: self.insetValue, bottom: self.insetValue, right: self.insetValue))

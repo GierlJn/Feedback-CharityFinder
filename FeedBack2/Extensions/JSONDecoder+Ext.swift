@@ -25,30 +25,11 @@ extension JSONDecoder{
         let hits = cargo.hits
         
         for hit in hits {
-            var outputsForCharity = [Output]()
-            var charityMainOutput: Output?
-            let name = hit.displayName ?? hit.name
-            if let projects = hit.projects{
-                for project in projects{
-                    if var projectOutputs = project.outputs{
-                        projectOutputs.removeAll(where: {$0.costPerBeneficiary == nil || $0.name == nil})
-                        for output in projectOutputs{
-                            if let value = output.costPerBeneficiary?.value{
-                                outputsForCharity.append(output)
-                                if(value > charityMainOutput?.costPerBeneficiary!.value ?? 0.0){
-                                    charityMainOutput = output
-                                }
-                            }
-                        }
-                    }
-                }
-                
-            }
-            if(charityMainOutput != nil && name != nil && hit.id != nil && hit.logo != nil && hit.url != nil){
-                #warning("refactor")
-                let charity = Charity(name: name!, id: hit.id!, logoUrl: hit.logo!, mainOutput: charityMainOutput!, outputs: outputsForCharity, url: hit.url!, impactEstimation: hit.estimatedImpact)
+            if let name = hit.displayName ?? hit.name{
+                let charity = Charity(name: name, id: hit.id, logoUrl: hit.logo, url: hit.url)
                 charities.append(charity)
             }
+            
         }
         return charities
     }

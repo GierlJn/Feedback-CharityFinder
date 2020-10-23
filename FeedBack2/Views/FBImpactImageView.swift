@@ -45,6 +45,7 @@ class FBImpactImageView: UIImageView{
                 if(error != nil){
                     DispatchQueue.main.async {
                         self.image = Images.image_placeholder
+                        completed(nil)
                     }
                 }else {
                     completed(error)
