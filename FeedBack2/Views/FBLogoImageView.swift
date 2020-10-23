@@ -10,6 +10,8 @@ import UIKit
 
 class FBLogoImageView: UIImageView{
     
+    let insetValue: CGFloat = -16
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
@@ -21,6 +23,10 @@ class FBLogoImageView: UIImageView{
     
     private func configure(){
         translatesAutoresizingMaskIntoConstraints = false
+        contentMode = .scaleAspectFit
+    }
+    
+    func setRoundCorners(){
         layer.cornerRadius = 16
         clipsToBounds = true
     }
@@ -28,7 +34,7 @@ class FBLogoImageView: UIImageView{
     func setLogoImage(logoUrl: String){
         let logoImage = ImageCache.shared.getImage(for: logoUrl)
         if(logoImage != nil){
-            image = logoImage
+            self.image = logoImage!.withAlignmentRectInsets(UIEdgeInsets(top: self.insetValue, left: self.insetValue, bottom: self.insetValue, right: self.insetValue))
         }else{
             downloadLogoImage(logoUrl)
         }
@@ -42,12 +48,13 @@ class FBLogoImageView: UIImageView{
             case .failure(let error):
                 print(error)
                 DispatchQueue.main.async {
-                    self.image = Images.logo_placeholder
+                    self.image = Images.image_placeholder!.withAlignmentRectInsets(UIEdgeInsets(top: self.insetValue, left: self.insetValue, bottom: self.insetValue, right: self.insetValue))
                 }
             case .success(let logoImage):
                 ImageCache.shared.setImage(image: logoImage, key: logoUrl)
                 DispatchQueue.main.async {
-                    self.image = logoImage
+                    self.image = logoImage.withAlignmentRectInsets(UIEdgeInsets(top: self.insetValue, left: self.insetValue, bottom: self.insetValue, right: self.insetValue))
+                   
                 }
             }
         }

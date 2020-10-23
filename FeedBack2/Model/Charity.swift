@@ -16,4 +16,6 @@ struct Charity: Hashable, Codable{
     var outputs: [Output]
     var url: String
     var impactEstimation: String?
+    
+    
 }

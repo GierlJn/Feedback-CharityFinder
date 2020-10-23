@@ -26,13 +26,17 @@ class SearchVC: UIViewController{
     let showcaseVC = ShowCaseVC()
     var searchCategory = Categories.all.category
     
+    var copyRightLabel = UILabel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavigationBar()
         configureHeaderView()
         configureCategoriesView()
+        configureCopyRightLabel()
         configureContentView()
         configureShowCaseVC()
+        
     }
     
     private func configureNavigationBar(){
@@ -73,6 +77,24 @@ extension SearchVC{
         }
     }
     
+    private func configureCopyRightLabel(){
+        view.addSubview(copyRightLabel)
+        copyRightLabel.text = "Data provided by SoGive Ltd"
+        copyRightLabel.textAlignment = .center
+        copyRightLabel.font = UIFont.preferredFont(forTextStyle: .footnote)
+        copyRightLabel.adjustsFontSizeToFitWidth = true
+        copyRightLabel.minimumScaleFactor = 0.6
+        copyRightLabel.lineBreakMode = .byTruncatingTail
+        copyRightLabel.textColor = .secondaryLabel
+        
+        copyRightLabel.snp.makeConstraints { (maker) in
+            maker.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-5)
+            maker.left.equalTo(view.snp.left)
+            maker.right.equalTo(view.snp.right)
+            maker.height.equalTo(20)
+        }
+    }
+    
     private func configureShowCaseVC(){
         add(childVC: showcaseVC, to: showCaseView)
         contentView.addSubview(showCaseView)
@@ -83,7 +105,7 @@ extension SearchVC{
         view.addSubview(contentView)
         contentView.snp.makeConstraints { (maker) in
             maker.top.equalTo(categoriesView.snp.bottom).offset(10)
-            maker.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+            maker.bottom.equalTo(copyRightLabel.snp.top)
             maker.left.equalTo(view.snp.left)
             maker.right.equalTo(view.snp.right)
         }

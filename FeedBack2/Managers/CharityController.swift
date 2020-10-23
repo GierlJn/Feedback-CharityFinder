@@ -10,18 +10,11 @@ import UIKit
 
 class CharityController {
     
-    struct CharityC: Hashable {
-        let title: String
-        let image: UIImage
-        let identifier = UUID()
-        func hash(into hasher: inout Hasher) {
-            hasher.combine(identifier)
-        }
-    }
+    let networkManager = NetworkManager()
     
     struct CharityCollection: Hashable {
         let title: String
-        let videos: [CharityC]
+        let charities: [Charity]
 
         let identifier = UUID()
         func hash(into hasher: inout Hasher) {
@@ -32,20 +25,31 @@ class CharityController {
     var collections: [CharityCollection] {
         return _collections
     }
-
-    init() {
-        generateCollections()
-    }
+    
     fileprivate var _collections = [CharityCollection]()
+    
+    typealias Handler = (Result<[Charity], FBError>) -> Void
+    
+    func loadHighImpactCharities( completed: @escaping Handler){
+        networkManager.getCharities(searchParameter: "high") { [weak self] (result) in
+            guard let self = self else { return }
+            switch result{
+            case .failure(let error):
+                print(error)
+                completed(.failure(error))
+            case .success(let charities):
+                self.generateCharityCollections(for: charities)
+                completed(.success(charities))
+            }
+        }
+    }
     
     
 }
 
 
 extension CharityController {
-    func generateCollections(){
-        _collections = [ CharityCollection(title: "High impact",
-                                           videos: [ CharityC(title: "Anti Malaria", image: Images.logo_placeholder!), CharityC(title: "Anti IV", image: Images.logo_placeholder!), CharityC(title: "Anti Aids", image: Images.logo_placeholder!)])]
-        
+    func generateCharityCollections(for charities: [Charity]){
+        _collections.append(CharityCollection(title: "High impact", charities: charities))
     }
 }

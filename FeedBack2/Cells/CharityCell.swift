@@ -69,6 +69,7 @@ class CharityCell: UITableViewCell{
     
     private func configureLogoImageView(){
         contentView.addSubview(logoImageView)
+        logoImageView.setRoundCorners()
         logoImageView.snp.makeConstraints { (maker) in
             maker.size.equalTo(80)
             maker.left.equalTo(padding)

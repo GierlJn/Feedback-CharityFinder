@@ -11,8 +11,8 @@ import UIKit
 class ExploreCharityCell: UICollectionViewCell{
     static let reuseIdentifier = "explore-charity-cell"
     
-    let imageView = UIImageView()
-    let titleLabel = FBTitleLabel()
+    let imageView = FBLogoImageView(frame: .zero)
+    let titleLabel = FBTitleLabel(textAlignment: .center)
     let labelView = UIView()
     
     override init(frame: CGRect) {
@@ -23,6 +23,7 @@ class ExploreCharityCell: UICollectionViewCell{
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
 }
 
 extension ExploreCharityCell {
@@ -42,8 +43,6 @@ extension ExploreCharityCell {
             maker.right.equalTo(contentView.snp.right)
             maker.bottom.equalTo(contentView.snp.bottom)
         }
-        labelView.backgroundColor = .white
-        
         
         labelView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { (maker) in
@@ -52,5 +51,8 @@ extension ExploreCharityCell {
             maker.right.equalTo(labelView.snp.right).offset(-spacing)
             maker.bottom.equalTo(labelView.snp.bottom).offset(-spacing)
         }
+        
+
+        labelView.setGradientBackgroundColor(colors: [.buttonDarkBlueGradientStart, .buttonDarkBlueGradientEnd], axis: .horizontal)
     }
 }

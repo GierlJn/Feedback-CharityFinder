@@ -12,8 +12,8 @@ class ShowCaseVC: UIViewController{
     
     let charityController = CharityController()
     var collectionView: UICollectionView! = nil
-    var dataSource: UICollectionViewDiffableDataSource<CharityController.CharityCollection, CharityController.CharityC>! = nil
-    var currentSnapshot: NSDiffableDataSourceSnapshot<CharityController.CharityCollection, CharityController.CharityC>! = nil
+    var dataSource: UICollectionViewDiffableDataSource<CharityController.CharityCollection, Charity>! = nil
+    var currentSnapshot: NSDiffableDataSourceSnapshot<CharityController.CharityCollection, Charity>! = nil
     static let titleElementKind = "title-element-kind"
     
     let networkManager = NetworkManager()
@@ -22,7 +22,16 @@ class ShowCaseVC: UIViewController{
         super.viewDidLoad()
         configureHierarchy()
         configureDataSource()
-        getCharities()
+        charityController.loadHighImpactCharities { [weak self] (result) in
+            guard let self = self else { return }
+            
+            switch result{
+            case .failure(let error):
+                print(error)
+            case .success(let charities):
+                self.applyCurrentSnapshot()
+            }
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -79,16 +88,17 @@ extension ShowCaseVC {
     func configureDataSource() {
         
         let cellRegistration = UICollectionView.CellRegistration
-        <ExploreCharityCell, CharityController.CharityC> { (cell, indexPath, charity) in
-            cell.titleLabel.text = charity.title
-            cell.imageView.image = charity.image
+        <ExploreCharityCell, Charity> { (cell, indexPath, charity) in
+            cell.titleLabel.text = charity.name
+            cell.imageView.setLogoImage(logoUrl: charity.logoUrl)
+            cell.backgroundColor = .white
             cell.layer.cornerRadius = 8
             cell.clipsToBounds = true
         }
         
         dataSource = UICollectionViewDiffableDataSource
-        <CharityController.CharityCollection, CharityController.CharityC>(collectionView: collectionView) {
-            (collectionView: UICollectionView, indexPath: IndexPath, charity: CharityController.CharityC) -> UICollectionViewCell? in
+        <CharityController.CharityCollection, Charity>(collectionView: collectionView) {
+            (collectionView: UICollectionView, indexPath: IndexPath, charity: Charity) -> UICollectionViewCell? in
             // Return the cell.
             return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: charity)
         }
@@ -108,19 +118,20 @@ extension ShowCaseVC {
                 using: supplementaryRegistration, for: index)
         }
         
+    }
+    
+    func applyCurrentSnapshot() {
         currentSnapshot = NSDiffableDataSourceSnapshot
-        <CharityController.CharityCollection, CharityController.CharityC>()
+        <CharityController.CharityCollection, Charity>()
         charityController.collections.forEach {
             let collection = $0
             currentSnapshot.appendSections([collection])
-            currentSnapshot.appendItems(collection.videos)
+            currentSnapshot.appendItems(collection.charities)
         }
         dataSource.apply(currentSnapshot, animatingDifferences: false)
     }
     
-    func getCharities(){
-        //networkManager.getCharities(searchParameter: <#T##String#>, completed: <#T##NetworkManager.Handler##NetworkManager.Handler##(Result<[Charity], FBError>) -> Void#>)
-    }
+    
 }
 
 class TitleSupplementaryView: UICollectionReusableView {
