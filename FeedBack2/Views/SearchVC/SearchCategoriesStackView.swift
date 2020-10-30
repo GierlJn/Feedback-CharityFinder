@@ -8,23 +8,24 @@
 
 import UIKit
 
-protocol SearchCategoriesDelegate{
-    func categoryHasChanged(category: Category)
-}
 
 class SearchCategoriesStackView: UIView, CategoryButtonDelegate{
 
     var scrollView = UIScrollView()
     var stackView = UIStackView()
     var categories = Categories.allCategories
-    var delegate: SearchCategoriesDelegate?
+    
     var searchVCdelegate: SearchVCDelegate?
     
     var categoryButtons = [CategoryButton]()
-    var selectedCategory = Categories.all.category {
+    var selectedCategory: Category? {
         didSet {
-            delegate?.categoryHasChanged(category: selectedCategory)
-            searchVCdelegate?.categoryChanged(category: selectedCategory)
+            if(selectedCategory != nil){
+                searchVCdelegate?.categoryChanged(category: selectedCategory!)
+            }else{
+                updateCategorySelection()
+            }
+            
         }
     }
     
@@ -66,10 +67,16 @@ class SearchCategoriesStackView: UIView, CategoryButtonDelegate{
     
     func categoryButtonPressed(category: Category) {
         self.selectedCategory = category
-        setButtonsNotSelected()
+        updateCategorySelection()
     }
     
-    private func setButtonsNotSelected() {
+    private func clearAllSelections(){
+        for button in categoryButtons{
+            button.isSelected = false
+        }
+    }
+    
+    private func clearCategoriesExcept(category: Category){
         let selectedButton = categoryButtons.first { $0.category == selectedCategory }
         for button in categoryButtons{
             if(button != selectedButton){
@@ -77,4 +84,14 @@ class SearchCategoriesStackView: UIView, CategoryButtonDelegate{
             }
         }
     }
+    
+    func updateCategorySelection() {
+        if let selectedCategory = selectedCategory{
+            clearCategoriesExcept(category: selectedCategory)
+        }else{
+            clearAllSelections()
+        }
+        
+    }
+    
 }

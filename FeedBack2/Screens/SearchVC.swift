@@ -16,7 +16,6 @@ protocol SearchVCDelegate{
 
 class SearchVC: UIViewController{
     
-    let textfield = FBTextField()
     let headerView = SearchHeaderView()
     let categoriesView = SearchCategoriesStackView()
     
@@ -26,7 +25,7 @@ class SearchVC: UIViewController{
     
     let charityListVC = CharityListVC()
     let showcaseVC = ShowCaseVC()
-    var searchCategory = Categories.all.category
+    var searchCategory: Category?
     
     var copyRightLabel = UILabel()
     
@@ -137,6 +136,7 @@ extension SearchVC: SearchVCDelegate{
             configureListVC()
 
         }
+        headerView.textfield.clearTextField()
         charityListVC.getCharities(searchParameter: category.parameter)
     }
     
@@ -146,6 +146,8 @@ extension SearchVC: SearchVCDelegate{
             configureListVC()
 
         }
+        categoriesView.selectedCategory = nil
+        categoriesView.updateCategorySelection()
         charityListVC.getCharities(searchParameter: "q=\(input)")
     }
 }

@@ -56,6 +56,15 @@ class TagLabelScrollView: UIView{
             textLabel.backgroundColor = color
             stackView.addArrangedSubview(textLabel)
         }
+        
+        let fillerUILabel = UILabel()
+        fillerUILabel.backgroundColor = .init(white: 1, alpha: 1)
+        fillerUILabel.text = " "
+        fillerUILabel.snp.makeConstraints { (maker) in
+            maker.width.equalTo(100)
+        }
+        stackView.addArrangedSubview(fillerUILabel)
+        
     }
     
     private func seperateTags(tags: String)->[String]{

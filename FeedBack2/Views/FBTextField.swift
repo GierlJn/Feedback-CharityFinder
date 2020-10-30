@@ -51,4 +51,9 @@ class FBTextField: UITextField{
         attributedText.append(searchString)
         attributedPlaceholder = attributedText
     }
+    
+    func clearTextField(){
+        endEditing(true)
+        text = nil
+    }
 }
