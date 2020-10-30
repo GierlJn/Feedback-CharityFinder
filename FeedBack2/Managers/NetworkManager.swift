@@ -11,15 +11,16 @@ import SwiftSVG
 
 class NetworkManager{
     
-    typealias Handler = (Result<[Charity], FBError>) -> Void
-    var baseSearchUrl = "https://app.sogive.org/search.json?q="
+    var baseSearchUrl = "https://app.sogive.org/search.json?"
     var baseCharityInfoUrl = "https://app.sogive.org/charity/"
     
-    func getCharities(searchParameter: String, completed: @escaping Handler){
-        guard let url = URL(string: "\(baseSearchUrl)\(searchParameter)") else {
+    func getCharities(searchParameter: String, size: Int = 8, completed: @escaping (Result<[Charity], FBError>) -> Void){
+        guard var url = URL(string: "\(baseSearchUrl)\(searchParameter)") else {
             completed(.failure(.unableToConnect))
             return
         }
+        url.appendPathComponent("&size=\(size)")
+        
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             if error != nil{
                 completed(.failure(.invalidData))
@@ -38,7 +39,6 @@ class NetworkManager{
             }
             do{
                 let decoder = JSONDecoder()
-//                let rawServerResponse = try decoder.decode(SearchResponse.self, from: data)
                 let charities = try decoder.decodeReceivedCharitiyDataToCharities(data: data)
                 
                 completed(.success(charities))
@@ -93,8 +93,6 @@ class NetworkManager{
             return
         }
         
-        
-        
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             guard error == nil else {
                 completed(.failure(.invalidResponse))
@@ -109,14 +107,10 @@ class NetworkManager{
                 return
             }
             
-            
             guard let image = UIImage(data: data) else {
                 completed(.failure(.invalidData))
                 return
             }
-            
-            
-            
             
             completed(.success(image))
         }

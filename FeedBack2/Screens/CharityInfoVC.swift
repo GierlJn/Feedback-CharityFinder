@@ -232,7 +232,7 @@ class CharityInfoVC: UIViewController{
 
 extension CharityInfoVC: DonationBarViewDelegate{
     func donationButtonPressed() {
-        guard let url = URL(string: charity.url!) else {
+        guard let url = URL(string: charity.url) else {
             print("error")
             #warning("handle error")
             return

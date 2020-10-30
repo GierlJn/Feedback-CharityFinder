@@ -49,6 +49,7 @@ class TagView: UIView{
     
     private func updateUI(){
         for tag in tags{
+            if(tag.isEmpty){return}
             let textLabel = TagLabel()
             textLabel.text = tag
             textLabel.sizeToFit()

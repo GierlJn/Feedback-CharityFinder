@@ -64,10 +64,9 @@ class SearchHeaderView: UIView{
             maker.height.equalTo(50)
             maker.centerY.equalTo(snp.bottom)
         }
-        
-        searchStackView.addArrangedSubview(textfield)
+
         searchStackView.spacing = 8
-        
+        searchStackView.addArrangedSubview(textfield)
         searchStackView.addArrangedSubview(searchButton)
         searchButton.snp.makeConstraints { (maker) in
             maker.size.equalTo(50)
@@ -80,6 +79,18 @@ class SearchHeaderView: UIView{
         searchButton.tintColor = .white
 
     }
+    
+    func configureTextField(){
+        textfield.delegate = self
+    }
 
     
+}
+
+
+extension SearchHeaderView: UITextFieldDelegate{
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        //
+        return true
+    }
 }

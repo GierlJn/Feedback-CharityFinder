@@ -36,7 +36,7 @@ class FBTextField: UITextField{
         
         backgroundColor = .tertiarySystemBackground
         autocorrectionType = .no
-        returnKeyType = .go
+        returnKeyType = .search
         clearButtonMode = .whileEditing
         
         configurePlaceholder()

@@ -38,7 +38,9 @@ extension JSONDecoder{
         
         for hit in hits {
             if let name = hit.displayName ?? hit.name{
-                let charity = Charity(name: name, id: hit.id, logoUrl: hit.logo, url: hit.url)
+                guard let logoUrl = hit.logo else { continue }
+                guard let url = hit.url else { continue }
+                let charity = Charity(name: name, id: hit.id, logoUrl: logoUrl, url: url)
                 charities.append(charity)
             }
             

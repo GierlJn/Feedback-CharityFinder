@@ -31,7 +31,7 @@ class CharityController {
     typealias Handler = (Result<[Charity], FBError>) -> Void
     
     func loadHighImpactCharities( completed: @escaping Handler){
-        networkManager.getCharities(searchParameter: "high") { [weak self] (result) in
+        networkManager.getCharities(searchParameter: "impact=high", size: 8) { [weak self] (result) in
             guard let self = self else { return }
             switch result{
             case .failure(let error):
@@ -45,7 +45,7 @@ class CharityController {
     }
     
     func loadSecoundaryCharities( completed: @escaping Handler){
-        networkManager.getCharities(searchParameter: "animals") { [weak self] (result) in
+        networkManager.getCharities(searchParameter: "q=animals", size: 8) { [weak self] (result) in
             guard let self = self else { return }
             switch result{
             case .failure(let error):

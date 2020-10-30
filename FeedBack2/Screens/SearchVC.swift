@@ -11,6 +11,7 @@ import UIKit
 
 protocol SearchVCDelegate{
     func categoryChanged(category: Category)
+    func searchEntered(input: String)
 }
 
 class SearchVC: UIViewController{
@@ -139,9 +140,9 @@ extension SearchVC: SearchVCDelegate{
         charityListVC.getCharities(searchParameter: category.parameter)
     }
     
-    
-    
-    
+    func searchEntered(input: String){
+        
+    }
 }
 
 
