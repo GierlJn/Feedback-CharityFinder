@@ -24,6 +24,7 @@ class FBLogoImageView: UIImageView{
     private func configure(){
         translatesAutoresizingMaskIntoConstraints = false
         contentMode = .scaleAspectFit
+        self.image = Images.image_placeholder!.withAlignmentRectInsets(UIEdgeInsets(top: self.insetValue, left: self.insetValue, bottom: self.insetValue, right: self.insetValue))
     }
     
     func setRoundCorners(){
@@ -32,18 +33,13 @@ class FBLogoImageView: UIImageView{
     }
     
     func setLogoImage(logoUrl: String?){
-        guard let logoUrl = logoUrl else {
-            DispatchQueue.main.async {
-                self.image = Images.image_placeholder!.withAlignmentRectInsets(UIEdgeInsets(top: self.insetValue, left: self.insetValue, bottom: self.insetValue, right: self.insetValue))
-            }
+        guard let logoUrl = logoUrl else { return }
+        guard let logoImage = ImageCache.shared.getImage(for: logoUrl) else{
+            downloadLogoImage(logoUrl)
             return
         }
-        let logoImage = ImageCache.shared.getImage(for: logoUrl)
-        if(logoImage != nil){
-            self.image = logoImage!.withAlignmentRectInsets(UIEdgeInsets(top: self.insetValue, left: self.insetValue, bottom: self.insetValue, right: self.insetValue))
-        }else{
-            downloadLogoImage(logoUrl)
-        }
+        self.image = logoImage.withAlignmentRectInsets(UIEdgeInsets(top: self.insetValue, left: self.insetValue, bottom: self.insetValue, right: self.insetValue))
+
     }
     
     private func downloadLogoImage(_ logoUrl: String) {
@@ -57,11 +53,10 @@ class FBLogoImageView: UIImageView{
                     self.image = Images.image_placeholder!.withAlignmentRectInsets(UIEdgeInsets(top: self.insetValue, left: self.insetValue, bottom: self.insetValue, right: self.insetValue))
                 }
             case .success(let logoImage):
-                ImageCache.shared.setImage(image: logoImage, key: logoUrl)
                 DispatchQueue.main.async {
                     self.image = logoImage.withAlignmentRectInsets(UIEdgeInsets(top: self.insetValue, left: self.insetValue, bottom: self.insetValue, right: self.insetValue))
-                   
                 }
+                ImageCache.shared.setImage(image: logoImage, key: logoUrl)
             }
         }
     }

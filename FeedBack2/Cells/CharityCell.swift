@@ -32,19 +32,11 @@ class CharityCell: UITableViewCell{
     
     func set(charity: Charity){
         titleLabel.text = charity.name
-        //let value = charity.mainOutput.costPerBeneficiary?.value
-        //let formatted = String(format: "%.2f", value!)
-        //let valueLabelText = "1 \(charity.mainOutput.name?.formatOutputName(with: PersistenceManager.retrieveCurrency()) ?? "")"
-        //let text = "\(valueLabelText ) for every \(formatted)\(PersistenceManager.retrieveCurrency().symbol) donated"
-        //impactDescriptionLabel.text = "\(charity.name)"
         logoImageView.setLogoImage(logoUrl: charity.logoUrl)
     }
     
     private func configureLabels(){
         contentView.addSubview(titleLabel)
-        //contentView.addSubview(impactDescriptionLabel)
-
-        //impactDescriptionLabel.numberOfLines = 2
         
         titleLabel.snp.makeConstraints { (maker) in
             maker.centerY.equalTo(snp.centerY)
@@ -52,13 +44,6 @@ class CharityCell: UITableViewCell{
             maker.right.equalTo(-padding)
             maker.height.equalTo(40)
         }
-        
-//        impactDescriptionLabel.snp.makeConstraints { (maker) in
-//            maker.top.equalTo(titleLabel.snp.bottom)
-//            maker.left.equalTo(logoImageView.snp.right).offset(15)
-//            maker.height.equalTo(50)
-//            maker.right.equalTo(-padding)
-//        }
     }
     
     private func configureButton(){

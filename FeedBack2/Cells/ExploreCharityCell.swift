@@ -31,14 +31,9 @@ extension ExploreCharityCell {
         addSubviews(imageView, labelView)
         
         let spacing = 10
-        imageView.snp.makeConstraints { (maker) in
-            maker.top.equalTo(contentView.snp.top)
-            maker.left.equalTo(contentView.snp.left)
-            maker.right.equalTo(contentView.snp.right)
-        }
-        
+
         labelView.snp.makeConstraints { (maker) in
-            maker.top.equalTo(imageView.snp.bottom)
+            maker.height.equalTo(50)
             maker.left.equalTo(contentView.snp.left)
             maker.right.equalTo(contentView.snp.right)
             maker.bottom.equalTo(contentView.snp.bottom)
@@ -51,6 +46,14 @@ extension ExploreCharityCell {
             maker.right.equalTo(labelView.snp.right).offset(-spacing)
             maker.bottom.equalTo(labelView.snp.bottom).offset(-spacing)
         }
+        
+        imageView.snp.makeConstraints { (maker) in
+            maker.top.equalTo(contentView.snp.top)
+            maker.left.equalTo(contentView.snp.left)
+            maker.right.equalTo(contentView.snp.right)
+            maker.bottom.equalTo(labelView.snp.top)
+        }
+        
         
 
         labelView.setGradientBackgroundColor(colors: [.buttonDarkBlueGradientStart, .buttonDarkBlueGradientEnd], axis: .horizontal)
