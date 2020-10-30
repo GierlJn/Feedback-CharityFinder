@@ -18,6 +18,8 @@ class SearchHeaderView: UIView{
     let textfield = FBTextField()
     let searchButton = UIButton()
     
+    var delegate: SearchVCDelegate?
+    
     override init(frame: CGRect) {
         super.init(frame: .zero)
         configure()
@@ -32,6 +34,7 @@ class SearchHeaderView: UIView{
         configureBackgroundView()
         configureLabel()
         configureSearchView()
+        configureTextField()
     }
     
     fileprivate func configureBackgroundView(){
@@ -90,7 +93,8 @@ class SearchHeaderView: UIView{
 
 extension SearchHeaderView: UITextFieldDelegate{
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        //
+        guard let searchInput = textfield.text, !searchInput.isEmpty else { return true}
+        delegate?.searchEntered(input: searchInput)
         return true
     }
 }

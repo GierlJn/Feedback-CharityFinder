@@ -139,19 +139,19 @@ extension ShowCaseVC {
             }
         }
         
-//        charityController.loadSecoundaryCharities{ [weak self] (result) in
-//            guard let self = self else { return }
-//
-//            switch result{
-//            case .failure(let error):
-//                print(error)
-//            case .success(let _):
-//                if(self.firstCharityDataReceived){
-//                    self.applyCurrentSnapshot()
-//                }
-//                self.firstCharityDataReceived = true
-//            }
-//        }
+        charityController.loadSecoundaryCharities{ [weak self] (result) in
+            guard let self = self else { return }
+
+            switch result{
+            case .failure(let error):
+                print(error)
+            case .success(let _):
+                if(self.firstCharityDataReceived){
+                    self.applyCurrentSnapshot()
+                }
+                self.firstCharityDataReceived = true
+            }
+        }
     }
     
     

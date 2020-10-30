@@ -61,7 +61,7 @@ class SearchVC: UIViewController{
 extension SearchVC{
     private func configureHeaderView(){
         view.addSubview(headerView)
-        
+        headerView.delegate = self
         headerView.snp.makeConstraints { (maker) in
             maker.top.equalTo(view.snp.top)
             maker.left.equalTo(view.snp.left)
@@ -141,7 +141,12 @@ extension SearchVC: SearchVCDelegate{
     }
     
     func searchEntered(input: String){
-        
+        if(!showCaseView.isHidden){
+            hideShowCaseView()
+            configureListVC()
+
+        }
+        charityListVC.getCharities(searchParameter: "q=\(input)")
     }
 }
 
