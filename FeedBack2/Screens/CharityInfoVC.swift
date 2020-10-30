@@ -21,8 +21,8 @@ class CharityInfoVC: UIViewController{
     var donationBarView = DonationBarView()
     var outputOverviewStackView = OutputOverViewContainerView()
     var aboutHeaderLabel = FBTitleLabel(textAlignment: .left)
-    var tagView = TagView(color: .lightGray)
-    var locationTagView = TagView(color: .systemGray)
+    var tagView = TagLabelScrollView(color: .lightGray)
+    var locationTagView = TagLabelScrollView(color: .systemGray)
     
     
     let scrollView = UIScrollView()

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TagView: UIView{
+class TagLabelScrollView: UIView{
     
     var scrollView = UIScrollView()
     var stackView = UIStackView()

@@ -9,12 +9,10 @@
 import Foundation
 
 enum Categories: CaseIterable {
-    case all, animals, health, education, poverty
+    case animals, health, education, poverty
     
     var category: Category{
         switch(self){
-        case .all:
-            return Category(name: "All", parameter: "")
         case .animals:
             return Category(name: "Animals", parameter: "q=animals")
         case .health:
