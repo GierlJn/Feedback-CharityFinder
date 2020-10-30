@@ -16,7 +16,6 @@ class CharityListVC: UIViewController{
     
     var tableView = UITableView()
     var dataSource: UITableViewDiffableDataSource<Section, Charity>!
-    let networkManager = NetworkManager()
     var charities = [Charity]()
     
     override func viewDidLoad() {
@@ -43,7 +42,7 @@ class CharityListVC: UIViewController{
     }
     
     func getCharities(searchParameter: String) {
-        networkManager.getCharities(searchParameter: searchParameter, size: 100) { [weak self] result in
+        NetworkManager.shared.getCharities(searchParameter: searchParameter, size: 100) { [weak self] result in
             guard let self = self else { return }
             switch(result){
             case .failure(let error):

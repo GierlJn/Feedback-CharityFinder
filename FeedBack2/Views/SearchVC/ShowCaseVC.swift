@@ -16,8 +16,6 @@ class ShowCaseVC: UIViewController{
     var currentSnapshot: NSDiffableDataSourceSnapshot<CharityController.CharityCollection, Charity>! = nil
     static let titleElementKind = "title-element-kind"
     
-    let networkManager = NetworkManager()
-    
     var firstCharityDataReceived = false
     
     override func viewDidLoad() {
@@ -132,26 +130,28 @@ extension ShowCaseVC {
             case .failure(let error):
                 print(error)
             case .success(let _):
+                self.applyCurrentSnapshot()
                 if(self.firstCharityDataReceived){
+                    
                     self.applyCurrentSnapshot()
                 }
                 self.firstCharityDataReceived = true
             }
         }
         
-        charityController.loadSecoundaryCharities{ [weak self] (result) in
-            guard let self = self else { return }
-            
-            switch result{
-            case .failure(let error):
-                print(error)
-            case .success(let _):
-                if(self.firstCharityDataReceived){
-                    self.applyCurrentSnapshot()
-                }
-                self.firstCharityDataReceived = true
-            }
-        }
+//        charityController.loadSecoundaryCharities{ [weak self] (result) in
+//            guard let self = self else { return }
+//
+//            switch result{
+//            case .failure(let error):
+//                print(error)
+//            case .success(let _):
+//                if(self.firstCharityDataReceived){
+//                    self.applyCurrentSnapshot()
+//                }
+//                self.firstCharityDataReceived = true
+//            }
+//        }
     }
     
     
@@ -175,7 +175,6 @@ extension TitleSupplementaryView {
     func configure() {
         addSubview(label)
         label.translatesAutoresizingMaskIntoConstraints = false
-        //label.adjustsFontForContentSizeCategory = true
         let inset = CGFloat(10)
         NSLayoutConstraint.activate([
             label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: inset),

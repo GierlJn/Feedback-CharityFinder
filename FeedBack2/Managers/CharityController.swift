@@ -10,8 +10,6 @@ import UIKit
 
 class CharityController {
     
-    let networkManager = NetworkManager()
-    
     struct CharityCollection: Hashable {
         let title: String
         let charities: [Charity]
@@ -31,7 +29,7 @@ class CharityController {
     typealias Handler = (Result<[Charity], FBError>) -> Void
     
     func loadHighImpactCharities( completed: @escaping Handler){
-        networkManager.getCharities(searchParameter: "impact=high", size: 8) { [weak self] (result) in
+        NetworkManager.shared.getCharities(searchParameter: "impact=high", size: 8) { [weak self] (result) in
             guard let self = self else { return }
             switch result{
             case .failure(let error):
@@ -45,7 +43,7 @@ class CharityController {
     }
     
     func loadSecoundaryCharities( completed: @escaping Handler){
-        networkManager.getCharities(searchParameter: "q=animals", size: 8) { [weak self] (result) in
+        NetworkManager.shared.getCharities(searchParameter: "q=animals", size: 8) { [weak self] (result) in
             guard let self = self else { return }
             switch result{
             case .failure(let error):

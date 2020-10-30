@@ -29,8 +29,7 @@ class CharityInfoVC: UIViewController{
     let contentView = UIView()
     var charityId: String = ""
     var enteredDonation: Float = 1.0
-    
-    var networkManger = NetworkManager()
+
     var charity: Charity!
     
     
@@ -83,7 +82,7 @@ class CharityInfoVC: UIViewController{
     
     private func getCharityInfo() {
         showLoadingView()
-        networkManger.getCharityInfo(charityId: charity.id) { [weak self] (result) in
+        NetworkManager.shared.getCharityInfo(charityId: charity.id) { [weak self] (result) in
             guard let self = self else { return }
             switch(result){
             case .failure(let error):

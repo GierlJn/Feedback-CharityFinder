@@ -55,8 +55,7 @@ class FBImpactImageView: UIImageView{
     }
     
     private func downloadLogoImage(_ imageUrl: String, completed: @escaping(FBError?) -> Void) {
-        let networkManager = NetworkManager()
-        networkManager.downloadImage(urlString: imageUrl) { [weak self](result) in
+            NetworkManager.shared.downloadImage(urlString: imageUrl) { [weak self](result) in
             guard let self = self else {return}
             switch(result){
             case .failure(let error):

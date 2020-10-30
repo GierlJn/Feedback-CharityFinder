@@ -43,8 +43,7 @@ class FBLogoImageView: UIImageView{
     }
     
     private func downloadLogoImage(_ logoUrl: String) {
-        let networkManager = NetworkManager()
-        networkManager.downloadImage(urlString: logoUrl) { [weak self](result) in
+        NetworkManager.shared.downloadImage(urlString: logoUrl) { [weak self](result) in
             guard let self = self else {return}
             switch(result){
             case .failure(let error):
