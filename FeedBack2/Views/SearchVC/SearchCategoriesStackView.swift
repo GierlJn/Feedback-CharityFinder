@@ -15,17 +15,17 @@ class SearchCategoriesStackView: UIView, CategoryButtonDelegate{
     var stackView = UIStackView()
     var categories = Categories.allCategories
     
-    var searchVCdelegate: SearchVCDelegate?
+    var searchVCdelegate: HeaderViewDelegate?
     
     var categoryButtons = [CategoryButton]()
     var selectedCategory: Category? {
         didSet {
             if(selectedCategory != nil){
+                setInitialButtonAsSelected()
                 searchVCdelegate?.categoryChanged(category: selectedCategory!)
             }else{
                 updateCategorySelection()
             }
-            
         }
     }
     

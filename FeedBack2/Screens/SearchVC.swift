@@ -9,9 +9,9 @@
 import UIKit
 
 
-protocol SearchVCDelegate{
+protocol HeaderViewDelegate{
     func categoryChanged(category: Category)
-    func searchEntered(input: String)
+    func searchEntered(input: String?)
 }
 
 class SearchVC: UIViewController{
@@ -51,7 +51,6 @@ class SearchVC: UIViewController{
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         view.setGradientBackgroundColor(colors: [.lightBlueBackgroundGradientStart, .lightBlueBackgroundGradientEnd], axis: .horizontal)
-        //headerView.setGradientBackgroundColor(colors: [.buttonDarkBlueGradientStart, .buttonDarkBlueGradientEnd], axis: .horizontal)
         
     }
 }
@@ -99,6 +98,7 @@ extension SearchVC{
     }
     
     private func configureShowCaseVC(){
+        showcaseVC.delegate = self
         add(childVC: showcaseVC, to: showCaseView)
         contentView.addSubview(showCaseView)
         showCaseView.pinToEdges(of: contentView)
@@ -114,6 +114,13 @@ extension SearchVC{
         }
     }
     
+    private func showListVC() {
+        if(!showCaseView.isHidden){
+            hideShowCaseView()
+            configureListVC()
+        }
+    }
+    
     private func configureListVC(){
         contentView.addSubview(listView)
         listView.pinToEdges(of: contentView)
@@ -124,32 +131,48 @@ extension SearchVC{
     private func hideShowCaseView(){
         showCaseView.removeFromSuperview()
     }
+    
 }
 
 
 
 
-extension SearchVC: SearchVCDelegate{
+extension SearchVC: HeaderViewDelegate{
     func categoryChanged(category: Category) {
-        if(!showCaseView.isHidden){
-            hideShowCaseView()
-            configureListVC()
-
-        }
+        showListVC()
         headerView.textfield.clearTextField()
         charityListVC.getCharities(searchParameter: category.parameter)
     }
     
-    func searchEntered(input: String){
-        if(!showCaseView.isHidden){
-            hideShowCaseView()
-            configureListVC()
-
-        }
+    func searchEntered(input: String?){
+        guard let searchInput = input, !searchInput.isEmpty else { return }
+        showListVC()
         categoriesView.selectedCategory = nil
         categoriesView.updateCategorySelection()
-        charityListVC.getCharities(searchParameter: "q=\(input)")
+        charityListVC.getCharities(searchParameter: "q=\(searchInput)")
     }
+}
+
+extension SearchVC: ShowCaseVCDelegate{
+    func showCharityInfo(charityId: String) {
+        headerView.textfield.clearTextField()
+        let charityInfoVC = CharityInfoVC()
+        charityInfoVC.charityId = charityId
+        
+        let navigationController = UINavigationController(rootViewController: charityInfoVC)
+        navigationController.modalPresentationStyle = .fullScreen
+        navigationController.navigationBar.barStyle = .black
+        present(navigationController, animated: true)
+    }
+    
+    func showCategories(category: Category) {
+        showListVC()
+        headerView.textfield.clearTextField()
+        //charityListVC.getCharities(searchParameter: category.parameter)
+        categoriesView.selectedCategory = category
+    }
+    
+    
 }
 
 

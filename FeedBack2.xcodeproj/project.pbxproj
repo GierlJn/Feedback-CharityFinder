@@ -47,6 +47,7 @@
 		B97AAFF82531BF4C00FCBC28 /* FBTextLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B97AAFF72531BF4C00FCBC28 /* FBTextLabel.swift */; };
 		B995A1B9252DEBF90037E0FB /* StatusBarViewOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = B995A1B8252DEBF90037E0FB /* StatusBarViewOne.swift */; };
 		B995A1BB252DF01B0037E0FB /* StatusBarViewTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B995A1BA252DF01B0037E0FB /* StatusBarViewTwo.swift */; };
+		B99BB050254D59060017E1F8 /* FBAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99BB04F254D59060017E1F8 /* FBAlertVC.swift */; };
 		B9A1C0F5252B1D48004E3AEE /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = B9A1C0F4252B1D48004E3AEE /* SnapKit */; };
 		B9A1C0F7252B2A40004E3AEE /* FBImpactImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A1C0F6252B2A40004E3AEE /* FBImpactImageView.swift */; };
 		B9A1C0FA252B3E82004E3AEE /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A1C0F9252B3E82004E3AEE /* UIView+Ext.swift */; };
@@ -107,6 +108,7 @@
 		B97AAFF72531BF4C00FCBC28 /* FBTextLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBTextLabel.swift; sourceTree = "<group>"; };
 		B995A1B8252DEBF90037E0FB /* StatusBarViewOne.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarViewOne.swift; sourceTree = "<group>"; };
 		B995A1BA252DF01B0037E0FB /* StatusBarViewTwo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarViewTwo.swift; sourceTree = "<group>"; };
+		B99BB04F254D59060017E1F8 /* FBAlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBAlertVC.swift; sourceTree = "<group>"; };
 		B9A1C0F6252B2A40004E3AEE /* FBImpactImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBImpactImageView.swift; sourceTree = "<group>"; };
 		B9A1C0F9252B3E82004E3AEE /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
 		B9A1C0FB252B470C004E3AEE /* FBTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBTitleLabel.swift; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 				B9FF36AB2525BE200065AC17 /* Utilities */,
 				B9A1C0F8252B3E71004E3AEE /* Extensions */,
 				B912457325287588002B85C5 /* Labels */,
+				B99BB052254D59140017E1F8 /* ViewController */,
 				B9273CD725270C5800FE7155 /* Views */,
 				B9FF36A72525B8CC0065AC17 /* Managers */,
 				B9FF36A42525B1010065AC17 /* Cells */,
@@ -225,6 +228,14 @@
 				B9664EB325247C9600637BDF /* LaunchScreen.storyboard */,
 			);
 			path = Support;
+			sourceTree = "<group>";
+		};
+		B99BB052254D59140017E1F8 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B99BB04F254D59060017E1F8 /* FBAlertVC.swift */,
+			);
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 		B9A1C0F8252B3E71004E3AEE /* Extensions */ = {
@@ -393,6 +404,7 @@
 				B9EBAE012536F1250070705F /* HeaderView.swift in Sources */,
 				B9F2274C252EE62200A25EC5 /* Colors+Ext.swift in Sources */,
 				B9273CE525274B1700FE7155 /* ImageCache.swift in Sources */,
+				B99BB050254D59060017E1F8 /* FBAlertVC.swift in Sources */,
 				B956D497252F313000F6E0D6 /* OutputView.swift in Sources */,
 				B9FF36A92525B8D70065AC17 /* NetworkManager.swift in Sources */,
 				B9A1C0FA252B3E82004E3AEE /* UIView+Ext.swift in Sources */,

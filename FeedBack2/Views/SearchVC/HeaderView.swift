@@ -18,7 +18,7 @@ class SearchHeaderView: UIView{
     let textfield = FBTextField()
     let searchButton = UIButton()
     
-    var delegate: SearchVCDelegate?
+    var delegate: HeaderViewDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
@@ -93,8 +93,7 @@ class SearchHeaderView: UIView{
 
 extension SearchHeaderView: UITextFieldDelegate{
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        guard let searchInput = textfield.text, !searchInput.isEmpty else { return true}
-        delegate?.searchEntered(input: searchInput)
+        delegate?.searchEntered(input: textfield.text)
         return true
     }
 }

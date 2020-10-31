@@ -27,10 +27,11 @@ class CharityInfoVC: UIViewController{
     
     let scrollView = UIScrollView()
     let contentView = UIView()
-    var charityId: String = ""
+    var charityId: String!
     var enteredDonation: Float = 1.0
 
-    var charity: Charity!
+    var infoCharity: InfoCharity?
+    //var charity: Charity!
     
     
     override func viewDidLoad() {
@@ -82,28 +83,30 @@ class CharityInfoVC: UIViewController{
     
     private func getCharityInfo() {
         showLoadingView()
-        NetworkManager.shared.getCharityInfo(charityId: charity.id) { [weak self] (result) in
+        NetworkManager.shared.getCharityInfo(charityId: charityId) { [weak self] (result) in
             guard let self = self else { return }
             switch(result){
             case .failure(let error):
-                print(error)
+                self.presentGFAlertOnMainThread(title: "Something went wrong!", message: error.errorMessage, buttonTitle: "Ok")
             case .success(let infoCharity):
                 DispatchQueue.main.async {
                     self.impactImageView.setImage(imageUrl: infoCharity.imageUrl) { (error) in
                             self.hideLoadingView()
-                            self.configureViews(with: infoCharity)
+                            self.infoCharity = infoCharity
+                            self.configureViews()
                         }
                 }
             }
         }
     }
     
-    private func configureViews(with infoCharity: InfoCharity) {
+    private func configureViews() {
+        guard let infoCharity = infoCharity else { return }
         addRightBarButtonItem()
         configureDonationBarView()
         configureImpactImageView(infoCharity)
         configureScrollView()
-        configureTitleLabelView()
+        configureTitleLabelView(infoCharity)
         configureTagView(infoCharity)
         configureLocationTagView(infoCharity)
         configureAboutHeaderLabel()
@@ -128,9 +131,9 @@ class CharityInfoVC: UIViewController{
         
     }
     
-    private func configureTitleLabelView(){
+    private func configureTitleLabelView(_ infoCharity: InfoCharity){
         self.view.addSubview(charityTitleLabelView)
-        charityTitleLabelView.set(title: charity.name)
+        charityTitleLabelView.set(title: infoCharity.name)
 
         
         charityTitleLabelView.snp.makeConstraints { (maker) in
@@ -231,11 +234,7 @@ class CharityInfoVC: UIViewController{
 
 extension CharityInfoVC: DonationBarViewDelegate{
     func donationButtonPressed() {
-        guard let url = URL(string: charity.url) else {
-            print("error")
-            #warning("handle error")
-            return
-        }
+        guard let infoCharity = infoCharity, let url = URL(string: infoCharity.url!) else { return }
         presentSafariVC(with: url)
     }
 }

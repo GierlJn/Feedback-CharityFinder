@@ -12,6 +12,16 @@ import SafariServices
 fileprivate var containerView: UIView!
 
 extension UIViewController{
+    
+    func presentGFAlertOnMainThread(title: String, message: String, buttonTitle: String){
+        DispatchQueue.main.async {
+            let alert = FBAlertVC(title: title, message: message, buttonTitle: buttonTitle)
+            alert.modalPresentationStyle = .overFullScreen
+            alert.modalTransitionStyle = .crossDissolve
+            self.present(alert, animated: true)
+        }
+    }
+    
     func presentSafariVC(with url: URL){
            let safariVC = SFSafariViewController(url: url)
            safariVC.preferredControlTintColor = .systemBlue

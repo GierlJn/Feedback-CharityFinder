@@ -15,42 +15,39 @@ class CharityController {
         let charities: [Charity]
         let position: Int
         let identifier = UUID()
+        let category: Category
         func hash(into hasher: inout Hasher) {
             hasher.combine(identifier)
         }
     }
     
-    var collections: [CharityCollection] {
-        return _collections
-    }
-    
-    fileprivate var _collections = [CharityCollection]()
+    var collections = [CharityCollection]()
     
     typealias Handler = (Result<[Charity], FBError>) -> Void
     
     func loadHighImpactCharities( completed: @escaping Handler){
-        NetworkManager.shared.getCharities(searchParameter: "impact=high", size: 8) { [weak self] (result) in
+        NetworkManager.shared.getCharities(searchParameter: Categories.highImpact.category.parameter, size: 8) { [weak self] (result) in
             guard let self = self else { return }
             switch result{
             case .failure(let error):
                 print(error)
                 completed(.failure(error))
             case .success(let charities):
-                self.generateCharityCollections(for: charities, title: "High Impact", positionIndex: 0)
+                self.generateCharityCollections(for: charities, category: Categories.highImpact.category, positionIndex: 0)
                 completed(.success(charities))
             }
         }
     }
     
     func loadSecoundaryCharities( completed: @escaping Handler){
-        NetworkManager.shared.getCharities(searchParameter: "q=animals", size: 8) { [weak self] (result) in
+        NetworkManager.shared.getCharities(searchParameter: Categories.animals.category.parameter, size: 8) { [weak self] (result) in
             guard let self = self else { return }
             switch result{
             case .failure(let error):
                 print(error)
                 completed(.failure(error))
             case .success(let charities):
-                self.generateCharityCollections(for: charities, title: "Animals", positionIndex: 1)
+                self.generateCharityCollections(for: charities, category: Categories.animals.category, positionIndex: 1)
                 completed(.success(charities))
             }
         }
@@ -60,9 +57,9 @@ class CharityController {
 
 
 extension CharityController {
-    func generateCharityCollections(for charities: [Charity], title: String, positionIndex: Int){
-        _collections.append(CharityCollection(title: title, charities: charities, position: positionIndex))
-        _collections.sort { $0.position < $1.position }
+    func generateCharityCollections(for charities: [Charity], category: Category, positionIndex: Int){
+        collections.append(CharityCollection(title: category.name, charities: charities, position: positionIndex, category: category))
+        collections.sort { $0.position < $1.position }
         
     }
 }

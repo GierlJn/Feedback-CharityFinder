@@ -8,6 +8,12 @@
 
 import UIKit
 
+protocol ShowCaseVCDelegate{
+    func showCharityInfo(charityId: String)
+    func showCategories(category: Category)
+}
+
+
 class ShowCaseVC: UIViewController{
     
     let charityController = CharityController()
@@ -17,6 +23,8 @@ class ShowCaseVC: UIViewController{
     static let titleElementKind = "title-element-kind"
     
     var firstCharityDataReceived = false
+    
+    var delegate: ShowCaseVCDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +36,14 @@ class ShowCaseVC: UIViewController{
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
     }
+}
+
+extension ShowCaseVC: TitleSupplementaryViewDelegate{
+    func viewAllButtonPressed(category: Category) {
+        delegate?.showCategories(category: category)
+    }
+    
+    
 }
 
 extension ShowCaseVC {
@@ -74,6 +90,7 @@ extension ShowCaseVC {
         collectionView.backgroundColor = .init(white: 0, alpha: 0)
         view.addSubview(collectionView)
         collectionView.pinToEdges(of: view)
+        collectionView.delegate = self
     }
     
     func configureDataSource() {
@@ -99,8 +116,10 @@ extension ShowCaseVC {
             (supplementaryView, string, indexPath) in
             if let snapshot = self.currentSnapshot {
                 // Populate the view with our section's description.
-                let charityCategory = snapshot.sectionIdentifiers[indexPath.section]
-                supplementaryView.label.text = charityCategory.title
+                let charityCollection = snapshot.sectionIdentifiers[indexPath.section]
+                supplementaryView.label.text = charityCollection.title
+                supplementaryView.category = charityCollection.category
+                supplementaryView.delegate = self
             }
         }
         
@@ -153,14 +172,28 @@ extension ShowCaseVC {
             }
         }
     }
-    
+}
+
+extension ShowCaseVC: UICollectionViewDelegate{
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let collections = charityController.collections[indexPath.section]
+        let charity = collections.charities[indexPath.row]
+        delegate?.showCharityInfo(charityId: charity.id)
+    }
+}
+
+
+protocol TitleSupplementaryViewDelegate{
+    func viewAllButtonPressed(category: Category)
     
 }
 
 class TitleSupplementaryView: UICollectionReusableView {
     let label = UILabel()
     let viewAllButton = UIButton()
+    var category: Category!
     static let reuseIdentifier = "title-supplementary-reuse-identifier"
+    var delegate: TitleSupplementaryViewDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -187,10 +220,15 @@ extension TitleSupplementaryView {
         viewAllButton.setTitle("View All", for: .normal)
         viewAllButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .footnote)
         viewAllButton.setTitleColor(.blue, for: .normal)
+        viewAllButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
         viewAllButton.snp.makeConstraints { (maker) in
             maker.top.equalTo(snp.top).offset(inset)
             maker.right.equalTo(snp.right).offset(-inset)
             maker.bottom.equalTo(snp.bottom).offset(-inset)
         }
+    }
+    
+    @objc func buttonPressed(){
+        delegate?.viewAllButtonPressed(category: category)
     }
 }
