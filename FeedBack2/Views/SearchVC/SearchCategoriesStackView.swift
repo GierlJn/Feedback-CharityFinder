@@ -44,6 +44,7 @@ class SearchCategoriesStackView: UIView, CategoryButtonDelegate{
         scrollView.pinToEdges(of: self)
         stackView.pinToEdges(of: scrollView)
         stackView.spacing = 12
+        scrollView.showsHorizontalScrollIndicator = false
         
         addButtons()
         setInitialButtonAsSelected()
@@ -58,6 +59,14 @@ class SearchCategoriesStackView: UIView, CategoryButtonDelegate{
             categoryButtons.append(categoryButton)
             stackView.addArrangedSubview(categoryButton)
         }
+        
+        let fillerUILabel = UILabel()
+        fillerUILabel.backgroundColor = .init(white: 0, alpha: 0)
+        fillerUILabel.text = " "
+        fillerUILabel.snp.makeConstraints { (maker) in
+            maker.width.equalTo(20)
+        }
+        stackView.addArrangedSubview(fillerUILabel)
     }
     
     private func setInitialButtonAsSelected(){
