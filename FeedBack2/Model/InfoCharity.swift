@@ -10,7 +10,7 @@ import Foundation
 
 struct InfoCharity: Hashable{
     var name: String
-    var id: String
+    var id: String?
     var summaryDescription: String?
     var logoUrl: String?
     var singleImpact: SimpleImpact?

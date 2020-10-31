@@ -24,7 +24,15 @@ extension JSONDecoder{
             let decoder = JSONDecoder()
             let rawServerResponse = try decoder.decode(InfoResponse.self, from: data)
             let cargo = rawServerResponse.cargo
-            let charity = InfoCharity(name: cargo.name, id: cargo.id, summaryDescription: cargo.summaryDescription, logoUrl: cargo.logo, singleImpact: cargo.simpleImpact, imageUrl: cargo.images, description: cargo.description, url: cargo.url, tags: cargo.tags ?? "No tags", geoTags: cargo.geoTags ?? "Worldwide")
+            
+            var charity = InfoCharity(name: cargo.name, id: cargo.id, summaryDescription: cargo.summaryDescription, logoUrl: cargo.logo, imageUrl: cargo.images, description: cargo.description, url: cargo.url, tags: cargo.tags ?? "No tags", geoTags: cargo.geoTags ?? "Worldwide")
+            
+            if let singleImpact = cargo.simpleImpact,
+               let costPerBeneficiary = singleImpact.costPerBeneficiary,
+               costPerBeneficiary.value != nil,
+               singleImpact.name != nil
+            { charity.singleImpact = singleImpact }
+            
             return charity
         }catch{
             throw FBError.invalidData
