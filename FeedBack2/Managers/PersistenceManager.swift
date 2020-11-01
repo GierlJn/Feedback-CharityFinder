@@ -47,7 +47,41 @@ class PersistenceManager {
         
     }
     
+    static func addFavorite(charity: Charity, persistenceActionType: PersistenceActionType, completed: @escaping(FBError?) -> Void){
+        retrieveFavorites { (result) in
+            switch result{
+            case .success(var charities):
+                switch persistenceActionType{
+                case .add:
+                    guard !charities.contains(charity) else {
+                        completed(.alreadyFavorite)
+                        return
+                    }
+                    charities.append(charity)
+                    
+                    
+                case .remove:
+                    charities.removeAll(where: {$0.id == charity.id})
+                    
+                }
+                completed(save(charities: charities))
+            
+            case .failure(let error):
+                completed(error)
+            }
+        }
+    }
     
+    static func isCharityFavorite(charity: Charity, completed: @escaping(Bool) -> Void){
+        retrieveFavorites { (result) in
+            switch result{
+            case .failure( _ ):
+                completed(false)
+            case .success(let charities):
+                completed(charities.contains(charity))
+            }
+        }
+    }
     
     static func retrieveFavorites(completed: @escaping(Result<[Charity], FBError>) -> Void){
         guard let data = defaults.object(forKey: Keys.favourites) as? Data else {
