@@ -31,7 +31,12 @@ class CharityCell: UITableViewCell{
     
     func set(charity: Charity){
         titleLabel.text = charity.name
-        subTitleLabel.text = "Impact: \(charity.impactEstimation ?? "n.a")"
+        if let impctestimation = charity.impactEstimation{
+            subTitleLabel.text = "Impact: \(impctestimation)"
+        }else{
+            subTitleLabel.text = "Impact undetermined"
+        }
+        
         logoImageView.setLogoImage(logoUrl: charity.logoUrl)
     }
     
@@ -49,7 +54,7 @@ class CharityCell: UITableViewCell{
         contentView.addSubview(titleLabel)
         //titleLabel.textAlignment = .right
         titleLabel.snp.makeConstraints { (maker) in
-            maker.top.equalTo(snp.top).offset(30)
+            maker.top.equalTo(snp.top).offset(padding)
             maker.left.equalTo(logoImageView.snp.right).offset(15)
             maker.right.equalTo(-25)
             maker.height.equalTo(40)
@@ -60,7 +65,7 @@ class CharityCell: UITableViewCell{
             maker.top.equalTo(titleLabel.snp.bottom).offset(5)
             maker.left.equalTo(logoImageView.snp.right).offset(15)
             maker.right.equalTo(-25)
-            maker.bottom.equalTo(snp.bottom).offset(-padding)
+            maker.bottom.equalTo(snp.bottom).offset(-25)
         }
         
     }
