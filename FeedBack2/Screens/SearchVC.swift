@@ -139,20 +139,21 @@ extension SearchVC{
 extension SearchVC: HeaderViewDelegate{
     func actionButtonPressed() {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let action1 = UIAlertAction(title: "Show Overview", style: .default) { (action) in
-                self.headerView.textfield.clearTextField()
-                self.showShowCaseVC()
-            }
-        let action2 = UIAlertAction(title: "Sort for impact", style: .default) { (action) in
+        let showOverViewAction = UIAlertAction(title: "Show Overview", style: .default) { (action) in
+            self.headerView.textfield.clearTextField()
+            self.showShowCaseVC()
+        }
+        let sortAction = UIAlertAction(title: "Sort for impact", style: .default) { (action) in
             if(self.listView.isDescendant(of: self.contentView)){
                 self.charityListVC.sortForImpact()
             }
-            
-            }
+        }
         
-            alertController.addAction(action2)
-            alertController.addAction(action1)
+        if(listView.isDescendant(of: contentView)){
+            alertController.addAction(sortAction)
+            alertController.addAction(showOverViewAction)
             self.present(alertController, animated: true, completion: nil)
+        }
     }
     
     func categoryChanged(category: Category) {
