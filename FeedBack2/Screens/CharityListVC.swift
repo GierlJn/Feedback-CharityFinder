@@ -55,15 +55,45 @@ class CharityListVC: UIViewController{
     
     private func updateUI(with charities: [Charity]){
         self.charities = charities
-        self.updateData(charities: charities)
+        self.updateData()
     }
     
-    private func updateData(charities: [Charity]){
+    private func updateData(){
         var snapshot = NSDiffableDataSourceSnapshot<Section, Charity>()
         snapshot.appendSections([.main])
         snapshot.appendItems(charities)
         DispatchQueue.main.async {self.dataSource.apply(snapshot)}
     }
+    
+    func sortForImpact(){
+        self.charities.sort { (charity1, charity2) -> Bool in
+            guard let impact1 = ImpactEstimation(rawValue: charity1.impactEstimation ?? "none") else { return false }
+            guard let impact2 = ImpactEstimation(rawValue: charity2.impactEstimation ?? "none") else { return false}
+            return impact1.getSortingRank > impact2.getSortingRank
+        }
+        self.updateData()
+    }
+}
+
+enum ImpactEstimation: String{
+    case none = "none"
+    case low = "low"
+    case medium = "medium"
+    case high = "high"
+    
+    var getSortingRank: Int{
+        switch self{
+        case .high:
+            return 4
+        case .medium:
+            return 3
+        case .low:
+            return 2
+        case .none:
+            return 1
+        }
+    }
+    
 }
 
 extension CharityListVC: UITableViewDelegate{

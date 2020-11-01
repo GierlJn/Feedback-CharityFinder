@@ -12,6 +12,7 @@ import UIKit
 protocol HeaderViewDelegate{
     func categoryChanged(category: Category)
     func searchEntered(input: String?)
+    func actionButtonPressed()
 }
 
 class SearchVC: UIViewController{
@@ -31,14 +32,12 @@ class SearchVC: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         configureNavigationBar()
         configureHeaderView()
         configureCategoriesView()
         configureCopyRightLabel()
         configureContentView()
         configureShowCaseVC()
-        
     }
     
     private func configureNavigationBar(){
@@ -116,29 +115,46 @@ extension SearchVC{
     }
     
     private func showListVC() {
-        if(!showCaseView.isHidden){
-            hideShowCaseView()
-            configureListVC()
+        if(showCaseView.isDescendant(of: contentView)){
+            showCaseView.removeFromSuperview()
+            contentView.addSubview(listView)
+            listView.pinToEdges(of: contentView)
+            add(childVC: charityListVC, to: listView)
         }
     }
     
-    private func configureListVC(){
-        contentView.addSubview(listView)
-        listView.pinToEdges(of: contentView)
-        add(childVC: charityListVC, to: listView)
-        
+    private func showShowCaseVC(){
+        if(listView.isDescendant(of: contentView)){
+            listView.removeFromSuperview()
+            contentView.addSubview(showCaseView)
+            showCaseView.pinToEdges(of: contentView)
+            add(childVC: showcaseVC, to: showCaseView)
+        }
     }
+
     
-    private func hideShowCaseView(){
-        showCaseView.removeFromSuperview()
-    }
-    
+
 }
 
-
-
-
 extension SearchVC: HeaderViewDelegate{
+    func actionButtonPressed() {
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let action1 = UIAlertAction(title: "Show Overview", style: .default) { (action) in
+                self.headerView.textfield.clearTextField()
+                self.showShowCaseVC()
+            }
+        let action2 = UIAlertAction(title: "Sort for impact", style: .default) { (action) in
+            if(self.listView.isDescendant(of: self.contentView)){
+                self.charityListVC.sortForImpact()
+            }
+            
+            }
+        
+            alertController.addAction(action2)
+            alertController.addAction(action1)
+            self.present(alertController, animated: true, completion: nil)
+    }
+    
     func categoryChanged(category: Category) {
         showListVC()
         headerView.textfield.clearTextField()
@@ -169,7 +185,6 @@ extension SearchVC: ShowCaseVCDelegate{
     func showCategories(category: Category) {
         showListVC()
         headerView.textfield.clearTextField()
-        //charityListVC.getCharities(searchParameter: category.parameter)
         categoriesView.selectedCategory = category
     }
     

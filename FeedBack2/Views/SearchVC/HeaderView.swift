@@ -16,7 +16,7 @@ class SearchHeaderView: UIView{
     
     let searchStackView = UIStackView()
     let textfield = FBTextField()
-    let searchButton = UIButton()
+    let actionButton = UIButton()
     
     var delegate: HeaderViewDelegate?
     
@@ -70,16 +70,17 @@ class SearchHeaderView: UIView{
 
         searchStackView.spacing = 8
         searchStackView.addArrangedSubview(textfield)
-        searchStackView.addArrangedSubview(searchButton)
-        searchButton.snp.makeConstraints { (maker) in
+        searchStackView.addArrangedSubview(actionButton)
+        actionButton.snp.makeConstraints { (maker) in
             maker.size.equalTo(50)
         }
         
-        searchButton.setImage(Images.searchActionButton, for: .normal)
-        searchButton.setGradientBackgroundColor(colors: [.hedaerViewGradientStart, .headerViewGradientEnd], axis: .custom(angle: CGFloat(90)))
-        searchButton.layer.cornerRadius = 7
-        searchButton.clipsToBounds = true
-        searchButton.tintColor = .white
+        actionButton.setImage(Images.searchActionButton, for: .normal)
+        actionButton.addTarget(self, action: #selector(actionButtonTabbed), for: .touchUpInside)
+        actionButton.setGradientBackgroundColor(colors: [.hedaerViewGradientStart, .headerViewGradientEnd], axis: .custom(angle: CGFloat(90)))
+        actionButton.layer.cornerRadius = 7
+        actionButton.clipsToBounds = true
+        actionButton.tintColor = .white
 
     }
     
@@ -87,6 +88,9 @@ class SearchHeaderView: UIView{
         textfield.delegate = self
     }
 
+    @objc private func actionButtonTabbed(){
+        delegate?.actionButtonPressed()
+    }
     
 }
 
