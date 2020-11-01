@@ -85,4 +85,20 @@ extension FavouritesVC: UITableViewDelegate, UITableViewDataSource{
         present(navigationController, animated: true)
     }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        guard editingStyle == .delete else { return }
+        
+        PersistenceManager.updateFavorites(charity: charities[indexPath.row], persistenceActionType: .remove) { [weak self](error) in
+            guard let self = self else { return }
+            guard let error = error else{
+                self.charities.remove(at: indexPath.row)
+                self.tableView.deleteRows(at: [indexPath], with: .left)
+                return
+            }
+            
+            self.presentGFAlertOnMainThread(title: "Something went wrong", message: error.errorMessage, buttonTitle: "Ok")
+        }
+        
+    }
+    
 }

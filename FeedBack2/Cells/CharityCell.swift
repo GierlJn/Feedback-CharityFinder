@@ -34,7 +34,7 @@ class CharityCell: UITableViewCell{
         if let impctestimation = charity.impactEstimation{
             subTitleLabel.text = "Impact: \(impctestimation)"
         }else{
-            subTitleLabel.text = "Impact undetermined"
+            subTitleLabel.text = "Impact unknown"
         }
         
         logoImageView.setLogoImage(logoUrl: charity.logoUrl)
