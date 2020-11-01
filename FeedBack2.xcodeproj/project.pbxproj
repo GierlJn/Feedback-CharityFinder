@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B904D32C25401FD60071E6CA /* UITableView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B904D32B25401FD60071E6CA /* UITableView+Ext.swift */; };
+		B90F6983254EC0C800D69AD1 /* FavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90F6982254EC0C800D69AD1 /* FavoriteCell.swift */; };
 		B912457225284C26002B85C5 /* SearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B912457125284C26002B85C5 /* SearchResponse.swift */; };
 		B912457525287599002B85C5 /* FBSubTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B912457425287599002B85C5 /* FBSubTitleLabel.swift */; };
 		B912457725287863002B85C5 /* DonationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B912457625287863002B85C5 /* DonationManager.swift */; };
@@ -68,6 +69,7 @@
 
 /* Begin PBXFileReference section */
 		B904D32B25401FD60071E6CA /* UITableView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Ext.swift"; sourceTree = "<group>"; };
+		B90F6982254EC0C800D69AD1 /* FavoriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCell.swift; sourceTree = "<group>"; };
 		B912457125284C26002B85C5 /* SearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResponse.swift; sourceTree = "<group>"; };
 		B912457425287599002B85C5 /* FBSubTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBSubTitleLabel.swift; sourceTree = "<group>"; };
 		B912457625287863002B85C5 /* DonationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationManager.swift; sourceTree = "<group>"; };
@@ -287,6 +289,7 @@
 			children = (
 				B9FF36A52525B1090065AC17 /* CharityCell.swift */,
 				B93BA93025387E43006A08BE /* ExploreCharityCell.swift */,
+				B90F6982254EC0C800D69AD1 /* FavoriteCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -415,6 +418,7 @@
 				B97AAFCE25319A3400FCBC28 /* Constants.swift in Sources */,
 				B912457725287863002B85C5 /* DonationManager.swift in Sources */,
 				B9F22749252EE05900A25EC5 /* FBTextView.swift in Sources */,
+				B90F6983254EC0C800D69AD1 /* FavoriteCell.swift in Sources */,
 				B9273CE12527474000FE7155 /* FBLogoImageView.swift in Sources */,
 				B9EBAE04253708CC0070705F /* SearchCategoriesStackView.swift in Sources */,
 				B9B2C8D225397CF600F4131F /* ShowCaseVC.swift in Sources */,
