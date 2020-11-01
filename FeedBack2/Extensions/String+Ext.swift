@@ -16,7 +16,18 @@ extension String{
     
     var withoutParanthesis: String { self.replacingOccurrences(of: "\\([^()]*\\)", with: "", options: .regularExpression) }
     
+    var withoutStartingWhiteSpace: String {
+        guard let index = self.firstIndex(where: {!$0.isWhitespace}) else { return "" }
+        return String(self.suffix(from: index))
+    }
+    
+    func tail(s: String) -> String {
+        return String(s.suffix(from: s.index(s.startIndex, offsetBy: 1)))
+    }
+    
     func formatOutputName(with currency: Currency)->String{ self.withoutParanthesis.replaceCurrencyWording(with: currency).lowercased().firstUppercased.condensed }
     
     func replaceCurrencyWording(with currency: Currency)->String{ return self.replacingOccurrences(of: "pound", with: currency.rawValue) }
+    
+    
 }

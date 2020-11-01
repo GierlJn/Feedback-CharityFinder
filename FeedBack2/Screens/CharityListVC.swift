@@ -77,5 +77,7 @@ extension CharityListVC: UITableViewDelegate{
         navigationController.navigationBar.barStyle = .black
         present(navigationController, animated: true)
     }
+    
+    
 }
 

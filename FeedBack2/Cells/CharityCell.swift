@@ -12,10 +12,9 @@ class CharityCell: UITableViewCell{
     static let reuseIdentifier = "CharityCell"
     
     let titleLabel = FBTitleLabel(frame: .zero)
-    //let impactDescriptionLabel = FBSubTitleLabel(frame: .zero)
+    let subTitleLabel = FBSubTitleLabel(frame: .zero)
     let logoImageView = FBLogoImageView(frame: .zero)
     let padding = 20
-    let enteredDonation: Float = 1.0
     let favouriteButton = UIButton()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -32,18 +31,38 @@ class CharityCell: UITableViewCell{
     
     func set(charity: Charity){
         titleLabel.text = charity.name
+        subTitleLabel.text = "Impact: \(charity.impactEstimation ?? "n.a")"
         logoImageView.setLogoImage(logoUrl: charity.logoUrl)
+    }
+    
+    private func configureLogoImageView(){
+        contentView.addSubview(logoImageView)
+        logoImageView.setRoundCorners()
+        logoImageView.snp.makeConstraints { (maker) in
+            maker.size.equalTo(100)
+            maker.left.equalTo(padding)
+            maker.centerY.equalTo(snp.centerY)
+        }
     }
     
     private func configureLabels(){
         contentView.addSubview(titleLabel)
-        
+        //titleLabel.textAlignment = .right
         titleLabel.snp.makeConstraints { (maker) in
-            maker.centerY.equalTo(snp.centerY)
+            maker.top.equalTo(snp.top).offset(30)
             maker.left.equalTo(logoImageView.snp.right).offset(15)
-            maker.right.equalTo(-padding)
+            maker.right.equalTo(-25)
             maker.height.equalTo(40)
         }
+        
+        contentView.addSubview(subTitleLabel)
+        subTitleLabel.snp.makeConstraints { (maker) in
+            maker.top.equalTo(titleLabel.snp.bottom).offset(5)
+            maker.left.equalTo(logoImageView.snp.right).offset(15)
+            maker.right.equalTo(-25)
+            maker.bottom.equalTo(snp.bottom).offset(-padding)
+        }
+        
     }
     
     private func configureButton(){
@@ -52,13 +71,5 @@ class CharityCell: UITableViewCell{
     
     
     
-    private func configureLogoImageView(){
-        contentView.addSubview(logoImageView)
-        logoImageView.setRoundCorners()
-        logoImageView.snp.makeConstraints { (maker) in
-            maker.size.equalTo(80)
-            maker.left.equalTo(padding)
-            maker.top.equalTo(padding)
-        }
-    }
+    
 }
