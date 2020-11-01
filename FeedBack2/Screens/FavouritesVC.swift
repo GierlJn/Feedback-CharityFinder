@@ -17,11 +17,17 @@ class FavouritesVC: UIViewController{
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         configureTableView()
+        self.navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         loadFavorites()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        view.setGradientBackgroundColor(colors: [.lightBlueBackgroundGradientStart, .lightBlueBackgroundGradientEnd], axis: .horizontal)
     }
     
     fileprivate func loadFavorites() {
@@ -43,8 +49,9 @@ class FavouritesVC: UIViewController{
         tableView.register(FavoriteCell.self, forCellReuseIdentifier: FavoriteCell.reuseIdentifier)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.rowHeight = 80
+        tableView.rowHeight = 100
         tableView.removeExcessCells()
+        tableView.backgroundColor = .init(white: 0, alpha: 0)
         
     }
     
@@ -65,6 +72,17 @@ extension FavouritesVC: UITableViewDelegate, UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: FavoriteCell.reuseIdentifier) as! FavoriteCell
         cell.set(charity: charities[indexPath.row])
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let charity = charities[indexPath.row]
+        let charityInfoVc = CharityInfoVC()
+        charityInfoVc.charity = charity
+        charityInfoVc.charityId = charity.id
+        let navigationController = UINavigationController(rootViewController: charityInfoVc)
+        navigationController.modalPresentationStyle = .fullScreen
+        navigationController.navigationBar.barStyle = .black
+        present(navigationController, animated: true)
     }
     
 }

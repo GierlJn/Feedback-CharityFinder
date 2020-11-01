@@ -46,6 +46,7 @@ class SearchVC: UIViewController{
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.isTranslucent = true
         navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.barStyle = .black
     }
     
     override func viewDidLayoutSubviews() {

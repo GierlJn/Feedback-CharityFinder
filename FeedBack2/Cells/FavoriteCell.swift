@@ -35,7 +35,7 @@ class FavoriteCell: UITableViewCell{
         contentView.addSubview(logoImageView)
         logoImageView.setRoundCorners()
         logoImageView.snp.makeConstraints { (maker) in
-            maker.size.equalTo(100)
+            maker.size.equalTo(80)
             maker.left.equalTo(padding)
             maker.centerY.equalTo(snp.centerY)
         }
