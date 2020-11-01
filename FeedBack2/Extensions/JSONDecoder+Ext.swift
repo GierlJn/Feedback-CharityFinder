@@ -25,7 +25,7 @@ extension JSONDecoder{
             let rawServerResponse = try decoder.decode(InfoResponse.self, from: data)
             let cargo = rawServerResponse.cargo
             
-            var charity = InfoCharity(name: cargo.name, id: cargo.id, summaryDescription: cargo.summaryDescription, logoUrl: cargo.logo, imageUrl: cargo.images, description: cargo.description, url: cargo.url, tags: cargo.tags ?? "No tags", geoTags: cargo.geoTags ?? "Worldwide")
+            var charity = InfoCharity(name: cargo.name, id: cargo.id, summaryDescription: cargo.summaryDescription, logoUrl: cargo.logo, imageUrl: cargo.images, description: cargo.description, url: cargo.url, tags: cargo.tags ?? "General", geoTags: cargo.geoTags ?? "Global")
             
             if let singleImpact = cargo.simpleImpact,
                let costPerBeneficiary = singleImpact.costPerBeneficiary,
@@ -46,8 +46,6 @@ extension JSONDecoder{
         
         for hit in hits {
             if let name = hit.displayName ?? hit.name{
-
-                
                 guard let logoUrl = hit.logo else { continue }
                 guard let url = hit.url else { continue }
                 var charity = Charity(name: name.withoutStartingWhiteSpace, id: hit.id, logoUrl: logoUrl, url: url)
