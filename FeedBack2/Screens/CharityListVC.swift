@@ -71,6 +71,7 @@ extension CharityListVC: UITableViewDelegate{
         let charity = charities[indexPath.item]
         let charityInfoVC = CharityInfoVC()
         charityInfoVC.charityId = charity.id
+        charityInfoVC.charity = charity
         let navigationController = UINavigationController(rootViewController: charityInfoVC)
         
         navigationController.modalPresentationStyle = .fullScreen

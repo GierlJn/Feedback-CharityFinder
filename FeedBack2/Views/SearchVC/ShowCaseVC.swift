@@ -9,7 +9,7 @@
 import UIKit
 
 protocol ShowCaseVCDelegate{
-    func showCharityInfo(charityId: String)
+    func showCharityInfo(charityId: String, charity: Charity)
     func showCategories(category: Category)
 }
 
@@ -178,7 +178,7 @@ extension ShowCaseVC: UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let collections = charityController.collections[indexPath.section]
         let charity = collections.charities[indexPath.row]
-        delegate?.showCharityInfo(charityId: charity.id)
+        delegate?.showCharityInfo(charityId: charity.id, charity: charity)
     }
 }
 

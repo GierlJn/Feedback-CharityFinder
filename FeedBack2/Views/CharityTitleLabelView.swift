@@ -8,10 +8,20 @@
 
 import UIKit
 
+protocol TitleLabelViewDelegate{
+    func favouriteButtonPressed()
+}
+
 class CharityTitleLabelView: UIView{
     
     let titleLabel = FBTitleLabel(textAlignment: .left)
-    let favoriteIconImageView = UIImageView()
+    let favoriteButton = UIButton()
+    var delegate: TitleLabelViewDelegate?
+    var isFavourite: Bool = false{
+        didSet{
+            favoriteButton.setImage(isFavourite ? UIImage(systemName: "bookmark.fill") : UIImage(systemName: "bookmark"), for: .normal)
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
@@ -34,9 +44,10 @@ class CharityTitleLabelView: UIView{
     }
     
     private func configure(){
-        addSubview(favoriteIconImageView)
-        favoriteIconImageView.image = UIImage(systemName: "bookmark")
-        favoriteIconImageView.snp.makeConstraints { (maker) in
+        addSubview(favoriteButton)
+        favoriteButton.setImage(isFavourite ? UIImage(systemName: "bookmark.fill") : UIImage(systemName: "bookmark"), for: .normal)
+        favoriteButton.addTarget(self, action: #selector(favouriteButtonPressed), for: .touchUpInside)
+        favoriteButton.snp.makeConstraints { (maker) in
             maker.right.equalTo(self.snp.right).offset(-16)
             maker.size.equalTo(20)
             maker.centerY.equalTo(self.snp.centerY)
@@ -44,11 +55,15 @@ class CharityTitleLabelView: UIView{
         
         addSubview(titleLabel)
         titleLabel.snp.makeConstraints { (maker) in
-            maker.right.equalTo(favoriteIconImageView.snp.left).offset(-16)
+            maker.right.equalTo(favoriteButton.snp.left).offset(-16)
             maker.top.equalTo(self.snp.top).offset(10)
             maker.bottom.equalTo(self.snp.bottom).offset(-10)
             maker.left.equalTo(self.snp.left).offset(20)
         }
+    }
+    
+    @objc func favouriteButtonPressed(){
+        delegate?.favouriteButtonPressed()
     }
     
 }

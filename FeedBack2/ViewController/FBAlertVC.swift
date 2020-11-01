@@ -58,7 +58,7 @@ class FBAlertVC: UIViewController{
         
         
         containerView.addSubview(titleLabel)
-        titleLabel.text = alertTitle ?? "Not Available"
+        titleLabel.text = alertTitle ?? "Something went wrong!"
         titleLabel.snp.makeConstraints { (maker) in
             maker.top.equalTo(containerView.snp.top).offset(padding)
             maker.left.equalTo(containerView.snp.left).offset(padding)
@@ -78,6 +78,7 @@ class FBAlertVC: UIViewController{
         
         containerView.addSubview(messageLabel)
         messageLabel.text = message ?? ""
+        messageLabel.numberOfLines = 3
         messageLabel.snp.makeConstraints { (maker) in
             maker.top.equalTo(titleLabel.snp.bottom).offset(8)
             maker.left.equalTo(containerView.snp.left).offset(padding)

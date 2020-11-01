@@ -31,13 +31,14 @@ class CharityInfoVC: UIViewController{
     var enteredDonation: Float = 1.0
 
     var infoCharity: InfoCharity?
-    //var charity: Charity!
+    var charity: Charity!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavigationBar()
         getCharityInfo()
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -134,8 +135,10 @@ class CharityInfoVC: UIViewController{
     private func configureTitleLabelView(_ infoCharity: InfoCharity){
         self.view.addSubview(charityTitleLabelView)
         charityTitleLabelView.set(title: infoCharity.name)
-
-        
+        charityTitleLabelView.delegate = self
+        PersistenceManager.isCharityFavorite(charity: charity) { (isFavourite) in
+            self.charityTitleLabelView.isFavourite = isFavourite
+        }
         charityTitleLabelView.snp.makeConstraints { (maker) in
             maker.centerY.equalTo(impactImageView.snp.bottom)
             maker.left.equalTo(self.view.snp.left)
@@ -226,6 +229,41 @@ class CharityInfoVC: UIViewController{
     }
     
     @objc func accessoryButtonPressed(){
+       
+        
+    }
+    
+    
+}
+
+extension CharityInfoVC: TitleLabelViewDelegate{
+    func favouriteButtonPressed() {
+        PersistenceManager.isCharityFavorite(charity: charity) { [self] (isFavourite) in
+            if (isFavourite){
+                PersistenceManager.updateFavorites(charity: charity, persistenceActionType: .remove) { (error) in
+                    if ((error) != nil){
+                        presentGFAlertOnMainThread(title: "Error", message: error!.errorMessage, buttonTitle: "Ok")
+                    }
+                    else{
+                        charityTitleLabelView.isFavourite = false
+                        presentGFAlertOnMainThread(title: "Removed", message: "\(charity.name) has been removed from your favorites", buttonTitle: "Ok")
+                        
+                    }
+                }
+            }else{
+                PersistenceManager.updateFavorites(charity: charity, persistenceActionType: .add) { (error) in
+                    if ((error) != nil){
+                        presentGFAlertOnMainThread(title: "Error", message: error!.errorMessage, buttonTitle: "Ok")
+                    }
+                    else{
+                        charityTitleLabelView.isFavourite = true
+                        presentGFAlertOnMainThread(title: "Added", message: "\(charity.name) has been added to your favorites", buttonTitle: "Ok")
+                    }
+                }
+            }
+            
+            
+        }
         
     }
     

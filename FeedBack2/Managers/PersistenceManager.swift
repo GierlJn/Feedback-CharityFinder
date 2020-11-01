@@ -47,7 +47,7 @@ class PersistenceManager {
         
     }
     
-    static func addFavorite(charity: Charity, persistenceActionType: PersistenceActionType, completed: @escaping(FBError?) -> Void){
+    static func updateFavorites(charity: Charity, persistenceActionType: PersistenceActionType, completed: @escaping(FBError?) -> Void){
         retrieveFavorites { (result) in
             switch result{
             case .success(var charities):

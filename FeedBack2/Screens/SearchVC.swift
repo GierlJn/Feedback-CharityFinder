@@ -154,11 +154,11 @@ extension SearchVC: HeaderViewDelegate{
 }
 
 extension SearchVC: ShowCaseVCDelegate{
-    func showCharityInfo(charityId: String) {
+    func showCharityInfo(charityId: String, charity: Charity) {
         headerView.textfield.clearTextField()
         let charityInfoVC = CharityInfoVC()
         charityInfoVC.charityId = charityId
-        
+        charityInfoVC.charity = charity
         let navigationController = UINavigationController(rootViewController: charityInfoVC)
         navigationController.modalPresentationStyle = .fullScreen
         navigationController.navigationBar.barStyle = .black
