@@ -23,13 +23,15 @@ class CharityInfoVC: UIViewController{
     var aboutHeaderLabel = FBTitleLabel(textAlignment: .left)
     var tagView = TagLabelScrollView(color: .lightGray)
     var locationTagView = TagLabelScrollView(color: .systemGray)
-    
+    var contentSuperView = UIView()
     
     let scrollView = UIScrollView()
     let contentView = UIView()
     var charityId: String!
     var enteredDonation: Float = 1.0
 
+    var contentHeight: CGFloat = 1.0
+    
     var infoCharity: InfoCharity?
     var charity: Charity!
     
@@ -65,7 +67,17 @@ class CharityInfoVC: UIViewController{
     }
     
     private func configureScrollView(){
-        view.addSubview(scrollView)
+        view.addSubview(contentSuperView)
+        
+        contentSuperView.snp.makeConstraints { (maker) in
+            maker.top.equalTo(impactImageView.snp.bottom)
+            maker.left.equalTo(self.view.snp.left)
+            maker.right.equalTo(self.view.snp.right)
+            maker.bottom.equalTo(donationBarView.snp.top)
+        }
+        
+        
+        contentSuperView.addSubview(scrollView)
         scrollView.addSubview(contentView)
         
         scrollView.snp.makeConstraints { (maker) in
@@ -77,8 +89,8 @@ class CharityInfoVC: UIViewController{
         
         contentView.pinToEdges(of: scrollView)
         contentView.snp.makeConstraints { (maker) in
-            maker.width.equalTo(scrollView.snp.width)
-            maker.height.equalTo(500)
+            maker.width.equalTo(contentSuperView.snp.width)
+            //maker.height.equalTo(contentSuperView.snp.height).priority(.low)
         }
     }
     
@@ -156,6 +168,8 @@ class CharityInfoVC: UIViewController{
             maker.left.equalTo(contentView.snp.left).offset(20)
             maker.right.equalTo(contentView.snp.right).offset(-20)
         }
+        
+        contentHeight += 75
     }
     
     private func configureLocationTagView(_ infoCharity: InfoCharity){
@@ -167,6 +181,7 @@ class CharityInfoVC: UIViewController{
             maker.left.equalTo(contentView.snp.left).offset(20)
             maker.right.equalTo(contentView.snp.right).offset(-20)
         }
+        contentHeight += 40
     }
     
     private func configureAboutHeaderLabel(){
@@ -178,6 +193,7 @@ class CharityInfoVC: UIViewController{
             maker.right.equalTo(contentView.snp.right).offset(-20)
             maker.height.equalTo(50)
         }
+        contentHeight += 75
     }
     
     private func configureDescriptionLabel(_ infoCharity: InfoCharity){
@@ -210,6 +226,9 @@ class CharityInfoVC: UIViewController{
             maker.right.equalTo(contentView.snp.right).offset(-20)
         }
         descriptionLabel.sizeToFit()
+        
+        let height = labelText.height(withWidth: view.bounds.width - 40, font: UIFont.preferredFont(forTextStyle: .footnote))
+        contentHeight += height
     }
     
     private func configureOutputOverviewStackView(_ infoCharity: InfoCharity){
@@ -222,6 +241,12 @@ class CharityInfoVC: UIViewController{
             maker.left.equalTo(contentView.snp.left).offset(20)
             maker.right.equalTo(contentView.snp.right).offset(-20)
         }
+        contentHeight += 100
+        
+        contentView.snp.makeConstraints { (maker) in
+            maker.height.equalTo(contentHeight)
+        }
+        
     }
     
     @objc func backButtonPressed(){
@@ -234,6 +259,14 @@ class CharityInfoVC: UIViewController{
     }
     
     
+}
+
+extension String {
+    func height(withWidth width: CGFloat, font: UIFont) -> CGFloat {
+        let maxSize = CGSize(width: width, height: CGFloat.greatestFiniteMagnitude)
+        let actualSize = self.boundingRect(with: maxSize, options: [.usesLineFragmentOrigin], attributes: [.font : font], context: nil)
+        return actualSize.height
+    }
 }
 
 extension CharityInfoVC: TitleLabelViewDelegate{
@@ -274,5 +307,12 @@ extension CharityInfoVC: DonationBarViewDelegate{
     func donationButtonPressed() {
         guard let infoCharity = infoCharity, let url = URL(string: infoCharity.url!) else { return }
         presentSafariVC(with: url)
+    }
+}
+
+extension UIScrollView {
+    func fitSizeOfContent() {
+        let sumHeight = self.subviews.map({$0.frame.size.height}).reduce(0, {x, y in x + y})
+        self.contentSize = CGSize(width: self.frame.width, height: sumHeight)
     }
 }

@@ -12,6 +12,7 @@
 		B912457225284C26002B85C5 /* SearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B912457125284C26002B85C5 /* SearchResponse.swift */; };
 		B912457525287599002B85C5 /* FBSubTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B912457425287599002B85C5 /* FBSubTitleLabel.swift */; };
 		B912457725287863002B85C5 /* DonationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B912457625287863002B85C5 /* DonationManager.swift */; };
+		B91397E125500BA200CB55BD /* OwnScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91397E025500BA200CB55BD /* OwnScrollView.swift */; };
 		B914C77B2536DFB600FAC66B /* TagLabelScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B914C77A2536DFB600FAC66B /* TagLabelScrollView.swift */; };
 		B914C77E2536E69B00FAC66B /* TagLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B914C77D2536E69B00FAC66B /* TagLabel.swift */; };
 		B9273CD925270C6700FE7155 /* CharityInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9273CD825270C6700FE7155 /* CharityInfoView.swift */; };
@@ -73,6 +74,7 @@
 		B912457125284C26002B85C5 /* SearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResponse.swift; sourceTree = "<group>"; };
 		B912457425287599002B85C5 /* FBSubTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBSubTitleLabel.swift; sourceTree = "<group>"; };
 		B912457625287863002B85C5 /* DonationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationManager.swift; sourceTree = "<group>"; };
+		B91397E025500BA200CB55BD /* OwnScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnScrollView.swift; sourceTree = "<group>"; };
 		B914C77A2536DFB600FAC66B /* TagLabelScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagLabelScrollView.swift; sourceTree = "<group>"; };
 		B914C77D2536E69B00FAC66B /* TagLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagLabel.swift; sourceTree = "<group>"; };
 		B9273CD825270C6700FE7155 /* CharityInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharityInfoView.swift; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 			children = (
 				B9664EC02524834E00637BDF /* FavouritesVC.swift */,
 				B9664EC425248B1000637BDF /* CharityListVC.swift */,
+				B91397E025500BA200CB55BD /* OwnScrollView.swift */,
 				B95B9E4D2529C34900DF6368 /* CharityInfoVC.swift */,
 				B9EBADFC2536EEE60070705F /* SearchVC.swift */,
 			);
@@ -402,6 +405,7 @@
 				B995A1BB252DF01B0037E0FB /* StatusBarViewTwo.swift in Sources */,
 				B9664EC12524834E00637BDF /* FavouritesVC.swift in Sources */,
 				B93BA93125387E43006A08BE /* ExploreCharityCell.swift in Sources */,
+				B91397E125500BA200CB55BD /* OwnScrollView.swift in Sources */,
 				B956D49B252F4A9A00F6E0D6 /* OutputOverViewContainerView.swift in Sources */,
 				B904D32C25401FD60071E6CA /* UITableView+Ext.swift in Sources */,
 				B9EBAE012536F1250070705F /* HeaderView.swift in Sources */,
