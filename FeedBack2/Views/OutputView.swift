@@ -53,7 +53,7 @@ class OutputView: UIView{
         let value = output.costPerBeneficiary!.value
         let floatValue = Float(value!) ?? 1.0
         let formatted = String(format: "%.2f", floatValue)
-        impactLabel.text = "For every \(formatted)\(userCurrency.symbol) donated"
+        impactLabel.text = "For every \(formatted)\(PersistenceManager.retrieveCurrency().symbol) donated"
         
         impactLabel.font = .systemFont(ofSize: 12)
         impactLabel.textColor = .mainTextColor

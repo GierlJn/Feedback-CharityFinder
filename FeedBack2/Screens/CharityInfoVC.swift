@@ -254,8 +254,22 @@ class CharityInfoVC: UIViewController{
     }
     
     @objc func accessoryButtonPressed(){
-       
+        DispatchQueue.main.async {
+            let vc = CurrencySelectionVC()
+            vc.modalPresentationStyle = .overFullScreen
+            vc.modalTransitionStyle = .crossDissolve
+            vc.delegate = self
+            self.present(vc, animated: true)
+        }
         
+    }
+    
+    
+}
+
+extension CharityInfoVC: CurrencySelectionDelegate{
+    func currencyChanged() {
+        outputOverviewStackView.setNeedsDisplay()
     }
     
     
@@ -294,13 +308,9 @@ extension CharityInfoVC: TitleLabelViewDelegate{
                     }
                 }
             }
-            
-            
         }
-        
     }
-    
-    
+
 }
 
 extension CharityInfoVC: DonationBarViewDelegate{
@@ -310,9 +320,3 @@ extension CharityInfoVC: DonationBarViewDelegate{
     }
 }
 
-extension UIScrollView {
-    func fitSizeOfContent() {
-        let sumHeight = self.subviews.map({$0.frame.size.height}).reduce(0, {x, y in x + y})
-        self.contentSize = CGSize(width: self.frame.width, height: sumHeight)
-    }
-}

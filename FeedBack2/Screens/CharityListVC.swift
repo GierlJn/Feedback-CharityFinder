@@ -75,27 +75,6 @@ class CharityListVC: UIViewController{
     }
 }
 
-enum ImpactEstimation: String{
-    case none = "none"
-    case low = "low"
-    case medium = "medium"
-    case high = "high"
-    
-    var getSortingRank: Int{
-        switch self{
-        case .high:
-            return 4
-        case .medium:
-            return 3
-        case .low:
-            return 2
-        case .none:
-            return 1
-        }
-    }
-    
-}
-
 extension CharityListVC: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let charity = charities[indexPath.item]

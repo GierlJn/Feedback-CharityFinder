@@ -22,6 +22,15 @@ extension UIViewController{
         }
     }
     
+    func presentCurrencySelectionOnMainThread(){
+        DispatchQueue.main.async {
+            let vc = CurrencySelectionVC()
+            vc.modalPresentationStyle = .overFullScreen
+            vc.modalTransitionStyle = .crossDissolve
+            self.present(vc, animated: true)
+        }
+    }
+    
     func presentSafariVC(with url: URL){
            let safariVC = SFSafariViewController(url: url)
            safariVC.preferredControlTintColor = .systemBlue
