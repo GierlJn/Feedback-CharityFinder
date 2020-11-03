@@ -30,6 +30,7 @@ class CharityListVC: UIViewController{
         tableView.register(CharityCell.self, forCellReuseIdentifier: CharityCell.reuseIdentifier)
         tableView.delegate = self
         tableView.rowHeight = 120
+        
         tableView.removeExcessCells()
     }
     
@@ -86,8 +87,10 @@ extension CharityListVC: UITableViewDelegate{
         let charityInfoVC = CharityInfoVC()
         charityInfoVC.charityId = charity.id
         charityInfoVC.charity = charity
-        let navigationController = UINavigationController(rootViewController: charityInfoVC)
+    
+        tableView.deselectRow(at: indexPath, animated: true)
         
+        let navigationController = UINavigationController(rootViewController: charityInfoVC)
         navigationController.modalPresentationStyle = .fullScreen
         navigationController.navigationBar.barStyle = .black
         present(navigationController, animated: true)
