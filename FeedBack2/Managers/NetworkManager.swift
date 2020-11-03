@@ -14,13 +14,13 @@ class NetworkManager{
     var baseSearchUrl = "https://app.sogive.org/search.json?"
     var baseCharityInfoUrl = "https://app.sogive.org/charity/"
     
-    private init(){}
-    
-    static let shared = NetworkManager()
+//    private init(){}
+//    
+//    static let shared = NetworkManager()
     
     func getCharities(searchParameter: String, size: Int, completed: @escaping (Result<[Charity], FBError>) -> Void){
         let stringUrl = "\(baseSearchUrl)\(searchParameter)&size=\(size)"
-        
+        print(stringUrl)
         guard let url = URL(string: stringUrl) else {
             completed(.failure(.unableToConnect))
             return

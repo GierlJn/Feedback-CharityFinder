@@ -143,19 +143,13 @@ extension ShowCaseVC {
     
     fileprivate func loadCharities() {
         
-        charityController.loadCharities(category: Categories.highImpact.category, size: 4, positionIndex: 0) { [weak self] (result) in
+        charityController.loadInitialCharities { [weak self] (error) in
             guard let self = self else { return }
-
-            switch result{
-            case .failure(let error):
-                print(error)
-            case .success(let _):
+            guard let error = error else {
                 self.applyCurrentSnapshot()
-//                if(self.firstCharityDataReceived){
-//                    self.applyCurrentSnapshot()
-//                }
-//                self.firstCharityDataReceived = true
+                return
             }
+            self.presentGFAlertOnMainThread(title: "Something went wrong", message: error.errorMessage, buttonTitle: "Ok")
         }
     }
 }

@@ -25,7 +25,7 @@ enum FBError: Error {
     var errorMessage: String{
         switch self {
         case .unableToConnect:
-            return "Was not able to connect to SoGive server"
+            return "Was not able to connect to the server"
         case .invalidResponseCode(let statusCode):
             return "Invalid Response code from server \(statusCode)"
         case .invalidData:

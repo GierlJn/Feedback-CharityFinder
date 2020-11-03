@@ -10,6 +10,8 @@ import UIKit
 
 class FBImpactImageView: UIImageView{
     
+    let networkManager = NetworkManager()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
@@ -55,7 +57,7 @@ class FBImpactImageView: UIImageView{
     }
     
     private func downloadImage(_ imageUrl: String, completed: @escaping(FBError?) -> Void) {
-            NetworkManager.shared.downloadImage(urlString: imageUrl) { [weak self](result) in
+        networkManager.downloadImage(urlString: imageUrl) { [weak self](result) in
             guard let self = self else {return}
             switch(result){
             case .failure(let error):

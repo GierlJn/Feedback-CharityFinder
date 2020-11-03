@@ -35,7 +35,7 @@ class CharityInfoVC: UIViewController{
     var infoCharity: InfoCharity?
     var charity: Charity!
     
-    
+    let networkManager = NetworkManager()
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavigationBar()
@@ -97,7 +97,7 @@ class CharityInfoVC: UIViewController{
     
     private func getCharityInfo() {
         showLoadingView()
-        NetworkManager.shared.getCharityInfo(charityId: charityId) { [weak self] (result) in
+        networkManager.getCharityInfo(charityId: charityId) { [weak self] (result) in
             guard let self = self else { return }
             switch(result){
             case .failure(let error):

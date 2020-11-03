@@ -11,6 +11,7 @@ import UIKit
 class FBLogoImageView: UIImageView{
     
     let insetValue: CGFloat = -16
+    let networkManager = NetworkManager()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -43,7 +44,7 @@ class FBLogoImageView: UIImageView{
     }
     
     private func downloadLogoImage(_ logoUrl: String) {
-        NetworkManager.shared.downloadImage(urlString: logoUrl) { [weak self](result) in
+        networkManager.downloadImage(urlString: logoUrl) { [weak self](result) in
             guard let self = self else {return}
             switch(result){
             case .failure(let error):
