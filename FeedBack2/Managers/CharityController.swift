@@ -25,29 +25,15 @@ class CharityController {
     
     typealias Handler = (Result<[Charity], FBError>) -> Void
     
-    func loadHighImpactCharities( completed: @escaping Handler){
-        NetworkManager.shared.getCharities(searchParameter: Categories.highImpact.category.parameter, size: 8) { [weak self] (result) in
+    func loadCharities( category: Category, size: Int, positionIndex: Int, completed: @escaping Handler){
+        NetworkManager.shared.getCharities(searchParameter: category.parameter, size: size) { [weak self] (result) in
             guard let self = self else { return }
             switch result{
             case .failure(let error):
                 print(error)
                 completed(.failure(error))
             case .success(let charities):
-                self.generateCharityCollections(for: charities, category: Categories.highImpact.category, positionIndex: 0)
-                completed(.success(charities))
-            }
-        }
-    }
-    
-    func loadSecoundaryCharities( completed: @escaping Handler){
-        NetworkManager.shared.getCharities(searchParameter: Categories.animals.category.parameter, size: 8) { [weak self] (result) in
-            guard let self = self else { return }
-            switch result{
-            case .failure(let error):
-                print(error)
-                completed(.failure(error))
-            case .success(let charities):
-                self.generateCharityCollections(for: charities, category: Categories.animals.category, positionIndex: 1)
+                self.generateCharityCollections(for: charities, category: category, positionIndex: positionIndex)
                 completed(.success(charities))
             }
         }

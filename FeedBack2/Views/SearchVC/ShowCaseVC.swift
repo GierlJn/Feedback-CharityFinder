@@ -142,33 +142,19 @@ extension ShowCaseVC {
     }
     
     fileprivate func loadCharities() {
-        charityController.loadHighImpactCharities { [weak self] (result) in
-            guard let self = self else { return }
-            
-            switch result{
-            case .failure(let error):
-                print(error)
-            case .success(let _):
-                self.applyCurrentSnapshot()
-                if(self.firstCharityDataReceived){
-                    
-                    self.applyCurrentSnapshot()
-                }
-                self.firstCharityDataReceived = true
-            }
-        }
         
-        charityController.loadSecoundaryCharities{ [weak self] (result) in
+        charityController.loadCharities(category: Categories.highImpact.category, size: 4, positionIndex: 0) { [weak self] (result) in
             guard let self = self else { return }
 
             switch result{
             case .failure(let error):
                 print(error)
             case .success(let _):
-                if(self.firstCharityDataReceived){
-                    self.applyCurrentSnapshot()
-                }
-                self.firstCharityDataReceived = true
+                self.applyCurrentSnapshot()
+//                if(self.firstCharityDataReceived){
+//                    self.applyCurrentSnapshot()
+//                }
+//                self.firstCharityDataReceived = true
             }
         }
     }

@@ -18,13 +18,14 @@ class NetworkManager{
     
     static let shared = NetworkManager()
     
-    func getCharities(searchParameter: String, size: Int = 8, completed: @escaping (Result<[Charity], FBError>) -> Void){
-        guard var url = URL(string: "\(baseSearchUrl)\(searchParameter)") else {
+    func getCharities(searchParameter: String, size: Int, completed: @escaping (Result<[Charity], FBError>) -> Void){
+        let stringUrl = "\(baseSearchUrl)\(searchParameter)&size=\(size)"
+        
+        guard let url = URL(string: stringUrl) else {
             completed(.failure(.unableToConnect))
             return
         }
-        url.appendPathComponent("&size=\(size)")
-        
+
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             if error != nil{
                 completed(.failure(.invalidData))

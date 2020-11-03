@@ -42,7 +42,7 @@ class CharityListVC: UIViewController{
     }
     
     func getCharities(searchParameter: String) {
-        NetworkManager.shared.getCharities(searchParameter: searchParameter, size: 100) { [weak self] result in
+        NetworkManager.shared.getCharities(searchParameter: searchParameter, size: 20) { [weak self] result in
             guard let self = self else { return }
             switch(result){
             case .failure(let error):
