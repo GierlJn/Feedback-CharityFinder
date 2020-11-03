@@ -51,7 +51,7 @@ class CurrencySelectionVC: UIViewController{
             maker.centerY.equalTo(view.snp.centerY)
             maker.centerX.equalTo(view.snp.centerX)
             maker.height.equalTo(220)
-            maker.width.equalTo(280)
+            maker.width.equalTo(240)
         }
     }
     
@@ -71,8 +71,8 @@ class CurrencySelectionVC: UIViewController{
         actionButton.setTitle("Set", for: .normal)
         actionButton.snp.makeConstraints { (maker) in
             maker.height.equalTo(44)
-            maker.left.equalTo(containerView.snp.left).offset(padding)
-            maker.right.equalTo(containerView.snp.right).offset(-padding)
+            maker.left.equalTo(containerView.snp.left).offset(padding*2)
+            maker.right.equalTo(containerView.snp.right).offset(-padding*2)
             maker.bottom.equalTo(containerView.snp.bottom).offset(-padding)
         }
         actionButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)

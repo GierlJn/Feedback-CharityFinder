@@ -19,7 +19,7 @@ class CharityInfoVC: UIViewController{
     var descriptionLabel = FBTextLabel()
     var charityTitleLabelView = CharityTitleLabelView()
     var donationBarView = DonationBarView()
-    var outputOverviewStackView = OutputOverViewContainerView()
+    var outputView: OutputView?
     var aboutHeaderLabel = FBTitleLabel(textAlignment: .left)
     var tagView = TagLabelScrollView(color: .lightGray)
     var locationTagView = TagLabelScrollView(color: .systemGray)
@@ -233,9 +233,9 @@ class CharityInfoVC: UIViewController{
     
     private func configureOutputOverviewStackView(_ infoCharity: InfoCharity){
         guard let impact = infoCharity.singleImpact else { return }
-        outputOverviewStackView.set(outputs: [impact])
-        contentView.addSubview(outputOverviewStackView)
-        outputOverviewStackView.snp.makeConstraints { (maker) in
+        outputView = OutputView(output: impact, color: .headerViewGradientEnd)
+        contentView.addSubview(outputView!)
+        outputView!.snp.makeConstraints { (maker) in
             maker.height.equalTo(30)
             maker.top.equalTo(descriptionLabel.snp.bottom).offset(50)
             maker.left.equalTo(contentView.snp.left).offset(20)
@@ -261,7 +261,6 @@ class CharityInfoVC: UIViewController{
             vc.delegate = self
             self.present(vc, animated: true)
         }
-        
     }
     
     
@@ -269,7 +268,7 @@ class CharityInfoVC: UIViewController{
 
 extension CharityInfoVC: CurrencySelectionDelegate{
     func currencyChanged() {
-        outputOverviewStackView.setNeedsDisplay()
+        outputView?.updateUI()
     }
     
     

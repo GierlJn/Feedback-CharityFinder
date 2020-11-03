@@ -29,7 +29,9 @@ class OutputView: UIView{
         self.init()
         self.output = output
         self.viewColor = color
+        
         configure()
+        updateUI()
     }
     
     private func configure(){
@@ -41,23 +43,6 @@ class OutputView: UIView{
             maker.size.equalTo(30)
             maker.centerY.equalTo(self.snp.centerY)
         }
-        
-        mayFundLabel.font = .boldSystemFont(ofSize: 12)
-        let valueLabelText = "1 \(output.name!.formatOutputName(with: PersistenceManager.retrieveCurrency()))"
-        
-        mayFundLabel.text = valueLabelText
-        mayFundLabel.textColor = .mainTextColor
-        
-
-        
-        let value = output.costPerBeneficiary!.value
-        let floatValue = Float(value!) ?? 1.0
-        let formatted = String(format: "%.2f", floatValue)
-        impactLabel.text = "For every \(formatted)\(PersistenceManager.retrieveCurrency().symbol) donated"
-        
-        impactLabel.font = .systemFont(ofSize: 12)
-        impactLabel.textColor = .mainTextColor
-        impactLabel.alpha = 0.8
         
         addSubview(labelsStackView)
         labelsStackView.axis = .vertical
@@ -74,5 +59,20 @@ class OutputView: UIView{
         }
     }
     
+    func updateUI(){
+        mayFundLabel.font = .boldSystemFont(ofSize: 12)
+        let valueLabelText = "1 \(output.name!.formatOutputName(with: PersistenceManager.retrieveCurrency()))"
+        mayFundLabel.text = valueLabelText
+        mayFundLabel.textColor = .mainTextColor
+        
+        let value = output.costPerBeneficiary!.value
+        let floatValue = Float(value!) ?? 1.0
+        let formatted = String(format: "%.2f", floatValue)
+        impactLabel.text = "For every \(formatted)\(PersistenceManager.retrieveCurrency().symbol) donated"
+        
+        impactLabel.font = .systemFont(ofSize: 12)
+        impactLabel.textColor = .mainTextColor
+        impactLabel.alpha = 0.8
+    }
     
 }
