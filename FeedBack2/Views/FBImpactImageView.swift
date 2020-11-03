@@ -41,7 +41,7 @@ class FBImpactImageView: UIImageView{
                 completed(nil)
             }
         }else{
-            downloadLogoImage(imageUrl) { (error) in
+            downloadImage(imageUrl) { (error) in
                 if(error != nil){
                     DispatchQueue.main.async {
                         self.image = Images.image_placeholder
@@ -54,7 +54,7 @@ class FBImpactImageView: UIImageView{
         }
     }
     
-    private func downloadLogoImage(_ imageUrl: String, completed: @escaping(FBError?) -> Void) {
+    private func downloadImage(_ imageUrl: String, completed: @escaping(FBError?) -> Void) {
             NetworkManager.shared.downloadImage(urlString: imageUrl) { [weak self](result) in
             guard let self = self else {return}
             switch(result){
