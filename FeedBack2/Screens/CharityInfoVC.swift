@@ -58,6 +58,7 @@ class CharityInfoVC: UIViewController{
     
     private func configureDonationBarView(){
         view.addSubview(donationBarView)
+        donationBarView.delegate = self
         donationBarView.snp.makeConstraints { (maker) in
             maker.left.equalTo(self.view.snp.left)
             maker.right.equalTo(self.view.snp.right)
@@ -328,7 +329,9 @@ extension CharityInfoVC: TitleLabelViewDelegate{
 
 extension CharityInfoVC: DonationBarViewDelegate{
     func donationButtonPressed() {
-        guard let infoCharity = infoCharity, let url = URL(string: infoCharity.url!) else { return }
+        guard let infoCharity = infoCharity, let url = URL(string: infoCharity.url!) else {
+            presentGFAlertOnMainThread(title: "Something went wrong", message: "It seems like we don't have a valid link to this charity.", buttonTitle: "Ok")
+            return }
         presentSafariVC(with: url)
     }
 }
