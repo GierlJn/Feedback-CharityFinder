@@ -58,7 +58,6 @@
 		B9EBAE012536F1250070705F /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EBAE002536F1250070705F /* HeaderView.swift */; };
 		B9EBAE04253708CC0070705F /* SearchCategoriesStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EBAE03253708CC0070705F /* SearchCategoriesStackView.swift */; };
 		B9EBAE08253713C10070705F /* CategoryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EBAE07253713C10070705F /* CategoryButton.swift */; };
-		B9F22749252EE05900A25EC5 /* FBTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F22748252EE05900A25EC5 /* FBTextView.swift */; };
 		B9F2274C252EE62200A25EC5 /* Colors+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F2274B252EE62200A25EC5 /* Colors+Ext.swift */; };
 		B9FF36A62525B1090065AC17 /* CharityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FF36A52525B1090065AC17 /* CharityCell.swift */; };
 		B9FF36A92525B8D70065AC17 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FF36A82525B8D70065AC17 /* NetworkManager.swift */; };
@@ -116,7 +115,6 @@
 		B9EBAE002536F1250070705F /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		B9EBAE03253708CC0070705F /* SearchCategoriesStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCategoriesStackView.swift; sourceTree = "<group>"; };
 		B9EBAE07253713C10070705F /* CategoryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryButton.swift; sourceTree = "<group>"; };
-		B9F22748252EE05900A25EC5 /* FBTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBTextView.swift; sourceTree = "<group>"; };
 		B9F2274B252EE62200A25EC5 /* Colors+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Colors+Ext.swift"; sourceTree = "<group>"; };
 		B9FF36A52525B1090065AC17 /* CharityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharityCell.swift; sourceTree = "<group>"; };
 		B9FF36A82525B8D70065AC17 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -143,9 +141,7 @@
 				B914C77D2536E69B00FAC66B /* TagLabel.swift */,
 				B912457425287599002B85C5 /* FBSubTitleLabel.swift */,
 				B9A1C0FB252B470C004E3AEE /* FBTitleLabel.swift */,
-				B9F22748252EE05900A25EC5 /* FBTextView.swift */,
 				B97AAFF72531BF4C00FCBC28 /* FBTextLabel.swift */,
-				B9EBAE07253713C10070705F /* CategoryButton.swift */,
 			);
 			path = Labels;
 			sourceTree = "<group>";
@@ -155,8 +151,6 @@
 			children = (
 				B99408152551560B005D78E8 /* CharityInfoVC */,
 				B9EBADFF2536F1190070705F /* SearchVC */,
-				B9C12F41253467AF0023CD11 /* Buttons */,
-				B994081725515623005D78E8 /* TextFields */,
 				B994081825515631005D78E8 /* ImageViews */,
 				B91397E6255040A800CB55BD /* AlertContainerView.swift */,
 			);
@@ -184,6 +178,8 @@
 			children = (
 				B9FF36AB2525BE200065AC17 /* Utilities */,
 				B9A1C0F8252B3E71004E3AEE /* Extensions */,
+				B9C12F41253467AF0023CD11 /* Buttons */,
+				B994081725515623005D78E8 /* TextFields */,
 				B912457325287588002B85C5 /* Labels */,
 				B99BB052254D59140017E1F8 /* ViewController */,
 				B9273CD725270C5800FE7155 /* Views */,
@@ -272,6 +268,7 @@
 		B9C12F41253467AF0023CD11 /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
+				B9EBAE07253713C10070705F /* CategoryButton.swift */,
 				B9664EC22524864900637BDF /* FBButton.swift */,
 			);
 			path = Buttons;
@@ -434,7 +431,6 @@
 				B9A1C0FC252B470C004E3AEE /* FBTitleLabel.swift in Sources */,
 				B97AAFCE25319A3400FCBC28 /* Constants.swift in Sources */,
 				B912457725287863002B85C5 /* DonationManager.swift in Sources */,
-				B9F22749252EE05900A25EC5 /* FBTextView.swift in Sources */,
 				B90F6983254EC0C800D69AD1 /* FavoriteCell.swift in Sources */,
 				B91397E7255040A800CB55BD /* AlertContainerView.swift in Sources */,
 				B994081025514490005D78E8 /* ImpactEstimation.swift in Sources */,
