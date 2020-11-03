@@ -254,6 +254,20 @@ class CharityInfoVC: UIViewController{
     }
     
     @objc func accessoryButtonPressed(){
+        let actionSheetAC = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let action = UIAlertAction(title: "Currency Selection", style: .default) { (action) in
+            self.showCurrencyAlertVC()
+        }
+        actionSheetAC.addAction(action)
+        
+        actionSheetAC.addAction(UIAlertAction(title: "Cancel",
+                                                style: .cancel,
+                                                handler: nil))
+        present(actionSheetAC, animated: true)
+        
+    }
+    
+    private func showCurrencyAlertVC(){
         DispatchQueue.main.async {
             let vc = CurrencySelectionVC()
             vc.modalPresentationStyle = .overFullScreen

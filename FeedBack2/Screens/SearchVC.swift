@@ -152,6 +152,9 @@ extension SearchVC: HeaderViewDelegate{
         if(listView.isDescendant(of: contentView)){
             alertController.addAction(sortAction)
             alertController.addAction(showOverViewAction)
+            alertController.addAction(UIAlertAction(title: "Cancel",
+                                                    style: .cancel,
+                                                    handler: nil))
             self.present(alertController, animated: true, completion: nil)
         }
     }
