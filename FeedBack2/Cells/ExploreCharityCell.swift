@@ -46,6 +46,13 @@ extension ExploreCharityCell {
         }
         
         labelView.addSubview(titleLabel)
+        let border = UIView()
+            border.backgroundColor = .systemGray6
+            border.autoresizingMask = [.flexibleWidth, .flexibleBottomMargin]
+        border.frame = CGRect(x: 0, y: 0, width: labelView.frame.size.width, height: 0.9)
+        labelView.addSubview(border)
+        
+        
         titleLabel.snp.makeConstraints { (maker) in
             maker.top.equalTo(labelView.snp.top).offset(spacing)
             maker.left.equalTo(labelView.snp.left).offset(spacing)
@@ -61,8 +68,9 @@ extension ExploreCharityCell {
         }
         
         
-        backgroundColor = .white
+        backgroundColor = .logoImageBackground
         layer.cornerRadius = 8
+        //layer.borderWidth = 1
         clipsToBounds = true
     }
 }

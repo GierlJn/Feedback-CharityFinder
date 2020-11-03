@@ -31,7 +31,8 @@ extension UIColor {
     static var lightBlueBackgroundGradientStart =  UIColor { traitCollection in
         switch traitCollection.userInterfaceStyle {
         case .dark:
-            return UIColor(rgb: 0x000000)
+            return UIColor(rgb: 0x434343)
+            
         default:
           return UIColor(rgb: 0xFFF6FF)
         }
@@ -40,9 +41,19 @@ extension UIColor {
     static var lightBlueBackgroundGradientEnd =  UIColor { traitCollection in
         switch traitCollection.userInterfaceStyle {
         case .dark:
-            return UIColor(rgb: 0x434343)
+            return UIColor(rgb: 0x000000)
         default:
           return UIColor(rgb: 0xEAD7ED)
+        }
+    }
+    
+    static var logoImageBackground = UIColor { traitCollection in
+        switch traitCollection.userInterfaceStyle {
+        case .dark:
+            //return UIColor(rgb: 0xf5f5f5)
+            return UIColor.init(white: 0, alpha: 0 )
+        default:
+            return UIColor.white
         }
     }
     

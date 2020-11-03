@@ -26,11 +26,13 @@ class FBLogoImageView: UIImageView{
         translatesAutoresizingMaskIntoConstraints = false
         contentMode = .scaleAspectFit
         self.image = Images.image_placeholder!.withAlignmentRectInsets(UIEdgeInsets(top: self.insetValue, left: self.insetValue, bottom: self.insetValue, right: self.insetValue))
+        backgroundColor = .logoImageBackground
     }
     
     func setRoundCorners(){
         layer.cornerRadius = 16
         clipsToBounds = true
+        
     }
     
     func setLogoImage(logoUrl: String?){
