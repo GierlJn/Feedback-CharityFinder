@@ -32,12 +32,19 @@ class SearchVC: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        addDismissKeyBoardGesture()
         configureNavigationBar()
         configureHeaderView()
         configureCategoriesView()
         configureCopyRightLabel()
         configureContentView()
         configureShowCaseVC()
+    }
+    
+    private func addDismissKeyBoardGesture(){
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:)))
+        tapGestureRecognizer.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapGestureRecognizer)
     }
     
     private func configureNavigationBar(){
