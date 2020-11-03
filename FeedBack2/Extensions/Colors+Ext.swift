@@ -21,12 +21,32 @@ extension UIColor {
     static var buttonDarkBlueGradientEnd: UIColor { return UIColor(rgb: 0x7573FF)}
     static var hedaerViewGradientStart: UIColor { return UIColor(rgb: 0xab6fdb)}
     static var headerViewGradientEnd: UIColor { return UIColor(rgb: 0x2c299a)}
-    static var lightBlueBackgroundGradientStart: UIColor { return UIColor(rgb: 0xFFF6FF)}
-    static var lightBlueBackgroundGradientEnd: UIColor { return UIColor(rgb: 0xEAD7ED)}
+    //static var lightBlueBackgroundGradientStart: UIColor { return UIColor(rgb: 0xFFF6FF)}
+    //static var lightBlueBackgroundGradientEnd: UIColor { return UIColor(rgb: 0xEAD7ED)}
     static var mainTextColor: UIColor { return UIColor(rgb: 0x676568)}
     static var iconColor: UIColor { return UIColor(rgb: 0xFF797A)}
     static var categoriesTransparentColor: UIColor { return UIColor(rgb: 0xFEF9FC)}
     
+    
+    static var lightBlueBackgroundGradientStart =  UIColor { traitCollection in
+        switch traitCollection.userInterfaceStyle {
+        case .dark:
+            return UIColor(rgb: 0x000000)
+        default:
+          return UIColor(rgb: 0xFFF6FF)
+        }
+    }
+    
+    static var lightBlueBackgroundGradientEnd =  UIColor { traitCollection in
+        switch traitCollection.userInterfaceStyle {
+        case .dark:
+            return UIColor(rgb: 0x434343)
+        default:
+          return UIColor(rgb: 0xEAD7ED)
+        }
+    }
+    
+        
     convenience init(red: Int, green: Int, blue: Int) {
         assert(red >= 0 && red <= 255, "Invalid red component")
         assert(green >= 0 && green <= 255, "Invalid green component")

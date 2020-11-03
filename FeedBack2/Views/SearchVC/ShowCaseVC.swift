@@ -99,9 +99,7 @@ extension ShowCaseVC {
         <ExploreCharityCell, Charity> { (cell, indexPath, charity) in
             cell.titleLabel.text = charity.name
             cell.imageView.setLogoImage(logoUrl: charity.logoUrl)
-            cell.backgroundColor = .white
-            cell.layer.cornerRadius = 8
-            cell.clipsToBounds = true
+            
         }
         
         dataSource = UICollectionViewDiffableDataSource

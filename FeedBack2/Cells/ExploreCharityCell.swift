@@ -32,6 +32,7 @@ class ExploreCharityCell: UICollectionViewCell{
 }
 
 extension ExploreCharityCell {
+    
     func configure(){
         addSubviews(imageView, labelView)
         
@@ -60,7 +61,8 @@ extension ExploreCharityCell {
         }
         
         
-
-        labelView.setGradientBackgroundColor(colors: [.buttonDarkBlueGradientStart, .buttonDarkBlueGradientEnd], axis: .horizontal)
+        backgroundColor = .white
+        layer.cornerRadius = 8
+        clipsToBounds = true
     }
 }
