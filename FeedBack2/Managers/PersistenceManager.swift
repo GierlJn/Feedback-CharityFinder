@@ -19,6 +19,16 @@ class PersistenceManager {
     enum Keys {
         static let currency = "currency"
         static let favourites = "favourites"
+        static let sort = "sort"
+    }
+    
+    static func setImpactSort(_ setOn: Bool){
+        defaults.setValue(setOn, forKey: Keys.sort)
+    }
+    
+    static func getImpactSort()->Bool{
+        let isOn = defaults.value(forKey: Keys.sort) as? Bool ?? false
+        return isOn
     }
     
     static func setCurrency(curency: Currency)->FBError?{

@@ -150,20 +150,26 @@ extension SearchVC: HeaderViewDelegate{
             self.headerView.textfield.clearTextField()
             self.showShowCaseVC()
         }
-        let sortAction = UIAlertAction(title: "Sort for impact", style: .default) { (action) in
+        
+        let sortIsOn = PersistenceManager.getImpactSort()
+        let sortActionTitle = sortIsOn ?    "Turn Off Sort for Impact" : "Turn On Sort for Impact"
+        
+        let sortAction = UIAlertAction(title: sortActionTitle, style: .default) { (action) in
+            PersistenceManager.setImpactSort(!sortIsOn)
             if(self.listView.isDescendant(of: self.contentView)){
                 self.charityListVC.sortForImpact()
+                self.charityListVC.updateData()
             }
         }
         
         if(listView.isDescendant(of: contentView)){
-            alertController.addAction(sortAction)
             alertController.addAction(showOverViewAction)
-            alertController.addAction(UIAlertAction(title: "Cancel",
-                                                    style: .cancel,
-                                                    handler: nil))
-            self.present(alertController, animated: true, completion: nil)
         }
+        alertController.addAction(sortAction)
+        alertController.addAction(UIAlertAction(title: "Cancel",
+                                                style: .cancel,
+                                                handler: nil))
+        self.present(alertController, animated: true, completion: nil)
     }
     
     func categoryChanged(category: Category) {

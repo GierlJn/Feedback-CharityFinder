@@ -55,14 +55,20 @@ class CharityListVC: UIViewController{
     
     private func updateUI(with charities: [Charity]){
         self.charities = charities
+        let isOn = PersistenceManager.getImpactSort()
+        if(isOn){
+            sortForImpact()
+        }
         self.updateData()
     }
     
-    private func updateData(){
+    func updateData(){
         var snapshot = NSDiffableDataSourceSnapshot<Section, Charity>()
         snapshot.appendSections([.main])
         snapshot.appendItems(charities)
-        DispatchQueue.main.async {self.dataSource.apply(snapshot)}
+        DispatchQueue.main.async {
+            self.dataSource.apply(snapshot)
+        }
     }
     
     func sortForImpact(){
@@ -71,7 +77,6 @@ class CharityListVC: UIViewController{
             guard let impact2 = ImpactEstimation(rawValue: charity2.impactEstimation ?? "none") else { return false}
             return impact1.getSortingRank > impact2.getSortingRank
         }
-        self.updateData()
     }
 }
 
