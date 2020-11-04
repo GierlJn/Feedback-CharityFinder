@@ -37,12 +37,14 @@ class FBLogoImageView: UIImageView{
     }
     
     func setLogoImage(logoUrl: String?){
-        guard let logoUrl = logoUrl else { return }
-        downloadLogoImage(logoUrl)
-            
-       // self.image = logoImage.withAlignmentRectInsets(UIEdgeInsets(top: self.insetValue, left: self.insetValue, bottom: self.insetValue, right: self.insetValue))
+            guard let logoUrl = logoUrl else { return }
+            guard let logoImage = ImageCache.shared.getImage(for: logoUrl) else{
+                downloadLogoImage(logoUrl)
+                return
+            }
+            self.image = logoImage.withAlignmentRectInsets(UIEdgeInsets(top: self.insetValue, left: self.insetValue, bottom: self.insetValue, right: self.insetValue))
 
-    }
+        }
     
     private func downloadLogoImage(_ logoUrl: String) {
         networkManager.downloadImage(urlString: logoUrl) { [weak self](result) in
