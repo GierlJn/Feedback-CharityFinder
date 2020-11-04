@@ -35,7 +35,6 @@ class CategoryButton: UIButton{
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        //addShadow()
     }
     
     required init?(coder: NSCoder) {

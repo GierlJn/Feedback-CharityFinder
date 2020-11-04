@@ -268,7 +268,6 @@
 		B9C12F41253467AF0023CD11 /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
-				B9EBAE07253713C10070705F /* CategoryButton.swift */,
 				B9664EC22524864900637BDF /* FBButton.swift */,
 			);
 			path = Buttons;
@@ -279,6 +278,7 @@
 			children = (
 				B9EBAE002536F1250070705F /* HeaderView.swift */,
 				B9EBAE03253708CC0070705F /* SearchCategoriesStackView.swift */,
+				B9EBAE07253713C10070705F /* CategoryButton.swift */,
 				B9B2C8D125397CF600F4131F /* ShowCaseVC.swift */,
 				B9664EC425248B1000637BDF /* CharityListVC.swift */,
 			);

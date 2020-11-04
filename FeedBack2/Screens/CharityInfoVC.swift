@@ -329,9 +329,18 @@ extension CharityInfoVC: TitleLabelViewDelegate{
 
 extension CharityInfoVC: DonationBarViewDelegate{
     func donationButtonPressed() {
-        guard let infoCharity = infoCharity, let url = URL(string: infoCharity.url!) else {
+        guard let infoCharity = infoCharity else { return }
+        
+        var stringUrl = infoCharity.url ?? ""
+        if(!stringUrl.hasPrefix("http")){
+            stringUrl = "http://".appending(stringUrl)
+        }
+        
+        guard let url = URL(string: stringUrl) else {
             presentGFAlertOnMainThread(title: "Something went wrong", message: "It seems like we don't have a valid link to this charity.", buttonTitle: "Ok")
             return }
+        
+        
         presentSafariVC(with: url)
     }
 }

@@ -84,6 +84,10 @@ class SearchHeaderView: UIView{
 
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        actionButton.setGradientBackgroundColor(colors: [.hedaerViewGradientStart, .headerViewGradientEnd], axis: .custom(angle: CGFloat(90)))
+    }
+    
     func configureTextField(){
         textfield.delegate = self
     }

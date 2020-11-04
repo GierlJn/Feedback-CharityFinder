@@ -29,6 +29,7 @@ class FBLogoImageView: UIImageView{
         backgroundColor = .logoImageBackground
     }
     
+    
     func setRoundCorners(){
         layer.cornerRadius = 16
         clipsToBounds = true
@@ -37,11 +38,9 @@ class FBLogoImageView: UIImageView{
     
     func setLogoImage(logoUrl: String?){
         guard let logoUrl = logoUrl else { return }
-        guard let logoImage = ImageCache.shared.getImage(for: logoUrl) else{
-            downloadLogoImage(logoUrl)
-            return
-        }
-        self.image = logoImage.withAlignmentRectInsets(UIEdgeInsets(top: self.insetValue, left: self.insetValue, bottom: self.insetValue, right: self.insetValue))
+        downloadLogoImage(logoUrl)
+            
+       // self.image = logoImage.withAlignmentRectInsets(UIEdgeInsets(top: self.insetValue, left: self.insetValue, bottom: self.insetValue, right: self.insetValue))
 
     }
     
@@ -51,14 +50,12 @@ class FBLogoImageView: UIImageView{
             switch(result){
             case .failure(let error):
                 print(error)
-                DispatchQueue.main.async {
-                    self.image = Images.image_placeholder!.withAlignmentRectInsets(UIEdgeInsets(top: self.insetValue, left: self.insetValue, bottom: self.insetValue, right: self.insetValue))
-                }
             case .success(let logoImage):
                 DispatchQueue.main.async {
                     self.image = logoImage.withAlignmentRectInsets(UIEdgeInsets(top: self.insetValue, left: self.insetValue, bottom: self.insetValue, right: self.insetValue))
+                        ImageCache.shared.setImage(image: logoImage, key: logoUrl)
                 }
-                ImageCache.shared.setImage(image: logoImage, key: logoUrl)
+                
             }
         }
     }
