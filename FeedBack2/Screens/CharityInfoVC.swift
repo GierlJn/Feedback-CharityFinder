@@ -238,7 +238,7 @@ class CharityInfoVC: UIViewController{
         contentView.addSubview(outputView!)
         outputView!.snp.makeConstraints { (maker) in
             maker.height.equalTo(30)
-            maker.top.equalTo(descriptionLabel.snp.bottom).offset(50)
+            maker.top.equalTo(descriptionLabel.snp.bottom).offset(30)
             maker.left.equalTo(contentView.snp.left).offset(20)
             maker.right.equalTo(contentView.snp.right).offset(-20)
         }

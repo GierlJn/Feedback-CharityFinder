@@ -24,7 +24,7 @@ class DonationBarView: UIView{
     }
     
     override func layoutSubviews() {
-        //actionButton.setGradientBackgroundColor(colors: [.buttonDarkBlueGradientStart, .buttonDarkBlueGradientEnd], axis: .horizontal, cornerRadius: 7)
+        actionButton.setGradientBackgroundColor(colors: [.hedaerViewGradientStart, .headerViewGradientEnd], axis: .horizontal, cornerRadius: 7)
     }
     
     private func configure(){
