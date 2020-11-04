@@ -25,8 +25,17 @@ extension UIColor {
     //static var lightBlueBackgroundGradientEnd: UIColor { return UIColor(rgb: 0xEAD7ED)}
     static var mainTextColor: UIColor { return UIColor(rgb: 0x676568)}
     static var iconColor: UIColor { return UIColor(rgb: 0xFF797A)}
-    static var categoriesTransparentColor: UIColor { return UIColor(rgb: 0xFEF9FC)}
+    //static var categoriesTransparentColor: UIColor { return UIColor(rgb: 0xFEF9FC)}
     
+    static var categoriesTransparentColor =  UIColor { traitCollection in
+        switch traitCollection.userInterfaceStyle {
+        case .dark:
+            return UIColor(rgb: 0xf7deed)
+            
+        default:
+          return UIColor(rgb: 0xFEF9FC)
+        }
+    }
     
     static var hedaerViewGradientStart =  UIColor { traitCollection in
         switch traitCollection.userInterfaceStyle {

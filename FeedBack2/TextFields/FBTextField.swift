@@ -24,8 +24,8 @@ class FBTextField: UITextField{
         translatesAutoresizingMaskIntoConstraints = false
         
         layer.cornerRadius = 10
-        layer.borderWidth = 2
-        layer.borderColor = UIColor.systemGray4.cgColor
+        layer.borderWidth = 1
+        layer.borderColor = UIColor.systemGray.cgColor
         
         textColor = .label
         tintColor = .label
