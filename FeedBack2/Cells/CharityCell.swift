@@ -14,6 +14,7 @@ class CharityCell: UITableViewCell{
     let titleLabel = FBTitleLabel(frame: .zero)
     let subTitleLabel = FBSubTitleLabel(frame: .zero)
     let logoImageView = FBLogoImageView(frame: .zero)
+    let imageContentView = UIView()
     let padding = 20
     let favouriteButton = UIButton()
     
@@ -41,12 +42,21 @@ class CharityCell: UITableViewCell{
     }
     
     private func configureLogoImageView(){
-        contentView.addSubview(logoImageView)
-        logoImageView.setRoundCorners()
-        logoImageView.snp.makeConstraints { (maker) in
+        contentView.addSubview(imageContentView)
+        imageContentView.snp.makeConstraints { (maker) in
             maker.size.equalTo(100)
             maker.left.equalTo(padding)
             maker.centerY.equalTo(snp.centerY)
+        }
+        
+        imageContentView.addSubview(logoImageView)
+        logoImageView.setRoundCorners()
+        logoImageView.snp.makeConstraints { (maker) in
+            maker.top.equalTo(imageContentView.snp.top).offset(15)
+            maker.bottom.equalTo(imageContentView.snp.bottom).offset(-15)
+            maker.left.equalTo(imageContentView.snp.left).offset(15)
+            maker.right.equalTo(imageContentView.snp.right).offset(-15)
+            
         }
     }
     
