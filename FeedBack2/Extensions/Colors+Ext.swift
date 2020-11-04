@@ -30,10 +30,11 @@ extension UIColor {
     static var categoriesTransparentColor =  UIColor { traitCollection in
         switch traitCollection.userInterfaceStyle {
         case .dark:
-            return UIColor(rgb: 0xf7deed)
+            return UIColor(rgb: 0xf4f4f4)
             
         default:
-          return UIColor(rgb: 0xFEF9FC)
+          //return UIColor(rgb: 0xFEF9FC)
+            return .white
         }
     }
     

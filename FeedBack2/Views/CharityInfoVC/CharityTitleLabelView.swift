@@ -30,7 +30,7 @@ class CharityTitleLabelView: UIView{
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        backgroundColor = .white
+        backgroundColor = .categoriesTransparentColor
         layer.cornerRadius = 7
         layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner]
     }
@@ -54,6 +54,7 @@ class CharityTitleLabelView: UIView{
         }
         
         addSubview(titleLabel)
+        titleLabel.textColor = .darkText
         titleLabel.snp.makeConstraints { (maker) in
             maker.right.equalTo(favoriteButton.snp.left).offset(-16)
             maker.top.equalTo(self.snp.top).offset(10)

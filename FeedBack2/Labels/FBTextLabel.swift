@@ -19,7 +19,7 @@ class FBTextLabel: UILabel{
     }
     
     private func configure(){
-        textColor = .mainTextColor
+        textColor = .label
         font = UIFont.preferredFont(forTextStyle: .footnote)
         isOpaque = false
         numberOfLines = 0
