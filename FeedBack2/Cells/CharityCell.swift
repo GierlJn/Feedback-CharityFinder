@@ -37,7 +37,7 @@ class CharityCell: UITableViewCell{
             subTitleLabel.text = "Impact unknown"
         }
         
-        logoImageView.setLogoImage(logoUrl: charity.logoUrl)
+        logoImageView.setLogoImage(urlString: charity.logoUrl)
     }
     
     private func configureLogoImageView(){

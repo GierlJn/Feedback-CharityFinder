@@ -14,6 +14,7 @@ class ExploreCharityCell: UICollectionViewCell{
     let imageView = FBLogoImageView(frame: .zero)
     let titleLabel = FBTitleLabel(textAlignment: .center)
     let labelView = UIView()
+    let padding = 15
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
@@ -22,11 +23,6 @@ class ExploreCharityCell: UICollectionViewCell{
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        imageView.image = Images.image_placeholder!
     }
 
 }
@@ -61,10 +57,10 @@ extension ExploreCharityCell {
         }
         
         imageView.snp.makeConstraints { (maker) in
-            maker.top.equalTo(contentView.snp.top)
-            maker.left.equalTo(contentView.snp.left)
-            maker.right.equalTo(contentView.snp.right)
-            maker.bottom.equalTo(labelView.snp.top)
+            maker.top.equalTo(contentView.snp.top).offset(padding)
+            maker.left.equalTo(contentView.snp.left).offset(padding)
+            maker.right.equalTo(contentView.snp.right).offset(-padding)
+            maker.bottom.equalTo(labelView.snp.top).offset(-padding)
         }
         
         

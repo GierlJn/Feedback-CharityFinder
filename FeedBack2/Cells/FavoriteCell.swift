@@ -28,7 +28,7 @@ class FavoriteCell: UITableViewCell{
     
     func set(charity: Charity){
         titleLabel.text = charity.name
-        logoImageView.setLogoImage(logoUrl: charity.logoUrl)
+        logoImageView.setLogoImage(urlString: charity.logoUrl)
     }
     
     private func configureLogoImageView(){

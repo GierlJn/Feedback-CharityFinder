@@ -98,7 +98,7 @@ extension ShowCaseVC {
         let cellRegistration = UICollectionView.CellRegistration
         <ExploreCharityCell, Charity> { (cell, indexPath, charity) in
             cell.titleLabel.text = charity.name
-            cell.imageView.setLogoImage(logoUrl: charity.logoUrl)
+            cell.imageView.setLogoImage(urlString: charity.logoUrl)
             
         }
         

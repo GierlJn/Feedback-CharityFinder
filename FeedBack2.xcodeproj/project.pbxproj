@@ -45,6 +45,7 @@
 		B971B23925306C2600660923 /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B971B23825306C2600660923 /* PersistenceManager.swift */; };
 		B97AAFCE25319A3400FCBC28 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B97AAFCD25319A3400FCBC28 /* Constants.swift */; };
 		B97AAFF82531BF4C00FCBC28 /* FBTextLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B97AAFF72531BF4C00FCBC28 /* FBTextLabel.swift */; };
+		B98A18022552A9750096B081 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = B98A18012552A9750096B081 /* SDWebImage */; };
 		B994081025514490005D78E8 /* ImpactEstimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B994080F25514490005D78E8 /* ImpactEstimation.swift */; };
 		B99BB050254D59060017E1F8 /* FBAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99BB04F254D59060017E1F8 /* FBAlertVC.swift */; };
 		B9A1C0F5252B1D48004E3AEE /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = B9A1C0F4252B1D48004E3AEE /* SnapKit */; };
@@ -128,6 +129,7 @@
 			files = (
 				B9A1C0F5252B1D48004E3AEE /* SnapKit in Frameworks */,
 				B9A1C0FF252B4CD5004E3AEE /* SwiftSVG in Frameworks */,
+				B98A18022552A9750096B081 /* SDWebImage in Frameworks */,
 				B970E95F2542E41F00241F4E /* AnimatedGradientView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -351,6 +353,7 @@
 				B9A1C0F4252B1D48004E3AEE /* SnapKit */,
 				B9A1C0FE252B4CD5004E3AEE /* SwiftSVG */,
 				B970E95E2542E41F00241F4E /* AnimatedGradientView */,
+				B98A18012552A9750096B081 /* SDWebImage */,
 			);
 			productName = FeedBack2;
 			productReference = B9664EA525247C9500637BDF /* FeedBack2.app */;
@@ -384,6 +387,7 @@
 				B9A1C0F3252B1D48004E3AEE /* XCRemoteSwiftPackageReference "SnapKit" */,
 				B9A1C0FD252B4CD5004E3AEE /* XCRemoteSwiftPackageReference "SwiftSVG" */,
 				B970E95D2542E41F00241F4E /* XCRemoteSwiftPackageReference "AnimatedGradientView" */,
+				B98A18002552A9750096B081 /* XCRemoteSwiftPackageReference "SDWebImage" */,
 			);
 			productRefGroup = B9664EA625247C9500637BDF /* Products */;
 			projectDirPath = "";
@@ -662,6 +666,14 @@
 				minimumVersion = 3.0.0;
 			};
 		};
+		B98A18002552A9750096B081 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.9.4;
+			};
+		};
 		B9A1C0F3252B1D48004E3AEE /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit";
@@ -685,6 +697,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B970E95D2542E41F00241F4E /* XCRemoteSwiftPackageReference "AnimatedGradientView" */;
 			productName = AnimatedGradientView;
+		};
+		B98A18012552A9750096B081 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B98A18002552A9750096B081 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
 		};
 		B9A1C0F4252B1D48004E3AEE /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
