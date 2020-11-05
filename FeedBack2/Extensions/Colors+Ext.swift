@@ -19,13 +19,9 @@ extension UIColor {
     static var buttonDarkBlue: UIColor { return UIColor(rgb: 0x5637D1)}
     static var buttonDarkBlueGradientStart: UIColor { return UIColor(rgb: 0xAE71E0)}
     static var buttonDarkBlueGradientEnd: UIColor { return UIColor(rgb: 0x7573FF)}
-    //static var hedaerViewGradientStart: UIColor { return UIColor(rgb: 0xab6fdb)}
-    //static var headerViewGradientEnd: UIColor { return UIColor(rgb: 0x2c299a)}
-    //static var lightBlueBackgroundGradientStart: UIColor { return UIColor(rgb: 0xFFF6FF)}
-    //static var lightBlueBackgroundGradientEnd: UIColor { return UIColor(rgb: 0xEAD7ED)}
     static var mainTextColor: UIColor { return UIColor(rgb: 0x676568)}
     static var iconColor: UIColor { return UIColor(rgb: 0xFF797A)}
-    //static var categoriesTransparentColor: UIColor { return UIColor(rgb: 0xFEF9FC)}
+
     
     static var categoriesTransparentColor =  UIColor { traitCollection in
         switch traitCollection.userInterfaceStyle {
@@ -33,12 +29,11 @@ extension UIColor {
             return UIColor(rgb: 0xf5f5f5)
             
         default:
-          //return UIColor(rgb: 0xFEF9FC)
             return .white
         }
     }
     
-    static var hedaerViewGradientStart =  UIColor { traitCollection in
+    static var headerViewGradientStart =  UIColor { traitCollection in
         switch traitCollection.userInterfaceStyle {
         case .dark:
             return UIColor(rgb: 0x302b63)

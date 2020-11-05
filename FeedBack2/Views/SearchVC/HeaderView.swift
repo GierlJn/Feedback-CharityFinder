@@ -40,7 +40,7 @@ class SearchHeaderView: UIView{
     fileprivate func configureBackgroundView(){
         addSubview(backgroundView)
         backgroundView.pinToEdges(of: self)
-        backgroundView.colors = [[UIColor.hedaerViewGradientStart, UIColor.headerViewGradientEnd]]
+        backgroundView.colors = [[UIColor.headerViewGradientStart, UIColor.headerViewGradientEnd]]
         backgroundView.direction = .right
         backgroundView.type = .conic
     }
@@ -77,7 +77,7 @@ class SearchHeaderView: UIView{
         
         actionButton.setImage(Images.searchActionButton, for: .normal)
         actionButton.addTarget(self, action: #selector(actionButtonTabbed), for: .touchUpInside)
-        actionButton.setGradientBackgroundColor(colors: [.hedaerViewGradientStart, .headerViewGradientEnd], axis: .custom(angle: CGFloat(90)))
+        actionButton.setGradientBackgroundColor(colors: [.headerViewGradientStart, .headerViewGradientEnd], axis: .custom(angle: CGFloat(90)))
         actionButton.layer.cornerRadius = 7
         actionButton.clipsToBounds = true
         actionButton.tintColor = .white
@@ -85,7 +85,7 @@ class SearchHeaderView: UIView{
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        actionButton.setGradientBackgroundColor(colors: [.hedaerViewGradientStart, .headerViewGradientEnd], axis: .custom(angle: CGFloat(90)))
+        actionButton.setGradientBackgroundColor(colors: [.headerViewGradientStart, .headerViewGradientEnd], axis: .custom(angle: CGFloat(90)))
     }
     
     func configureTextField(){
