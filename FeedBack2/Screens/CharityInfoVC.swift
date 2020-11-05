@@ -27,13 +27,13 @@ class CharityInfoVC: UIViewController{
     
     let scrollView = UIScrollView()
     let contentView = UIView()
-    var charityId: String!
-    var enteredDonation: Float = 1.0
-
+    
+    
     var contentHeight: CGFloat = 1.0
     
     var infoCharity: InfoCharity?
     var charity: Charity!
+    var charityId: String!
     
     let networkManager = NetworkManager()
     override func viewDidLoad() {
@@ -104,7 +104,7 @@ class CharityInfoVC: UIViewController{
                 self.presentGFAlertOnMainThread(title: "Something went wrong!", message: error.errorMessage, buttonTitle: "Ok")
             case .success(let infoCharity):
                 DispatchQueue.main.async {
-                    self.impactImageView.setImage(imageUrl: infoCharity.imageUrl) { (error) in
+                    self.impactImageView.setImage(imageUrl: infoCharity.imageUrl) { 
                             self.hideLoadingView()
                             self.infoCharity = infoCharity
                             self.configureViews()

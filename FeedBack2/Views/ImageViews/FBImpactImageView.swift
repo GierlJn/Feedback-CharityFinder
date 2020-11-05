@@ -7,10 +7,13 @@
 //
 
 import UIKit
+import SDWebImage
 
 class FBImpactImageView: UIImageView{
     
     let networkManager = NetworkManager()
+    
+    let insetValue: CGFloat = -20
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -23,52 +26,35 @@ class FBImpactImageView: UIImageView{
     
     private func configure(){
         translatesAutoresizingMaskIntoConstraints = false
-        layer.cornerRadius = 2
-        clipsToBounds = true
+        //layer.cornerRadius = 2
+        //clipsToBounds = true
+        contentMode = .scaleAspectFit
+        backgroundColor = .systemGray6
+        self.image = Images.image_placeholder!//.withAlignmentRectInsets(UIEdgeInsets(top: insetValue, left: insetValue*4, bottom: insetValue, right: insetValue*4))
     }
     
-    func setImage(imageUrl: String?, completed: @escaping(FBError?) -> Void){
+    func setImage(imageUrl: String?, completed: @escaping () -> ()){
         guard let imageUrl = imageUrl else {
-            DispatchQueue.main.async {
-                self.image = Images.image_placeholder
-            }
-            completed(.invalidData)
-            return
-        }
-        
-        let image = ImageCache.shared.getImage(for: imageUrl)
-        if(image != nil){
-            DispatchQueue.main.async {
-                self.image = image
-                completed(nil)
-            }
-        }else{
-            downloadImage(imageUrl) { (error) in
-                if(error != nil){
-                    DispatchQueue.main.async {
-                        self.image = Images.image_placeholder
-                        completed(nil)
-                    }
-                }else {
-                    completed(error)
-                }
-            }
+            completed()
+            return }
+        sd_setImage(with: URL(string: imageUrl)) { (image, erro, type, url) in
+            completed()
         }
     }
     
-    private func downloadImage(_ imageUrl: String, completed: @escaping(FBError?) -> Void) {
-        networkManager.downloadImage(urlString: imageUrl) { [weak self](result) in
-            guard let self = self else {return}
-            switch(result){
-            case .failure(let error):
-                completed(error)
-            case .success(let logoImage):
-                ImageCache.shared.setImage(image: logoImage, key: imageUrl)
-                DispatchQueue.main.async {
-                    self.image = logoImage
-                    completed(nil)
-                }
-            }
-        }
-    }
+//    private func downloadImage(_ imageUrl: String, completed: @escaping(FBError?) -> Void) {
+//        networkManager.downloadImage(urlString: imageUrl) { [weak self](result) in
+//            guard let self = self else {return}
+//            switch(result){
+//            case .failure(let error):
+//                completed(error)
+//            case .success(let logoImage):
+//                ImageCache.shared.setImage(image: logoImage, key: imageUrl)
+//                DispatchQueue.main.async {
+//                    self.image = logoImage
+//                    completed(nil)
+//                }
+//            }
+//        }
+//    }
 }
