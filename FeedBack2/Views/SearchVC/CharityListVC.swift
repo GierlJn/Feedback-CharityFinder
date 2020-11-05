@@ -61,6 +61,7 @@ class CharityListVC: UIViewController{
             sortForImpact()
         }
         self.updateData()
+        scrollToTop()
     }
     
     func updateData(){
@@ -77,6 +78,12 @@ class CharityListVC: UIViewController{
             guard let impact1 = ImpactEstimation(rawValue: charity1.impactEstimation ?? "none") else { return false }
             guard let impact2 = ImpactEstimation(rawValue: charity2.impactEstimation ?? "none") else { return false}
             return impact1.getSortingRank > impact2.getSortingRank
+        }
+    }
+    
+    fileprivate func scrollToTop() {
+        DispatchQueue.main.async {
+            self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
         }
     }
 }
