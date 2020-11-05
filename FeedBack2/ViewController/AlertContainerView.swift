@@ -22,7 +22,7 @@ class AlertContainerView: UIView{
     fileprivate func configure() {
         backgroundColor = .systemBackground
         layer.borderWidth = 2
-        layer.borderColor = UIColor.buttonDarkBlueGradientEnd.cgColor
+        layer.borderColor = UIColor.headerViewGradientStart.cgColor
         layer.cornerRadius = 12
         clipsToBounds = true
     }

@@ -15,7 +15,7 @@ class OutputView: UIView{
     var mayFundLabel = UILabel()
     var impactLabel = UILabel()
     var labelsStackView = UIStackView()
-    var viewColor: UIColor = .iconColor
+    var viewColor: UIColor = UIColor.outputColor
     
     private override init(frame: CGRect) {
         super.init(frame: .zero)
@@ -25,10 +25,9 @@ class OutputView: UIView{
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(output: SimpleImpact, color: UIColor) {
+    init(output: SimpleImpact) {
         self.init()
         self.output = output
-        self.viewColor = color
         
         configure()
         updateUI()
@@ -37,7 +36,7 @@ class OutputView: UIView{
     private func configure(){
         addSubview(iconImageView)
         iconImageView.image = UIImage(systemName: "heart.fill")
-        iconImageView.tintColor = .mainTextColor
+        iconImageView.tintColor = viewColor
         iconImageView.snp.makeConstraints { (maker) in
             maker.left.equalTo(self.snp.left)
             maker.size.equalTo(30)
@@ -63,7 +62,7 @@ class OutputView: UIView{
         mayFundLabel.font = .boldSystemFont(ofSize: 12)
         let valueLabelText = "1 \(output.name!.formatOutputName(with: PersistenceManager.retrieveCurrency()))"
         mayFundLabel.text = valueLabelText
-        mayFundLabel.textColor = .mainTextColor
+        mayFundLabel.textColor = viewColor
         
         let currency = PersistenceManager.retrieveCurrency()
         
@@ -74,7 +73,7 @@ class OutputView: UIView{
         impactLabel.text = "For every \(formatted)\(currency.symbol) donated"
         
         impactLabel.font = .systemFont(ofSize: 12)
-        impactLabel.textColor = .mainTextColor
+        impactLabel.textColor = viewColor
         impactLabel.alpha = 0.8
     }
     

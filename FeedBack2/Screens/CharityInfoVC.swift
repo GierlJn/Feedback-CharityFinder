@@ -233,7 +233,7 @@ class CharityInfoVC: UIViewController{
     
     private func configureOutputOverviewStackView(_ infoCharity: InfoCharity){
         guard let impact = infoCharity.singleImpact else { return }
-        outputView = OutputView(output: impact, color: .headerViewGradientEnd)
+        outputView = OutputView(output: impact)
         contentView.addSubview(outputView!)
         outputView!.snp.makeConstraints { (maker) in
             maker.height.equalTo(30)

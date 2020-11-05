@@ -23,6 +23,16 @@ extension UIColor {
     static var iconColor: UIColor { return UIColor(rgb: 0xFF797A)}
 
     
+    static var outputColor = UIColor { traitCollection in
+        switch traitCollection.userInterfaceStyle {
+        case .dark:
+            return UIColor(rgb: 0xEAD7ED)
+            
+        default:
+            return UIColor(rgb: 0x676568)
+        }
+    }
+    
     static var categoriesTransparentColor =  UIColor { traitCollection in
         switch traitCollection.userInterfaceStyle {
         case .dark:

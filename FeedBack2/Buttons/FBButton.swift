@@ -33,7 +33,7 @@ class FBButton: UIButton{
     }
     
     private func configure(){
-        backgroundColor = .buttonDarkBlueGradientEnd
+        backgroundColor = .headerViewGradientStart
         translatesAutoresizingMaskIntoConstraints = false
         layer.cornerRadius = 7
         titleLabel?.font = .systemFont(ofSize: 20)

@@ -154,7 +154,6 @@
 				B99408152551560B005D78E8 /* CharityInfoVC */,
 				B9EBADFF2536F1190070705F /* SearchVC */,
 				B994081825515631005D78E8 /* ImageViews */,
-				B91397E6255040A800CB55BD /* AlertContainerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -249,6 +248,7 @@
 			isa = PBXGroup;
 			children = (
 				B99BB04F254D59060017E1F8 /* FBAlertVC.swift */,
+				B91397E6255040A800CB55BD /* AlertContainerView.swift */,
 				B91397E325503EB500CB55BD /* CurrencySelectionVC.swift */,
 			);
 			path = ViewController;
