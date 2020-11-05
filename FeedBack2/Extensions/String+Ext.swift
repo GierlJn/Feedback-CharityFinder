@@ -6,7 +6,7 @@
 //  Copyright © 2020 Julian Gierl. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 extension String{
     
@@ -29,5 +29,10 @@ extension String{
     
     func replaceCurrencyWording(with currency: Currency)->String{ return self.replacingOccurrences(of: "pound", with: currency.rawValue) }
     
+    func height(withWidth width: CGFloat, font: UIFont) -> CGFloat {
+        let maxSize = CGSize(width: width, height: CGFloat.greatestFiniteMagnitude)
+        let actualSize = self.boundingRect(with: maxSize, options: [.usesLineFragmentOrigin], attributes: [.font : font], context: nil)
+        return actualSize.height
+    }
     
 }

@@ -52,7 +52,7 @@ class CharityInfoVC: UIViewController{
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.isTranslucent = true
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.left.square.fill"), style: .plain, target: self, action: #selector(backButtonPressed))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: Images.backButton, style: .plain, target: self, action: #selector(backButtonPressed))
         navigationController?.navigationBar.tintColor = .white
     }
     
@@ -91,7 +91,6 @@ class CharityInfoVC: UIViewController{
         contentView.pinToEdges(of: scrollView)
         contentView.snp.makeConstraints { (maker) in
             maker.width.equalTo(contentSuperView.snp.width)
-            //maker.height.equalTo(contentSuperView.snp.height).priority(.low)
         }
     }
     
@@ -289,39 +288,11 @@ extension CharityInfoVC: CurrencySelectionDelegate{
     
 }
 
-extension String {
-    func height(withWidth width: CGFloat, font: UIFont) -> CGFloat {
-        let maxSize = CGSize(width: width, height: CGFloat.greatestFiniteMagnitude)
-        let actualSize = self.boundingRect(with: maxSize, options: [.usesLineFragmentOrigin], attributes: [.font : font], context: nil)
-        return actualSize.height
-    }
-}
-
 extension CharityInfoVC: TitleLabelViewDelegate{
     func favouriteButtonPressed() {
-        PersistenceManager.isCharityFavorite(charity: charity) { [self] (isFavourite) in
-            if (isFavourite){
-                PersistenceManager.updateFavorites(charity: charity, persistenceActionType: .remove) { (error) in
-                    if ((error) != nil){
-                        presentGFAlertOnMainThread(title: "Error", message: error!.errorMessage, buttonTitle: "Ok")
-                    }
-                    else{
-                        charityTitleLabelView.isFavourite = false
-                        presentGFAlertOnMainThread(title: "Removed", message: "\(charity.name) has been removed from your favorites", buttonTitle: "Ok")
-                        
-                    }
-                }
-            }else{
-                PersistenceManager.updateFavorites(charity: charity, persistenceActionType: .add) { (error) in
-                    if ((error) != nil){
-                        presentGFAlertOnMainThread(title: "Error", message: error!.errorMessage, buttonTitle: "Ok")
-                    }
-                    else{
-                        charityTitleLabelView.isFavourite = true
-                        presentGFAlertOnMainThread(title: "Added", message: "\(charity.name) has been added to your favorites", buttonTitle: "Ok")
-                    }
-                }
-            }
+        presentFavoriteAlert(charity: charity) { [weak self] (isFavorite) in
+            guard let self = self else { return }
+            self.charityTitleLabelView.isFavourite = isFavorite
         }
     }
 
