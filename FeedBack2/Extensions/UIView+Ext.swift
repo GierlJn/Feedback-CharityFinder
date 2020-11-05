@@ -9,8 +9,27 @@
 import UIKit
 import SnapKit
 
+fileprivate var emptyStateView: EmptyStateView!
+
 extension UIView{
 
+    func showEmptyView(_ title: String?){
+        DispatchQueue.main.async {
+        emptyStateView = EmptyStateView(title: title)
+        self.addSubview(emptyStateView)
+        emptyStateView.pinToEdges(of: self)
+        }
+    }
+    
+    func hideEmptyView(){
+        if(emptyStateView != nil){
+            DispatchQueue.main.async {
+                emptyStateView.removeFromSuperview()
+                emptyStateView = nil
+            }
+        }
+        
+    }
     
     func pinToEdges(of superView: UIView){
         self.snp.makeConstraints { (make) in

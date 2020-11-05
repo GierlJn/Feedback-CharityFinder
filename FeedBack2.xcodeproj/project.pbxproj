@@ -43,6 +43,7 @@
 		B971B23325305A0500660923 /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B971B23225305A0500660923 /* String+Ext.swift */; };
 		B971B23625305F2C00660923 /* Currrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = B971B23525305F2C00660923 /* Currrency.swift */; };
 		B971B23925306C2600660923 /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B971B23825306C2600660923 /* PersistenceManager.swift */; };
+		B97A1A612554009D008C755E /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B97A1A602554009D008C755E /* EmptyStateView.swift */; };
 		B97AAFCE25319A3400FCBC28 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B97AAFCD25319A3400FCBC28 /* Constants.swift */; };
 		B97AAFF82531BF4C00FCBC28 /* FBTextLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B97AAFF72531BF4C00FCBC28 /* FBTextLabel.swift */; };
 		B98A18022552A9750096B081 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = B98A18012552A9750096B081 /* SDWebImage */; };
@@ -103,6 +104,7 @@
 		B971B23225305A0500660923 /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
 		B971B23525305F2C00660923 /* Currrency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currrency.swift; sourceTree = "<group>"; };
 		B971B23825306C2600660923 /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
+		B97A1A602554009D008C755E /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
 		B97AAFCD25319A3400FCBC28 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B97AAFF72531BF4C00FCBC28 /* FBTextLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBTextLabel.swift; sourceTree = "<group>"; };
 		B994080F25514490005D78E8 /* ImpactEstimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactEstimation.swift; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 				B99408152551560B005D78E8 /* CharityInfoVC */,
 				B9EBADFF2536F1190070705F /* SearchVC */,
 				B994081825515631005D78E8 /* ImageViews */,
+				B97A1A602554009D008C755E /* EmptyStateView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -454,6 +457,7 @@
 				B97AAFF82531BF4C00FCBC28 /* FBTextLabel.swift in Sources */,
 				B9664EC32524864900637BDF /* FBButton.swift in Sources */,
 				B970E95A2542C9F200241F4E /* JSONDecoder+Ext.swift in Sources */,
+				B97A1A612554009D008C755E /* EmptyStateView.swift in Sources */,
 				B9664EC525248B1000637BDF /* CharityListVC.swift in Sources */,
 				B93BA92C25385C45006A08BE /* Categories.swift in Sources */,
 				B9273CDD252746F700FE7155 /* ImpactProject.swift in Sources */,

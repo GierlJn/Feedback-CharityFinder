@@ -18,6 +18,7 @@ class CharityListVC: UIViewController{
     var dataSource: UITableViewDiffableDataSource<Section, Charity>!
     var charities = [Charity]()
     let networkManager = NetworkManager()
+    
     override func viewDidLoad() {
         configureTableViewController()
         configureDataSource()
@@ -49,19 +50,29 @@ class CharityListVC: UIViewController{
             case .failure(let error):
                 print(error)
             case .success(let charities):
-                self.updateUI(with: charities)
+                DispatchQueue.main.async {
+                    self.updateUI(with: charities)
+                }
+                
             }
         }
     }
     
     private func updateUI(with charities: [Charity]){
         self.charities = charities
+        
         let isOn = PersistenceManager.getImpactSort()
         if(isOn){
             sortForImpact()
         }
         self.updateData()
-        scrollToTop()
+        if (charities.isEmpty) {
+            view.showEmptyView(nil)
+        }else{
+            view.hideEmptyView()
+            scrollToTop()
+        }
+        
     }
     
     func updateData(){
