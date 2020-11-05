@@ -57,6 +57,11 @@ class FavouritesVC: UIViewController{
     
     private func updateUI(){
         tableView.reloadData()
+        if (charities.isEmpty) {
+            view.showEmptyView("You don't have any favorites yet")
+        }else{
+            view.hideEmptyView()
+        }
     }
     
 }

@@ -67,7 +67,7 @@ class CharityListVC: UIViewController{
         }
         self.updateData()
         if (charities.isEmpty) {
-            view.showEmptyView(nil)
+            view.showEmptyView("Your search didn't find anything")
         }else{
             view.hideEmptyView()
             scrollToTop()

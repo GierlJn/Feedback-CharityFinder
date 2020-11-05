@@ -11,24 +11,23 @@ import UIKit
 class EmptyStateView: UIView{
     
     var titleLabel = FBTitleLabel(textAlignment: .center)
-    var title: String = "Nothing to see here"
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
+        configure()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    convenience init(title: String?) {
+    convenience init(title: String) {
         self.init(frame: .zero)
-        configure()
+        titleLabel.text = title
     }
     
     private func configure(){
         addSubview(titleLabel)
-        titleLabel.text = title
         
         titleLabel.snp.makeConstraints { (maker) in
             maker.centerY.equalTo(snp.centerY)

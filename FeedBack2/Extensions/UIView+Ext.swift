@@ -13,7 +13,7 @@ fileprivate var emptyStateView: EmptyStateView!
 
 extension UIView{
 
-    func showEmptyView(_ title: String?){
+    func showEmptyView(_ title: String){
         DispatchQueue.main.async {
         emptyStateView = EmptyStateView(title: title)
         self.addSubview(emptyStateView)
