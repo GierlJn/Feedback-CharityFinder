@@ -15,7 +15,6 @@ class CharityListVC: UIViewController{
     }
     
     var tableView = UITableView()
-    var dataSource: UITableViewDiffableDataSource<Section, Charity>!
     var charities = [Charity]()
     let networkManager = NetworkManager()
     
@@ -29,18 +28,11 @@ class CharityListVC: UIViewController{
         tableView.pinToEdges(of: view)
         tableView.backgroundColor = .init(white: 0, alpha: 0 )
         tableView.register(CharityCell.self, forCellReuseIdentifier: CharityCell.reuseIdentifier)
+        tableView.dataSource = self
         tableView.delegate = self
         tableView.rowHeight = 120
         
         tableView.removeExcessCells()
-    }
-    
-    private func configureDataSource(){
-        dataSource = UITableViewDiffableDataSource(tableView: tableView, cellProvider: { (tableView, indexPath, charity) -> UITableViewCell? in
-            let cell = tableView.dequeueReusableCell(withIdentifier: CharityCell.reuseIdentifier, for: indexPath) as! CharityCell
-            cell.set(charity: charity)
-            return cell
-        })
     }
     
     func getCharities(searchParameter: String) {
@@ -76,12 +68,7 @@ class CharityListVC: UIViewController{
     }
     
     func updateData(){
-        var snapshot = NSDiffableDataSourceSnapshot<Section, Charity>()
-        snapshot.appendSections([.main])
-        snapshot.appendItems(charities)
-        DispatchQueue.main.async {
-            self.dataSource.apply(snapshot)
-        }
+        tableView.reloadData()
     }
     
     func sortForImpact(){
@@ -97,6 +84,21 @@ class CharityListVC: UIViewController{
             self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
         }
     }
+}
+
+extension CharityListVC: UITableViewDataSource{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        charities.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let charity = charities[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: CharityCell.reuseIdentifier) as! CharityCell
+        cell.set(charity: charity)
+        return cell
+    }
+    
+    
 }
 
 extension CharityListVC: UITableViewDelegate{
