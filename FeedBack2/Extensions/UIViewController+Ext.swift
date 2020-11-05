@@ -21,7 +21,6 @@ extension UIViewController{
                         presentGFAlertOnMainThread(title: "Error", message: error!.errorMessage, buttonTitle: "Ok")
                     }
                     else{
-                        //charityTitleLabelView.isFavourite = false
                         presentGFAlertOnMainThread(title: "Removed", message: "\(charity.name) has been removed from your favorites", buttonTitle: "Ok")
                         completed(false)
                         
@@ -33,7 +32,6 @@ extension UIViewController{
                         presentGFAlertOnMainThread(title: "Error", message: error!.errorMessage, buttonTitle: "Ok")
                     }
                     else{
-                        //charityTitleLabelView.isFavourite = true
                         presentGFAlertOnMainThread(title: "Added", message: "\(charity.name) has been added to your favorites", buttonTitle: "Ok")
                         completed(true)
                     }

@@ -65,10 +65,13 @@ class OutputView: UIView{
         mayFundLabel.text = valueLabelText
         mayFundLabel.textColor = .mainTextColor
         
+        let currency = PersistenceManager.retrieveCurrency()
+        
         let value = output.costPerBeneficiary!.value
-        let floatValue = Float(value!) ?? 1.0
+        var floatValue = Float(value!) ?? 1.0
+        floatValue = floatValue / currency.relativeValueToPound
         let formatted = String(format: "%.2f", floatValue)
-        impactLabel.text = "For every \(formatted)\(PersistenceManager.retrieveCurrency().symbol) donated"
+        impactLabel.text = "For every \(formatted)\(currency.symbol) donated"
         
         impactLabel.font = .systemFont(ofSize: 12)
         impactLabel.textColor = .mainTextColor

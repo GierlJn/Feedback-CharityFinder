@@ -37,7 +37,11 @@ class FBImpactImageView: UIImageView{
         guard let imageUrl = imageUrl else {
             completed()
             return }
-        sd_setImage(with: URL(string: imageUrl)) { (image, erro, type, url) in
+        sd_setImage(with: URL(string: imageUrl)) { [weak self](image, error, type, url) in
+            guard let self = self else { return }
+            if( error == nil){
+                self.contentMode = .scaleToFill
+            }
             completed()
         }
     }
