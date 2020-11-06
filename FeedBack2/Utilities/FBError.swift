@@ -8,12 +8,6 @@
 
 import Foundation
 
-//enum FBError: String, Error{
-//    case unableToConnect = "Was not able to connect to SoGive server"
-//    case invalidData = "Response data not valid"
-//    case invalidResponse = "Invalid Response from server"
-//}
-
 enum FBError: Error {
     case unableToConnect
     case invalidResponseCode(Int)

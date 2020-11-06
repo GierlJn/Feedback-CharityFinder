@@ -71,10 +71,10 @@ class CharityListVC: UIViewController{
     }
     
     func sortForImpact(){
+        let impactEst: [String:Int] = ["none":1, "low":2, "medium":3, "high":4]
+        
         self.charities.sort { (charity1, charity2) -> Bool in
-            guard let impact1 = ImpactEstimation(rawValue: charity1.impactEstimation ?? "none") else { return false }
-            guard let impact2 = ImpactEstimation(rawValue: charity2.impactEstimation ?? "none") else { return false}
-            return impact1.getSortingRank > impact2.getSortingRank
+            return impactEst[charity1.impactEstimation ?? "none", default: 1] > impactEst[charity2.impactEstimation ?? "none", default: 1]
         }
     }
     

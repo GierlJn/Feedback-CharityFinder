@@ -47,7 +47,6 @@
 		B97AAFCE25319A3400FCBC28 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B97AAFCD25319A3400FCBC28 /* Constants.swift */; };
 		B97AAFF82531BF4C00FCBC28 /* FBTextLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B97AAFF72531BF4C00FCBC28 /* FBTextLabel.swift */; };
 		B98A18022552A9750096B081 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = B98A18012552A9750096B081 /* SDWebImage */; };
-		B994081025514490005D78E8 /* ImpactEstimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B994080F25514490005D78E8 /* ImpactEstimation.swift */; };
 		B99BB050254D59060017E1F8 /* FBAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99BB04F254D59060017E1F8 /* FBAlertVC.swift */; };
 		B9A1C0F5252B1D48004E3AEE /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = B9A1C0F4252B1D48004E3AEE /* SnapKit */; };
 		B9A1C0F7252B2A40004E3AEE /* FBImpactImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A1C0F6252B2A40004E3AEE /* FBImpactImageView.swift */; };
@@ -107,7 +106,6 @@
 		B97A1A602554009D008C755E /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
 		B97AAFCD25319A3400FCBC28 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B97AAFF72531BF4C00FCBC28 /* FBTextLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBTextLabel.swift; sourceTree = "<group>"; };
-		B994080F25514490005D78E8 /* ImpactEstimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactEstimation.swift; sourceTree = "<group>"; };
 		B99BB04F254D59060017E1F8 /* FBAlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBAlertVC.swift; sourceTree = "<group>"; };
 		B9A1C0F6252B2A40004E3AEE /* FBImpactImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBImpactImageView.swift; sourceTree = "<group>"; };
 		B9A1C0F9252B3E82004E3AEE /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
@@ -331,7 +329,6 @@
 				B9273CE425274B1700FE7155 /* ImageCache.swift */,
 				B971B23525305F2C00660923 /* Currrency.swift */,
 				B97AAFCD25319A3400FCBC28 /* Constants.swift */,
-				B994080F25514490005D78E8 /* ImpactEstimation.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -369,7 +366,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1170;
-				LastUpgradeCheck = 1170;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = "Julian Gierl";
 				TargetAttributes = {
 					B9664EA425247C9500637BDF = {
@@ -440,7 +437,6 @@
 				B912457725287863002B85C5 /* DonationManager.swift in Sources */,
 				B90F6983254EC0C800D69AD1 /* FavoriteCell.swift in Sources */,
 				B91397E7255040A800CB55BD /* AlertContainerView.swift in Sources */,
-				B994081025514490005D78E8 /* ImpactEstimation.swift in Sources */,
 				B9273CE12527474000FE7155 /* FBLogoImageView.swift in Sources */,
 				B9EBAE04253708CC0070705F /* SearchCategoriesStackView.swift in Sources */,
 				B9B2C8D225397CF600F4131F /* ShowCaseVC.swift in Sources */,
@@ -512,6 +508,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -572,6 +569,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
