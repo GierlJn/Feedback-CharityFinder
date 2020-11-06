@@ -17,6 +17,7 @@ enum FBError: Error {
     case invalidData
     case unableToFavourite
     case alreadyFavorite
+    case noValidURL
     
     var errorMessage: String{
         switch self {
@@ -32,6 +33,8 @@ enum FBError: Error {
             return "Could not be added to favourites"
         case .alreadyFavorite:
             return "Charity is already a favourite"
+        case .noValidURL:
+            return "It seems like we don't have a valid url to this charity."
         }
     }
     
