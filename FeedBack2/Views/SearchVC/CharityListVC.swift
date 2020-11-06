@@ -20,7 +20,6 @@ class CharityListVC: UIViewController{
     
     override func viewDidLoad() {
         configureTableViewController()
-        configureDataSource()
     }
     
     private func configureTableViewController(){
