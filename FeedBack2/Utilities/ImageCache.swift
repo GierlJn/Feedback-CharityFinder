@@ -8,26 +8,26 @@
 
 import UIKit
 
-class ImageCache{
-    static let shared = ImageCache()
-    
-    private init(){}
-    
-    let cache = NSCache<NSString, UIImage>()
-    
-    func setImage(image: UIImage, key: String){
-        cache.setObject(image, forKey: NSString(string: key))
-    }
-    
-    func getImage(for key: String)->UIImage?{
-        return cache.object(forKey: NSString(string: key))
-    }
-    
-    func hasImage(for key: String)->Bool{
-        if(cache.object(forKey: NSString(string: key)) != nil){
-            return true
-        }else {
-            return false
-        }
-    }
-}
+//class ImageCache{
+//    static let shared = ImageCache()
+//    
+//    private init(){}
+//    
+//    let cache = NSCache<NSString, UIImage>()
+//    
+//    func setImage(image: UIImage, key: String){
+//        cache.setObject(image, forKey: NSString(string: key))
+//    }
+//    
+//    func getImage(for key: String)->UIImage?{
+//        return cache.object(forKey: NSString(string: key))
+//    }
+//    
+//    func hasImage(for key: String)->Bool{
+//        if(cache.object(forKey: NSString(string: key)) != nil){
+//            return true
+//        }else {
+//            return false
+//        }
+//    }
+//}

@@ -24,11 +24,7 @@ class FBLogoImageView: UIImageView{
     }
     
     private func configure(){
-        //translatesAutoresizingMaskIntoConstraints = false
         contentMode = .scaleAspectFit
-        //self.image = Images.image_placeholder!
-        //self.image!.withAlignmentRectInsets(UIEdgeInsets(top: self.insetValue, left: self.insetValue, bottom: self.insetValue, right: self.insetValue))
-        //backgroundColor = .logoImageBackground
     }
     
     func setRoundCorners(){
@@ -41,29 +37,6 @@ class FBLogoImageView: UIImageView{
         guard let logoUrl = URL(string: logoString) else { return }
         self.sd_setImage(with: logoUrl, placeholderImage: Images.image_placeholder!, completed: { (image, error, cache, url) in
         })
-        
-//            guard let logoUrl = logoUrl else { return }
-//            guard let logoImage = ImageCache.shared.getImage(for: logoUrl) else{
-//                downloadLogoImage(logoUrl)
-//                return
-//            }
-//            self.image = logoImage.withAlignmentRectInsets(UIEdgeInsets(top: self.insetValue, left: self.insetValue, bottom: self.insetValue, right: self.insetValue))
 
         }
-    
-    private func downloadLogoImage(_ logoUrl: String) {
-        networkManager.downloadImage(urlString: logoUrl) { [weak self](result) in
-            guard let self = self else {return}
-            switch(result){
-            case .failure(let error):
-                print(error)
-            case .success(let logoImage):
-                DispatchQueue.main.async {
-                    self.image = logoImage.withAlignmentRectInsets(UIEdgeInsets(top: self.insetValue, left: self.insetValue, bottom: self.insetValue, right: self.insetValue))
-                        ImageCache.shared.setImage(image: logoImage, key: logoUrl)
-                }
-                
-            }
-        }
-    }
 }
