@@ -28,6 +28,7 @@ class SearchHeaderView: UIView{
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
     
     
     private func configure(){
@@ -86,6 +87,7 @@ class SearchHeaderView: UIView{
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         actionButton.setGradientBackgroundColor(colors: [.headerViewGradientStart, .headerViewGradientEnd], axis: .custom(angle: CGFloat(90)))
+        backgroundView.colors = [[UIColor.headerViewGradientStart, UIColor.headerViewGradientEnd]]
     }
     
     func configureTextField(){
