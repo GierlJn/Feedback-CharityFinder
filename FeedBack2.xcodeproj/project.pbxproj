@@ -20,7 +20,6 @@
 		B9273CDD252746F700FE7155 /* ImpactProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9273CDC252746F700FE7155 /* ImpactProject.swift */; };
 		B9273CDF2527470900FE7155 /* Charity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9273CDE2527470900FE7155 /* Charity.swift */; };
 		B9273CE12527474000FE7155 /* FBLogoImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9273CE02527474000FE7155 /* FBLogoImageView.swift */; };
-		B9273CE525274B1700FE7155 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9273CE425274B1700FE7155 /* ImageCache.swift */; };
 		B93BA92C25385C45006A08BE /* Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93BA92B25385C45006A08BE /* Categories.swift */; };
 		B93BA93125387E43006A08BE /* ExploreCharityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93BA93025387E43006A08BE /* ExploreCharityCell.swift */; };
 		B93BA9342538804E006A08BE /* CharityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93BA9332538804E006A08BE /* CharityController.swift */; };
@@ -79,7 +78,6 @@
 		B9273CDC252746F700FE7155 /* ImpactProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactProject.swift; sourceTree = "<group>"; };
 		B9273CDE2527470900FE7155 /* Charity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Charity.swift; sourceTree = "<group>"; };
 		B9273CE02527474000FE7155 /* FBLogoImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBLogoImageView.swift; sourceTree = "<group>"; };
-		B9273CE425274B1700FE7155 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		B93BA92B25385C45006A08BE /* Categories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Categories.swift; sourceTree = "<group>"; };
 		B93BA93025387E43006A08BE /* ExploreCharityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreCharityCell.swift; sourceTree = "<group>"; };
 		B93BA9332538804E006A08BE /* CharityController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharityController.swift; sourceTree = "<group>"; };
@@ -326,7 +324,6 @@
 			isa = PBXGroup;
 			children = (
 				B9FF36AC2525BE2E0065AC17 /* FBError.swift */,
-				B9273CE425274B1700FE7155 /* ImageCache.swift */,
 				B971B23525305F2C00660923 /* Currrency.swift */,
 				B97AAFCD25319A3400FCBC28 /* Constants.swift */,
 			);
@@ -424,7 +421,6 @@
 				B904D32C25401FD60071E6CA /* UITableView+Ext.swift in Sources */,
 				B9EBAE012536F1250070705F /* HeaderView.swift in Sources */,
 				B9F2274C252EE62200A25EC5 /* Colors+Ext.swift in Sources */,
-				B9273CE525274B1700FE7155 /* ImageCache.swift in Sources */,
 				B99BB050254D59060017E1F8 /* FBAlertVC.swift in Sources */,
 				B956D497252F313000F6E0D6 /* OutputView.swift in Sources */,
 				B9FF36A92525B8D70065AC17 /* NetworkManager.swift in Sources */,

@@ -290,12 +290,31 @@ extension CharityInfoVC: CurrencySelectionDelegate{
 
 extension CharityInfoVC: TitleLabelViewDelegate{
     func favouriteButtonPressed() {
-        presentFavoriteAlert(charity: charity) { [weak self] (isFavorite) in
+        PersistenceManager.isCharityFavorite(charity: charity) { [weak self] (isFavourite) in
             guard let self = self else { return }
-            self.charityTitleLabelView.isFavourite = isFavorite
+            if(isFavourite){
+                    PersistenceManager.updateFavorites(charity: self.charity, persistenceActionType: .remove) { (error) in
+                        guard let error = error else {
+                            self.presentGFAlertOnMainThread(title: "Removed", message: "\(self.charity.name) has been removed from your favorites", buttonTitle: "Ok")
+                            self.charityTitleLabelView.isFavourite = false
+                            return
+                        }
+                        self.presentErrorAlert(error: error)
+                    }
+                }else{
+                    PersistenceManager.updateFavorites(charity: self.charity, persistenceActionType: .add) { (error) in
+                        guard let error = error else {
+                            self.presentGFAlertOnMainThread(title: "Added", message: "\(self.charity.name) has been added from your favorites", buttonTitle: "Ok")
+                            self.charityTitleLabelView.isFavourite = true
+                            return
+                        }
+                        self.presentErrorAlert(error: error)
+                    }
+                }
+            
         }
     }
-
+    
 }
 
 extension CharityInfoVC: DonationBarViewDelegate{

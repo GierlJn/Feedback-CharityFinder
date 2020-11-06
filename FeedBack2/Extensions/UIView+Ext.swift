@@ -28,7 +28,6 @@ extension UIView{
                 emptyStateView = nil
             }
         }
-        
     }
     
     func pinToEdges(of superView: UIView){
@@ -46,6 +45,8 @@ extension UIView{
         }
     }
 }
+
+//MARK: GradientBackground
 
 extension UIView {
 

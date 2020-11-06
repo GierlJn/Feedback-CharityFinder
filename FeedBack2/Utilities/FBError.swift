@@ -9,6 +9,8 @@
 import Foundation
 
 enum FBError: Error {
+    static var titleMessage = "Something went wrong!"
+    
     case unableToConnect
     case invalidResponseCode(Int)
     case invalidResponse

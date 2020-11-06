@@ -8,9 +8,8 @@
 
 import UIKit
 
-
-
 extension UIColor {
+    
     static var pineApplePurple: UIColor { return UIColor(rgb: 0x413C58)}
     static var columbiaBlue: UIColor { return UIColor(rgb: 0xC4D7F2)}
     static var cambridgeBlue: UIColor { return UIColor(rgb: 0xA3C4BC)}
@@ -21,7 +20,6 @@ extension UIColor {
     static var buttonDarkBlueGradientEnd: UIColor { return UIColor(rgb: 0x7573FF)}
     static var mainTextColor: UIColor { return UIColor(rgb: 0x676568)}
     static var iconColor: UIColor { return UIColor(rgb: 0xFF797A)}
-
     
     static var outputColor = UIColor { traitCollection in
         switch traitCollection.userInterfaceStyle {
@@ -37,7 +35,6 @@ extension UIColor {
         switch traitCollection.userInterfaceStyle {
         case .dark:
             return UIColor(rgb: 0xf5f5f5)
-            
         default:
             return .white
         }
@@ -47,7 +44,6 @@ extension UIColor {
         switch traitCollection.userInterfaceStyle {
         case .dark:
             return UIColor(rgb: 0x302b63)
-            
         default:
           return UIColor(rgb: 0xab6fdb)
         }
@@ -57,7 +53,6 @@ extension UIColor {
         switch traitCollection.userInterfaceStyle {
         case .dark:
             return UIColor(rgb: 0x24243e)
-            
         default:
           return UIColor(rgb: 0x2c299a)
         }
@@ -68,7 +63,6 @@ extension UIColor {
         switch traitCollection.userInterfaceStyle {
         case .dark:
             return UIColor(rgb: 0x434343)
-            
         default:
           return UIColor(rgb: 0xFFF6FF)
         }
@@ -86,13 +80,11 @@ extension UIColor {
     static var logoImageBackground = UIColor { traitCollection in
         switch traitCollection.userInterfaceStyle {
         case .dark:
-            //return UIColor(rgb: 0xf5f5f5)
             return UIColor.init(white: 0, alpha: 0 )
         default:
             return UIColor.white
         }
     }
-    
         
     convenience init(red: Int, green: Int, blue: Int) {
         assert(red >= 0 && red <= 255, "Invalid red component")

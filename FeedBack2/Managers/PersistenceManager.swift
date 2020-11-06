@@ -8,8 +8,9 @@
 
 import Foundation
 
-enum PersistenceActionType{
-    case add, remove
+enum PersistenceActionType: String{
+    case add = "Added"
+    case remove = "Removed"
 }
 
 class PersistenceManager {

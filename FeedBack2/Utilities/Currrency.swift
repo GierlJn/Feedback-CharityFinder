@@ -9,6 +9,7 @@
 import Foundation
 
 enum Currency: String, Codable, CaseIterable{
+    
     case dollar = "dollar"
     case euro = "euro"
     case pound = "pound"
@@ -33,7 +34,6 @@ enum Currency: String, Codable, CaseIterable{
         case .pound:
             return "£"
         }
-        
     }
-
+    
 }
