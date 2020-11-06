@@ -15,3 +15,6 @@ enum Images {
     static let backButton = UIImage(systemName: "chevron.left.square.fill")
 }
 
+enum URLS {
+    static let soGiveUrl = URL(string: "https://sogive.org/")!
+}

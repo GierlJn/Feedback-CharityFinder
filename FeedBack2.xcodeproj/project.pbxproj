@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B904D32C25401FD60071E6CA /* UITableView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B904D32B25401FD60071E6CA /* UITableView+Ext.swift */; };
+		B907ECB825555B070048939A /* FooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B907ECB725555B070048939A /* FooterView.swift */; };
 		B90F6983254EC0C800D69AD1 /* FavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90F6982254EC0C800D69AD1 /* FavoriteCell.swift */; };
 		B912457225284C26002B85C5 /* SearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B912457125284C26002B85C5 /* SearchResponse.swift */; };
 		B912457525287599002B85C5 /* FBSubTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B912457425287599002B85C5 /* FBSubTitleLabel.swift */; };
@@ -66,6 +67,7 @@
 
 /* Begin PBXFileReference section */
 		B904D32B25401FD60071E6CA /* UITableView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Ext.swift"; sourceTree = "<group>"; };
+		B907ECB725555B070048939A /* FooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterView.swift; sourceTree = "<group>"; };
 		B90F6982254EC0C800D69AD1 /* FavoriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCell.swift; sourceTree = "<group>"; };
 		B912457125284C26002B85C5 /* SearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResponse.swift; sourceTree = "<group>"; };
 		B912457425287599002B85C5 /* FBSubTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBSubTitleLabel.swift; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 				B9EBADFF2536F1190070705F /* SearchVC */,
 				B994081825515631005D78E8 /* ImageViews */,
 				B97A1A602554009D008C755E /* EmptyStateView.swift */,
+				B907ECB725555B070048939A /* FooterView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -415,6 +418,7 @@
 				B91397E425503EB500CB55BD /* CurrencySelectionVC.swift in Sources */,
 				B95B9E52252A0DFB00DF6368 /* InfoCharity.swift in Sources */,
 				B9EBADFD2536EEE60070705F /* SearchVC.swift in Sources */,
+				B907ECB825555B070048939A /* FooterView.swift in Sources */,
 				B912457525287599002B85C5 /* FBSubTitleLabel.swift in Sources */,
 				B9664EC12524834E00637BDF /* FavouritesVC.swift in Sources */,
 				B93BA93125387E43006A08BE /* ExploreCharityCell.swift in Sources */,
