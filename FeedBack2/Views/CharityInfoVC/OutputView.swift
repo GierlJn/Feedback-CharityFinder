@@ -32,16 +32,9 @@ class OutputView: UIView{
         configure()
         updateUI()
     }
-    
-    @objc func buttonPressed(){
-        print("pressed")
-    }
 
     private func configure(){
-        
-        let gestureRegocnizer = UITapGestureRecognizer(target: self, action: #selector(buttonPressed))
-        addGestureRecognizer(gestureRegocnizer)
-        
+
         addSubview(iconImageView)
         iconImageView.image = UIImage(systemName: "heart.fill")
         iconImageView.tintColor = viewColor

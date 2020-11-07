@@ -235,6 +235,8 @@ class CharityInfoVC: UIViewController{
         guard let impact = infoCharity.singleImpact else { return }
         
         outputView = OutputView(output: impact)
+        let gestureRegocnizer = UITapGestureRecognizer(target: self, action: #selector(outputButtonPressed))
+        outputView!.addGestureRecognizer(gestureRegocnizer)
         
         contentView.addSubview(outputView!)
         outputView!.snp.makeConstraints { (maker) in
@@ -243,12 +245,6 @@ class CharityInfoVC: UIViewController{
             maker.left.equalTo(contentView.snp.left).offset(20)
             maker.right.equalTo(contentView.snp.right).offset(-20)
         }
-        //outputView?.setNeedsLayout()
-        //outputView?.layoutIfNeeded()
-        //outputView?.layoutSubviews()
-        //outputView?.addTarget(self, action: #selector(outputButtonPressed), for: .touchUpInside)
-        outputView?.backgroundColor = .systemIndigo
-        
         contentHeight += 100
         contentView.snp.makeConstraints { (maker) in
             maker.height.equalTo(contentHeight)
@@ -295,8 +291,6 @@ extension CharityInfoVC: CurrencySelectionDelegate{
     func currencyChanged() {
         outputView?.updateUI()
     }
-    
-    
 }
 
 extension CharityInfoVC: TitleLabelViewDelegate{
