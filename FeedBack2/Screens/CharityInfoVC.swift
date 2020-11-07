@@ -124,7 +124,7 @@ class CharityInfoVC: UIViewController{
         configureLocationTagView(infoCharity)
         configureAboutHeaderLabel()
         configureDescriptionLabel(infoCharity)
-        configureOutputOverviewStackView(infoCharity)
+        configureOutputView(infoCharity)
     }
     
     private func addRightBarButtonItem(){
@@ -231,9 +231,11 @@ class CharityInfoVC: UIViewController{
         contentHeight += height
     }
     
-    private func configureOutputOverviewStackView(_ infoCharity: InfoCharity){
+    private func configureOutputView(_ infoCharity: InfoCharity){
         guard let impact = infoCharity.singleImpact else { return }
+        
         outputView = OutputView(output: impact)
+        
         contentView.addSubview(outputView!)
         outputView!.snp.makeConstraints { (maker) in
             maker.height.equalTo(30)
@@ -241,12 +243,21 @@ class CharityInfoVC: UIViewController{
             maker.left.equalTo(contentView.snp.left).offset(20)
             maker.right.equalTo(contentView.snp.right).offset(-20)
         }
-        contentHeight += 100
+        //outputView?.setNeedsLayout()
+        //outputView?.layoutIfNeeded()
+        //outputView?.layoutSubviews()
+        //outputView?.addTarget(self, action: #selector(outputButtonPressed), for: .touchUpInside)
+        outputView?.backgroundColor = .systemIndigo
         
+        contentHeight += 100
         contentView.snp.makeConstraints { (maker) in
             maker.height.equalTo(contentHeight)
         }
         
+    }
+    
+    @objc func outputButtonPressed(){
+       print("test")
     }
     
     @objc func backButtonPressed(){

@@ -33,7 +33,15 @@ class OutputView: UIView{
         updateUI()
     }
     
+    @objc func buttonPressed(){
+        print("pressed")
+    }
+
     private func configure(){
+        
+        let gestureRegocnizer = UITapGestureRecognizer(target: self, action: #selector(buttonPressed))
+        addGestureRecognizer(gestureRegocnizer)
+        
         addSubview(iconImageView)
         iconImageView.image = UIImage(systemName: "heart.fill")
         iconImageView.tintColor = viewColor
@@ -43,6 +51,7 @@ class OutputView: UIView{
             maker.centerY.equalTo(self.snp.centerY)
         }
         
+                
         addSubview(labelsStackView)
         labelsStackView.axis = .vertical
         labelsStackView.distribution = .fill
