@@ -38,11 +38,10 @@ class FBTextField: UITextField{
         autocorrectionType = .no
         returnKeyType = .search
         clearButtonMode = .whileEditing
-        
-        configurePlaceholder()
+    
     }
     
-    fileprivate func configurePlaceholder() {
+    func addSearchPlaceholder() {
         let magnifyingGlassAttachment = NSTextAttachment(data: nil, ofType: nil)
         magnifyingGlassAttachment.image = UIImage(systemName: "magnifyingglass")?.withTintColor(.systemGray)
         let magnifyingGlassString = NSAttributedString(attachment: magnifyingGlassAttachment)

@@ -21,6 +21,16 @@ extension UIColor {
     static var mainTextColor: UIColor { return UIColor(rgb: 0x676568)}
     static var iconColor: UIColor { return UIColor(rgb: 0xFF797A)}
     
+    static var navigationBarTint = UIColor { traitCollection in
+        switch traitCollection.userInterfaceStyle {
+        case .dark:
+            return .white
+            
+        default:
+            return .black
+        }
+    }
+    
     static var outputColor = UIColor { traitCollection in
         switch traitCollection.userInterfaceStyle {
         case .dark:

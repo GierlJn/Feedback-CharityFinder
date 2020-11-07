@@ -92,6 +92,7 @@ class SearchHeaderView: UIView{
     
     func configureTextField(){
         textfield.delegate = self
+        textfield.addSearchPlaceholder()
     }
 
     @objc private func actionButtonTabbed(){

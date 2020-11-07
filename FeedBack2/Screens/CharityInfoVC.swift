@@ -28,7 +28,6 @@ class CharityInfoVC: UIViewController{
     let scrollView = UIScrollView()
     let contentView = UIView()
     
-    
     var contentHeight: CGFloat = 1.0
     
     var infoCharity: InfoCharity?
