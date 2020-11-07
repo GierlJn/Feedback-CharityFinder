@@ -312,7 +312,7 @@ extension CharityInfoVC: TitleLabelViewDelegate{
                 }else{
                     PersistenceManager.updateFavorites(charity: self.charity, persistenceActionType: .add) { (error) in
                         guard let error = error else {
-                            self.presentGFAlertOnMainThread(title: "Added", message: "\(self.charity.name) has been added from your favorites", buttonTitle: "Ok")
+                            self.presentGFAlertOnMainThread(title: "Added", message: "\(self.charity.name) is now in your favorites", buttonTitle: "Ok")
                             self.charityTitleLabelView.isFavourite = true
                             return
                         }
