@@ -13,19 +13,30 @@ class FBAlertVC: UIViewController{
     var containerView = AlertContainerView()
     var titleLabel = FBTitleLabel(textAlignment: .center)
     var messageLabel = FBSubTitleLabel(textAlignment: .center)
-    var actionButton = FBButton()
+    var dismissButten = FBButton()
+    var actionButton: FBButton?
+    var buttonStackView = UIStackView()
     
     var alertTitle: String?
     var message: String?
-    var buttonTitle: String?
+    var dismissButtonTitle: String?
+    var actionButtonTite: String?
+    
+    var actionClosure: (()->())?
     
     let padding: CGFloat = 20
     
-    init(title: String, message: String, buttonTitle: String) {
+    init(title: String, message: String, actionButtonTitle: String) {
         super.init(nibName: nil, bundle: nil)
         self.alertTitle = title
         self.message = message
-        self.buttonTitle = buttonTitle
+        self.dismissButtonTitle = actionButtonTitle
+    }
+    
+    convenience init(title: String, message: String, actionButtonTitle: String, dismissButtonTitle: String, actionClosure: @escaping ()->()) {
+        self.init(title: title, message: message, actionButtonTitle: dismissButtonTitle)
+        self.actionButtonTite = actionButtonTitle
+        self.actionClosure = actionClosure
     }
     
     required init?(coder: NSCoder) {
@@ -39,8 +50,11 @@ class FBAlertVC: UIViewController{
     private func configure(){
         configureContainerView()
         configureTitleLabel()
-        configureActionButton()
-        
+        configureActionButtons()
+        configureMessageLabel()
+    }
+    
+    fileprivate func configureMessageLabel() {
         containerView.addSubview(messageLabel)
         messageLabel.text = message ?? ""
         messageLabel.numberOfLines = 3
@@ -48,9 +62,8 @@ class FBAlertVC: UIViewController{
             maker.top.equalTo(titleLabel.snp.bottom).offset(8)
             maker.left.equalTo(containerView.snp.left).offset(padding)
             maker.right.equalTo(containerView.snp.right).offset(-padding)
-            maker.bottom.equalTo(actionButton.snp.top).offset(-12)
+            maker.bottom.equalTo(dismissButten.snp.top).offset(-12)
         }
-
     }
     
     fileprivate func configureContainerView() {
@@ -75,20 +88,53 @@ class FBAlertVC: UIViewController{
         }
     }
     
-    fileprivate func configureActionButton() {
-        containerView.addSubview(actionButton)
-        actionButton.setTitle(buttonTitle, for: .normal)
-        actionButton.snp.makeConstraints { (maker) in
-            maker.height.equalTo(44)
-            maker.left.equalTo(containerView.snp.left).offset(padding)
-            maker.right.equalTo(containerView.snp.right).offset(-padding)
-            maker.bottom.equalTo(containerView.snp.bottom).offset(-padding)
+    fileprivate func configureActionButtons() {
+        if(actionButtonTite == nil){
+            containerView.addSubview(dismissButten)
+            dismissButten.setTitle(dismissButtonTitle, for: .normal)
+            dismissButten.snp.makeConstraints { (maker) in
+                maker.height.equalTo(44)
+                maker.left.equalTo(containerView.snp.left).offset(padding)
+                maker.right.equalTo(containerView.snp.right).offset(-padding)
+                maker.bottom.equalTo(containerView.snp.bottom).offset(-padding)
+            }
+            dismissButten.addTarget(self, action: #selector(dismissButtonPressed), for: .touchUpInside)
+        }else{
+            
+            containerView.addSubview(buttonStackView)
+            buttonStackView.snp.makeConstraints { (maker) in
+                maker.height.equalTo(44)
+                maker.left.equalTo(containerView.snp.left).offset(padding)
+                maker.right.equalTo(containerView.snp.right).offset(-padding)
+                maker.bottom.equalTo(containerView.snp.bottom).offset(-padding)
+            }
+            buttonStackView.spacing = 10
+            buttonStackView.distribution = .fillEqually
+            
+            
+            dismissButten.setTitle(dismissButtonTitle, for: .normal)
+            dismissButten.addTarget(self, action: #selector(dismissButtonPressed), for: .touchUpInside)
+            buttonStackView.addArrangedSubview(dismissButten)
+            
+            actionButton = FBButton()
+            actionButton?.setTitle(actionButtonTite, for: .normal)
+            actionButton?.addTarget(self, action: #selector(actionButtonPressed), for: .touchUpInside)
+            buttonStackView.addArrangedSubview(actionButton!)
+            
         }
-        actionButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+
     }
     
-    @objc func buttonPressed(){
+    @objc func dismissButtonPressed(){
         dismiss(animated: true)
+    }
+    
+    @objc func actionButtonPressed(){
+        dismiss(animated: false) { [weak self] in
+            guard let self = self else { return }
+            self.actionClosure!()
+        }
+        
     }
     
 }

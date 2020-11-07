@@ -135,7 +135,18 @@ extension SearchVC{
 
 extension SearchVC: FooterViewDelegate{
     func buttonPressed() {
-        presentSafariVC(with: URLS.soGiveUrl)
+        DispatchQueue.main.async {
+            let fbAlertVC = FBAlertVC(title: "Open Link", message: "This opens a link in your browser", actionButtonTitle: "Ok", dismissButtonTitle: "Cancel"){ [weak self] in
+                guard let self = self else { return }
+                self.presentSafariVC(with: URLS.soGiveUrl)
+            }
+            fbAlertVC.modalPresentationStyle = .overFullScreen
+            fbAlertVC.modalTransitionStyle = .crossDissolve
+            self.present(fbAlertVC, animated: true)
+        }
+        
+        
+        //presentSafariVC(with: URLS.soGiveUrl)
     }
 }
 
