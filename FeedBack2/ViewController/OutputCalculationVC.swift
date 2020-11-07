@@ -13,26 +13,30 @@ class OutputCalculationVC: UIViewController{
     var actionButton: FBButton?
     var buttonStackView = UIStackView()
     
-    var alertTitle: String?
+    var alertTitle: String = "Calculate your impact"
     var message: String?
-    var dismissButtonTitle: String?
-    var actionButtonTite: String?
+    var dismissButtonTitle: String? = "Cancel"
+    var actionButtonTite: String? = "Go"
     
     var actionClosure: (()->())?
     
-    let padding: CGFloat = 20
+    var actionContentView = UIView()
     
-    init(title: String, message: String, actionButtonTitle: String) {
+    let padding: CGFloat = 20
+
+    var output: SimpleImpact!
+    
+    var enteredAmount: Float = 1.0
+    
+    let currency = PersistenceManager.retrieveCurrency()
+    
+    init() {
         super.init(nibName: nil, bundle: nil)
-        self.alertTitle = title
-        self.message = message
-        self.dismissButtonTitle = actionButtonTitle
     }
     
-    convenience init(title: String, message: String, actionButtonTitle: String, dismissButtonTitle: String, actionClosure: @escaping ()->()) {
-        self.init(title: title, message: message, actionButtonTitle: dismissButtonTitle)
-        self.actionButtonTite = actionButtonTitle
-        self.actionClosure = actionClosure
+    convenience init(output: SimpleImpact) {
+        self.init()
+        self.output = output
     }
     
     required init?(coder: NSCoder) {
@@ -46,20 +50,10 @@ class OutputCalculationVC: UIViewController{
     private func configure(){
         configureContainerView()
         configureTitleLabel()
+        
+        //configureMessageLabel()
+        configureTextField()
         configureActionButtons()
-        configureMessageLabel()
-    }
-    
-    fileprivate func configureMessageLabel() {
-        containerView.addSubview(messageLabel)
-        messageLabel.text = message ?? ""
-        messageLabel.numberOfLines = 3
-        messageLabel.snp.makeConstraints { (maker) in
-            maker.top.equalTo(titleLabel.snp.bottom).offset(8)
-            maker.left.equalTo(containerView.snp.left).offset(padding)
-            maker.right.equalTo(containerView.snp.right).offset(-padding)
-            maker.bottom.equalTo(dismissButten.snp.top).offset(-12)
-        }
     }
     
     fileprivate func configureContainerView() {
@@ -67,7 +61,7 @@ class OutputCalculationVC: UIViewController{
         containerView.snp.makeConstraints { (maker) in
             maker.centerY.equalTo(view.snp.centerY)
             maker.centerX.equalTo(view.snp.centerX)
-            maker.height.equalTo(220)
+            maker.height.equalTo(180)
             maker.width.equalTo(280)
         }
     }
@@ -75,7 +69,7 @@ class OutputCalculationVC: UIViewController{
     fileprivate func configureTitleLabel() {
         containerView.addSubview(titleLabel)
         
-        titleLabel.text = alertTitle ?? "Something went wrong!"
+        titleLabel.text = alertTitle
         titleLabel.snp.makeConstraints { (maker) in
             maker.top.equalTo(containerView.snp.top).offset(padding)
             maker.left.equalTo(containerView.snp.left).offset(padding)
@@ -85,40 +79,73 @@ class OutputCalculationVC: UIViewController{
     }
     
     fileprivate func configureActionButtons() {
-        if(actionButtonTite == nil){
-            containerView.addSubview(dismissButten)
-            dismissButten.setTitle(dismissButtonTitle, for: .normal)
-            dismissButten.snp.makeConstraints { (maker) in
-                maker.height.equalTo(44)
-                maker.left.equalTo(containerView.snp.left).offset(padding)
-                maker.right.equalTo(containerView.snp.right).offset(-padding)
-                maker.bottom.equalTo(containerView.snp.bottom).offset(-padding)
-            }
-            dismissButten.addTarget(self, action: #selector(dismissButtonPressed), for: .touchUpInside)
-        }else{
-            
-            containerView.addSubview(buttonStackView)
-            buttonStackView.snp.makeConstraints { (maker) in
-                maker.height.equalTo(44)
-                maker.left.equalTo(containerView.snp.left).offset(padding)
-                maker.right.equalTo(containerView.snp.right).offset(-padding)
-                maker.bottom.equalTo(containerView.snp.bottom).offset(-padding)
-            }
-            buttonStackView.spacing = 10
-            buttonStackView.distribution = .fillEqually
-            
-            
-            dismissButten.setTitle(dismissButtonTitle, for: .normal)
-            dismissButten.addTarget(self, action: #selector(dismissButtonPressed), for: .touchUpInside)
-            buttonStackView.addArrangedSubview(dismissButten)
-            
-            actionButton = FBButton()
-            actionButton?.setTitle(actionButtonTite, for: .normal)
-            actionButton?.addTarget(self, action: #selector(actionButtonPressed), for: .touchUpInside)
-            buttonStackView.addArrangedSubview(actionButton!)
-            
+        containerView.addSubview(buttonStackView)
+        buttonStackView.snp.makeConstraints { (maker) in
+            maker.height.equalTo(44)
+            maker.top.equalTo(actionContentView.snp.bottom).offset(padding)
+            maker.left.equalTo(containerView.snp.left).offset(padding)
+            maker.right.equalTo(containerView.snp.right).offset(-padding)
+            maker.bottom.equalTo(containerView.snp.bottom).offset(-padding)
         }
+        buttonStackView.spacing = 10
+        buttonStackView.distribution = .fillEqually
+        
+        dismissButten.setTitle(dismissButtonTitle, for: .normal)
+        dismissButten.addTarget(self, action: #selector(dismissButtonPressed), for: .touchUpInside)
+        buttonStackView.addArrangedSubview(dismissButten)
+        
+        actionButton = FBButton()
+        actionButton?.setTitle(actionButtonTite, for: .normal)
+        actionButton?.addTarget(self, action: #selector(actionButtonPressed), for: .touchUpInside)
+        buttonStackView.addArrangedSubview(actionButton!)
+    }
+    
+    fileprivate func configureExitButton(){
+        containerView.addSubview(dismissButten)
+        dismissButten.setTitle("Go", for: .normal)
+        dismissButten.snp.makeConstraints { (maker) in
+            maker.height.equalTo(44)
+            maker.top.equalTo(actionContentView.snp.bottom).offset(padding)
+            maker.left.equalTo(containerView.snp.left).offset(padding)
+            maker.right.equalTo(containerView.snp.right).offset(-padding)
+            maker.bottom.equalTo(containerView.snp.bottom).offset(-padding)
+        }
+    }
+    
+    fileprivate func configureTextField(){
+        containerView.addSubview(actionContentView)
+        actionContentView.addSubview(textField)
+        
+        actionContentView.snp.makeConstraints { (maker) in
+            maker.top.equalTo(titleLabel.snp.bottom).offset(8)
+            maker.left.equalTo(containerView.snp.left).offset(padding)
+            maker.right.equalTo(containerView.snp.right).offset(-padding)
+            maker.height.equalTo(40)
+        }
+        
+        textField.placeholder = "Enter donation sum"
+        textField.keyboardType = .numberPad
+        textField.pinToEdges(of: actionContentView)
+        textField.attributedText.
+    }
+    
+    fileprivate func configureMessageLabel() {
+        actionContentView.addSubview(messageLabel)
 
+        
+        let value = output.costPerBeneficiary?.value ?? "1.0"
+        var floatValue = Float(value) ?? 1.0
+        floatValue = floatValue / currency.relativeValueToPound
+        
+        
+        
+        let impact = enteredAmount * floatValue
+        
+        let formatted = String(format: "%.2f", impact)
+        
+        messageLabel.text = "\(formatted) \(output.name ?? "")"
+        messageLabel.numberOfLines = 2
+        messageLabel.pinToEdges(of: actionContentView)
     }
     
     @objc func dismissButtonPressed(){
@@ -126,13 +153,28 @@ class OutputCalculationVC: UIViewController{
     }
     
     @objc func actionButtonPressed(){
-        dismiss(animated: false) { [weak self] in
-            guard let self = self else { return }
-            self.actionClosure!()
-        }
+        guard let text = textField.text else { return}
+        titleLabel.text = "This sum equals"
         
+        enteredAmount = Float(String(text)) ?? 1.0
+        
+        textField.removeFromSuperview()
+        configureMessageLabel()
+        
+        dismissButten.removeFromSuperview()
+        buttonStackView.removeFromSuperview()
+        configureExitButton()
     }
     
 }
 
 
+extension OutputCalculationVC: UITextFieldDelegate{
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        guard let text = textField.text else { return false}
+        enteredAmount = Float(String(text)) ?? 1.0
+        return true
+    }
+    
+    
+}

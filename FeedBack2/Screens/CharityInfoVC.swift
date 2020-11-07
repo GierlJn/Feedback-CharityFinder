@@ -252,7 +252,11 @@ class CharityInfoVC: UIViewController{
     }
     
     @objc func outputButtonPressed(){
-       print("test")
+       let calculationVC = OutputCalculationVC()
+        calculationVC.output = infoCharity?.singleImpact
+        calculationVC.modalTransitionStyle = .crossDissolve
+        calculationVC.modalPresentationStyle = .overFullScreen
+        present(calculationVC, animated: true)
     }
     
     @objc func backButtonPressed(){
