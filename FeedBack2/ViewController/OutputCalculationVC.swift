@@ -126,7 +126,6 @@ class OutputCalculationVC: UIViewController{
         textField.placeholder = "Enter donation sum"
         textField.keyboardType = .numberPad
         textField.pinToEdges(of: actionContentView)
-        textField.attributedText.
     }
     
     fileprivate func configureMessageLabel() {
