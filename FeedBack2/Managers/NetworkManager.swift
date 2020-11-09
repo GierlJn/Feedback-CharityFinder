@@ -19,7 +19,9 @@ class NetworkManager{
 //    static let shared = NetworkManager()
     
     func getCharities(searchParameter: String, size: Int, completed: @escaping (Result<[Charity], FBError>) -> Void){
-        let stringUrl = "\(baseSearchUrl)\(searchParameter)&size=\(size)"
+        let cleanedSpacesParameter = searchParameter.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? searchParameter
+        
+        let stringUrl = "\(baseSearchUrl)\(cleanedSpacesParameter)&size=\(size)"
         print(stringUrl)
         guard let url = URL(string: stringUrl) else {
             completed(.failure(.unvalidSearchParameter))
