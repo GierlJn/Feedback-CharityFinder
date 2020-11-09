@@ -19,13 +19,13 @@ class FBTabBarController: UITabBarController{
     
     private func createSearchVC() -> UINavigationController{
         let searchVC = SearchVC()
-        searchVC.tabBarItem = UITabBarItem(title: nil, image: Images.magnifyingGlass, tag: 0)
+        searchVC.tabBarItem = UITabBarItem(title: "Browse", image: Images.magnifyingGlass, tag: 0)
         return UINavigationController(rootViewController: searchVC)
     }
     
     private func createFavoritesVC() -> UINavigationController{
         let favouritesVC = FavouritesVC()
-        favouritesVC.tabBarItem = UITabBarItem(title: nil, image: Images.bookMark, selectedImage: Images.bookMarkFill)
+        favouritesVC.tabBarItem = UITabBarItem(title: "Saved", image: Images.bookMark, selectedImage: Images.bookMarkFill)
         return UINavigationController(rootViewController: favouritesVC)
     }
 
