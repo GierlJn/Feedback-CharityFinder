@@ -22,16 +22,16 @@ class NetworkManager{
         let stringUrl = "\(baseSearchUrl)\(searchParameter)&size=\(size)"
         print(stringUrl)
         guard let url = URL(string: stringUrl) else {
-            completed(.failure(.unableToConnect))
+            completed(.failure(.unvalidSearchParameter))
             return
         }
 
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             if error != nil{
-                completed(.failure(.invalidData))
+                completed(.failure(.unableToConnect))
             }
             guard let response = response as? HTTPURLResponse else{
-                completed(.failure(.invalidResponse))
+                completed(.failure(.unableToConnect))
                 return
             }
             guard response.statusCode == 200 else{
@@ -49,7 +49,7 @@ class NetworkManager{
                 completed(.success(charities))
                 return
             }catch{
-                completed(.failure(.invalidData))
+                completed(.failure(.unableToDecodeData))
                 return
             }
         }

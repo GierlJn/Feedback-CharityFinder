@@ -123,7 +123,7 @@ class OutputCalculationVC: UIViewController{
             maker.height.equalTo(40)
         }
         
-        textField.placeholder = "Enter donation sum"
+        textField.placeholder = "Enter donation"
         textField.keyboardType = .numberPad
         textField.pinToEdges(of: actionContentView)
     }

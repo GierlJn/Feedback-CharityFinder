@@ -34,12 +34,17 @@ class OutputView: UIView{
     }
 
     private func configure(){
-
+        layer.cornerRadius = 7
+        layer.borderWidth = 1
+        layer.borderColor = viewColor.cgColor
+        
+        let padding: CGFloat = 5
+        
         addSubview(iconImageView)
         iconImageView.image = UIImage(systemName: "heart.fill")
         iconImageView.tintColor = viewColor
         iconImageView.snp.makeConstraints { (maker) in
-            maker.left.equalTo(self.snp.left)
+            maker.left.equalTo(self.snp.left).offset(padding)
             maker.size.equalTo(30)
             maker.centerY.equalTo(self.snp.centerY)
         }
@@ -54,9 +59,9 @@ class OutputView: UIView{
         
         labelsStackView.snp.makeConstraints { (maker) in
             maker.left.equalTo(iconImageView.snp.right).offset(8)
-            maker.right.equalTo(self.snp.right)
-            maker.top.equalTo(self.snp.top)
-            maker.bottom.equalTo(self.snp.bottom)
+            maker.right.equalTo(self.snp.right).offset(-padding)
+            maker.top.equalTo(self.snp.top).offset(padding)
+            maker.bottom.equalTo(self.snp.bottom).offset(-padding)
         }
     }
     

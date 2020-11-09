@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum FBError: Error {
+enum FBError: Error, Equatable {
     static var titleMessage = "Something went wrong!"
     
     case unableToConnect
@@ -18,6 +18,8 @@ enum FBError: Error {
     case unableToFavourite
     case alreadyFavorite
     case noValidURL
+    case unableToDecodeData
+    case unvalidSearchParameter
     
     var errorMessage: String{
         switch self {
@@ -35,6 +37,10 @@ enum FBError: Error {
             return "Charity is already a favourite"
         case .noValidURL:
             return "It seems like we don't have a valid url to this charity."
+        case .unableToDecodeData:
+            return "No charity data could be decoded"
+        case .unvalidSearchParameter:
+            return "The entered search is not a valid url"
         }
     }
     

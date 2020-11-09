@@ -15,7 +15,7 @@ extension JSONDecoder{
             let charities = try decodeRawServerResponse(rawServerResponse)
             return charities
         }catch{
-            throw FBError.invalidData
+            throw FBError.unableToDecodeData
         }
     }
     

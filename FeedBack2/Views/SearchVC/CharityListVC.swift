@@ -15,16 +15,23 @@ class CharityListVC: UIViewController{
     }
     
     var tableView = UITableView()
+    var contentView = UIView()
+    let emptyStateView = EmptyStateView(title: "Your search didn't find anything")
     var charities = [Charity]()
     let networkManager = NetworkManager()
     
     override func viewDidLoad() {
+        configureContentView()
         configureTableViewController()
     }
     
+    private func configureContentView(){
+        view.addSubview(contentView)
+        contentView.pinToEdges(of: view)
+    }
+    
     private func configureTableViewController(){
-        view.addSubview(tableView)
-        tableView.pinToEdges(of: view)
+        addTableViewController()
         tableView.backgroundColor = .init(white: 0, alpha: 0 )
         tableView.register(CharityCell.self, forCellReuseIdentifier: CharityCell.reuseIdentifier)
         tableView.dataSource = self
@@ -34,12 +41,45 @@ class CharityListVC: UIViewController{
         tableView.removeExcessCells()
     }
     
+    private func addTableViewController(){
+        if(emptyStateView.isDescendant(of: view)){
+            emptyStateView.removeFromSuperview()
+        }
+        
+        if(!tableView.isDescendant(of: view)){
+            view.addSubview(tableView)
+            tableView.pinToEdges(of: contentView)
+        }
+    }
+    
+    private func addEmptyStateView(){
+        if(tableView.isDescendant(of: view)){
+            tableView.removeFromSuperview()
+        }
+        
+        if(!emptyStateView.isDescendant(of: view)){
+            contentView.addSubview(emptyStateView)
+            emptyStateView.pinToEdges(of: contentView)
+        }
+    }
+
+    
     func getCharities(searchParameter: String) {
+        DispatchQueue.main.async {
+            self.addTableViewController()
+        }
+        
         networkManager.getCharities(searchParameter: searchParameter, size: 15) { [weak self] result in
             guard let self = self else { return }
             switch(result){
             case .failure(let error):
-                print(error)
+                if(error == .unableToConnect){
+                    self.presentErrorAlert(error: error)
+                }else{
+                    DispatchQueue.main.async {
+                        self.addEmptyStateView()
+                    }
+                }
             case .success(let charities):
                 DispatchQueue.main.async {
                     self.updateUI(with: charities)
@@ -58,9 +98,8 @@ class CharityListVC: UIViewController{
         }
         self.updateData()
         if (charities.isEmpty) {
-            view.showEmptyView("Your search didn't find anything")
+            self.addEmptyStateView()
         }else{
-            view.hideEmptyView()
             scrollToTop()
         }
         
