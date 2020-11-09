@@ -34,9 +34,9 @@ class OutputView: UIView{
     }
 
     private func configure(){
-        layer.cornerRadius = 7
-        layer.borderWidth = 1
-        layer.borderColor = viewColor.cgColor
+        //layer.cornerRadius = 7
+        //layer.borderWidth = 1
+        //layer.borderColor = viewColor.cgColor
         
         let padding: CGFloat = 5
         
@@ -59,13 +59,21 @@ class OutputView: UIView{
         
         labelsStackView.snp.makeConstraints { (maker) in
             maker.left.equalTo(iconImageView.snp.right).offset(8)
-            maker.right.equalTo(self.snp.right).offset(-padding)
+            maker.right.greaterThanOrEqualTo(self.snp.right).offset(-padding)
             maker.top.equalTo(self.snp.top).offset(padding)
             maker.bottom.equalTo(self.snp.bottom).offset(-padding)
         }
+        
+        mayFundLabel.snp.makeConstraints { (maker) in
+            maker.right.equalTo(labelsStackView.snp.right)
+        }
+        
+        
     }
     
     func updateUI(){
+        
+        
         mayFundLabel.font = .boldSystemFont(ofSize: 12)
         let valueLabelText = "1 \(output.name!.formatOutputName(with: PersistenceManager.retrieveCurrency()))"
         mayFundLabel.text = valueLabelText
