@@ -36,13 +36,10 @@ class TagLabelScrollView: UIView{
     
     private func configure(){
         addSubview(scrollView)
-        scrollView.addSubview(stackView)
         scrollView.pinToEdges(of: self)
-        scrollView.showsVerticalScrollIndicator = false
+        scrollView.addSubview(stackView)
         scrollView.showsVerticalScrollIndicator = false
         scrollView.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: -30, right: 0)
-        
-
         stackView.pinToEdges(of: scrollView)
         stackView.spacing = 12
     }
@@ -56,14 +53,6 @@ class TagLabelScrollView: UIView{
             textLabel.backgroundColor = color
             stackView.addArrangedSubview(textLabel)
         }
-        
-        let fillerUILabel = UILabel()
-        fillerUILabel.backgroundColor = .init(white: 0, alpha: 0)
-        fillerUILabel.text = " "
-        fillerUILabel.snp.makeConstraints { (maker) in
-            maker.width.equalTo(20)
-        }
-        stackView.addArrangedSubview(fillerUILabel)
         
     }
     

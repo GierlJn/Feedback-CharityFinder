@@ -124,6 +124,7 @@ class CharityInfoVC: UIViewController{
         configureAboutHeaderLabel()
         configureDescriptionLabel(infoCharity)
         configureOutputView(infoCharity)
+        setContentViewHeight()
     }
     
     private func addRightBarButtonItem(){
@@ -244,12 +245,13 @@ class CharityInfoVC: UIViewController{
             maker.left.equalTo(contentView.snp.left).offset(20)
             maker.right.greaterThanOrEqualTo(contentView.snp.right).offset(-20)
         }
-        
         contentHeight += 115
+    }
+    
+    private func setContentViewHeight(){
         contentView.snp.makeConstraints { (maker) in
             maker.height.equalTo(contentHeight)
         }
-        
     }
     
     @objc func outputButtonPressed(){
