@@ -19,7 +19,7 @@ class CharityTitleLabelView: UIView{
     var delegate: TitleLabelViewDelegate?
     var isFavourite: Bool = false{
         didSet{
-            favoriteButton.setImage(isFavourite ? UIImage(systemName: "bookmark.fill") : UIImage(systemName: "bookmark"), for: .normal)
+            favoriteButton.setImage(isFavourite ? Images.bookMarkFill : Images.bookMark, for: .normal)
         }
     }
     
