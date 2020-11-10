@@ -91,8 +91,6 @@ extension ShowCaseVC {
         view.addSubview(collectionView)
         collectionView.pinToEdges(of: view)
         collectionView.delegate = self
-        //collectionView.register(FooterView.self, forCellWithReuseIdentifier: FooterView.reuseIdentifier)
-        
     }
     
     func configureDataSource() {

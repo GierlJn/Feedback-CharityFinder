@@ -142,9 +142,9 @@ class OutputCalculationVC: UIViewController{
         var floatValue = Float(value) ?? 1.0
         floatValue = floatValue / currency.relativeValueToPound
         
-        let impact = enteredAmount * floatValue
+        let impact = enteredAmount / floatValue
         
-        let formatted = String(format: "%.2f", impact)
+        let formatted = String(format: "%.0f", impact)
         
         messageLabel.text = "\(formatted) x \(output.name?.formatOutputName(with: currency) ?? "")"
         messageLabel.numberOfLines = 2
