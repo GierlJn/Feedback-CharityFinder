@@ -19,6 +19,7 @@ class CharityListVC: UIViewController{
     let emptyStateView = EmptyStateView(title: "Your search didn't find anything")
     var charities = [Charity]()
     let networkManager = NetworkManager()
+    var containerView: UIView?
     
     override func viewDidLoad() {
         configureContentView()
@@ -65,13 +66,13 @@ class CharityListVC: UIViewController{
 
     
     func getCharities(searchParameter: String) {
-        DispatchQueue.main.async {
-            self.addTableViewController()
-        }
         
+        showLoadingIndicatorView()
         networkManager.getCharities(searchParameter: searchParameter, size: 15) { [weak self] result in
             guard let self = self else { return }
+            self.hideLoadingIndicatorView()
             switch(result){
+            
             case .failure(let error):
                 if(error == .unableToConnect){
                     self.presentErrorAlert(error: error)
@@ -82,10 +83,36 @@ class CharityListVC: UIViewController{
                 }
             case .success(let charities):
                 DispatchQueue.main.async {
+                    DispatchQueue.main.async {
+                        self.addTableViewController()
+                    }
                     self.updateUI(with: charities)
                 }
                 
             }
+        }
+    }
+    
+    func showLoadingIndicatorView(){
+        containerView = UIView()
+        guard let containerView = containerView else { return }
+        contentView.addSubview(containerView)
+        containerView.pinToEdges(of: view)
+        //.backgroundColor = .lightBlueBackgroundGradientEnd
+        containerView.alpha = 1
+        let loadingIndicator = UIActivityIndicatorView(style: .large)
+        containerView.addSubview(loadingIndicator)
+        loadingIndicator.snp.makeConstraints { (maker) in
+            maker.centerX.equalTo(containerView.snp.centerX)
+            maker.centerY.equalTo(containerView.snp.centerY)
+        }
+        loadingIndicator.startAnimating()
+    }
+    
+    func hideLoadingIndicatorView(){
+        DispatchQueue.main.async {
+            if(self.containerView != nil){ self.containerView!.removeFromSuperview()}
+            self.containerView = nil
         }
     }
     
