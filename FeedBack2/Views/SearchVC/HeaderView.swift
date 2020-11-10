@@ -78,7 +78,7 @@ class SearchHeaderView: UIView{
         
         actionButton.setImage(Images.searchActionButton, for: .normal)
         actionButton.addTarget(self, action: #selector(actionButtonTabbed), for: .touchUpInside)
-        actionButton.setGradientBackgroundColor(colors: [.headerViewGradientStart, .headerViewGradientEnd], axis: .custom(angle: CGFloat(90)))
+        actionButton.setGradientBackgroundColor(colors: [.headerButtonGradientStart, .headerButtonGradientEnd], axis: .custom(angle: CGFloat(90)))
         actionButton.layer.cornerRadius = 7
         actionButton.clipsToBounds = true
         actionButton.tintColor = .white
@@ -86,7 +86,7 @@ class SearchHeaderView: UIView{
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        actionButton.setGradientBackgroundColor(colors: [.headerViewGradientStart, .headerViewGradientEnd], axis: .custom(angle: CGFloat(90)))
+        actionButton.setGradientBackgroundColor(colors: [.headerButtonGradientStart, .headerButtonGradientEnd], axis: .custom(angle: CGFloat(90)))
         backgroundView.colors = [[UIColor.headerViewGradientStart, UIColor.headerViewGradientEnd]]
     }
     

@@ -19,11 +19,20 @@ class CategoryButton: UIButton{
     override var isSelected: Bool {
         didSet {
             if(isSelected){
-                setGradientBackgroundColor(colors: [.headerViewGradientStart, .headerViewGradientEnd], axis: .custom(angle: CGFloat(90)))
+                setGradientBackgroundColor(colors: [.headerButtonGradientStart, .headerButtonGradientEnd], axis: .custom(angle: CGFloat(90)))
             }else{
                 removeGradientBackground()
                 backgroundColor = UIColor.categoriesTransparentColor
             }
+        }
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        if(isSelected){
+            setGradientBackgroundColor(colors: [.headerButtonGradientStart, .headerButtonGradientEnd], axis: .custom(angle: CGFloat(90)))
+        }else{
+            removeGradientBackground()
+            backgroundColor = UIColor.categoriesTransparentColor
         }
     }
     

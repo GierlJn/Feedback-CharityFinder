@@ -25,7 +25,6 @@ extension UIColor {
         switch traitCollection.userInterfaceStyle {
         case .dark:
             return .white
-            
         default:
             return .black
         }
@@ -63,6 +62,24 @@ extension UIColor {
         switch traitCollection.userInterfaceStyle {
         case .dark:
             return UIColor(rgb: 0x24243e)
+        default:
+          return UIColor(rgb: 0x2c299a)
+        }
+    }
+    
+    static var headerButtonGradientStart =  UIColor { traitCollection in
+        switch traitCollection.userInterfaceStyle {
+        case .dark:
+            return UIColor(rgb: 0x286885)
+        default:
+          return UIColor(rgb: 0xab6fdb)
+        }
+    }
+    
+    static var headerButtonGradientEnd =  UIColor { traitCollection in
+        switch traitCollection.userInterfaceStyle {
+        case .dark:
+            return UIColor(rgb: 0x294463)
         default:
           return UIColor(rgb: 0x2c299a)
         }

@@ -12,7 +12,7 @@ class FBTabBarController: UITabBarController{
     
     override func viewDidLoad() {
         
-        UITabBar.appearance().tintColor = .headerViewGradientEnd
+        UITabBar.appearance().tintColor = .headerButtonGradientStart
         viewControllers = [createSearchVC(), createFavoritesVC()]
     }
     
@@ -25,7 +25,8 @@ class FBTabBarController: UITabBarController{
     
     private func createFavoritesVC() -> UINavigationController{
         let favouritesVC = FavouritesVC()
-        favouritesVC.tabBarItem = UITabBarItem(title: "Saved", image: Images.bookMark, selectedImage: Images.bookMarkFill)
+        favouritesVC.title = "Favorites"
+        favouritesVC.tabBarItem = UITabBarItem(title: "Favorites", image: Images.bookMark, selectedImage: Images.bookMarkFill)
         return UINavigationController(rootViewController: favouritesVC)
     }
 
