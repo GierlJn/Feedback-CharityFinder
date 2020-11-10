@@ -199,7 +199,7 @@ extension TitleSupplementaryView {
         addSubview(viewAllButton)
         viewAllButton.setTitle("View All", for: .normal)
         viewAllButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .footnote)
-        viewAllButton.setTitleColor(.blue, for: .normal)
+        viewAllButton.setTitleColor(.textTitleLabel, for: .normal)
         viewAllButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
         viewAllButton.snp.makeConstraints { (maker) in
             maker.top.equalTo(snp.top).offset(inset)

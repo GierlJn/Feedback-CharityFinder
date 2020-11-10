@@ -24,7 +24,7 @@ class FBTitleLabel: UILabel{
     }
     
     private func configure(){
-        textColor = .label
+        textColor = .textTitleLabel
         font = UIFont.preferredFont(forTextStyle: .headline)
         adjustsFontSizeToFitWidth = true
         minimumScaleFactor = 0.6

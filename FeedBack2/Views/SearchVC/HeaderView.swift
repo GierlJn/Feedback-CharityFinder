@@ -44,6 +44,7 @@ class SearchHeaderView: UIView{
         backgroundView.colors = [[UIColor.headerViewGradientStart, UIColor.headerViewGradientEnd]]
         backgroundView.direction = .right
         backgroundView.type = .conic
+        
     }
     
     fileprivate func configureLabel() {

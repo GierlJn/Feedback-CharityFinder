@@ -49,6 +49,15 @@ extension UIColor {
         }
     }
     
+    static var textTitleLabel =  UIColor { traitCollection in
+        switch traitCollection.userInterfaceStyle {
+        case .dark:
+            return UIColor(rgb: 0xf5f5f5)
+        default:
+            return .black
+        }
+    }
+    
     static var headerViewGradientStart =  UIColor { traitCollection in
         switch traitCollection.userInterfaceStyle {
         case .dark:
