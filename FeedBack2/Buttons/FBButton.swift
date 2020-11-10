@@ -37,7 +37,7 @@ class FBButton: UIButton{
         translatesAutoresizingMaskIntoConstraints = false
         layer.cornerRadius = 7
         titleLabel?.font = .systemFont(ofSize: 20)
-        titleLabel?.textColor = .red
+        //titleLabel?.textColor = .red
     }
     
     private func addShadow(){

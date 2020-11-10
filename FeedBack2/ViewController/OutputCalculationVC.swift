@@ -89,12 +89,11 @@ class OutputCalculationVC: UIViewController{
             maker.height.equalTo(80)
         }
         
-        
         donationTextFieldView.snp.makeConstraints { (maker) in
             maker.height.equalTo(40)
             maker.centerY.equalTo(actionContentView.snp.centerY)
-            maker.left.equalTo(actionContentView.snp.left).offset(padding)
-            maker.right.equalTo(actionContentView.snp.right).offset(-padding)
+            maker.left.equalTo(containerView.snp.left).offset(padding)
+            maker.right.equalTo(containerView.snp.right).offset(-padding)
         }
         donationTextFieldView.currencyLabel.text = currency.symbol
         
@@ -112,19 +111,23 @@ class OutputCalculationVC: UIViewController{
         buttonStackView.spacing = 10
         buttonStackView.distribution = .fillEqually
         
-        dismissButten.setTitle(dismissButtonTitle, for: .normal)
+        dismissButten.setTitle("Cancel", for: .normal)
+        dismissButten.backgroundColor = .systemGray
         dismissButten.addTarget(self, action: #selector(dismissButtonPressed), for: .touchUpInside)
         buttonStackView.addArrangedSubview(dismissButten)
         
+        
         actionButton = FBButton()
-        actionButton?.setTitle(actionButtonTite, for: .normal)
+        actionButton?.setTitle("Go", for: .normal)
         actionButton?.addTarget(self, action: #selector(actionButtonPressed), for: .touchUpInside)
+        actionButton?.backgroundColor = .headerViewGradientEnd
         buttonStackView.addArrangedSubview(actionButton!)
     }
     
     fileprivate func configureExitButton(){
         containerView.addSubview(dismissButten)
-        dismissButten.setTitle("Go", for: .normal)
+        dismissButten.setTitle("Return", for: .normal)
+        dismissButten.backgroundColor = .headerViewGradientEnd
         dismissButten.snp.makeConstraints { (maker) in
             maker.height.equalTo(44)
             maker.top.equalTo(actionContentView.snp.bottom).offset(padding)
@@ -142,8 +145,6 @@ class OutputCalculationVC: UIViewController{
         var floatValue = Float(value) ?? 1.0
         floatValue = floatValue / currency.relativeValueToPound
         
-        
-        
         let impact = enteredAmount * floatValue
         
         let formatted = String(format: "%.2f", impact)
@@ -159,17 +160,20 @@ class OutputCalculationVC: UIViewController{
     
     @objc func actionButtonPressed(){
         guard let text = donationTextFieldView.textField.text else { return}
-        titleLabel.text = "This donation equals"
-        
+        guard !text.isEmpty else { return }
         enteredAmount = Float(String(text)) ?? 1.0
-        
+        showImpact()
+    }
+    
+    private func showImpact(){
+        titleLabel.text = "This donation equals"
+
         donationTextFieldView.removeFromSuperview()
         configureMessageLabel()
         
         dismissButten.removeFromSuperview()
         buttonStackView.removeFromSuperview()
         configureExitButton()
-        dismissButten.setTitle("Return", for: .normal)
     }
     
 }
@@ -177,7 +181,8 @@ class OutputCalculationVC: UIViewController{
 
 extension OutputCalculationVC: UITextFieldDelegate{
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        guard let text = textField.text else { return false}
+        guard let text = donationTextFieldView.textField.text else { return false}
+        guard !text.isEmpty else { return false}
         enteredAmount = Float(String(text)) ?? 1.0
         return true
     }
