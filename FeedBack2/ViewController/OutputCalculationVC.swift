@@ -112,7 +112,6 @@ class OutputCalculationVC: UIViewController{
         buttonStackView.distribution = .fillEqually
         
         dismissButten.setTitle("Cancel", for: .normal)
-        dismissButten.backgroundColor = .systemGray
         dismissButten.addTarget(self, action: #selector(dismissButtonPressed), for: .touchUpInside)
         buttonStackView.addArrangedSubview(dismissButten)
         
@@ -120,14 +119,12 @@ class OutputCalculationVC: UIViewController{
         actionButton = FBButton()
         actionButton?.setTitle("Go", for: .normal)
         actionButton?.addTarget(self, action: #selector(actionButtonPressed), for: .touchUpInside)
-        actionButton?.backgroundColor = .headerViewGradientEnd
         buttonStackView.addArrangedSubview(actionButton!)
     }
     
     fileprivate func configureExitButton(){
         containerView.addSubview(dismissButten)
         dismissButten.setTitle("Return", for: .normal)
-        dismissButten.backgroundColor = .headerViewGradientEnd
         dismissButten.snp.makeConstraints { (maker) in
             maker.height.equalTo(44)
             maker.top.equalTo(actionContentView.snp.bottom).offset(padding)

@@ -22,9 +22,13 @@ class AlertContainerView: UIView{
     fileprivate func configure() {
         backgroundColor = .systemBackground
         layer.borderWidth = 2
-        layer.borderColor = UIColor.headerViewGradientEnd.cgColor
+        layer.borderColor = UIColor.standardButton.cgColor
         layer.cornerRadius = 12
         clipsToBounds = true
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        layer.borderColor = UIColor.standardButton.cgColor
     }
     
 }

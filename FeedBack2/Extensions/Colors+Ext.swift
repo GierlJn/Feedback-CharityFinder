@@ -30,6 +30,15 @@ extension UIColor {
         }
     }
     
+    static var standardButton = UIColor { traitCollection in
+        switch traitCollection.userInterfaceStyle {
+        case .dark:
+            return UIColor(rgb: 0x286885)
+        default:
+            return UIColor(rgb: 0x2c299a)
+        }
+    }
+    
     static var outputColor = UIColor { traitCollection in
         switch traitCollection.userInterfaceStyle {
         case .dark:

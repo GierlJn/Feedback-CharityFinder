@@ -37,6 +37,7 @@ class DonationTextFieldView: UITextField{
         textField.placeholder = "Enter donation"
         textField.keyboardType = .numberPad
         textField.layer.borderWidth = 0
+        textField.backgroundColor = .none
         addSubview(textField)
         textField.snp.makeConstraints { (maker) in
             maker.top.equalTo(snp.top)
