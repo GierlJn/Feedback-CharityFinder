@@ -98,7 +98,6 @@ class CharityListVC: UIViewController{
         guard let containerView = containerView else { return }
         contentView.addSubview(containerView)
         containerView.pinToEdges(of: view)
-        //.backgroundColor = .lightBlueBackgroundGradientEnd
         containerView.alpha = 1
         let loadingIndicator = UIActivityIndicatorView(style: .large)
         containerView.addSubview(loadingIndicator)
