@@ -33,6 +33,8 @@ extension JSONDecoder{
                singleImpact.name != nil
             { charity.singleImpact = singleImpact }
             
+            charity.filterBadImages()
+            
             return charity
         }catch{
             throw FBError.invalidData

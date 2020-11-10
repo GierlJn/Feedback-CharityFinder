@@ -19,4 +19,11 @@ struct InfoCharity: Hashable{
     var url: String?
     var tags: String?
     var geoTags: String?
+    
+    
+    mutating func filterBadImages(){
+        if(id == "give-directly"){
+            imageUrl = nil
+        }
+    }
 }

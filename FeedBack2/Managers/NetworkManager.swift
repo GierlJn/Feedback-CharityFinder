@@ -14,9 +14,6 @@ class NetworkManager{
     var baseSearchUrl = "https://app.sogive.org/search.json?"
     var baseCharityInfoUrl = "https://app.sogive.org/charity/"
     
-//    private init(){}
-//    
-//    static let shared = NetworkManager()
     
     func getCharities(searchParameter: String, size: Int, completed: @escaping (Result<[Charity], FBError>) -> Void){
         let cleanedSpacesParameter = searchParameter.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? searchParameter
