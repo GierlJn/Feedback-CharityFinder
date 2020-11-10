@@ -7,7 +7,9 @@ class OutputCalculationVC: UIViewController{
     var containerView = AlertContainerView()
     var titleLabel = FBTitleLabel(textAlignment: .center)
     var messageLabel = FBSubTitleLabel(textAlignment: .center)
-    var textField = FBTextField()
+    
+    
+    var donationTextFieldView = DonationTextFieldView()
     
     var dismissButten = FBButton()
     var actionButton: FBButton?
@@ -50,8 +52,6 @@ class OutputCalculationVC: UIViewController{
     private func configure(){
         configureContainerView()
         configureTitleLabel()
-        
-        //configureMessageLabel()
         configureTextField()
         configureActionButtons()
     }
@@ -61,7 +61,7 @@ class OutputCalculationVC: UIViewController{
         containerView.snp.makeConstraints { (maker) in
             maker.centerY.equalTo(view.snp.centerY)
             maker.centerX.equalTo(view.snp.centerX)
-            maker.height.equalTo(180)
+            maker.height.equalTo(230)
             maker.width.equalTo(280)
         }
     }
@@ -76,6 +76,28 @@ class OutputCalculationVC: UIViewController{
             maker.right.equalTo(containerView.snp.right).offset(-padding)
             maker.height.equalTo(28)
         }
+    }
+    
+    fileprivate func configureTextField(){
+        containerView.addSubview(actionContentView)
+        actionContentView.addSubview(donationTextFieldView)
+        
+        actionContentView.snp.makeConstraints { (maker) in
+            maker.top.equalTo(titleLabel.snp.bottom).offset(8)
+            maker.left.equalTo(containerView.snp.left).offset(padding)
+            maker.right.equalTo(containerView.snp.right).offset(-padding)
+            maker.height.equalTo(80)
+        }
+        
+        
+        donationTextFieldView.snp.makeConstraints { (maker) in
+            maker.height.equalTo(40)
+            maker.centerY.equalTo(actionContentView.snp.centerY)
+            maker.left.equalTo(actionContentView.snp.left).offset(padding)
+            maker.right.equalTo(actionContentView.snp.right).offset(-padding)
+        }
+        donationTextFieldView.currencyLabel.text = currency.symbol
+        
     }
     
     fileprivate func configureActionButtons() {
@@ -112,25 +134,9 @@ class OutputCalculationVC: UIViewController{
         }
     }
     
-    fileprivate func configureTextField(){
-        containerView.addSubview(actionContentView)
-        actionContentView.addSubview(textField)
-        
-        actionContentView.snp.makeConstraints { (maker) in
-            maker.top.equalTo(titleLabel.snp.bottom).offset(8)
-            maker.left.equalTo(containerView.snp.left).offset(padding)
-            maker.right.equalTo(containerView.snp.right).offset(-padding)
-            maker.height.equalTo(40)
-        }
-        
-        textField.placeholder = "Enter donation"
-        textField.keyboardType = .numberPad
-        textField.pinToEdges(of: actionContentView)
-    }
-    
     fileprivate func configureMessageLabel() {
         actionContentView.addSubview(messageLabel)
-
+        actionContentView.layer.borderWidth = 0
         
         let value = output.costPerBeneficiary?.value ?? "1.0"
         var floatValue = Float(value) ?? 1.0
@@ -142,7 +148,7 @@ class OutputCalculationVC: UIViewController{
         
         let formatted = String(format: "%.2f", impact)
         
-        messageLabel.text = "\(formatted) \(output.name ?? "")"
+        messageLabel.text = "\(formatted) x \(output.name?.formatOutputName(with: currency) ?? "")"
         messageLabel.numberOfLines = 2
         messageLabel.pinToEdges(of: actionContentView)
     }
@@ -152,17 +158,18 @@ class OutputCalculationVC: UIViewController{
     }
     
     @objc func actionButtonPressed(){
-        guard let text = textField.text else { return}
-        titleLabel.text = "This sum equals"
+        guard let text = donationTextFieldView.textField.text else { return}
+        titleLabel.text = "This donation equals"
         
         enteredAmount = Float(String(text)) ?? 1.0
         
-        textField.removeFromSuperview()
+        donationTextFieldView.removeFromSuperview()
         configureMessageLabel()
         
         dismissButten.removeFromSuperview()
         buttonStackView.removeFromSuperview()
         configureExitButton()
+        dismissButten.setTitle("Return", for: .normal)
     }
     
 }
