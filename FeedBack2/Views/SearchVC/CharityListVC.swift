@@ -72,7 +72,7 @@ class CharityListVC: UIViewController{
             guard let self = self else { return }
             self.hideLoadingIndicatorView()
             switch(result){
-            
+
             case .failure(let error):
                 if(error == .unableToConnect){
                     self.presentErrorAlert(error: error)
@@ -83,34 +83,37 @@ class CharityListVC: UIViewController{
                 }
             case .success(let charities):
                 DispatchQueue.main.async {
-                    DispatchQueue.main.async {
-                        self.addTableViewController()
-                    }
+                    self.addTableViewController()
                     self.updateUI(with: charities)
                 }
-                
+
             }
         }
     }
     
     func showLoadingIndicatorView(){
+        guard  containerView == nil else { return }
+        //guard !containerView.isDescendant(of: contentView) else { return }
         containerView = UIView()
-        guard let containerView = containerView else { return }
-        contentView.addSubview(containerView)
-        containerView.pinToEdges(of: view)
-        containerView.alpha = 1
+        contentView.addSubview(containerView!)
+        containerView!.pinToEdges(of: view)
+        containerView!.alpha = 1
         let loadingIndicator = UIActivityIndicatorView(style: .large)
-        containerView.addSubview(loadingIndicator)
+        //guard !loadingIndicator.isDescendant(of: containerView) else { return }
+        containerView!.addSubview(loadingIndicator)
         loadingIndicator.snp.makeConstraints { (maker) in
-            maker.centerX.equalTo(containerView.snp.centerX)
-            maker.centerY.equalTo(containerView.snp.centerY)
+            maker.centerX.equalTo(containerView!.snp.centerX)
+            maker.centerY.equalTo(containerView!.snp.centerY)
         }
         loadingIndicator.startAnimating()
     }
     
     func hideLoadingIndicatorView(){
         DispatchQueue.main.async {
-            if(self.containerView != nil){ self.containerView!.removeFromSuperview()}
+            if(self.containerView != nil){
+                self.containerView!.removeFromSuperview()
+                
+            }
             self.containerView = nil
         }
     }
