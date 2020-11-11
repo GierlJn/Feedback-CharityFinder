@@ -70,11 +70,17 @@ extension UIViewController{
         }
     }
     
-    func hideLoadingSubView(){
+    func hideLoadingSubView(in view: UIView){
         DispatchQueue.main.async {
+            view.subviews.forEach { (view) in
+                if(view.tag == 13){
+                    view.removeFromSuperview()
+                }
+            }
             if(containerView != nil){
                 containerView!.removeFromSuperview()
                 containerView = nil
+                
             }
             
         }
@@ -83,11 +89,14 @@ extension UIViewController{
     func showLoadingSubView(in view: UIView){
         DispatchQueue.main.async {
         guard  containerView == nil else { return }
+        
         containerView = UIView()
+        containerView.tag = 13
         view.addSubview(containerView!)
         containerView!.pinToEdges(of: view)
         containerView!.alpha = 1
         let loadingIndicator = UIActivityIndicatorView(style: .large)
+        loadingIndicator.tag = 13
         containerView!.addSubview(loadingIndicator)
         loadingIndicator.snp.makeConstraints { (maker) in
             maker.centerX.equalTo(containerView!.snp.centerX)

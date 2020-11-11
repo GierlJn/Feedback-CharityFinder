@@ -69,8 +69,6 @@ class CharityListVC: UIViewController{
         networkManager.cancelCurrentTasks()
         showLoadingSubView(in: contentView)
         
-        
-        
         networkManager.getCharities(searchParameter: searchParameter, size: 15) { [weak self] result in
             guard let self = self else { return }
             
@@ -78,19 +76,19 @@ class CharityListVC: UIViewController{
 
             case .failure(let error):
                 if(error == .unableToConnect){
-                    self.hideLoadingSubView()
+                    self.hideLoadingSubView(in: self.contentView)
                     self.presentErrorAlert(error: error)
                 }else if(error == .userCancelled){
                     return 
                 }else{
                     DispatchQueue.main.async {
-                        self.hideLoadingSubView()
+                        self.hideLoadingSubView(in: self.contentView)
                         self.addEmptyStateView()
                     }
                 }
             case .success(let charities):
                 DispatchQueue.main.async {
-                    self.hideLoadingSubView()
+                    self.hideLoadingSubView(in: self.contentView)
                     self.addTableViewController()
                     self.updateUI(with: charities)
                 }
