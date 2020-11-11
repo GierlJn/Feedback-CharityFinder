@@ -22,8 +22,15 @@ class CharityListVC: UIViewController{
     var containerView: UIView?
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         configureContentView()
         configureTableViewController()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        networkManager.cancelCurrentTasks()
+        hideLoadingSubView(in: contentView)
     }
     
     private func configureContentView(){
@@ -67,8 +74,6 @@ class CharityListVC: UIViewController{
     
     func getCharities(searchParameter: String) {
         networkManager.cancelCurrentTasks()
-        showLoadingSubView(in: contentView)
-        
         networkManager.getCharities(searchParameter: searchParameter, size: 15) { [weak self] result in
             guard let self = self else { return }
             
@@ -96,31 +101,6 @@ class CharityListVC: UIViewController{
             }
         }
     }
-    
-//    func showLoadingIndicatorView(){
-//        guard  containerView == nil else { return }
-//        containerView = UIView()
-//        contentView.addSubview(containerView!)
-//        containerView!.pinToEdges(of: view)
-//        containerView!.alpha = 1
-//        let loadingIndicator = UIActivityIndicatorView(style: .large)
-//        containerView!.addSubview(loadingIndicator)
-//        loadingIndicator.snp.makeConstraints { (maker) in
-//            maker.centerX.equalTo(containerView!.snp.centerX)
-//            maker.centerY.equalTo(containerView!.snp.centerY)
-//        }
-//        loadingIndicator.startAnimating()
-//    }
-//
-//    func hideLoadingIndicatorView(){
-//        DispatchQueue.main.async {
-//            if(self.containerView != nil){
-//                self.containerView!.removeFromSuperview()
-//                self.containerView = nil
-//            }
-//
-//        }
-//    }
     
     private func updateUI(with charities: [Charity]){
         self.charities = charities
