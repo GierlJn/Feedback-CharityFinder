@@ -28,7 +28,6 @@ class NetworkManager{
         let cleanedSpacesParameter = searchParameter.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? searchParameter
         
         let stringUrl = "\(baseSearchUrl)\(cleanedSpacesParameter)&size=\(size)"
-        print(stringUrl)
         guard let url = URL(string: stringUrl) else {
             completed(.failure(.unvalidSearchParameter))
             return
@@ -36,7 +35,6 @@ class NetworkManager{
         
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             if error != nil{
-                print(error.debugDescription)
                 if(error?.localizedDescription == "cancelled"){
                     completed(.failure(.userCancelled))
                 }else{

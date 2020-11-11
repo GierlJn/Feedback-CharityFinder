@@ -59,10 +59,8 @@ class CharityController {
             guard let self = self else { return }
             switch result{
             case .failure(let error):
-                print(error)
                 completed(error)
             case .success(let charities):
-                print(charities)
                 self.generateCharityCollections(for: charities, category: category, positionIndex: positionIndex)
                 completed(nil)
             }
