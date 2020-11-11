@@ -15,6 +15,15 @@ class NetworkManager{
     var baseCharityInfoUrl = "https://app.sogive.org/charity/"
     
     
+    func cancelCurrentTasks(){
+        //URLSession.shared.invalidateAndCancel()
+        URLSession.shared.getTasksWithCompletionHandler { (dataTasks, uploadTasks, downloadTasks) in
+            for task in dataTasks{
+                task.cancel()
+            }
+        }
+    }
+    
     func getCharities(searchParameter: String, size: Int, completed: @escaping (Result<[Charity], FBError>) -> Void){
         let cleanedSpacesParameter = searchParameter.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? searchParameter
         
@@ -24,13 +33,20 @@ class NetworkManager{
             completed(.failure(.unvalidSearchParameter))
             return
         }
-
+        
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             if error != nil{
-                completed(.failure(.unableToConnect))
+                print(error.debugDescription)
+                if(error?.localizedDescription == "cancelled"){
+                    completed(.failure(.userCancelled))
+                }else{
+                    completed(.failure(.unableToConnect))
+                }
+                
             }
+            
             guard let response = response as? HTTPURLResponse else{
-                completed(.failure(.unableToConnect))
+                completed(.failure(.userCancelled))
                 return
             }
             guard response.statusCode == 200 else{

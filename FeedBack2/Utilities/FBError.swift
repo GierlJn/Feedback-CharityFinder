@@ -20,6 +20,7 @@ enum FBError: Error, Equatable {
     case noValidURL
     case unableToDecodeData
     case unvalidSearchParameter
+    case userCancelled
     
     var errorMessage: String{
         switch self {
@@ -41,6 +42,9 @@ enum FBError: Error, Equatable {
             return "No charity data could be decoded"
         case .unvalidSearchParameter:
             return "The entered search is not a valid url"
+        case .userCancelled:
+            return "The user cancelled the task"
+            
         }
     }
     

@@ -66,7 +66,7 @@ class CharityListVC: UIViewController{
 
     
     func getCharities(searchParameter: String) {
-        
+        networkManager.cancelCurrentTasks()
         showLoadingIndicatorView()
         networkManager.getCharities(searchParameter: searchParameter, size: 15) { [weak self] result in
             guard let self = self else { return }
@@ -76,6 +76,8 @@ class CharityListVC: UIViewController{
             case .failure(let error):
                 if(error == .unableToConnect){
                     self.presentErrorAlert(error: error)
+                }else if(error == .userCancelled){
+                    return 
                 }else{
                     DispatchQueue.main.async {
                         self.addEmptyStateView()
@@ -93,13 +95,11 @@ class CharityListVC: UIViewController{
     
     func showLoadingIndicatorView(){
         guard  containerView == nil else { return }
-        //guard !containerView.isDescendant(of: contentView) else { return }
         containerView = UIView()
         contentView.addSubview(containerView!)
         containerView!.pinToEdges(of: view)
         containerView!.alpha = 1
         let loadingIndicator = UIActivityIndicatorView(style: .large)
-        //guard !loadingIndicator.isDescendant(of: containerView) else { return }
         containerView!.addSubview(loadingIndicator)
         loadingIndicator.snp.makeConstraints { (maker) in
             maker.centerX.equalTo(containerView!.snp.centerX)
@@ -112,9 +112,9 @@ class CharityListVC: UIViewController{
         DispatchQueue.main.async {
             if(self.containerView != nil){
                 self.containerView!.removeFromSuperview()
-                
+                self.containerView = nil
             }
-            self.containerView = nil
+            
         }
     }
     
