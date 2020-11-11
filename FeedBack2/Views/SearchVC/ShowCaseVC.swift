@@ -11,6 +11,7 @@ import UIKit
 protocol ShowCaseVCDelegate{
     func showCharityInfo(charityId: String, charity: Charity)
     func showCategories(category: Category)
+    func finishedLoading()
 }
 
 
@@ -140,9 +141,9 @@ extension ShowCaseVC {
     }
     
     fileprivate func loadCharities() {
-        
         charityController.loadInitialCharities { [weak self] (error) in
             guard let self = self else { return }
+            self.delegate?.finishedLoading()
             guard let error = error else {
                 self.applyCurrentSnapshot()
                 return

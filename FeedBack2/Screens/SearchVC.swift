@@ -30,8 +30,11 @@ class SearchVC: UIViewController{
     
     var copyRightLabel = FooterView()
     
+    var loadingVC: LoadingVC?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        showSplashLoadingSreen()
         addDismissKeyBoardGesture()
         configureNavigationBar()
         configureHeaderView()
@@ -39,6 +42,16 @@ class SearchVC: UIViewController{
         configureCopyRightLabel()
         configureContentView()
         configureShowCaseVC()
+    }
+    
+    fileprivate func showSplashLoadingSreen() {
+        loadingVC = LoadingVC()
+        guard let loadingVC = loadingVC else { return }
+        loadingVC.modalTransitionStyle = .crossDissolve
+        loadingVC.modalPresentationStyle = .fullScreen
+        DispatchQueue.main.async {
+            self.present(loadingVC, animated: false)
+        }
     }
     
     private func addDismissKeyBoardGesture(){
@@ -210,6 +223,13 @@ extension SearchVC: ShowCaseVCDelegate{
         showListVC()
         headerView.textfield.clearTextField()
         categoriesView.selectedCategory = category
+    }
+    
+    func finishedLoading(){
+        DispatchQueue.main.async {
+            self.loadingVC?.dismiss(animated: true)
+        }
+        
     }
     
     
