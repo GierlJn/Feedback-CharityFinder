@@ -32,6 +32,7 @@ class SearchHeaderView: UIView{
     
     
     private func configure(){
+        translatesAutoresizingMaskIntoConstraints = false
         configureBackgroundView()
         configureLabel()
         configureSearchView()
