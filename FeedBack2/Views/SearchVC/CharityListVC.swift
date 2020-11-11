@@ -67,10 +67,10 @@ class CharityListVC: UIViewController{
     
     func getCharities(searchParameter: String) {
         networkManager.cancelCurrentTasks()
-        showLoadingIndicatorView()
+        showLoadingSubView(in: contentView)
         networkManager.getCharities(searchParameter: searchParameter, size: 15) { [weak self] result in
             guard let self = self else { return }
-            self.hideLoadingIndicatorView()
+            self.hideLoadingSubView()
             switch(result){
 
             case .failure(let error):
@@ -93,30 +93,30 @@ class CharityListVC: UIViewController{
         }
     }
     
-    func showLoadingIndicatorView(){
-        guard  containerView == nil else { return }
-        containerView = UIView()
-        contentView.addSubview(containerView!)
-        containerView!.pinToEdges(of: view)
-        containerView!.alpha = 1
-        let loadingIndicator = UIActivityIndicatorView(style: .large)
-        containerView!.addSubview(loadingIndicator)
-        loadingIndicator.snp.makeConstraints { (maker) in
-            maker.centerX.equalTo(containerView!.snp.centerX)
-            maker.centerY.equalTo(containerView!.snp.centerY)
-        }
-        loadingIndicator.startAnimating()
-    }
-    
-    func hideLoadingIndicatorView(){
-        DispatchQueue.main.async {
-            if(self.containerView != nil){
-                self.containerView!.removeFromSuperview()
-                self.containerView = nil
-            }
-            
-        }
-    }
+//    func showLoadingIndicatorView(){
+//        guard  containerView == nil else { return }
+//        containerView = UIView()
+//        contentView.addSubview(containerView!)
+//        containerView!.pinToEdges(of: view)
+//        containerView!.alpha = 1
+//        let loadingIndicator = UIActivityIndicatorView(style: .large)
+//        containerView!.addSubview(loadingIndicator)
+//        loadingIndicator.snp.makeConstraints { (maker) in
+//            maker.centerX.equalTo(containerView!.snp.centerX)
+//            maker.centerY.equalTo(containerView!.snp.centerY)
+//        }
+//        loadingIndicator.startAnimating()
+//    }
+//
+//    func hideLoadingIndicatorView(){
+//        DispatchQueue.main.async {
+//            if(self.containerView != nil){
+//                self.containerView!.removeFromSuperview()
+//                self.containerView = nil
+//            }
+//
+//        }
+//    }
     
     private func updateUI(with charities: [Charity]){
         self.charities = charities

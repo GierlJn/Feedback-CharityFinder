@@ -69,4 +69,33 @@ extension UIViewController{
             containerView = nil
         }
     }
+    
+    func hideLoadingSubView(){
+        DispatchQueue.main.async {
+            if(containerView != nil){
+                containerView!.removeFromSuperview()
+                containerView = nil
+            }
+            
+        }
+    }
+    
+    func showLoadingSubView(in view: UIView){
+        DispatchQueue.main.async {
+        guard  containerView == nil else { return }
+        containerView = UIView()
+        view.addSubview(containerView!)
+        containerView!.pinToEdges(of: view)
+        containerView!.alpha = 1
+        let loadingIndicator = UIActivityIndicatorView(style: .large)
+        containerView!.addSubview(loadingIndicator)
+        loadingIndicator.snp.makeConstraints { (maker) in
+            maker.centerX.equalTo(containerView!.snp.centerX)
+            maker.centerY.equalTo(containerView!.snp.centerY)
+        }
+        loadingIndicator.startAnimating()
+        }
+    }
+    
+    
 }
