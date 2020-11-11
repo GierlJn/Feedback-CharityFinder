@@ -75,8 +75,10 @@ class SearchCategoriesStackView: UIView, CategoryButtonDelegate{
     }
     
     func categoryButtonPressed(category: Category) {
-        self.selectedCategory = category
-        updateCategorySelection()
+        if(category != self.selectedCategory){
+            self.selectedCategory = category
+            updateCategorySelection()
+        }
     }
     
     private func clearAllSelections(){

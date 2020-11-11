@@ -29,8 +29,8 @@ class CharityListVC: UIViewController{
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
-        networkManager.cancelCurrentTasks()
-        hideLoadingSubView(in: contentView)
+//        networkManager.cancelCurrentTasks()
+//        hideLoadingSubView(in: contentView)
     }
     
     private func configureContentView(){
@@ -68,12 +68,23 @@ class CharityListVC: UIViewController{
         if(!emptyStateView.isDescendant(of: view)){
             contentView.addSubview(emptyStateView)
             emptyStateView.pinToEdges(of: contentView)
+            emptyStateView.isHidden = false
+        }
+    }
+    
+    private func hideEmptyStateView(){
+        emptyStateView.isHidden = true
+        if(emptyStateView.isDescendant(of: view)){
+            emptyStateView.removeFromSuperview()
         }
     }
 
     
     func getCharities(searchParameter: String) {
         networkManager.cancelCurrentTasks()
+        showLoadingSubView(in: self.contentView)
+        tableView.isHidden = true
+        hideEmptyStateView()
         networkManager.getCharities(searchParameter: searchParameter, size: 15) { [weak self] result in
             guard let self = self else { return }
             
@@ -84,6 +95,9 @@ class CharityListVC: UIViewController{
                     self.hideLoadingSubView(in: self.contentView)
                     self.presentErrorAlert(error: error)
                 }else if(error == .userCancelled){
+                    DispatchQueue.main.async {
+                        //self.tableView.isHidden = false
+                    }
                     return 
                 }else{
                     DispatchQueue.main.async {
@@ -93,6 +107,7 @@ class CharityListVC: UIViewController{
                 }
             case .success(let charities):
                 DispatchQueue.main.async {
+                    self.tableView.isHidden = false
                     self.hideLoadingSubView(in: self.contentView)
                     self.addTableViewController()
                     self.updateUI(with: charities)
@@ -160,6 +175,9 @@ extension CharityListVC: UITableViewDelegate{
         charityInfoVC.charity = charity
     
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        networkManager.cancelCurrentTasks()
+        hideLoadingSubView(in: contentView)
         
         let navigationController = UINavigationController(rootViewController: charityInfoVC)
         navigationController.modalPresentationStyle = .fullScreen
