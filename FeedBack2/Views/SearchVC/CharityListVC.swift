@@ -45,8 +45,12 @@ class CharityListVC: UIViewController{
         tableView.dataSource = self
         tableView.delegate = self
         tableView.rowHeight = 120
+        let footerView = FooterView()
+        footerView.delegate = self
+        tableView.tableFooterView = footerView
         
-        tableView.removeExcessCells()
+        
+        //tableView.removeExcessCells()
     }
     
     private func addTableViewController(){
@@ -184,7 +188,19 @@ extension CharityListVC: UITableViewDelegate{
         navigationController.navigationBar.barStyle = .black
         present(navigationController, animated: true)
     }
-    
-    
+}
+
+extension CharityListVC: FooterViewDelegate{
+    func buttonPressed() {
+        DispatchQueue.main.async {
+            let fbAlertVC = FBAlertVC(title: "Notice", message: "This will open a link in your browser", actionButtonTitle: "Ok", dismissButtonTitle: "Cancel"){ [weak self] in
+                guard let self = self else { return }
+                self.presentSafariVC(with: URLS.soGiveUrl)
+            }
+            fbAlertVC.modalPresentationStyle = .overFullScreen
+            fbAlertVC.modalTransitionStyle = .crossDissolve
+            self.present(fbAlertVC, animated: true)
+        }
+    }
 }
 
