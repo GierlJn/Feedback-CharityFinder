@@ -132,7 +132,7 @@ extension ShowCaseVC {
         }
         
         let supplementaryRegistration2 = UICollectionView.SupplementaryRegistration
-        <SupplementaryFooterView>(elementKind: "Footer") {
+        <FooterView>(elementKind: "Footer") {
             (supplementaryView, string, indexPath) in
             supplementaryView.delegate = self
         }
@@ -183,8 +183,8 @@ extension ShowCaseVC: UICollectionViewDelegate{
     }
 }
 
-extension ShowCaseVC: FooterSupplementaryViewDelegate{
-    func urlButtonPresed() {
+extension ShowCaseVC: FooterViewDelegate{
+    func buttonPressed() {
         DispatchQueue.main.async {
             let fbAlertVC = FBAlertVC(title: "Notice", message: "This will open a link in your browser", actionButtonTitle: "Ok", dismissButtonTitle: "Cancel"){ [weak self] in
                 guard let self = self else { return }
@@ -194,9 +194,6 @@ extension ShowCaseVC: FooterSupplementaryViewDelegate{
             fbAlertVC.modalTransitionStyle = .crossDissolve
             self.present(fbAlertVC, animated: true)
         }
-        
-        
-        //presentSafariVC(with: URLS.soGiveUrl)
     }
 }
 
@@ -205,9 +202,6 @@ protocol TitleSupplementaryViewDelegate{
     func viewAllButtonPressed(category: Category)
 }
 
-protocol FooterSupplementaryViewDelegate{
-    func urlButtonPresed()
-}
 
 class TitleSupplementaryView: UICollectionReusableView {
     let label = UILabel()
@@ -222,49 +216,6 @@ class TitleSupplementaryView: UICollectionReusableView {
     }
     required init?(coder: NSCoder) {
         fatalError()
-    }
-}
-
-class SupplementaryFooterView: UICollectionReusableView {
-
-    static let reuseIdentifier = "supplementary-footer-reusable-view"
-
-    var delegate : FooterSupplementaryViewDelegate?
-
-    var actionButton = UIButton()
-    let padding = 20
-    
-    override init(frame: CGRect) {
-        super.init(frame: CGRect(x: 0, y: 0, width: 0, height: 50))
-        configure()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func configure(){
-        addSubview(actionButton)
-        
-        actionButton.setTitle("Data provided by SoGive LtD", for: .normal)
-        actionButton.setTitleColor(.secondaryLabel, for: .normal)
-        actionButton.titleLabel?.textAlignment = .center
-        actionButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .footnote)
-        actionButton.titleLabel?.adjustsFontSizeToFitWidth = true
-        actionButton.titleLabel?.minimumScaleFactor = 0.6
-        actionButton.titleLabel?.lineBreakMode = .byTruncatingHead
-        actionButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
-        
-        actionButton.snp.makeConstraints { (maker) in
-            maker.left.equalTo(snp.left).offset(padding)
-            maker.right.equalTo(snp.right).offset(-padding)
-            maker.top.equalTo(snp.top).offset(10)
-            maker.bottom.equalTo(snp.bottom)
-        }
-    }
-    
-    @objc private func buttonPressed(){
-        delegate?.urlButtonPresed()
     }
 }
 

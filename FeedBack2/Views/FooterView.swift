@@ -12,7 +12,7 @@ protocol FooterViewDelegate{
     func buttonPressed()
 }
 
-class FooterView: UIView{
+class FooterView: UICollectionReusableView{
     
     var actionButton = UIButton()
     let padding = 20
