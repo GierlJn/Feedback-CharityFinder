@@ -11,7 +11,7 @@ import AnimatedGradientView
 
 class SearchHeaderView: UIView{
     
-    let backgroundView = AnimatedGradientView()
+    var backgroundView: AnimatedGradientView!
     let label = FBTitleLabel(textAlignment: .left)
     
     let searchStackView = UIStackView()
@@ -40,11 +40,14 @@ class SearchHeaderView: UIView{
     }
     
     fileprivate func configureBackgroundView(){
+        backgroundView = AnimatedGradientView()
         addSubview(backgroundView)
         backgroundView.pinToEdges(of: self)
         backgroundView.colors = [[UIColor.headerViewGradientStart, UIColor.headerViewGradientEnd]]
         backgroundView.direction = .right
         backgroundView.type = .conic
+        backgroundView.drawsAsynchronously = false
+        backgroundView.autoAnimate = false
         
     }
     
@@ -89,7 +92,11 @@ class SearchHeaderView: UIView{
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         actionButton.setGradientBackgroundColor(colors: [.headerButtonGradientStart, .headerButtonGradientEnd], axis: .custom(angle: CGFloat(90)))
-        backgroundView.colors = [[UIColor.headerViewGradientStart, UIColor.headerViewGradientEnd]]
+        
+        DispatchQueue.main.async {
+            self.backgroundView.startAnimating()
+        }
+        
     }
     
     func configureTextField(){
