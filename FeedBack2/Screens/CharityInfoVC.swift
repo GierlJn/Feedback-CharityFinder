@@ -124,9 +124,9 @@ class CharityInfoVC: UIViewController{
         configureTitleLabelView(infoCharity)
         configureTagView(infoCharity)
         configureLocationTagView(infoCharity)
+        configureOutputView(infoCharity)
         configureAboutHeaderLabel()
         configureDescriptionLabel(infoCharity)
-        configureOutputView(infoCharity)
         setContentViewHeight()
     }
     
@@ -187,11 +187,28 @@ class CharityInfoVC: UIViewController{
         contentHeight += 40
     }
     
+    private func configureOutputView(_ infoCharity: InfoCharity){
+        //guard let impact = infoCharity.singleImpact else { return }
+        
+        outputView = OutputView(output: infoCharity.singleImpact)
+        let gestureRegocnizer = UITapGestureRecognizer(target: self, action: #selector(outputButtonPressed))
+        outputView!.addGestureRecognizer(gestureRegocnizer)
+        
+        contentView.addSubview(outputView!)
+        outputView!.snp.makeConstraints { (maker) in
+            maker.height.equalTo(45)
+            maker.top.equalTo(locationTagView.snp.bottom).offset(30)
+            maker.left.equalTo(contentView.snp.left).offset(20)
+            maker.right.greaterThanOrEqualTo(contentView.snp.right).offset(-20)
+        }
+        contentHeight += 115
+    }
+    
     private func configureAboutHeaderLabel(){
         contentView.addSubview(aboutHeaderLabel)
         aboutHeaderLabel.text = "About Charity"
         aboutHeaderLabel.snp.makeConstraints { (maker) in
-            maker.top.equalTo(locationTagView.snp.bottom).offset(25)
+            maker.top.equalTo(outputView!.snp.bottom).offset(25)
             maker.left.equalTo(contentView.snp.left).offset(20)
             maker.right.equalTo(contentView.snp.right).offset(-20)
             maker.height.equalTo(50)
@@ -232,23 +249,6 @@ class CharityInfoVC: UIViewController{
         
         let height = labelText.height(withWidth: view.bounds.width - 40, font: UIFont.preferredFont(forTextStyle: .footnote))
         contentHeight += height
-    }
-    
-    private func configureOutputView(_ infoCharity: InfoCharity){
-        guard let impact = infoCharity.singleImpact else { return }
-        
-        outputView = OutputView(output: impact)
-        let gestureRegocnizer = UITapGestureRecognizer(target: self, action: #selector(outputButtonPressed))
-        outputView!.addGestureRecognizer(gestureRegocnizer)
-        
-        contentView.addSubview(outputView!)
-        outputView!.snp.makeConstraints { (maker) in
-            maker.height.equalTo(45)
-            maker.top.equalTo(descriptionLabel.snp.bottom).offset(30)
-            maker.left.equalTo(contentView.snp.left).offset(20)
-            maker.right.greaterThanOrEqualTo(contentView.snp.right).offset(-20)
-        }
-        contentHeight += 115
     }
     
     private func setContentViewHeight(){

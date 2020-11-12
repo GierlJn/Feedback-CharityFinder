@@ -10,12 +10,15 @@ import UIKit
 
 class OutputView: UIView{
     
-    var output: SimpleImpact!
+    var output: SimpleImpact?
     var iconImageView = UIImageView()
     var mayFundLabel = UILabel()
     var impactLabel = UILabel()
     var labelsStackView = UIStackView()
     var viewColor: UIColor = UIColor.outputColor
+    
+    let padding: CGFloat = 5
+    
     
     private override init(frame: CGRect) {
         super.init(frame: .zero)
@@ -25,21 +28,44 @@ class OutputView: UIView{
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(output: SimpleImpact) {
+    init(output: SimpleImpact?) {
         self.init()
         self.output = output
         
+        if output == nil {
+            configurePlaceholder()
+            return
+        }
         configure()
         updateUI()
     }
+    
+    private func configurePlaceholder(){
+        addSubview(iconImageView)
+        iconImageView.image = UIImage(systemName: "heart")
+        iconImageView.tintColor = viewColor
+        iconImageView.snp.makeConstraints { (maker) in
+            maker.left.equalTo(self.snp.left).offset(padding)
+            maker.size.equalTo(30)
+            maker.centerY.equalTo(self.snp.centerY)
+        }
+        
+        let placeHolderLabel = UILabel()
+        addSubview(placeHolderLabel)
+        placeHolderLabel.font = .boldSystemFont(ofSize: 12)
+        placeHolderLabel.text = "No research data available"
+        placeHolderLabel.textColor = viewColor
+        
+        placeHolderLabel.snp.makeConstraints { (maker) in
+            maker.left.equalTo(iconImageView.snp.right).offset(8)
+            maker.right.greaterThanOrEqualTo(self.snp.right).offset(-padding)
+            maker.top.equalTo(self.snp.top).offset(padding)
+            maker.bottom.equalTo(self.snp.bottom).offset(-padding)
+        }
+    }
 
     private func configure(){
-        //layer.cornerRadius = 7
-        //layer.borderWidth = 1
-        //layer.borderColor = viewColor.cgColor
-        
-        let padding: CGFloat = 5
-        
+
         addSubview(iconImageView)
         iconImageView.image = UIImage(systemName: "heart.fill")
         iconImageView.tintColor = viewColor
@@ -72,16 +98,14 @@ class OutputView: UIView{
     }
     
     func updateUI(){
-        
-        
         mayFundLabel.font = .boldSystemFont(ofSize: 12)
-        let valueLabelText = "1 \(output.name!.formatOutputName(with: PersistenceManager.retrieveCurrency()))"
+        let valueLabelText = "1 \(output!.name!.formatOutputName(with: PersistenceManager.retrieveCurrency()))"
         mayFundLabel.text = valueLabelText
         mayFundLabel.textColor = viewColor
         
         let currency = PersistenceManager.retrieveCurrency()
         
-        let value = output.costPerBeneficiary!.value
+        let value = output!.costPerBeneficiary!.value
         var floatValue = Float(value!) ?? 1.0
         floatValue = floatValue / currency.relativeValueToPound
         let formatted = String(format: "%.2f", floatValue)
