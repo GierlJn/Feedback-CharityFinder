@@ -18,7 +18,7 @@ class CharityInfoVC: UIViewController{
     var impactImageView = FBImpactImageView(frame: .zero)
     var descriptionLabel = FBTextLabel()
     var charityTitleLabelView = CharityTitleLabelView()
-    var donationBarView = DonationBarView()
+    let donateButton = FBButton(title: "Donate")
     var outputView: OutputView?
     var aboutHeaderLabel = FBTitleLabel(textAlignment: .left)
     var tagView = TagLabelScrollView(color: .lightGray)
@@ -28,7 +28,8 @@ class CharityInfoVC: UIViewController{
     let scrollView = UIScrollView()
     let contentView = UIView()
     
-    var contentHeight: CGFloat = 1.0
+    var contentHeight: CGFloat = 83.0
+    let padding: CGFloat = 20
     
     var infoCharity: InfoCharity?
     var charity: Charity!
@@ -55,14 +56,15 @@ class CharityInfoVC: UIViewController{
         navigationController?.navigationBar.tintColor = .white
     }
     
-    private func configureDonationBarView(){
-        view.addSubview(donationBarView)
-        donationBarView.delegate = self
-        donationBarView.snp.makeConstraints { (maker) in
-            maker.left.equalTo(self.view.snp.left)
-            maker.right.equalTo(self.view.snp.right)
-            maker.bottom.equalTo(self.view.snp.bottom)
-            maker.height.equalTo(100)
+    private func configureDonationButton(){
+        view.addSubview(donateButton)
+        donateButton.addTarget(self, action: #selector(donateButtonPressed), for: .touchUpInside)
+        donateButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .title1)
+        donateButton.snp.makeConstraints { (maker) in
+            maker.left.equalTo(self.view.snp.left).offset(padding)
+            maker.right.equalTo(self.view.snp.right).offset(-padding)
+            maker.bottom.equalTo(self.view.snp.bottom).offset(-35)
+            maker.height.equalTo(47)
         }
     }
     
@@ -73,9 +75,8 @@ class CharityInfoVC: UIViewController{
             maker.top.equalTo(impactImageView.snp.bottom)
             maker.left.equalTo(self.view.snp.left)
             maker.right.equalTo(self.view.snp.right)
-            maker.bottom.equalTo(donationBarView.snp.top)
+            maker.bottom.equalTo(self.view.snp.bottom)
         }
-        
         
         contentSuperView.addSubview(scrollView)
         scrollView.addSubview(contentView)
@@ -84,13 +85,15 @@ class CharityInfoVC: UIViewController{
             maker.top.equalTo(impactImageView.snp.bottom)
             maker.left.equalTo(self.view.snp.left)
             maker.right.equalTo(self.view.snp.right)
-            maker.bottom.equalTo(donationBarView.snp.top)
+            maker.bottom.equalTo(self.view.snp.bottom)
         }
         
         contentView.pinToEdges(of: scrollView)
         contentView.snp.makeConstraints { (maker) in
             maker.width.equalTo(contentSuperView.snp.width)
         }
+        
+        view.bringSubviewToFront(donateButton)
     }
     
     private func getCharityInfo() {
@@ -115,7 +118,7 @@ class CharityInfoVC: UIViewController{
     private func configureViews() {
         guard let infoCharity = infoCharity else { return }
         addRightBarButtonItem()
-        configureDonationBarView()
+        configureDonationButton()
         configureImpactImageView(infoCharity)
         configureScrollView()
         configureTitleLabelView(infoCharity)
@@ -249,6 +252,7 @@ class CharityInfoVC: UIViewController{
     }
     
     private func setContentViewHeight(){
+        
         contentView.snp.makeConstraints { (maker) in
             maker.height.equalTo(contentHeight)
         }
@@ -264,6 +268,19 @@ class CharityInfoVC: UIViewController{
     
     @objc func backButtonPressed(){
         self.dismiss(animated: true)
+    }
+    
+    @objc func donateButtonPressed() {
+        guard let infoCharity = infoCharity else { return }
+        var stringUrl = infoCharity.url ?? ""
+        if(!stringUrl.hasPrefix("http")){
+            stringUrl = "http://".appending(stringUrl)
+        }
+        guard let url = URL(string: stringUrl) else {
+            presentErrorAlert(error: FBError.noValidURL)
+            return
+        }
+        presentSafariVC(with: url)
     }
     
     @objc func accessoryButtonPressed(){

@@ -32,14 +32,9 @@ class DonationBarView: UIView{
         actionButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .title1)
         actionButton.addTarget(self, action: #selector(actionButtonPressed), for: .touchUpInside)
 
-        let padding = 16
+        //let padding = 16
         
-        actionButton.snp.makeConstraints { (maker) in
-            maker.left.equalTo(self.snp.left).offset(padding*2)
-            maker.right.equalTo(self.snp.right).offset(-padding*2)
-            maker.top.equalTo(self.snp.top).offset(padding)
-            maker.bottom.equalTo(self.snp.bottom).offset(-padding*2)
-        }
+        actionButton.pinToEdges(of: self)
     }
     
     @objc func actionButtonPressed(){
