@@ -22,6 +22,7 @@ class ShowCaseVC: UIViewController{
     var dataSource: UICollectionViewDiffableDataSource<CharityController.CharityCollection, Charity>! = nil
     var currentSnapshot: NSDiffableDataSourceSnapshot<CharityController.CharityCollection, Charity>! = nil
     static let titleElementKind = "title-element-kind"
+    static let footerElementKind = "footer-element-kind"
     
     var firstCharityDataReceived = false
     
@@ -49,7 +50,7 @@ extension ShowCaseVC: TitleSupplementaryViewDelegate{
 
 extension ShowCaseVC {
     func createLayout() -> UICollectionViewLayout {
-        let sectionProvider = { (sectionIndex: Int,
+        let sectionProvider = { [self] (sectionIndex: Int,
                                  layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                                   heightDimension: .fractionalHeight(1.0))
@@ -71,6 +72,14 @@ extension ShowCaseVC {
                 elementKind: ShowCaseVC.titleElementKind,
                 alignment: .top)
             section.boundarySupplementaryItems = [titleSupplementary]
+            
+            if(sectionIndex == self.charityController.collections.count-1){
+                let footerSupplementary = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                                                                                                         heightDimension: .estimated(60)), elementKind: ShowCaseVC.footerElementKind, alignment: .bottom)
+                section.boundarySupplementaryItems.append(footerSupplementary)
+            }
+            
+            
             return section
         }
         
@@ -111,7 +120,7 @@ extension ShowCaseVC {
         }
         
         let supplementaryRegistration = UICollectionView.SupplementaryRegistration
-        <TitleSupplementaryView>(elementKind: "Footer") {
+        <TitleSupplementaryView>(elementKind: "Header") {
             (supplementaryView, string, indexPath) in
             if let snapshot = self.currentSnapshot {
                 // Populate the view with our section's description.
@@ -122,9 +131,22 @@ extension ShowCaseVC {
             }
         }
         
+        let supplementaryRegistration2 = UICollectionView.SupplementaryRegistration
+        <SupplementaryFooterView>(elementKind: "Footer") {
+            (supplementaryView, string, indexPath) in
+            supplementaryView.delegate = self
+        }
+        
         dataSource.supplementaryViewProvider = { (view, kind, index) in
-            return self.collectionView.dequeueConfiguredReusableSupplementary(
-                using: supplementaryRegistration, for: index)
+            
+            if(kind == ShowCaseVC.titleElementKind){
+                return self.collectionView.dequeueConfiguredReusableSupplementary(
+                    using: supplementaryRegistration, for: index)
+            }else{
+                return self.collectionView.dequeueConfiguredReusableSupplementary(
+                    using: supplementaryRegistration2, for: index)
+            }
+            
         }
         
     }
@@ -143,7 +165,7 @@ extension ShowCaseVC {
     fileprivate func loadCharities() {
         charityController.loadInitialCharities { [weak self] (error) in
             guard let self = self else { return }
-            self.delegate?.finishedLoading()
+                self.delegate?.finishedLoading()
             guard let error = error else {
                 self.applyCurrentSnapshot()
                 return
@@ -161,10 +183,30 @@ extension ShowCaseVC: UICollectionViewDelegate{
     }
 }
 
+extension ShowCaseVC: FooterSupplementaryViewDelegate{
+    func urlButtonPresed() {
+        DispatchQueue.main.async {
+            let fbAlertVC = FBAlertVC(title: "Notice", message: "This will open a link in your browser", actionButtonTitle: "Ok", dismissButtonTitle: "Cancel"){ [weak self] in
+                guard let self = self else { return }
+                self.presentSafariVC(with: URLS.soGiveUrl)
+            }
+            fbAlertVC.modalPresentationStyle = .overFullScreen
+            fbAlertVC.modalTransitionStyle = .crossDissolve
+            self.present(fbAlertVC, animated: true)
+        }
+        
+        
+        //presentSafariVC(with: URLS.soGiveUrl)
+    }
+}
+
 
 protocol TitleSupplementaryViewDelegate{
     func viewAllButtonPressed(category: Category)
-    
+}
+
+protocol FooterSupplementaryViewDelegate{
+    func urlButtonPresed()
 }
 
 class TitleSupplementaryView: UICollectionReusableView {
@@ -182,6 +224,50 @@ class TitleSupplementaryView: UICollectionReusableView {
         fatalError()
     }
 }
+
+class SupplementaryFooterView: UICollectionReusableView {
+
+    static let reuseIdentifier = "supplementary-footer-reusable-view"
+
+    var delegate : FooterSupplementaryViewDelegate?
+
+    var actionButton = UIButton()
+    let padding = 20
+    
+    override init(frame: CGRect) {
+        super.init(frame: CGRect(x: 0, y: 0, width: 0, height: 50))
+        configure()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func configure(){
+        addSubview(actionButton)
+        
+        actionButton.setTitle("Data provided by SoGive LtD", for: .normal)
+        actionButton.setTitleColor(.secondaryLabel, for: .normal)
+        actionButton.titleLabel?.textAlignment = .center
+        actionButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .footnote)
+        actionButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        actionButton.titleLabel?.minimumScaleFactor = 0.6
+        actionButton.titleLabel?.lineBreakMode = .byTruncatingHead
+        actionButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        
+        actionButton.snp.makeConstraints { (maker) in
+            maker.left.equalTo(snp.left).offset(padding)
+            maker.right.equalTo(snp.right).offset(-padding)
+            maker.top.equalTo(snp.top).offset(10)
+            maker.bottom.equalTo(snp.bottom)
+        }
+    }
+    
+    @objc private func buttonPressed(){
+        delegate?.urlButtonPresed()
+    }
+}
+
 
 extension TitleSupplementaryView {
     func configure() {
