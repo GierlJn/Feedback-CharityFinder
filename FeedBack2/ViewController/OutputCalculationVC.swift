@@ -146,7 +146,7 @@ class OutputCalculationVC: UIViewController{
         
         let formatted = String(format: "%.0f", impact)
         
-        messageLabel.text = "\(formatted) x \(output.name?.formatOutputName(with: currency) ?? "")"
+        messageLabel.text = "\(formatted) \(output.name?.formatOutputName(with: currency, wording: .plural) ?? "")"
         messageLabel.numberOfLines = 2
         messageLabel.pinToEdges(of: actionContentView)
     }

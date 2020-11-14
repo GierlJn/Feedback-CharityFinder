@@ -99,7 +99,9 @@ class OutputView: UIView{
     
     func updateUI(){
         mayFundLabel.font = .boldSystemFont(ofSize: 12)
-        let valueLabelText = "1 \(output!.name!.formatOutputName(with: PersistenceManager.retrieveCurrency()))"
+        let valueLabelText = "1 \(output!.name!.formatOutputName(with: PersistenceManager.retrieveCurrency(), wording: .singular))"
+        print(output!.name!)
+        
         mayFundLabel.text = valueLabelText
         mayFundLabel.textColor = viewColor
         

@@ -8,6 +8,10 @@
 
 import UIKit
 
+enum Wording{
+    case singular, plural
+}
+
 extension String{
     
     var firstUppercased: String { prefix(1).uppercased() + dropFirst() }
@@ -25,7 +29,70 @@ extension String{
         return String(s.suffix(from: s.index(s.startIndex, offsetBy: 1)))
     }
     
-    func formatOutputName(with currency: Currency)->String{ self.withoutParanthesis.replaceCurrencyWording(with: currency).lowercased().firstUppercased.condensed }
+    func formatOutputName(with currency: Currency, wording: Wording)->String{
+        
+        switch(wording){
+        case .plural:
+            return getPluralWording().replaceCurrencyWording(with: currency).withoutParanthesis.lowercased().firstUppercased.condensed
+        case .singular:
+            return getSingularWording().replaceCurrencyWording(with: currency).withoutParanthesis.lowercased().firstUppercased.condensed
+        }
+    }
+    
+    func getSingularWording()->String{
+        
+        let fullString = self
+        
+        guard let parenthesisRange = fullString.range(of: #"(?<=\()(.*?)(?=\))"#, options: .regularExpression) else {
+            return self
+        }
+
+        var paranthesisContent = fullString[parenthesisRange]
+
+        if(paranthesisContent.hasPrefix("singular: ")){
+            paranthesisContent.removeFirst("singular: ".count)
+        }else{
+            return self
+        }
+
+        let withoutParenthesis = fullString.withoutParanthesis.condensed
+        
+        var array = withoutParenthesis.components(separatedBy: " ")
+        array.removeFirst()
+        
+        let result = String(paranthesisContent) + " " + String(array.joined())
+        return result
+    }
+    
+    func getPluralWording()->String{
+        
+        var fullString = self
+        
+        guard let parenthesisRange = fullString.range(of: #"(?<=\()(.*?)(?=\))"#, options: .regularExpression) else {
+            return self
+        }
+
+        var paranthesisContent = fullString[parenthesisRange]
+
+        if(paranthesisContent.hasPrefix("plural: ")){
+            paranthesisContent.removeFirst("plural: ".count)
+        }else if(paranthesisContent == "s"){
+            fullString = fullString.replacingOccurrences(of: "(", with: "")
+            fullString = fullString.replacingOccurrences(of: ")", with: "")
+            return fullString
+        }
+        else{
+            return self
+        }
+
+        let withoutParenthesis = fullString.withoutParanthesis.condensed
+        
+        var array = withoutParenthesis.components(separatedBy: " ")
+        array.removeFirst()
+        
+        let result = String(paranthesisContent) + " " + String(array.joined())
+        return result
+    }
     
     func replaceCurrencyWording(with currency: Currency)->String{ return self.replacingOccurrences(of: "pound", with: currency.rawValue) }
     
@@ -34,6 +101,7 @@ extension String{
         let actualSize = self.boundingRect(with: maxSize, options: [.usesLineFragmentOrigin], attributes: [.font : font], context: nil)
         return actualSize.height
     }
+
     
     
     
