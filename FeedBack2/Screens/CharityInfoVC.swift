@@ -188,12 +188,8 @@ class CharityInfoVC: UIViewController{
     }
     
     private func configureOutputView(_ infoCharity: InfoCharity){
-        //guard let impact = infoCharity.singleImpact else { return }
-        
         outputView = OutputView(output: infoCharity.singleImpact)
-        let gestureRegocnizer = UITapGestureRecognizer(target: self, action: #selector(outputButtonPressed))
-        outputView!.addGestureRecognizer(gestureRegocnizer)
-        
+ 
         contentView.addSubview(outputView!)
         outputView!.snp.makeConstraints { (maker) in
             maker.height.equalTo(45)
@@ -201,6 +197,12 @@ class CharityInfoVC: UIViewController{
             maker.left.equalTo(contentView.snp.left).offset(20)
             maker.right.greaterThanOrEqualTo(contentView.snp.right).offset(-20)
         }
+        
+        if(infoCharity.singleImpact != nil){
+            let gestureRegocnizer = UITapGestureRecognizer(target: self, action: #selector(outputButtonPressed))
+            outputView!.addGestureRecognizer(gestureRegocnizer)
+        }
+        
         contentHeight += 115
     }
     

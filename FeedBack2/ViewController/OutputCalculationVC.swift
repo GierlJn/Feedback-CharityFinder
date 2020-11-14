@@ -163,7 +163,7 @@ class OutputCalculationVC: UIViewController{
     }
     
     private func showImpact(){
-        titleLabel.text = "This donation equals"
+        titleLabel.text = "Your donation may fund"
 
         donationTextFieldView.removeFromSuperview()
         configureMessageLabel()

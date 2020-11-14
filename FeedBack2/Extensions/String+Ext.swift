@@ -33,7 +33,7 @@ extension String{
         
         switch(wording){
         case .plural:
-            return getPluralWording().replaceCurrencyWording(with: currency).withoutParanthesis.lowercased().firstUppercased.condensed
+            return getPluralWording().replaceCurrencyWording(with: currency).withoutParanthesis.lowercased().condensed
         case .singular:
             return getSingularWording().replaceCurrencyWording(with: currency).withoutParanthesis.lowercased().firstUppercased.condensed
         }
@@ -60,7 +60,7 @@ extension String{
         var array = withoutParenthesis.components(separatedBy: " ")
         array.removeFirst()
         
-        let result = String(paranthesisContent) + " " + String(array.joined())
+        let result = String(paranthesisContent) + " " + String(array.joined(separator: " "))
         return result
     }
     
@@ -90,7 +90,7 @@ extension String{
         var array = withoutParenthesis.components(separatedBy: " ")
         array.removeFirst()
         
-        let result = String(paranthesisContent) + " " + String(array.joined())
+        let result = String(paranthesisContent) + " " + String(array.joined(separator: " "))
         return result
     }
     
