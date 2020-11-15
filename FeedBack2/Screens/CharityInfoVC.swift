@@ -18,7 +18,7 @@ class CharityInfoVC: UIViewController{
     var impactImageView = FBImpactImageView(frame: .zero)
     var descriptionLabel = FBTextLabel()
     var charityTitleLabelView = CharityTitleLabelView()
-    let donateButton = FBButton(title: "Donate")
+    let donateButton = UIButton()
     var outputView: OutputView?
     var aboutHeaderLabel = FBTitleLabel(textAlignment: .left)
     var tagView = TagLabelScrollView(color: .lightGray)
@@ -28,7 +28,7 @@ class CharityInfoVC: UIViewController{
     let scrollView = UIScrollView()
     let contentView = UIView()
     
-    var contentHeight: CGFloat = 83.0
+    var contentHeight: CGFloat = 70.0
     let padding: CGFloat = 20
     
     var infoCharity: InfoCharity?
@@ -46,6 +46,12 @@ class CharityInfoVC: UIViewController{
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         view.setGradientBackgroundColor(colors: [.lightBlueBackgroundGradientStart, .lightBlueBackgroundGradientEnd], axis: .horizontal)
+        donateButton.applyGradient(colors: [UIColor.headerButtonGradientStart.cgColor, UIColor.headerButtonGradientEnd.cgColor], radius: nil)
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        donateButton.applyGradient(colors: [UIColor.headerButtonGradientStart.cgColor, UIColor.headerButtonGradientEnd.cgColor], radius: nil)
+        
     }
     
     private func configureNavigationBar(){
@@ -60,11 +66,14 @@ class CharityInfoVC: UIViewController{
         view.addSubview(donateButton)
         donateButton.addTarget(self, action: #selector(donateButtonPressed), for: .touchUpInside)
         donateButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .title1)
+        donateButton.setTitle("Donate", for: .normal)
+
+        
         donateButton.snp.makeConstraints { (maker) in
-            maker.left.equalTo(self.view.snp.left).offset(padding)
-            maker.right.equalTo(self.view.snp.right).offset(-padding)
-            maker.bottom.equalTo(self.view.snp.bottom).offset(-35)
-            maker.height.equalTo(47)
+            maker.left.equalTo(self.view.snp.left)
+            maker.right.equalTo(self.view.snp.right)
+            maker.bottom.equalTo(self.view.snp.bottom)
+            maker.height.equalTo(70)
         }
     }
     
@@ -308,6 +317,8 @@ class CharityInfoVC: UIViewController{
             self.present(vc, animated: true)
         }
     }
+    
+    
     
     
 }

@@ -22,8 +22,7 @@ class FBButton: UIButton{
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        addShadow()
-        
+        self.applyGradient(colors: [UIColor.headerButtonGradientStart.cgColor, UIColor.headerButtonGradientEnd.cgColor], radius: 7)
     }
     
     convenience init(title: String){
@@ -33,19 +32,9 @@ class FBButton: UIButton{
     }
     
     private func configure(){
-        backgroundColor = .standardButton
         translatesAutoresizingMaskIntoConstraints = false
         layer.cornerRadius = 7
         titleLabel?.font = .systemFont(ofSize: 20)
-        //titleLabel?.textColor = .red
     }
-    
-    private func addShadow(){
-        layer.shadowColor = UIColor.black.cgColor
-        layer.shadowOpacity = 0.3
-        layer.shadowOffset = CGSize(width: 0, height: 6.0)
-        layer.shadowRadius = 3
-    }
-    
 }
 

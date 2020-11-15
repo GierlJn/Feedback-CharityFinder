@@ -39,6 +39,11 @@ class FBAlertVC: UIViewController{
         self.actionClosure = actionClosure
     }
     
+    override func viewDidLayoutSubviews() {
+        //dismissButten.applyGradient(colors: [UIColor.headerButtonGradientStart.cgColor, UIColor.headerButtonGradientEnd.cgColor])
+        //actionButton?.applyGradient(colors: [UIColor.headerButtonGradientStart.cgColor, UIColor.headerButtonGradientEnd.cgColor])
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -92,6 +97,7 @@ class FBAlertVC: UIViewController{
         if(actionButtonTite == nil){
             containerView.addSubview(dismissButten)
             dismissButten.setTitle(dismissButtonTitle, for: .normal)
+            
             dismissButten.snp.makeConstraints { (maker) in
                 maker.height.equalTo(44)
                 maker.left.equalTo(containerView.snp.left).offset(padding)
@@ -118,6 +124,7 @@ class FBAlertVC: UIViewController{
             
             actionButton = FBButton()
             actionButton?.setTitle(actionButtonTite, for: .normal)
+            
             actionButton?.addTarget(self, action: #selector(actionButtonPressed), for: .touchUpInside)
             buttonStackView.addArrangedSubview(actionButton!)
             

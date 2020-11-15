@@ -42,7 +42,7 @@
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" red="0.1845260561" green="0.16488239169999999" blue="0.60733610390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.39965939519999999" green="0.23102372879999999" blue="0.38020575049999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="mnQ-Ls-kDU" secondAttribute="trailing" constant="20" id="A4J-R2-8PC"/>
                             <constraint firstItem="In1-eg-uIN" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="CAp-XO-GeY"/>
@@ -61,6 +61,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="playstore" width="512" height="512"/>
+        <image name="playstore" width="546.5" height="500"/>
     </resources>
 </document>
