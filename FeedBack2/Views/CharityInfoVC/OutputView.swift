@@ -42,7 +42,7 @@ class OutputView: UIView{
     
     private func configurePlaceholder(){
         addSubview(iconImageView)
-        iconImageView.image = UIImage(systemName: "heart")
+        iconImageView.image = UIImage(named: "outputlogo1")
         iconImageView.tintColor = viewColor
         iconImageView.snp.makeConstraints { (maker) in
             maker.left.equalTo(self.snp.left).offset(padding)
@@ -67,7 +67,7 @@ class OutputView: UIView{
     private func configure(){
 
         addSubview(iconImageView)
-        iconImageView.image = UIImage(systemName: "heart.fill")
+        iconImageView.image = UIImage(named: "outputlogo1")
         iconImageView.tintColor = viewColor
         iconImageView.snp.makeConstraints { (maker) in
             maker.left.equalTo(self.snp.left).offset(padding)

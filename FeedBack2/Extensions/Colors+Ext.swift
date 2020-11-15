@@ -39,16 +39,6 @@ extension UIColor {
         }
     }
     
-    static var outputColor = UIColor { traitCollection in
-        switch traitCollection.userInterfaceStyle {
-        case .dark:
-            return UIColor(rgb: 0xEAD7ED)
-            
-        default:
-            return UIColor(rgb: 0x676568)
-        }
-    }
-    
     static var categoriesTransparentColor =  UIColor { traitCollection in
         switch traitCollection.userInterfaceStyle {
         case .dark:
@@ -84,6 +74,44 @@ extension UIColor {
           return UIColor(rgb: 0x2c299a)
         }
     }
+    
+    static var favoriteButton =  UIColor { traitCollection in
+        switch traitCollection.userInterfaceStyle {
+        case .dark:
+            return UIColor(rgb: 0x24243e)
+        default:
+          return UIColor(rgb: 0x4C4452)
+        }
+    }
+    
+    static var whyTagView =  UIColor { traitCollection in
+        switch traitCollection.userInterfaceStyle {
+        case .dark:
+            return lightGray
+        default:
+          return UIColor(rgb: 0x63ACD5)
+        }
+    }
+    
+    static var locationTagView =  UIColor { traitCollection in
+        switch traitCollection.userInterfaceStyle {
+        case .dark:
+            return systemGray
+        default:
+          return UIColor(rgb: 0x63ACD5)
+        }
+    }
+    
+    static var outputColor = UIColor { traitCollection in
+        switch traitCollection.userInterfaceStyle {
+        case .dark:
+            return UIColor(rgb: 0xEAD7ED)
+            
+        default:
+            return UIColor(rgb: 0x4A758F)
+        }
+    }
+    
     
     static var headerButtonGradientStart =  UIColor { traitCollection in
         switch traitCollection.userInterfaceStyle {

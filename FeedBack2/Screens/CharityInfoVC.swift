@@ -21,8 +21,8 @@ class CharityInfoVC: UIViewController{
     let donateButton = UIButton()
     var outputView: OutputView?
     var aboutHeaderLabel = FBTitleLabel(textAlignment: .left)
-    var tagView = TagLabelScrollView(color: .lightGray)
-    var locationTagView = TagLabelScrollView(color: .systemGray)
+    var tagView = TagLabelScrollView(color: .whyTagView)
+    var locationTagView = TagLabelScrollView(color: .locationTagView)
     var contentSuperView = UIView()
     
     let scrollView = UIScrollView()

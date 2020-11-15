@@ -46,8 +46,8 @@ class CharityTitleLabelView: UIView{
     private func configure(){
         addSubview(favoriteButton)
         favoriteButton.setImage(isFavourite ? UIImage(systemName: "bookmark.fill") : UIImage(systemName: "bookmark"), for: .normal)
-        favoriteButton.setTitleColor(.headerViewGradientEnd, for: .normal)
-        favoriteButton.imageView?.tintColor = .headerViewGradientEnd
+        favoriteButton.setTitleColor(.favoriteButton, for: .normal)
+        favoriteButton.imageView?.tintColor = .favoriteButton
         favoriteButton.addTarget(self, action: #selector(favouriteButtonPressed), for: .touchUpInside)
         favoriteButton.snp.makeConstraints { (maker) in
             maker.right.equalTo(self.snp.right).offset(-16)
