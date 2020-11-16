@@ -28,7 +28,7 @@ class OutputCalculationVC: UIViewController{
     
     var actionContentView = UIView()
     
-    let padding: CGFloat = 20
+    let padding: CGFloat = 15
 
     var output: SimpleImpact!
     
@@ -67,7 +67,7 @@ class OutputCalculationVC: UIViewController{
         containerView.snp.makeConstraints { (maker) in
             maker.centerY.equalTo(view.snp.centerY)
             maker.centerX.equalTo(view.snp.centerX)
-            maker.height.equalTo(230)
+            maker.height.equalTo(240)
             maker.width.equalTo(280)
         }
     }
@@ -137,15 +137,25 @@ class OutputCalculationVC: UIViewController{
         dismissButten.snp.makeConstraints { (maker) in
             maker.height.equalTo(44)
             maker.top.equalTo(actionContentView.snp.bottom).offset(padding)
-            maker.left.equalTo(containerView.snp.left).offset(padding*2)
-            maker.right.equalTo(containerView.snp.right).offset(-padding*2)
+            maker.centerX.equalTo(containerView.snp.centerX)
+            maker.width.equalTo(120)
             maker.bottom.equalTo(containerView.snp.bottom).offset(-padding)
         }
     }
     
     fileprivate func configureMessageLabel() {
-        actionContentView.addSubview(messageLabel)
         actionContentView.layer.borderWidth = 0
+        
+        let stackView = UIStackView()
+        let impactNumberLabel = FBTitleLabel(textAlignment: .center)
+        let impactNameLabel = FBSubTitleLabel(textAlignment: .center)
+        actionContentView.addSubview(stackView)
+        stackView.pinToEdges(of: actionContentView)
+        stackView.addArrangedSubview(impactNumberLabel)
+        stackView.addArrangedSubview(impactNameLabel)
+        stackView.axis = .vertical
+        stackView.distribution = .fillEqually
+        
         
         let value = output.costPerBeneficiary?.value ?? "1.0"
         var floatValue = Float(value) ?? 1.0
@@ -155,11 +165,15 @@ class OutputCalculationVC: UIViewController{
         
         let formatted = String(format: "%.0f", impact)
         
-        messageLabel.text = "\(formatted) \(output.name?.formatOutputName(with: currency, wording: .plural) ?? "")"
-        messageLabel.font = UIFont.preferredFont(forTextStyle: .title3)
-        messageLabel.textColor = .label
-        messageLabel.numberOfLines = 2
-        messageLabel.pinToEdges(of: actionContentView)
+        impactNumberLabel.text = "\(formatted)"
+        impactNumberLabel.textColor = .outputColor
+        impactNumberLabel.font = UIFont.boldSystemFont(ofSize: 20)
+        impactNameLabel.text = "\(output.name?.formatOutputName(with: currency, wording: .plural) ?? "")"
+        impactNameLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        impactNameLabel.textColor = .label
+        impactNameLabel.numberOfLines = 2
+        
+        //messageLabel.pinToEdges(of: actionContentView)
     }
     
     @objc func dismissButtonPressed(){
