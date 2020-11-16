@@ -9,8 +9,8 @@
 import UIKit
 
 enum Images {
-    static let image_placeholder = UIImage(named: "charity-image-placeholder-dark")
-    static let logo_placeholder = UIImage(named: "logo-placeholder-dark")
+    static let image_placeholder = UIImage(named: "logo_heart_transparent")
+    static let logo_placeholder = UIImage(named: "logo_heart_transparent")
     static let searchActionButton = UIImage(systemName: "slider.horizontal.3")
     static let backButton = UIImage(systemName: "chevron.left.square.fill")
     static let bookMarkFill = UIImage(systemName: "bookmark.fill")!
