@@ -15,43 +15,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="playstore" translatesAutoresizingMaskIntoConstraints="NO" id="In1-eg-uIN">
-                                <rect key="frame" x="87" y="384" width="240" height="128"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="240" id="dPl-SM-rYD"/>
-                                    <constraint firstAttribute="height" constant="128" id="ygA-0B-30N"/>
-                                </constraints>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launchscreen_light" translatesAutoresizingMaskIntoConstraints="NO" id="dSo-5V-IT3">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FeedBack" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FhT-mm-Myw">
-                                <rect key="frame" x="20" y="542" width="374" height="32"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="32" id="bcX-aa-khv"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="27"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Find effective charities" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mnQ-Ls-kDU">
-                                <rect key="frame" x="20" y="594" width="374" height="32"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="32" id="kFF-hD-eic"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" red="0.39965939519999999" green="0.23102372879999999" blue="0.38020575049999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="mnQ-Ls-kDU" secondAttribute="trailing" constant="20" id="A4J-R2-8PC"/>
-                            <constraint firstItem="In1-eg-uIN" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="CAp-XO-GeY"/>
-                            <constraint firstItem="mnQ-Ls-kDU" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="CyK-g8-6He"/>
-                            <constraint firstItem="FhT-mm-Myw" firstAttribute="top" secondItem="In1-eg-uIN" secondAttribute="bottom" constant="30" id="FF9-6L-1L0"/>
-                            <constraint firstItem="In1-eg-uIN" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="RyZ-Gs-Bh6"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="FhT-mm-Myw" secondAttribute="trailing" constant="20" id="VW1-HR-UsM"/>
-                            <constraint firstItem="FhT-mm-Myw" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="hps-Ga-VkO"/>
-                            <constraint firstItem="mnQ-Ls-kDU" firstAttribute="top" secondItem="FhT-mm-Myw" secondAttribute="bottom" constant="20" id="sNo-jx-TDp"/>
+                            <constraint firstAttribute="bottom" secondItem="dSo-5V-IT3" secondAttribute="bottom" id="2AY-fa-jbE"/>
+                            <constraint firstItem="dSo-5V-IT3" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="9Gw-Og-Ddb"/>
+                            <constraint firstItem="dSo-5V-IT3" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="aWU-qM-P0P"/>
+                            <constraint firstItem="dSo-5V-IT3" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="hXr-zM-Z8R"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -61,6 +35,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="playstore" width="546.5" height="500"/>
+        <image name="launchscreen_light" width="431.5" height="934"/>
     </resources>
 </document>
