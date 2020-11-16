@@ -10,6 +10,7 @@ import UIKit
 
 protocol CurrencySelectionDelegate {
     func currencyChanged()
+    func startCalculationVC()
 }
 
 class CurrencySelectionVC: UIViewController{
@@ -24,6 +25,8 @@ class CurrencySelectionVC: UIViewController{
     var selectedCurrency = PersistenceManager.retrieveCurrency()
     
     var delegate: CurrencySelectionDelegate?
+    
+    var startOutputCalculationVCOnDismiss = false
     
     init(){
         super.init(nibName: nil, bundle: nil)
@@ -94,11 +97,16 @@ class CurrencySelectionVC: UIViewController{
     }
     
     @objc func buttonPressed(){
-        if let error = PersistenceManager.setCurrency(curency: selectedCurrency){
-            presentGFAlertOnMainThread(title: "Error", message: error.errorMessage, buttonTitle: "Ok")
-        }
-        dismiss(animated: true)
-        delegate?.currencyChanged()
+        _ = PersistenceManager.setCurrency(curency: selectedCurrency)
+        
+        dismiss(animated: true, completion: {
+            self.delegate?.currencyChanged()
+            if(self.startOutputCalculationVCOnDismiss){
+                self.delegate?.startCalculationVC()
+            }
+        })
+        
+       
     }
     
 }

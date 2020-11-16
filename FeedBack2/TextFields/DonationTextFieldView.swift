@@ -11,7 +11,7 @@ import UIKit
 class DonationTextFieldView: UITextField{
     
     var textField = FBTextField()
-    var currencyLabel = UILabel()
+    var currencyLabel = UIButton()
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
@@ -31,6 +31,8 @@ class DonationTextFieldView: UITextField{
             maker.bottom.equalTo(snp.bottom)
             maker.width.equalTo(15)
         }
+        
+        
         
         textField.returnKeyType = .go
         textField.clearButtonMode = .never

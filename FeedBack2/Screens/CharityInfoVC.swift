@@ -25,6 +25,7 @@ class CharityInfoVC: UIViewController{
     var locationTagView = TagLabelScrollView(color: .locationTagView)
     var contentSuperView = UIView()
     
+    var calculationVC: OutputCalculationVC?
     let scrollView = UIScrollView()
     let contentView = UIView()
     
@@ -276,11 +277,15 @@ class CharityInfoVC: UIViewController{
     }
     
     @objc func outputButtonPressed(){
-       let calculationVC = OutputCalculationVC()
-        calculationVC.output = infoCharity?.singleImpact
-        calculationVC.modalTransitionStyle = .crossDissolve
-        calculationVC.modalPresentationStyle = .overFullScreen
-        present(calculationVC, animated: true)
+        calculationVC = OutputCalculationVC()
+        calculationVC?.output = infoCharity?.singleImpact
+        calculationVC?.modalTransitionStyle = .crossDissolve
+        calculationVC?.modalPresentationStyle = .overFullScreen
+        calculationVC?.delegate = self
+        if(calculationVC != nil){
+            present(calculationVC!, animated: true)
+        }
+        
     }
     
     @objc func backButtonPressed(){
@@ -324,7 +329,29 @@ class CharityInfoVC: UIViewController{
         }
     }
     
+    func presentCurrencySelectionInCalculationVC(){
+        if(calculationVC != nil){
+            calculationVC?.dismiss(animated: true, completion: {
+                let vc = CurrencySelectionVC()
+                vc.modalPresentationStyle = .overFullScreen
+                vc.modalTransitionStyle = .crossDissolve
+                vc.startOutputCalculationVCOnDismiss = true
+                vc.delegate = self
+                self.present(vc, animated: true)
+            })
+        }
+    }
     
+    func presentCalculationVC(){
+        calculationVC = OutputCalculationVC()
+        calculationVC?.output = infoCharity?.singleImpact
+        calculationVC?.modalTransitionStyle = .crossDissolve
+        calculationVC?.modalPresentationStyle = .overFullScreen
+        calculationVC?.delegate = self
+        if(calculationVC != nil){
+            present(calculationVC!, animated: true)
+        }
+    }
     
     
 }
@@ -332,6 +359,9 @@ class CharityInfoVC: UIViewController{
 extension CharityInfoVC: CurrencySelectionDelegate{
     func currencyChanged() {
         outputView?.updateUI()
+    }
+    func startCalculationVC(){
+        presentCalculationVC()
     }
 }
 
@@ -376,5 +406,13 @@ extension CharityInfoVC: DonationBarViewDelegate{
         }
         presentSafariVC(with: url)
     }
+}
+
+extension CharityInfoVC: OutputCalculationVCDelegate{
+    func currencyButtonPressed() {
+        presentCurrencySelectionInCalculationVC()
+    }
+    
+    
 }
 

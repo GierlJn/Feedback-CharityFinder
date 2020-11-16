@@ -2,6 +2,10 @@
 
 import UIKit
 
+protocol OutputCalculationVCDelegate {
+    func currencyButtonPressed()
+}
+
 class OutputCalculationVC: UIViewController{
     
     var containerView = AlertContainerView()
@@ -31,6 +35,8 @@ class OutputCalculationVC: UIViewController{
     var enteredAmount: Float = 1.0
     
     let currency = PersistenceManager.retrieveCurrency()
+    
+    var delegate: OutputCalculationVCDelegate?
     
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -95,8 +101,10 @@ class OutputCalculationVC: UIViewController{
             maker.left.equalTo(containerView.snp.left).offset(padding)
             maker.right.equalTo(containerView.snp.right).offset(-padding)
         }
-        donationTextFieldView.currencyLabel.text = currency.symbol
         
+        donationTextFieldView.currencyLabel.setTitle(currency.symbol, for: .normal)
+        donationTextFieldView.currencyLabel.setTitleColor(.label, for: .normal)
+        donationTextFieldView.currencyLabel.addTarget(self, action: #selector(currencyButtonPressed), for: .touchUpInside)
     }
     
     fileprivate func configureActionButtons() {
@@ -153,6 +161,10 @@ class OutputCalculationVC: UIViewController{
     
     @objc func dismissButtonPressed(){
         dismiss(animated: true)
+    }
+    
+    @objc func currencyButtonPressed(){
+        delegate?.currencyButtonPressed()
     }
     
     @objc func actionButtonPressed(){
