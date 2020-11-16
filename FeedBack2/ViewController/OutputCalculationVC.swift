@@ -168,8 +168,10 @@ class OutputCalculationVC: UIViewController{
     }
     
     @objc func actionButtonPressed(){
-        guard let text = donationTextFieldView.textField.text else { return}
-        guard !text.isEmpty else { return }
+        guard let text = donationTextFieldView.textField.text,
+              !text.isEmpty,
+              text.isNumeric
+        else { return }
         enteredAmount = Float(String(text)) ?? 1.0
         showImpact()
     }

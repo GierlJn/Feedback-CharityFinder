@@ -102,7 +102,8 @@ extension String{
         return actualSize.height
     }
 
-    
-    
+    var isNumeric: Bool{
+        CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: self))
+    }
     
 }
