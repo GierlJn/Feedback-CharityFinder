@@ -80,7 +80,7 @@ extension UIColor {
         case .dark:
             return UIColor(rgb: 0x24243e)
         default:
-          return UIColor(rgb: 0x4C4452)
+          return UIColor(rgb: 0x4A758F)
         }
     }
     
