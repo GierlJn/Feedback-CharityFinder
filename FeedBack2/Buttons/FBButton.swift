@@ -22,7 +22,8 @@ class FBButton: UIButton{
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        self.applyGradient(colors: [UIColor.headerButtonGradientStart.cgColor, UIColor.headerButtonGradientEnd.cgColor], radius: 7)
+        //self.applyGradient(colors: [UIColor.headerButtonGradientStart.cgColor, UIColor.headerButtonGradientEnd.cgColor], radius: 7)
+        self.applyShadow()
     }
     
     convenience init(title: String){
@@ -32,6 +33,7 @@ class FBButton: UIButton{
     }
     
     private func configure(){
+        backgroundColor = UIColor.headerButtonGradientStart
         translatesAutoresizingMaskIntoConstraints = false
         layer.cornerRadius = 7
         titleLabel?.font = .systemFont(ofSize: 20)

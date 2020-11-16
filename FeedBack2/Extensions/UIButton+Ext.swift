@@ -30,5 +30,17 @@ extension UIButton {
             self.layer.insertSublayer(gradientLayer, at: 0)
             self.contentVerticalAlignment = .center
         }
+    
+    func applyShadow(){
+        self.layoutIfNeeded()
+        layer.shadowColor = UIColor.darkGray.cgColor
+        layer.shadowOffset = CGSize(width: 0, height: 2.5)
+        layer.shadowOpacity = 0.2
+        layer.shadowRadius = 0.2
+        layer.masksToBounds = false
+        //layer.cornerRadius = 4.0
+    }
+    
+    
 }
 
