@@ -201,23 +201,29 @@ class CharityInfoVC: UIViewController{
  
         contentView.addSubview(outputView!)
         outputView!.snp.makeConstraints { (maker) in
-            maker.height.equalTo(45)
+            maker.height.equalTo(50)
             maker.top.equalTo(locationTagView.snp.bottom).offset(30)
             maker.left.equalTo(contentView.snp.left).offset(20)
-            maker.right.greaterThanOrEqualTo(contentView.snp.right).offset(-20)
+            maker.right.lessThanOrEqualTo(contentView.snp.right).offset(-20)
         }
+        
         
         if(infoCharity.singleImpact != nil){
             let gestureRegocnizer = UITapGestureRecognizer(target: self, action: #selector(outputButtonPressed))
             outputView!.addGestureRecognizer(gestureRegocnizer)
+            
+            outputView?.layer.borderWidth = 0.2
+            outputView?.layer.cornerRadius = 7
+            outputView?.layer.borderColor = UIColor.outputColor.cgColor
         }
         
-        contentHeight += 115
+        contentHeight += 120
     }
     
     private func configureAboutHeaderLabel(){
         contentView.addSubview(aboutHeaderLabel)
         aboutHeaderLabel.text = "About Charity"
+        aboutHeaderLabel.textColor = .aboutCharityTextColor
         aboutHeaderLabel.snp.makeConstraints { (maker) in
             maker.top.equalTo(outputView!.snp.bottom).offset(25)
             maker.left.equalTo(contentView.snp.left).offset(20)
@@ -257,7 +263,7 @@ class CharityInfoVC: UIViewController{
             maker.right.equalTo(contentView.snp.right).offset(-20)
         }
         descriptionLabel.sizeToFit()
-        
+        descriptionLabel.textColor = .aboutCharityTextColor
         let height = labelText.height(withWidth: view.bounds.width - 40, font: UIFont.preferredFont(forTextStyle: .footnote))
         contentHeight += height
     }

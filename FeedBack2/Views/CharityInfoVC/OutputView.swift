@@ -17,7 +17,7 @@ class OutputView: UIView{
     var labelsStackView = UIStackView()
     var viewColor: UIColor = UIColor.outputColor
     
-    let padding: CGFloat = 5
+    let padding: CGFloat = 10
     
     
     private override init(frame: CGRect) {
@@ -31,6 +31,9 @@ class OutputView: UIView{
     init(output: SimpleImpact?) {
         self.init()
         self.output = output
+        
+        //addTopSeperatorView()
+        //addBottomSeperatorView()
         
         if output == nil {
             configurePlaceholder()
@@ -85,15 +88,10 @@ class OutputView: UIView{
         
         labelsStackView.snp.makeConstraints { (maker) in
             maker.left.equalTo(iconImageView.snp.right).offset(8)
-            maker.right.greaterThanOrEqualTo(self.snp.right).offset(-padding)
-            maker.top.equalTo(self.snp.top).offset(padding)
-            maker.bottom.equalTo(self.snp.bottom).offset(-padding)
+            maker.right.lessThanOrEqualTo(self.snp.right).offset(-padding)
+            maker.top.equalTo(self.snp.top).offset(padding).offset(10)
+            maker.bottom.equalTo(self.snp.bottom).offset(-padding).offset(-10)
         }
-        
-        mayFundLabel.snp.makeConstraints { (maker) in
-            maker.right.equalTo(labelsStackView.snp.right)
-        }
-        
         
     }
     
@@ -116,6 +114,30 @@ class OutputView: UIView{
         impactLabel.font = .systemFont(ofSize: 12)
         impactLabel.textColor = viewColor
         impactLabel.alpha = 0.8
+    }
+    
+    fileprivate func addTopSeperatorView() {
+        let seperatorView = UIView()
+        addSubview(seperatorView)
+        seperatorView.backgroundColor = viewColor
+        seperatorView.snp.makeConstraints { (maker) in
+            maker.height.equalTo(0.5)
+            maker.left.equalTo(self.snp.left)
+            maker.right.equalTo(self.snp.right)
+            maker.top.equalTo(self.snp.top)
+        }
+    }
+    
+    fileprivate func addBottomSeperatorView() {
+        let seperatorView = UIView()
+        addSubview(seperatorView)
+        seperatorView.backgroundColor = viewColor
+        seperatorView.snp.makeConstraints { (maker) in
+            maker.height.equalTo(0.5)
+            maker.left.equalTo(self.snp.left)
+            maker.right.equalTo(self.snp.right)
+            maker.bottom.equalTo(self.snp.bottom)
+        }
     }
     
 }

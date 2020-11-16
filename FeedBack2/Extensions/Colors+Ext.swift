@@ -89,7 +89,7 @@ extension UIColor {
         case .dark:
             return lightGray
         default:
-          return UIColor(rgb: 0x63ACD5)
+          return UIColor(rgb: 0xB2A8B8)
         }
     }
     
@@ -98,7 +98,7 @@ extension UIColor {
         case .dark:
             return systemGray
         default:
-          return UIColor(rgb: 0x63ACD5)
+          return UIColor(rgb: 0xB2A8B8)
         }
     }
     
@@ -112,6 +112,14 @@ extension UIColor {
         }
     }
     
+    static var aboutCharityTextColor =  UIColor { traitCollection in
+        switch traitCollection.userInterfaceStyle {
+        case .dark:
+            return white
+        default:
+          return UIColor(rgb: 0x4C4452)
+        }
+    }
     
     static var headerButtonGradientStart =  UIColor { traitCollection in
         switch traitCollection.userInterfaceStyle {
