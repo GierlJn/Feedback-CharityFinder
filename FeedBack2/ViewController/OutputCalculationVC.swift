@@ -15,7 +15,7 @@ class OutputCalculationVC: UIViewController{
     
     var donationTextFieldView = DonationTextFieldView()
     
-    var dismissButten = FBButton()
+    var dismissButten: FBButton?
     var actionButton: FBButton?
     var buttonStackView = UIStackView()
     
@@ -23,6 +23,8 @@ class OutputCalculationVC: UIViewController{
     var message: String?
     var dismissButtonTitle: String? = "Cancel"
     var actionButtonTite: String? = "Go"
+    
+    var outputStackView: UIStackView?
     
     var actionClosure: (()->())?
     
@@ -58,6 +60,7 @@ class OutputCalculationVC: UIViewController{
     private func configure(){
         configureContainerView()
         configureTitleLabel()
+        configureActionContentView()
         configureTextField()
         configureActionButtons()
     }
@@ -75,6 +78,8 @@ class OutputCalculationVC: UIViewController{
     fileprivate func configureTitleLabel() {
         containerView.addSubview(titleLabel)
         
+        titleLabel.textColor = .secondaryLabel
+        titleLabel.font = .preferredFont(forTextStyle: .body)
         titleLabel.text = alertTitle
         titleLabel.snp.makeConstraints { (maker) in
             maker.top.equalTo(containerView.snp.top).offset(padding)
@@ -84,17 +89,21 @@ class OutputCalculationVC: UIViewController{
         }
     }
     
-    fileprivate func configureTextField(){
+    fileprivate func configureActionContentView(){
         containerView.addSubview(actionContentView)
-        actionContentView.addSubview(donationTextFieldView)
         
         actionContentView.snp.makeConstraints { (maker) in
-            maker.top.equalTo(titleLabel.snp.bottom).offset(8)
+            maker.top.equalTo(titleLabel.snp.bottom).offset(12)
             maker.left.equalTo(containerView.snp.left).offset(padding)
             maker.right.equalTo(containerView.snp.right).offset(-padding)
             maker.height.equalTo(60)
         }
         
+    }
+    
+    fileprivate func configureTextField(){
+        actionContentView.addSubview(donationTextFieldView)
+
         donationTextFieldView.snp.makeConstraints { (maker) in
             maker.height.equalTo(40)
             maker.centerY.equalTo(actionContentView.snp.centerY)
@@ -118,43 +127,64 @@ class OutputCalculationVC: UIViewController{
         }
         buttonStackView.spacing = 10
         buttonStackView.distribution = .fillEqually
-        
-        dismissButten.setTitle("Cancel", for: .normal)
-        dismissButten.addTarget(self, action: #selector(dismissButtonPressed), for: .touchUpInside)
-        buttonStackView.addArrangedSubview(dismissButten)
-        
+        dismissButten = FBButton()
+        dismissButten?.setTitle("Cancel", for: .normal)
+        dismissButten?.addTarget(self, action: #selector(dismissButtonPressed), for: .touchUpInside)
+        if(dismissButten != nil){
+            buttonStackView.addArrangedSubview(dismissButten!)
+        }
         
         actionButton = FBButton()
         actionButton?.setTitle("Go", for: .normal)
         actionButton?.addTarget(self, action: #selector(actionButtonPressed), for: .touchUpInside)
-        buttonStackView.addArrangedSubview(actionButton!)
+        if(actionButton != nil){
+            buttonStackView.addArrangedSubview(actionButton!)
+        }
+        
     }
     
     fileprivate func configureExitButton(){
-        dismissButten = FBButton(title: "Ok")
-        containerView.addSubview(dismissButten)
-        dismissButten.addTarget(self, action: #selector(dismissButtonPressed), for: .touchUpInside)
-        dismissButten.snp.makeConstraints { (maker) in
+        containerView.addSubview(buttonStackView)
+        buttonStackView.snp.makeConstraints { (maker) in
             maker.height.equalTo(44)
             maker.top.equalTo(actionContentView.snp.bottom).offset(padding)
-            maker.centerX.equalTo(containerView.snp.centerX)
-            maker.width.equalTo(120)
+            maker.left.equalTo(containerView.snp.left).offset(padding)
+            maker.right.equalTo(containerView.snp.right).offset(-padding)
             maker.bottom.equalTo(containerView.snp.bottom).offset(-padding)
         }
+        buttonStackView.spacing = 10
+        buttonStackView.distribution = .fillEqually
+        dismissButten = FBButton()
+        
+        dismissButten?.setTitle("Return", for: .normal)
+        dismissButten?.addTarget(self, action: #selector(backButtonPressed), for: .touchUpInside)
+        if(dismissButten != nil){
+            buttonStackView.addArrangedSubview(dismissButten!)
+        }
+        
+        actionButton = FBButton()
+        actionButton?.setTitle("Ok", for: .normal)
+        actionButton?.addTarget(self, action: #selector(dismissButtonPressed), for: .touchUpInside)
+        if(actionButton != nil){
+            buttonStackView.addArrangedSubview(actionButton!)
+        }
+       
     }
     
     fileprivate func configureMessageLabel() {
         actionContentView.layer.borderWidth = 0
         
-        let stackView = UIStackView()
+        outputStackView = UIStackView()
         let impactNumberLabel = FBTitleLabel(textAlignment: .center)
         let impactNameLabel = FBSubTitleLabel(textAlignment: .center)
-        actionContentView.addSubview(stackView)
-        stackView.pinToEdges(of: actionContentView)
-        stackView.addArrangedSubview(impactNumberLabel)
-        stackView.addArrangedSubview(impactNameLabel)
-        stackView.axis = .vertical
-        stackView.distribution = .fillEqually
+        if(outputStackView != nil){
+            actionContentView.addSubview(outputStackView!)
+            outputStackView?.pinToEdges(of: actionContentView)
+        }
+        outputStackView?.addArrangedSubview(impactNumberLabel)
+        outputStackView?.addArrangedSubview(impactNameLabel)
+        outputStackView?.axis = .vertical
+        outputStackView?.distribution = .fillEqually
         
         
         let value = output.costPerBeneficiary?.value ?? "1.0"
@@ -167,7 +197,7 @@ class OutputCalculationVC: UIViewController{
         
         impactNumberLabel.text = "\(formatted)"
         impactNumberLabel.textColor = .outputColor
-        impactNumberLabel.font = UIFont.boldSystemFont(ofSize: 20)
+        impactNumberLabel.font = UIFont.boldSystemFont(ofSize: 25)
         impactNameLabel.text = "\(output.name?.formatOutputName(with: currency, wording: .plural) ?? "")"
         impactNameLabel.font = UIFont.preferredFont(forTextStyle: .title3)
         impactNameLabel.textColor = .label
@@ -178,6 +208,18 @@ class OutputCalculationVC: UIViewController{
     
     @objc func dismissButtonPressed(){
         dismiss(animated: true)
+    }
+    
+    @objc func backButtonPressed(){
+        titleLabel.text = alertTitle
+        dismissButten?.removeFromSuperview()
+        dismissButten = nil
+        actionButton?.removeFromSuperview()
+        actionButton = nil
+        buttonStackView.removeFromSuperview()
+        outputStackView?.removeFromSuperview()
+        configureTextField()
+        configureActionButtons()
     }
     
     @objc func currencyButtonPressed(){
@@ -195,13 +237,15 @@ class OutputCalculationVC: UIViewController{
     
     private func showImpact(){
         titleLabel.text = "Your donation may fund"
-        titleLabel.textColor = .secondaryLabel
-        titleLabel.font = .preferredFont(forTextStyle: .body)
         donationTextFieldView.removeFromSuperview()
         configureMessageLabel()
         
-        dismissButten.removeFromSuperview()
+        dismissButten?.removeFromSuperview()
+        dismissButten = nil
+        actionButton?.removeFromSuperview()
+        actionButton = nil
         buttonStackView.removeFromSuperview()
+        
         configureExitButton()
     }
     
