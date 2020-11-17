@@ -67,7 +67,8 @@ class SearchHeaderView: UIView{
         addSubview(searchStackView)
         searchStackView.snp.makeConstraints { (maker) in
             maker.left.equalTo(snp.left).offset(20)
-            maker.right.equalTo(snp.right).offset(-20)
+            maker.right.lessThanOrEqualTo(snp.right).offset(-20).priority(1000)
+            maker.width.greaterThanOrEqualTo(500).priority(900)
             maker.height.equalTo(50)
             maker.centerY.equalTo(snp.bottom)
         }
