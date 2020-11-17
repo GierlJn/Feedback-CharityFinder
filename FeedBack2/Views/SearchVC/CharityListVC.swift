@@ -147,15 +147,15 @@ class CharityListVC: UIViewController{
     private func initialUpdateUI(with charities: [Charity]){
         self.charities = charities
         charitiesLeftDownload = true
-//        let isOn = PersistenceManager.getImpactSort()
-//        if(isOn){
-//            sortForImpact()
-//        }
+        let isOn = PersistenceManager.getImpactSort()
+        if(isOn){
+            sortForImpact()
+        }
         self.updateData()
         if (self.charities.isEmpty) {
             self.addEmptyStateView()
         }else{
-            //scrollToTop()
+            scrollToTop()
         }
     }
     
