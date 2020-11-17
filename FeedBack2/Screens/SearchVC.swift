@@ -195,7 +195,7 @@ extension SearchVC: HeaderViewDelegate{
     func categoryChanged(category: Category) {
         showListVC()
         headerView.textfield.clearTextField()
-        charityListVC.getCharities(searchParameter: category.parameter)
+        charityListVC.getInitialCharities(searchParameter: category.parameter)
     }
     
     func searchEntered(input: String?){
@@ -203,7 +203,7 @@ extension SearchVC: HeaderViewDelegate{
         showListVC()
         categoriesView.selectedCategory = nil
         categoriesView.updateCategorySelection()
-        charityListVC.getCharities(searchParameter: "q=\(searchInput)")
+        charityListVC.getInitialCharities(searchParameter: "q=\(searchInput)")
     }
 }
 

@@ -55,7 +55,7 @@ class CharityController {
     }
     
     func loadCharities( category: Category, size: Int, positionIndex: Int, completed: @escaping (FBError?) -> ()){
-        networkManager.getCharities(searchParameter: category.parameter, size: size) { [weak self] (result) in
+        networkManager.getCharities(searchParameter: category.parameter, size: size, startFrom: 0) { [weak self] (result) in
             guard let self = self else { return }
             switch result{
             case .failure(let error):

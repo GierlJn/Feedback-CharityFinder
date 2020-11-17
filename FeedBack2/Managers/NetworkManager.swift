@@ -24,10 +24,10 @@ class NetworkManager{
         }
     }
     
-    func getCharities(searchParameter: String, size: Int, completed: @escaping (Result<[Charity], FBError>) -> Void){
+    func getCharities(searchParameter: String, size: Int, startFrom: Int, completed: @escaping (Result<[Charity], FBError>) -> Void){
         let cleanedSpacesParameter = searchParameter.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? searchParameter
         
-        let stringUrl = "\(baseSearchUrl)\(cleanedSpacesParameter)&size=\(size)"
+        let stringUrl = "\(baseSearchUrl)\(cleanedSpacesParameter)&size=\(size)&from=\(startFrom)"
         guard let url = URL(string: stringUrl) else {
             completed(.failure(.unvalidSearchParameter))
             return
