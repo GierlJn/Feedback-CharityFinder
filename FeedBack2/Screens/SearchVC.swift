@@ -39,7 +39,6 @@ class SearchVC: UIViewController{
         configureNavigationBar()
         configureHeaderView()
         configureCategoriesView()
-        //configureCopyRightLabel()
         configureContentView()
         configureShowCaseVC()
     }
@@ -99,18 +98,6 @@ extension SearchVC{
         }
     }
     
-//    private func configureCopyRightLabel(){
-//        view.addSubview(copyRightLabel)
-//        copyRightLabel.delegate = self
-//
-//        copyRightLabel.snp.makeConstraints { (maker) in
-//            maker.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-5)
-//            maker.left.equalTo(view.snp.left)
-//            maker.right.equalTo(view.snp.right)
-//            maker.height.equalTo(20)
-//        }
-//    }
-    
     private func configureShowCaseVC(){
         showcaseVC.delegate = self
         add(childVC: showcaseVC, to: showCaseView)
@@ -145,23 +132,6 @@ extension SearchVC{
             add(childVC: showcaseVC, to: showCaseView)
         }
     }}
-//
-//extension SearchVC: FooterViewDelegate{
-//    func buttonPressed() {
-//        DispatchQueue.main.async {
-//            let fbAlertVC = FBAlertVC(title: "Notice", message: "This will open a link in your browser", actionButtonTitle: "Ok", dismissButtonTitle: "Cancel"){ [weak self] in
-//                guard let self = self else { return }
-//                self.presentSafariVC(with: URLS.soGiveUrl)
-//            }
-//            fbAlertVC.modalPresentationStyle = .overFullScreen
-//            fbAlertVC.modalTransitionStyle = .crossDissolve
-//            self.present(fbAlertVC, animated: true)
-//        }
-//
-//
-//        //presentSafariVC(with: URLS.soGiveUrl)
-//    }
-//}
 
 extension SearchVC: HeaderViewDelegate{
     func actionButtonPressed() {
