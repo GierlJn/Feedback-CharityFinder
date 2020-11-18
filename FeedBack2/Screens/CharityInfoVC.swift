@@ -47,12 +47,20 @@ class CharityInfoVC: UIViewController{
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         view.setGradientBackgroundColor(colors: [.lightBlueBackgroundGradientStart, .lightBlueBackgroundGradientEnd], axis: .horizontal)
-        donateButton.applyGradient(colors: [UIColor.headerButtonGradientStart.cgColor, UIColor.headerButtonGradientEnd.cgColor], radius: nil)
+        if(DeviceType.isiPad){
+            donateButton.applyGradient(colors: [UIColor.headerButtonGradientStart.cgColor, UIColor.headerButtonGradientEnd.cgColor], radius: 7)
+        }else{
+            donateButton.applyGradient(colors: [UIColor.headerButtonGradientStart.cgColor, UIColor.headerButtonGradientEnd.cgColor], radius: nil)
+        }
+        
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        donateButton.applyGradient(colors: [UIColor.headerButtonGradientStart.cgColor, UIColor.headerButtonGradientEnd.cgColor], radius: nil)
-        
+        if(DeviceType.isiPad){
+            donateButton.applyGradient(colors: [UIColor.headerButtonGradientStart.cgColor, UIColor.headerButtonGradientEnd.cgColor], radius: 7)
+        }else{
+            donateButton.applyGradient(colors: [UIColor.headerButtonGradientStart.cgColor, UIColor.headerButtonGradientEnd.cgColor], radius: nil)
+        }
     }
     
     private func configureNavigationBar(){
@@ -69,13 +77,24 @@ class CharityInfoVC: UIViewController{
         donateButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .title1)
         donateButton.setTitle("Donate", for: .normal)
 
-        
-        donateButton.snp.makeConstraints { (maker) in
-            maker.left.equalTo(self.view.snp.left)
-            maker.right.equalTo(self.view.snp.right)
-            maker.bottom.equalTo(self.view.snp.bottom)
-            maker.height.equalTo(70)
+        if(DeviceType.isiPad){
+            donateButton.snp.makeConstraints { (maker) in
+                maker.left.equalTo(self.view.snp.left).offset(200)
+                maker.right.equalTo(self.view.snp.right).offset(-200)
+                maker.width.greaterThanOrEqualTo(400)
+                maker.centerX.equalTo(self.view.snp.centerX)
+                maker.bottom.equalTo(self.view.snp.bottom).offset(-40)
+                maker.height.equalTo(70)
+            }
+        }else{
+            donateButton.snp.makeConstraints { (maker) in
+                maker.left.equalTo(self.view.snp.left)
+                maker.right.equalTo(self.view.snp.right)
+                maker.bottom.equalTo(self.view.snp.bottom)
+                maker.height.equalTo(70)
+            }
         }
+
     }
     
     private func configureScrollView(){
