@@ -45,7 +45,7 @@ class OutputView: UIView{
     
     private func configurePlaceholder(){
         addSubview(iconImageView)
-        iconImageView.image = UIImage(named: "outputlogo1")
+        iconImageView.image = Images.outputLogoIcon
         iconImageView.tintColor = viewColor
         iconImageView.snp.makeConstraints { (maker) in
             maker.left.equalTo(self.snp.left).offset(padding)

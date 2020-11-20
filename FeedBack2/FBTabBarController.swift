@@ -12,7 +12,7 @@ class FBTabBarController: UITabBarController{
     
     override func viewDidLoad() {
         UITabBar.appearance().tintColor = .headerButtonGradientStart
-        viewControllers = [createSearchVC(), createFavoritesVC()]
+        viewControllers = [createSearchVC(), createFavoritesVC(), createDonationHistoryVC()]
     }
     
     
@@ -27,6 +27,13 @@ class FBTabBarController: UITabBarController{
         favouritesVC.title = "Favorites"
         favouritesVC.tabBarItem = UITabBarItem(title: "Favorites", image: Images.bookMark, selectedImage: Images.bookMarkFill)
         return UINavigationController(rootViewController: favouritesVC)
+    }
+    
+    private func createDonationHistoryVC() -> UINavigationController{
+        let donationHistoryVC = DonationHistoryVC()
+        donationHistoryVC.title = "Donations"
+        donationHistoryVC.tabBarItem = UITabBarItem(title: "Favorites", image: Images.bookMark, selectedImage: Images.bookMarkFill)
+        return UINavigationController(rootViewController: donationHistoryVC)
     }
     
     

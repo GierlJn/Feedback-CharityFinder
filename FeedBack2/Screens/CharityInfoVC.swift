@@ -455,26 +455,14 @@ extension CharityInfoVC: OutputCalculationVCDelegate{
     }
 }
 
-extension CharityInfoVC: SocialMediaStackViewDelegate, SharingDelegate{
+extension CharityInfoVC: SocialMediaStackViewDelegate{
     func shareTextOnFaceBook() {
         guard let urlString = infoCharity!.url else { return }
         guard let url = URL.init(string: urlString) else { return }
         let shareContent = ShareLinkContent()
         shareContent.contentURL = url
         shareContent.quote = infoCharity!.summaryDescription ?? ""
-        ShareDialog(fromViewController: self, content: shareContent, delegate: self).show()
-    }
-
-    func sharer(_ sharer: Sharing, didCompleteWithResults results: [String : Any]) {
-        if sharer.shareContent.pageID != nil {
-            print("Share: Success")
-        }
-    }
-    func sharer(_ sharer: Sharing, didFailWithError error: Error) {
-        print("Share: Fail")
-    }
-    func sharerDidCancel(_ sharer: Sharing) {
-        print("Share: Cancel")
+        ShareDialog(fromViewController: self, content: shareContent, delegate: nil).show()
     }
     
     func shareTextOnTwitter(){

@@ -19,6 +19,7 @@ enum Images {
     static let facebookIcon = UIImage(named: "facebook_icon")!
     static let twitterIcon = UIImage(named: "twitter_icon")!
     static let whatsappIcon = UIImage(named: "whatsapp_icon")!
+    static let outputLogoIcon = UIImage(named: "outputlogo1")!
 }
 
 enum URLS {
