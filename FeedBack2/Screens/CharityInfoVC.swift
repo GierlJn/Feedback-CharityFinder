@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FacebookShare
 import SnapKit
 
 protocol DonationBarViewDelegate {
@@ -454,17 +455,61 @@ extension CharityInfoVC: OutputCalculationVCDelegate{
     }
 }
 
-extension CharityInfoVC: SocialMediaStackViewDelegate{
+extension CharityInfoVC: SocialMediaStackViewDelegate, SharingDelegate{
+    func shareTextOnFaceBook() {
+        guard let urlString = infoCharity!.url else { return }
+        guard let url = URL.init(string: urlString) else { return }
+        let shareContent = ShareLinkContent()
+        shareContent.contentURL = url
+        shareContent.quote = infoCharity!.summaryDescription ?? ""
+        ShareDialog(fromViewController: self, content: shareContent, delegate: self).show()
+    }
+
+    func sharer(_ sharer: Sharing, didCompleteWithResults results: [String : Any]) {
+        if sharer.shareContent.pageID != nil {
+            print("Share: Success")
+        }
+    }
+    func sharer(_ sharer: Sharing, didFailWithError error: Error) {
+        print("Share: Fail")
+    }
+    func sharerDidCancel(_ sharer: Sharing) {
+        print("Share: Cancel")
+    }
     
+    func shareTextOnTwitter(){
+        let tweetText = infoCharity?.summaryDescription ?? ""
+        let tweetUrl = infoCharity!.url ?? ""
+
+        let shareString = "https://twitter.com/intent/tweet?text=\(tweetText)&url=\(tweetUrl)"
+        let escapedShareString = shareString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
+        guard let url = URL(string: escapedShareString) else { return }
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+    }
+    
+    func shareTextOnWhatsapp(){
+        let message = infoCharity?.summaryDescription ?? "" + "\n" + String(infoCharity!.url ?? "")
+        
+         if let escapedString = message.addingPercentEncoding(withAllowedCharacters:  NSCharacterSet.urlQueryAllowed) {
+             if let whatsappURL = URL(string: "whatsapp://send?text=\(escapedString)") {
+                 if UIApplication.shared.canOpenURL(whatsappURL) {
+                     UIApplication.shared.open(whatsappURL, options: [: ], completionHandler: nil)
+                 } else {
+                    presentGFAlertOnMainThread(title: "WhatsApp could not be found", message: "Please install WhatsApp first", buttonTitle: "Ok")
+                 }
+             }
+    }
+    }
     
     func buttonPressed(type: SocialMediaType) {
+        
         switch type {
         case .facebook:
-            print(type)
+            shareTextOnFaceBook()
         case .twitter:
-            print(type)
+            shareTextOnTwitter()
         case .whatsapp:
-            print(type)
+            shareTextOnWhatsapp()
         }
     }
 }
