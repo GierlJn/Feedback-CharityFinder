@@ -8,7 +8,13 @@
 
 import UIKit
 
+protocol SocialMediaStackViewDelegate{
+    func buttonPressed(type: SocialMediaType)
+}
+
 class SocialMediaStackView: UIStackView{
+    
+    var delegate: SocialMediaStackViewDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
@@ -37,7 +43,7 @@ class SocialMediaStackView: UIStackView{
     }
     
     @objc func buttonPressed(sender: SocialMediaButton){
-        
+        delegate?.buttonPressed(type: sender.type)
     }
 
 }

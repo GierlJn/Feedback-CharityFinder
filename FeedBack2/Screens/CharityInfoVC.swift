@@ -298,7 +298,7 @@ class CharityInfoVC: UIViewController{
     
     private func configureSocialMediaStackView(){
         contentView.addSubview(socialMediaStackView)
-        
+        socialMediaStackView.delegate = self
         socialMediaStackView.snp.makeConstraints { (maker) in
             maker.top.equalTo(descriptionLabel.snp.bottom).offset(padding)
             maker.width.equalTo(100)
@@ -452,7 +452,20 @@ extension CharityInfoVC: OutputCalculationVCDelegate{
     func currencyButtonPressed() {
         presentCurrencySelectionInCalculationVC()
     }
+}
+
+extension CharityInfoVC: SocialMediaStackViewDelegate{
     
     
+    func buttonPressed(type: SocialMediaType) {
+        switch type {
+        case .facebook:
+            print(type)
+        case .twitter:
+            print(type)
+        case .whatsapp:
+            print(type)
+        }
+    }
 }
 
