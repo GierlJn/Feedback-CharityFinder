@@ -29,6 +29,8 @@ class CharityInfoVC: UIViewController{
     let scrollView = UIScrollView()
     let contentView = UIView()
     
+    var socialMediaStackView = SocialMediaStackView()
+    
     var contentHeight: CGFloat = 70.0
     let padding: CGFloat = 20
     
@@ -156,6 +158,7 @@ class CharityInfoVC: UIViewController{
         configureOutputView(infoCharity)
         configureAboutHeaderLabel()
         configureDescriptionLabel(infoCharity)
+        configureSocialMediaStackView()
         setContentViewHeight()
     }
     
@@ -279,8 +282,8 @@ class CharityInfoVC: UIViewController{
         
         descriptionLabel.snp.makeConstraints { (maker) in
             maker.top.equalTo(aboutHeaderLabel.snp.bottom)
-            maker.left.equalTo(contentView.snp.left).offset(20)
-            maker.right.equalTo(contentView.snp.right).offset(-20)
+            maker.left.equalTo(contentView.snp.left).offset(padding)
+            maker.right.equalTo(contentView.snp.right).offset(-padding)
         }
         descriptionLabel.sizeToFit()
         descriptionLabel.textColor = .aboutCharityTextColor
@@ -291,8 +294,19 @@ class CharityInfoVC: UIViewController{
             let height = labelText.height(withWidth: view.bounds.width - 40, font: UIFont.preferredFont(forTextStyle: .footnote))
             contentHeight += height
         }
+    }
+    
+    private func configureSocialMediaStackView(){
+        contentView.addSubview(socialMediaStackView)
         
+        socialMediaStackView.snp.makeConstraints { (maker) in
+            maker.top.equalTo(descriptionLabel.snp.bottom).offset(padding)
+            maker.width.equalTo(100)
+            maker.height.equalTo(30)
+            maker.centerX.equalTo(contentView.snp.centerX)
+        }
         
+        contentHeight += 30
     }
     
     private func setContentViewHeight(){

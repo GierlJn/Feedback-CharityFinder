@@ -28,5 +28,7 @@ class FBTabBarController: UITabBarController{
         favouritesVC.tabBarItem = UITabBarItem(title: "Favorites", image: Images.bookMark, selectedImage: Images.bookMarkFill)
         return UINavigationController(rootViewController: favouritesVC)
     }
+    
+    
 }
 

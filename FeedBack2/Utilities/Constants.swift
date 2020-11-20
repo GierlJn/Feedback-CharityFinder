@@ -16,6 +16,9 @@ enum Images {
     static let bookMarkFill = UIImage(systemName: "bookmark.fill")!
     static let bookMark = UIImage(systemName: "bookmark")!
     static let magnifyingGlass = UIImage(systemName: "magnifyingglass")!
+    static let facebookIcon = UIImage(named: "facebook_icon")!
+    static let twitterIcon = UIImage(named: "twitter_icon")!
+    static let whatsappIcon = UIImage(named: "whatsapp_icon")!
 }
 
 enum URLS {
