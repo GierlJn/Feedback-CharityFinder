@@ -284,8 +284,15 @@ class CharityInfoVC: UIViewController{
         }
         descriptionLabel.sizeToFit()
         descriptionLabel.textColor = .aboutCharityTextColor
-        let height = labelText.height(withWidth: view.bounds.width - 40, font: UIFont.preferredFont(forTextStyle: .footnote))
-        contentHeight += height
+        if(DeviceType.isiPad){
+            let height = labelText.height(withWidth: view.bounds.width - 40, font: UIFont.preferredFont(forTextStyle: .body))
+            contentHeight += height
+        }else{
+            let height = labelText.height(withWidth: view.bounds.width - 40, font: UIFont.preferredFont(forTextStyle: .footnote))
+            contentHeight += height
+        }
+        
+        
     }
     
     private func setContentViewHeight(){

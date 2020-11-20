@@ -25,7 +25,12 @@ class FBTitleLabel: UILabel{
     
     private func configure(){
         textColor = .textTitleLabel
-        font = UIFont.preferredFont(forTextStyle: .headline)
+        if(DeviceType.isiPad){
+            font = UIFont.preferredFont(forTextStyle: .title2)
+        }else{
+            font = UIFont.preferredFont(forTextStyle: .headline)
+        }
+        
         adjustsFontSizeToFitWidth = true
         minimumScaleFactor = 0.6
         lineBreakMode = .byTruncatingTail

@@ -20,7 +20,13 @@ class FBTextLabel: UILabel{
     
     private func configure(){
         textColor = .label
-        font = UIFont.preferredFont(forTextStyle: .footnote)
+        if(DeviceType.isiPad){
+            font = UIFont.preferredFont(forTextStyle: .body)
+        }else{
+            font = UIFont.preferredFont(forTextStyle: .footnote)
+        }
+        
+        
         isOpaque = false
         numberOfLines = 0
         textAlignment = .left
