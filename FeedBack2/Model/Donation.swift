@@ -12,7 +12,7 @@ struct Donation: Hashable, Decodable, Encodable{
     var id = UUID()
     var date: Date
     var charityName: String
-    var output: Output
+    var impact: SimpleImpact?
     var amount: Float
-    var impact: Float
+    var currency: Currency
 }

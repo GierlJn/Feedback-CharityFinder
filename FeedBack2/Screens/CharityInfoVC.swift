@@ -399,6 +399,12 @@ class CharityInfoVC: UIViewController{
         presentSafariVC(with: url)
     }
     
+    func saveDonation(enteredAmount: Float){
+        let donation = Donation(date: Date(), charityName: infoCharity!.name, impact: infoCharity?.singleImpact, amount: enteredAmount, currency: PersistenceManager.retrieveCurrency())
+        
+        
+    }
+    
     
 }
 
@@ -441,11 +447,12 @@ extension CharityInfoVC: TitleLabelViewDelegate{
 
 extension CharityInfoVC: DonationBarViewDelegate{
     func donationButtonPressed() {
-        
+        presentSafariVC()
     }
 }
 
 extension CharityInfoVC: OutputCalculationVCDelegate{
+    
     func currencyButtonPressed() {
         presentCurrencySelectionInCalculationVC()
     }

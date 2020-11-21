@@ -66,7 +66,7 @@ struct InfoCargo : Decodable {
 }
 
 
-struct SimpleImpact : Decodable, Hashable {
+struct SimpleImpact : Decodable, Hashable, Encodable {
     
     let type : String?
     let costPerBeneficiary : InfoCostPerBeneficiary?
