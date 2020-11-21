@@ -21,6 +21,7 @@ class PersistenceManager {
         static let currency = "currency"
         static let favourites = "favourites"
         static let sort = "sort"
+        static let donations = "donations"
     }
     
     static func setImpactSort(_ setOn: Bool){
@@ -55,7 +56,28 @@ class PersistenceManager {
         }catch{
             return Currency.euro
         }
-        
+    }
+    
+    static func updateDonations(donation: Donation, persistenceActionType: PersistenceActionType, completed: @escaping(FBError?)->Void){
+        retrieveDonations { (result) in
+            switch result{
+            case .success(var donations):
+                switch persistenceActionType{
+                case .add:
+                    guard !donations.contains(donation) else {
+                        completed(.donationAlreadySaved)
+                        return
+                    }
+                case .remove:
+                    donations.removeAll(where: {$0.id == donation.id})
+                }
+                completed(saveDonations(donations: donations))
+                
+            case .failure(let error):
+                completed(error)
+            }
+            
+        }
     }
     
     static func updateFavorites(charity: Charity, persistenceActionType: PersistenceActionType, completed: @escaping(FBError?) -> Void){
@@ -75,13 +97,31 @@ class PersistenceManager {
                     charities.removeAll(where: {$0.id == charity.id})
                     
                 }
-                completed(save(charities: charities))
+                completed(saveCharities(charities: charities))
             
             case .failure(let error):
                 completed(error)
             }
         }
     }
+    
+    static func retrieveDonations(completed: @escaping(Result<[Donation], FBError>) -> Void){
+        guard let data = defaults.object(forKey: Keys.donations) as? Data else {
+            completed(.success([Donation]()))
+            return
+        }
+        
+        do{
+            let decoder = JSONDecoder()
+            let decodedData = try decoder.decode([Donation].self, from: data)
+            completed(.success(decodedData))
+        }catch{
+            completed(.failure(.alreadyFavorite))
+            return
+        }
+        
+    }
+    
     
     static func isCharityFavorite(charity: Charity, completed: @escaping(Bool) -> Void){
         retrieveFavorites { (result) in
@@ -109,7 +149,7 @@ class PersistenceManager {
         }
     }
     
-    static func save(charities: [Charity]) -> FBError? {
+    static func saveCharities(charities: [Charity]) -> FBError? {
         do{
             let encoder = JSONEncoder()
             let encodedFavoruites = try encoder.encode(charities)
@@ -117,6 +157,17 @@ class PersistenceManager {
             return nil
         }catch{
             return .unableToFavourite
+        }
+    }
+    
+    static func saveDonations(donations: [Donation]) -> FBError? {
+        do{
+            let encoder = JSONEncoder()
+            let encodedFavoruites = try encoder.encode(donations)
+            defaults.set(encodedFavoruites, forKey: Keys.donations)
+            return nil
+        }catch{
+            return .donationCantBeSaved
         }
     }
 }

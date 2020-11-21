@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct InfoCharity: Hashable{
+struct InfoCharity: Hashable, Decodable{
     var name: String
     var id: String?
     var summaryDescription: String?
