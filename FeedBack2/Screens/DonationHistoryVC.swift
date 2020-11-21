@@ -13,6 +13,9 @@ class DonationHistoryVC: UIViewController{
     let headerView = HistoryHeaderView()
     let padding = 20
     
+    var tableView = UITableView()
+    var donations = [Donation]()
+    
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nil, bundle: .main)
     }
@@ -25,13 +28,26 @@ class DonationHistoryVC: UIViewController{
         super.viewDidLoad()
         navigationController?.isNavigationBarHidden = true
         configure()
+        getDonations()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = true
     }
     
-    private func configure(){
+    fileprivate func getDonations() {
+        PersistenceManager.retrieveDonations { [weak self] (result) in
+            guard let self = self else { return }
+            switch result{
+            case .failure(let error):
+                self.presentErrorAlert(error)
+            case .success(let donations):
+                self.donations = donations
+            }
+        }
+    }
+    
+    fileprivate func configureHeaderView() {
         view.addSubview(headerView)
         
         headerView.snp.makeConstraints { (maker) in
@@ -40,9 +56,38 @@ class DonationHistoryVC: UIViewController{
             maker.left.equalTo(view.snp.left)
             maker.right.equalTo(view.snp.right)
         }
-        
-        
     }
+    
+    fileprivate func configureTableView() {
+        tableView.dataSource = self
+        tableView.register(DonationCell.self, forCellReuseIdentifier: DonationCell.reuseIdentifier)
+        view.addSubview(tableView)
+        tableView.snp.makeConstraints { (maker) in
+            maker.top.equalTo(headerView.snp.bottom)
+            maker.left.equalTo(view.snp.left)
+            maker.right.equalTo(view.snp.right)
+            maker.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+        }
+        tableView.removeExcessCells()
+    }
+    
+    private func configure(){
+        configureHeaderView()
+        configureTableView()
+    }
+    
+}
+
+extension DonationHistoryVC: UITableViewDataSource{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        donations.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: DonationCell.reuseIdentifier) as! DonationCell
+        return cell
+    }
+    
     
 }
 
@@ -68,7 +113,6 @@ class HistoryHeaderView: UIView{
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
-        backgroundColor = .red
         configure()
     }
     
@@ -108,7 +152,6 @@ class HistoryHeaderView: UIView{
         totalLabelView.text = String(totalDonations)
         totalLabelView.textColor = .outputColor
         numbersStackView.addArrangedSubview(totalLabelView)
-        
         
 //        let heartIconImageView = UIImageView(image: Images.outputLogoIcon)
 //        numbersStackView.addArrangedSubview(heartIconImageView)

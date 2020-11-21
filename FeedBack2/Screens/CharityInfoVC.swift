@@ -340,7 +340,7 @@ class CharityInfoVC: UIViewController{
             stringUrl = "http://".appending(stringUrl)
         }
         guard let url = URL(string: stringUrl) else {
-            presentErrorAlert(error: FBError.noValidURL)
+            presentErrorAlert(FBError.noValidURL)
             return
         }
         presentSafariVC(with: url)
@@ -417,7 +417,7 @@ extension CharityInfoVC: TitleLabelViewDelegate{
                             self.charityTitleLabelView.isFavourite = false
                             return
                         }
-                        self.presentErrorAlert(error: error)
+                        self.presentErrorAlert(error)
                     }
                 }else{
                     PersistenceManager.updateFavorites(charity: self.charity, persistenceActionType: .add) { (error) in
@@ -426,7 +426,7 @@ extension CharityInfoVC: TitleLabelViewDelegate{
                             self.charityTitleLabelView.isFavourite = true
                             return
                         }
-                        self.presentErrorAlert(error: error)
+                        self.presentErrorAlert(error)
                     }
                 }
         }
@@ -442,7 +442,7 @@ extension CharityInfoVC: DonationBarViewDelegate{
             stringUrl = "http://".appending(stringUrl)
         }
         guard let url = URL(string: stringUrl) else {
-            presentErrorAlert(error: FBError.noValidURL)
+            presentErrorAlert(FBError.noValidURL)
             return
         }
         presentSafariVC(with: url)

@@ -99,7 +99,7 @@ class CharityListVC: UIViewController{
             case .failure(let error):
                 if(error == .unableToConnect){
                     self.hideLoadingSubView(in: self.contentView)
-                    self.presentErrorAlert(error: error)
+                    self.presentErrorAlert(error)
                 }else if(error == .userCancelled){
                     return 
                 }else{

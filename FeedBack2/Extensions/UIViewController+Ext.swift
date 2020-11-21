@@ -13,7 +13,7 @@ fileprivate var containerView: UIView!
 
 extension UIViewController{
     
-    func presentErrorAlert(error: FBError){
+    func presentErrorAlert(_ error: FBError){
         presentGFAlertOnMainThread(title: FBError.titleMessage, message: error.errorMessage, buttonTitle: "Ok")
     }
     
