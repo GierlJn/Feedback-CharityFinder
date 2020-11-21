@@ -318,15 +318,7 @@ class CharityInfoVC: UIViewController{
     }
     
     @objc func outputButtonPressed(){
-        calculationVC = OutputCalculationVC()
-        calculationVC?.output = infoCharity?.singleImpact
-        calculationVC?.modalTransitionStyle = .crossDissolve
-        calculationVC?.modalPresentationStyle = .overFullScreen
-        calculationVC?.delegate = self
-        if(calculationVC != nil){
-            present(calculationVC!, animated: true)
-        }
-        
+        presentCalculationVC()
     }
     
     @objc func backButtonPressed(){
@@ -394,6 +386,19 @@ class CharityInfoVC: UIViewController{
         }
     }
     
+    func presentSafariVC(){
+        guard let infoCharity = infoCharity else { return }
+        var stringUrl = infoCharity.url ?? ""
+        if(!stringUrl.hasPrefix("http")){
+            stringUrl = "http://".appending(stringUrl)
+        }
+        guard let url = URL(string: stringUrl) else {
+            presentErrorAlert(FBError.noValidURL)
+            return
+        }
+        presentSafariVC(with: url)
+    }
+    
     
 }
 
@@ -436,16 +441,7 @@ extension CharityInfoVC: TitleLabelViewDelegate{
 
 extension CharityInfoVC: DonationBarViewDelegate{
     func donationButtonPressed() {
-        guard let infoCharity = infoCharity else { return }
-        var stringUrl = infoCharity.url ?? ""
-        if(!stringUrl.hasPrefix("http")){
-            stringUrl = "http://".appending(stringUrl)
-        }
-        guard let url = URL(string: stringUrl) else {
-            presentErrorAlert(FBError.noValidURL)
-            return
-        }
-        presentSafariVC(with: url)
+        
     }
 }
 
