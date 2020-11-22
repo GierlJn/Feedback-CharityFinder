@@ -11,22 +11,17 @@ class OutputCalculationVC: UIViewController{
     var containerView = AlertContainerView()
     var titleLabel = FBTitleLabel(textAlignment: .center)
     
-    var actionContentView = UIView()
+    var actionContentView = ActionContentView()
     
     var messageLabel = FBSubTitleLabel(textAlignment: .center)
-    var donationTextField = DonationTextField()
     
     var buttonStackView = UIStackView()
     var dismissButten: FBButton?
     var actionButton: FBButton?
     
-    var outputStackView: UIStackView?
-    
     let padding: CGFloat = 15
     var output: SimpleImpact!
-    var enteredAmount: Float = 1.0
     let currency = PersistenceManager.retrieveCurrency()
-    var delegate: OutputCalculationVCDelegate?
     
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -49,7 +44,7 @@ class OutputCalculationVC: UIViewController{
         configureContainerView()
         configureTitleLabel()
         configureActionContentView()
-        configureTextField()
+        //configureTextField()
         configureActionButtons()
     }
     
@@ -86,22 +81,6 @@ class OutputCalculationVC: UIViewController{
             maker.right.equalTo(containerView.snp.right).offset(-padding)
             maker.height.equalTo(60)
         }
-        
-    }
-    
-    fileprivate func configureTextField(){
-        actionContentView.addSubview(donationTextField)
-
-        donationTextField.snp.makeConstraints { (maker) in
-            maker.height.equalTo(40)
-            maker.centerY.equalTo(actionContentView.snp.centerY)
-            maker.left.equalTo(containerView.snp.left).offset(padding)
-            maker.right.equalTo(containerView.snp.right).offset(-padding)
-        }
-        
-        donationTextField.currencyLabel.setTitle(currency.symbol, for: .normal)
-        donationTextField.currencyLabel.setTitleColor(.label, for: .normal)
-        donationTextField.currencyLabel.addTarget(self, action: #selector(currencyButtonPressed), for: .touchUpInside)
     }
     
     fileprivate func configureActionButtons() {
@@ -159,41 +138,6 @@ class OutputCalculationVC: UIViewController{
        
     }
     
-    fileprivate func configureMessageLabel() {
-        actionContentView.layer.borderWidth = 0
-        
-        outputStackView = UIStackView()
-        let impactNumberLabel = FBTitleLabel(textAlignment: .center)
-        let impactNameLabel = FBSubTitleLabel(textAlignment: .center)
-        if(outputStackView != nil){
-            actionContentView.addSubview(outputStackView!)
-            outputStackView?.pinToEdges(of: actionContentView)
-        }
-        outputStackView?.addArrangedSubview(impactNumberLabel)
-        outputStackView?.addArrangedSubview(impactNameLabel)
-        outputStackView?.axis = .vertical
-        outputStackView?.distribution = .fillEqually
-        
-        
-        let value = output.costPerBeneficiary?.value ?? "1.0"
-        var floatValue = Float(value) ?? 1.0
-        floatValue = floatValue / currency.relativeValueToPound
-        
-        let impact = enteredAmount / floatValue
-        
-        let formatted = String(format: "%.0f", impact)
-        
-        impactNumberLabel.text = "\(formatted)"
-        impactNumberLabel.textColor = .outputColor
-        impactNumberLabel.font = UIFont.boldSystemFont(ofSize: 25)
-        impactNameLabel.text = "\(output.name?.formatOutputName(with: currency, wording: .plural) ?? "")"
-        impactNameLabel.font = UIFont.preferredFont(forTextStyle: .title3)
-        impactNameLabel.textColor = .label
-        impactNameLabel.numberOfLines = 2
-        
-        //messageLabel.pinToEdges(of: actionContentView)
-    }
-    
     @objc func dismissButtonPressed(){
         dismiss(animated: true)
     }
@@ -205,28 +149,24 @@ class OutputCalculationVC: UIViewController{
         actionButton?.removeFromSuperview()
         actionButton = nil
         buttonStackView.removeFromSuperview()
-        outputStackView?.removeFromSuperview()
-        configureTextField()
+        actionContentView.outputStackView?.removeFromSuperview()
+        actionContentView.configureTextField()
         configureActionButtons()
     }
     
-    @objc func currencyButtonPressed(){
-        delegate?.currencyButtonPressed()
-    }
-    
     @objc func actionButtonPressed(){
-        guard let text = donationTextField.textField.text,
+        guard let text = actionContentView.donationTextField.textField.text,
               !text.isEmpty,
               text.isNumeric
         else { return }
-        enteredAmount = Float(String(text)) ?? 1.0
+        actionContentView.enteredAmount = Float(String(text)) ?? 1.0
         showImpact()
     }
     
     private func showImpact(){
         titleLabel.text = "Your donation may fund"
-        donationTextField.removeFromSuperview()
-        configureMessageLabel()
+        actionContentView.donationTextField.removeFromSuperview()
+        actionContentView.configureMessageLabel(output: output)
         
         dismissButten?.removeFromSuperview()
         dismissButten = nil
@@ -240,13 +180,3 @@ class OutputCalculationVC: UIViewController{
 }
 
 
-extension OutputCalculationVC: UITextFieldDelegate{
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        guard let text = donationTextField.textField.text else { return false}
-        guard !text.isEmpty else { return false}
-        enteredAmount = Float(String(text)) ?? 1.0
-        return true
-    }
-    
-    
-}

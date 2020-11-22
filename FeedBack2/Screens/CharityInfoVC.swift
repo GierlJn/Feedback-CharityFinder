@@ -380,7 +380,7 @@ class CharityInfoVC: UIViewController{
         calculationVC?.output = infoCharity?.singleImpact
         calculationVC?.modalTransitionStyle = .crossDissolve
         calculationVC?.modalPresentationStyle = .overFullScreen
-        calculationVC?.delegate = self
+        calculationVC?.actionContentView.delegate = self
         if(calculationVC != nil){
             present(calculationVC!, animated: true)
         }
