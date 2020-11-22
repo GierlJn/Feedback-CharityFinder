@@ -10,34 +10,22 @@ class OutputCalculationVC: UIViewController{
     
     var containerView = AlertContainerView()
     var titleLabel = FBTitleLabel(textAlignment: .center)
-    var messageLabel = FBSubTitleLabel(textAlignment: .center)
-    
-    
-    var donationTextFieldView = DonationTextFieldView()
-    
-    var dismissButten: FBButton?
-    var actionButton: FBButton?
-    var buttonStackView = UIStackView()
-    
-    var alertTitle: String = "Calculate your impact"
-    var message: String?
-    var dismissButtonTitle: String? = "Cancel"
-    var actionButtonTite: String? = "Go"
-    
-    var outputStackView: UIStackView?
-    
-    var actionClosure: (()->())?
     
     var actionContentView = UIView()
     
+    var messageLabel = FBSubTitleLabel(textAlignment: .center)
+    var donationTextField = DonationTextField()
+    
+    var buttonStackView = UIStackView()
+    var dismissButten: FBButton?
+    var actionButton: FBButton?
+    
+    var outputStackView: UIStackView?
+    
     let padding: CGFloat = 15
-
     var output: SimpleImpact!
-    
     var enteredAmount: Float = 1.0
-    
     let currency = PersistenceManager.retrieveCurrency()
-    
     var delegate: OutputCalculationVCDelegate?
     
     init() {
@@ -80,7 +68,7 @@ class OutputCalculationVC: UIViewController{
         
         titleLabel.textColor = .secondaryLabel
         titleLabel.font = .preferredFont(forTextStyle: .body)
-        titleLabel.text = alertTitle
+        titleLabel.text = "Calculate your impact"
         titleLabel.snp.makeConstraints { (maker) in
             maker.top.equalTo(containerView.snp.top).offset(padding)
             maker.left.equalTo(containerView.snp.left).offset(padding)
@@ -102,18 +90,18 @@ class OutputCalculationVC: UIViewController{
     }
     
     fileprivate func configureTextField(){
-        actionContentView.addSubview(donationTextFieldView)
+        actionContentView.addSubview(donationTextField)
 
-        donationTextFieldView.snp.makeConstraints { (maker) in
+        donationTextField.snp.makeConstraints { (maker) in
             maker.height.equalTo(40)
             maker.centerY.equalTo(actionContentView.snp.centerY)
             maker.left.equalTo(containerView.snp.left).offset(padding)
             maker.right.equalTo(containerView.snp.right).offset(-padding)
         }
         
-        donationTextFieldView.currencyLabel.setTitle(currency.symbol, for: .normal)
-        donationTextFieldView.currencyLabel.setTitleColor(.label, for: .normal)
-        donationTextFieldView.currencyLabel.addTarget(self, action: #selector(currencyButtonPressed), for: .touchUpInside)
+        donationTextField.currencyLabel.setTitle(currency.symbol, for: .normal)
+        donationTextField.currencyLabel.setTitleColor(.label, for: .normal)
+        donationTextField.currencyLabel.addTarget(self, action: #selector(currencyButtonPressed), for: .touchUpInside)
     }
     
     fileprivate func configureActionButtons() {
@@ -211,7 +199,7 @@ class OutputCalculationVC: UIViewController{
     }
     
     @objc func backButtonPressed(){
-        titleLabel.text = alertTitle
+        titleLabel.text = "Calculate your impact"
         dismissButten?.removeFromSuperview()
         dismissButten = nil
         actionButton?.removeFromSuperview()
@@ -227,7 +215,7 @@ class OutputCalculationVC: UIViewController{
     }
     
     @objc func actionButtonPressed(){
-        guard let text = donationTextFieldView.textField.text,
+        guard let text = donationTextField.textField.text,
               !text.isEmpty,
               text.isNumeric
         else { return }
@@ -237,7 +225,7 @@ class OutputCalculationVC: UIViewController{
     
     private func showImpact(){
         titleLabel.text = "Your donation may fund"
-        donationTextFieldView.removeFromSuperview()
+        donationTextField.removeFromSuperview()
         configureMessageLabel()
         
         dismissButten?.removeFromSuperview()
@@ -254,7 +242,7 @@ class OutputCalculationVC: UIViewController{
 
 extension OutputCalculationVC: UITextFieldDelegate{
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        guard let text = donationTextFieldView.textField.text else { return false}
+        guard let text = donationTextField.textField.text else { return false}
         guard !text.isEmpty else { return false}
         enteredAmount = Float(String(text)) ?? 1.0
         return true

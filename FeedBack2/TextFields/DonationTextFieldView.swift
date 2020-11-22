@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DonationTextFieldView: UITextField{
+class DonationTextField: UITextField{
     
     var textField = FBTextField()
     var currencyLabel = UIButton()
