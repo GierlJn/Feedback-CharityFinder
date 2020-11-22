@@ -11,7 +11,7 @@ import UIKit
 class ActionContentView: UIView{
     
     var donationTextField = DonationTextField()
-    var outputStackView: UIStackView?
+    var outputStackView = UIStackView()
     let currency = PersistenceManager.retrieveCurrency()
     var delegate: OutputCalculationVCDelegate?
     let padding: CGFloat = 15
@@ -44,10 +44,8 @@ class ActionContentView: UIView{
     
     func configureImpactStackView(output: SimpleImpact) {
         outputStackView = ImpactStackView(output: output, enteredAmount: enteredAmount)
-        if(outputStackView != nil){
-            self.addSubview(outputStackView!)
-            outputStackView?.pinToEdges(of: self)
-        }
+        self.addSubview(outputStackView)
+        outputStackView.pinToEdges(of: self)
     }
     
     @objc func currencyButtonPressed(){

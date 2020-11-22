@@ -140,14 +140,13 @@ class OutputCalculationVC: UIViewController{
     fileprivate func showInitialState() {
         titleLabel.text = "Calculate your impact"
         clearButtons()
-        actionContentView.outputStackView?.removeFromSuperview()
+        actionContentView.outputStackView.removeFromSuperview()
         actionContentView.configureTextField()
         configureInitialButtons()
     }
     
     private func showImpactState(){
         titleLabel.text = "Your donation may fund"
-                
         clearButtons()
         actionContentView.donationTextField.removeFromSuperview()
         actionContentView.configureImpactStackView  (output: output)
