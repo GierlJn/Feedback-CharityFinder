@@ -63,6 +63,7 @@ class DonationHistoryVC: UIViewController{
     fileprivate func configureTableView() {
         tableView.dataSource = self
         tableView.register(DonationCell.self, forCellReuseIdentifier: DonationCell.reuseIdentifier)
+        tableView.rowHeight = 80
         view.addSubview(tableView)
         tableView.snp.makeConstraints { (maker) in
             maker.top.equalTo(headerView.snp.bottom)
@@ -116,6 +117,7 @@ class HistoryHeaderView: UIView{
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
+        backgroundColor = .systemBackground
         configure()
     }
     
