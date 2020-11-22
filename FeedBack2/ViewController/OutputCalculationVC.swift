@@ -2,8 +2,8 @@
 
 import UIKit
 
-protocol OutputCalculationVCDelegate {
-    func currencyButtonPressed()
+protocol OutputCalculationVCDelegate{
+    func currencyButtonPressedFromOutputCalculationVC()
 }
 
 class OutputCalculationVC: UIViewController{
@@ -18,6 +18,8 @@ class OutputCalculationVC: UIViewController{
     let padding: CGFloat = 15
     var output: SimpleImpact!
     let currency = PersistenceManager.retrieveCurrency()
+    
+    var delegate: OutputCalculationVCDelegate?
     
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -71,6 +73,7 @@ class OutputCalculationVC: UIViewController{
     
     fileprivate func configureActionContentView(){
         containerView.addSubview(actionContentView)
+        actionContentView.delegate = self
         actionContentView.snp.makeConstraints { (maker) in
             maker.top.equalTo(titleLabel.snp.bottom).offset(12)
             maker.left.equalTo(containerView.snp.left).offset(padding)
@@ -149,11 +152,18 @@ class OutputCalculationVC: UIViewController{
     @objc func actionButtonPressed(){
         guard let text = actionContentView.donationTextField.textField.text,
               !text.isEmpty,
-              text.isNumeric
-        else { return }
+              text.isNumeric else { return }
         actionContentView.enteredAmount = Float(String(text)) ?? 1.0
         showImpactState()
     }
+    
+}
+
+extension OutputCalculationVC: ActionContentViewDelegate{
+    func currencyButtonPressed() {
+        delegate?.currencyButtonPressedFromOutputCalculationVC()
+    }
+    
     
 }
 

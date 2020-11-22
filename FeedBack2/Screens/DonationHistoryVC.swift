@@ -33,6 +33,7 @@ class DonationHistoryVC: UIViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = true
+        getDonations()
     }
     
     fileprivate func getDonations() {
@@ -43,6 +44,7 @@ class DonationHistoryVC: UIViewController{
                 self.presentErrorAlert(error)
             case .success(let donations):
                 self.donations = donations
+                self.tableView.reloadData()
             }
         }
     }
@@ -85,6 +87,7 @@ extension DonationHistoryVC: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: DonationCell.reuseIdentifier) as! DonationCell
+        cell.set(donation: donations[indexPath.row])
         return cell
     }
     

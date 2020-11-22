@@ -8,12 +8,16 @@
 
 import UIKit
 
+protocol ActionContentViewDelegate {
+    func currencyButtonPressed()
+}
+
 class ActionContentView: UIView{
     
     var donationTextField = DonationTextField()
     var outputStackView = UIStackView()
     let currency = PersistenceManager.retrieveCurrency()
-    var delegate: OutputCalculationVCDelegate?
+    var delegate: ActionContentViewDelegate?
     let padding: CGFloat = 15
     var enteredAmount: Float = 1.0
     

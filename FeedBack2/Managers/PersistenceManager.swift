@@ -68,6 +68,8 @@ class PersistenceManager {
                         completed(.donationAlreadySaved)
                         return
                     }
+                    donations.append(donation)
+                    
                 case .remove:
                     donations.removeAll(where: {$0.id == donation.id})
                 }
@@ -91,7 +93,6 @@ class PersistenceManager {
                         return
                     }
                     charities.append(charity)
-                    
                     
                 case .remove:
                     charities.removeAll(where: {$0.id == charity.id})

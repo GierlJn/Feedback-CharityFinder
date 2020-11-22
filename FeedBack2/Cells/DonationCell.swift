@@ -29,6 +29,7 @@ class DonationCell: UITableViewCell{
     }
     
     private func configure(){
+        addSubview(titleLabel)
         titleLabel.snp.makeConstraints { (maker) in
             maker.left.equalTo(snp.left)
             maker.top.equalTo(snp.top)

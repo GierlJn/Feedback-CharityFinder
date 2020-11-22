@@ -27,6 +27,7 @@ class CharityInfoVC: UIViewController{
     var contentSuperView = UIView()
     
     var calculationVC: OutputCalculationVC?
+    var donationAlertVC: DonationAlertVC?
     let scrollView = UIScrollView()
     let contentView = UIView()
     
@@ -311,7 +312,6 @@ class CharityInfoVC: UIViewController{
     }
     
     private func setContentViewHeight(){
-        
         contentView.snp.makeConstraints { (maker) in
             maker.height.equalTo(contentHeight)
         }
@@ -325,17 +325,8 @@ class CharityInfoVC: UIViewController{
         self.dismiss(animated: true)
     }
     
-    @objc func donateButtonPressed() {
-        guard let infoCharity = infoCharity else { return }
-        var stringUrl = infoCharity.url ?? ""
-        if(!stringUrl.hasPrefix("http")){
-            stringUrl = "http://".appending(stringUrl)
-        }
-        guard let url = URL(string: stringUrl) else {
-            presentErrorAlert(FBError.noValidURL)
-            return
-        }
-        presentSafariVC(with: url)
+    @objc private func donateButtonPressed() {
+        presentDonationAlertVC()
     }
     
     @objc func accessoryButtonPressed(){
@@ -375,14 +366,38 @@ class CharityInfoVC: UIViewController{
         }
     }
     
+    func presentCurrencyAlertVCFromDonationVC(){
+        if(donationAlertVC != nil){
+            donationAlertVC?.dismiss(animated: true, completion: {
+                let vc = CurrencySelectionVC()
+                vc.modalPresentationStyle = .overFullScreen
+                vc.modalTransitionStyle = .crossDissolve
+                vc.startDonationAlertVCOnDismiss = true
+                vc.delegate = self
+                self.present(vc, animated: true)
+            })
+        }
+    }
+    
     func presentCalculationVC(){
         calculationVC = OutputCalculationVC()
         calculationVC?.output = infoCharity?.singleImpact
         calculationVC?.modalTransitionStyle = .crossDissolve
         calculationVC?.modalPresentationStyle = .overFullScreen
-        calculationVC?.actionContentView.delegate = self
+        calculationVC?.delegate = self
         if(calculationVC != nil){
             present(calculationVC!, animated: true)
+        }
+    }
+    
+    func presentDonationAlertVC(){
+        donationAlertVC = DonationAlertVC()
+        donationAlertVC?.output = infoCharity?.singleImpact
+        donationAlertVC?.modalTransitionStyle = .crossDissolve
+        donationAlertVC?.modalPresentationStyle = .overFullScreen
+        donationAlertVC?.delegate = self
+        if(donationAlertVC != nil){
+            present(donationAlertVC!, animated: true)
         }
     }
     
@@ -402,7 +417,12 @@ class CharityInfoVC: UIViewController{
     func saveDonation(enteredAmount: Float){
         let donation = Donation(date: Date(), charityName: infoCharity!.name, impact: infoCharity?.singleImpact, amount: enteredAmount, currency: PersistenceManager.retrieveCurrency())
         
-        
+        PersistenceManager.updateDonations(donation: donation, persistenceActionType: .add) { [weak self](error) in
+            guard let self = self else { return }
+            if error != nil {
+                self.presentErrorAlert(error!)
+            }
+        }
     }
     
     
@@ -414,6 +434,9 @@ extension CharityInfoVC: CurrencySelectionDelegate{
     }
     func startCalculationVC(){
         presentCalculationVC()
+    }
+    func startDonationAlertVC(){
+        presentDonationAlertVC()
     }
 }
 
@@ -452,11 +475,26 @@ extension CharityInfoVC: DonationBarViewDelegate{
 }
 
 extension CharityInfoVC: OutputCalculationVCDelegate{
-    
-    func currencyButtonPressed() {
+    func currencyButtonPressedFromOutputCalculationVC() {
         presentCurrencySelectionInCalculationVC()
     }
 }
+
+extension CharityInfoVC: DonationAlertVCDelegate{
+    func saveDonationTriggered(enteredAmount: Float) {
+        saveDonation(enteredAmount: enteredAmount)
+    }
+    
+    func showSafari() {
+        presentSafariVC()
+    }
+    
+    func presentCurrencySelectionFromDonationAlertVC() {
+        presentCurrencyAlertVCFromDonationVC()
+    }
+}
+
+
 
 extension CharityInfoVC: SocialMediaStackViewDelegate{
     func shareTextOnFaceBook() {
@@ -501,4 +539,3 @@ extension CharityInfoVC: SocialMediaStackViewDelegate{
         }
     }
 }
-
