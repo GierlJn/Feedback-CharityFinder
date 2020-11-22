@@ -165,7 +165,7 @@ class OutputCalculationVC: UIViewController{
     private func showImpact(){
         titleLabel.text = "Your donation may fund"
         actionContentView.donationTextField.removeFromSuperview()
-        actionContentView.configureMessageLabel(output: output)
+        actionContentView.configureImpactStackView  (output: output)
         
         dismissButten?.removeFromSuperview()
         dismissButten = nil

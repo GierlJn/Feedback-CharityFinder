@@ -42,35 +42,12 @@ class ActionContentView: UIView{
         donationTextField.currencyLabel.addTarget(self, action: #selector(currencyButtonPressed), for: .touchUpInside)
     }
     
-    func configureMessageLabel(output: SimpleImpact) {
-        outputStackView = UIStackView()
-        let impactNumberLabel = FBTitleLabel(textAlignment: .center)
-        let impactNameLabel = FBSubTitleLabel(textAlignment: .center)
+    func configureImpactStackView(output: SimpleImpact) {
+        outputStackView = ImpactStackView(output: output, enteredAmount: enteredAmount)
         if(outputStackView != nil){
             self.addSubview(outputStackView!)
             outputStackView?.pinToEdges(of: self)
         }
-        outputStackView?.addArrangedSubview(impactNumberLabel)
-        outputStackView?.addArrangedSubview(impactNameLabel)
-        outputStackView?.axis = .vertical
-        outputStackView?.distribution = .fillEqually
-        
-        let value = output.costPerBeneficiary?.value ?? "1.0"
-        var floatValue = Float(value) ?? 1.0
-        floatValue = floatValue / currency.relativeValueToPound
-        
-        let impact = enteredAmount / floatValue
-        
-        let formatted = String(format: "%.0f", impact)
-        
-        impactNumberLabel.text = "\(formatted)"
-        impactNumberLabel.textColor = .outputColor
-        impactNumberLabel.font = UIFont.boldSystemFont(ofSize: 25)
-        
-        impactNameLabel.text = "\(output.name?.formatOutputName(with: currency, wording: .plural) ?? "")"
-        impactNameLabel.font = UIFont.preferredFont(forTextStyle: .title3)
-        impactNameLabel.textColor = .label
-        impactNameLabel.numberOfLines = 2
     }
     
     @objc func currencyButtonPressed(){
