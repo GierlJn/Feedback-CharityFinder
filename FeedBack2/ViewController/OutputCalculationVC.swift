@@ -44,7 +44,7 @@ class OutputCalculationVC: UIViewController{
         configureContainerView()
         configureTitleLabel()
         configureActionContentView()
-        configureActionButtons()
+        configureInitialButtons()
     }
     
     fileprivate func configureContainerView() {
@@ -82,7 +82,7 @@ class OutputCalculationVC: UIViewController{
         }
     }
     
-    fileprivate func configureActionButtons() {
+    fileprivate func configureInitialButtons() {
         containerView.addSubview(buttonStackView)
         buttonStackView.snp.makeConstraints { (maker) in
             maker.height.equalTo(44)
@@ -109,7 +109,7 @@ class OutputCalculationVC: UIViewController{
         
     }
     
-    fileprivate func configureExitButton(){
+    fileprivate func configureExitButtons(){
         containerView.addSubview(buttonStackView)
         buttonStackView.snp.makeConstraints { (maker) in
             maker.height.equalTo(44)
@@ -137,20 +137,37 @@ class OutputCalculationVC: UIViewController{
        
     }
     
-    @objc func dismissButtonPressed(){
-        dismiss(animated: true)
+    fileprivate func showInitialState() {
+        titleLabel.text = "Calculate your impact"
+        clearButtons()
+        actionContentView.outputStackView?.removeFromSuperview()
+        actionContentView.configureTextField()
+        configureInitialButtons()
     }
     
-    @objc func backButtonPressed(){
-        titleLabel.text = "Calculate your impact"
+    private func showImpactState(){
+        titleLabel.text = "Your donation may fund"
+                
+        clearButtons()
+        actionContentView.donationTextField.removeFromSuperview()
+        actionContentView.configureImpactStackView  (output: output)
+        configureExitButtons()
+    }
+    
+    fileprivate func clearButtons(){
         dismissButten?.removeFromSuperview()
         dismissButten = nil
         actionButton?.removeFromSuperview()
         actionButton = nil
         buttonStackView.removeFromSuperview()
-        actionContentView.outputStackView?.removeFromSuperview()
-        actionContentView.configureTextField()
-        configureActionButtons()
+    }
+    
+    @objc func dismissButtonPressed(){
+        dismiss(animated: true)
+    }
+    
+    @objc func backButtonPressed(){
+        showInitialState()
     }
     
     @objc func actionButtonPressed(){
@@ -159,21 +176,7 @@ class OutputCalculationVC: UIViewController{
               text.isNumeric
         else { return }
         actionContentView.enteredAmount = Float(String(text)) ?? 1.0
-        showImpact()
-    }
-    
-    private func showImpact(){
-        titleLabel.text = "Your donation may fund"
-        actionContentView.donationTextField.removeFromSuperview()
-        actionContentView.configureImpactStackView  (output: output)
-        
-        dismissButten?.removeFromSuperview()
-        dismissButten = nil
-        actionButton?.removeFromSuperview()
-        actionButton = nil
-        buttonStackView.removeFromSuperview()
-        
-        configureExitButton()
+        showImpactState()
     }
     
 }
