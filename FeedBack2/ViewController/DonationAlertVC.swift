@@ -18,7 +18,7 @@ class DonationAlertVC: UIViewController{
     var buttonStackView = UIStackView()
     
     let padding: CGFloat = 15
-    var output: SimpleImpact!
+    var output: SimpleImpact?
     let currency = PersistenceManager.retrieveCurrency()
     
     var delegate: DonationAlertVCDelegate?
@@ -27,7 +27,7 @@ class DonationAlertVC: UIViewController{
         super.init(nibName: nil, bundle: nil)
     }
     
-    convenience init(output: SimpleImpact) {
+    convenience init(output: SimpleImpact?) {
         self.init()
         self.output = output
     }
@@ -132,7 +132,7 @@ class DonationAlertVC: UIViewController{
         titleLabel.text = "Your donation may fund"
         removeButtons()
         actionContentView.donationTextField.removeFromSuperview()
-        actionContentView.configureImpactStackView(output: output)
+        actionContentView.configureImpactStackView(output: output!)
         configureExitButtons()
     }
     
@@ -162,7 +162,15 @@ class DonationAlertVC: UIViewController{
               !text.isEmpty,
               text.isNumeric else { return }
         actionContentView.enteredAmount = Float(String(text)) ?? 1.0
-        showImpactState()
+        
+        if(output != nil){
+            showImpactState()
+        }else{
+            dismiss(animated: true) {
+                self.delegate?.saveDonationTriggered(enteredAmount: self.actionContentView.enteredAmount)
+                self.delegate?.showSafari()
+            }
+        }
     }
     
 }
