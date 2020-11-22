@@ -83,16 +83,8 @@ class OutputCalculationVC: UIViewController{
     }
     
     fileprivate func configureInitialButtons() {
-        containerView.addSubview(buttonStackView)
-        buttonStackView.snp.makeConstraints { (maker) in
-            maker.height.equalTo(44)
-            maker.top.equalTo(actionContentView.snp.bottom).offset(padding)
-            maker.left.equalTo(containerView.snp.left).offset(padding)
-            maker.right.equalTo(containerView.snp.right).offset(-padding)
-            maker.bottom.equalTo(containerView.snp.bottom).offset(-padding)
-        }
-        buttonStackView.spacing = 10
-        buttonStackView.distribution = .fillEqually
+        configureButtonStackView()
+        
         dismissButten = FBButton()
         dismissButten?.setTitle("Cancel", for: .normal)
         dismissButten?.addTarget(self, action: #selector(dismissButtonPressed), for: .touchUpInside)
@@ -110,18 +102,9 @@ class OutputCalculationVC: UIViewController{
     }
     
     fileprivate func configureExitButtons(){
-        containerView.addSubview(buttonStackView)
-        buttonStackView.snp.makeConstraints { (maker) in
-            maker.height.equalTo(44)
-            maker.top.equalTo(actionContentView.snp.bottom).offset(padding)
-            maker.left.equalTo(containerView.snp.left).offset(padding)
-            maker.right.equalTo(containerView.snp.right).offset(-padding)
-            maker.bottom.equalTo(containerView.snp.bottom).offset(-padding)
-        }
-        buttonStackView.spacing = 10
-        buttonStackView.distribution = .fillEqually
-        dismissButten = FBButton()
+        configureButtonStackView()
         
+        dismissButten = FBButton()
         dismissButten?.setTitle("Return", for: .normal)
         dismissButten?.addTarget(self, action: #selector(backButtonPressed), for: .touchUpInside)
         if(dismissButten != nil){
@@ -134,12 +117,24 @@ class OutputCalculationVC: UIViewController{
         if(actionButton != nil){
             buttonStackView.addArrangedSubview(actionButton!)
         }
-       
+    }
+    
+    fileprivate func configureButtonStackView() {
+        containerView.addSubview(buttonStackView)
+        buttonStackView.snp.makeConstraints { (maker) in
+            maker.height.equalTo(44)
+            maker.top.equalTo(actionContentView.snp.bottom).offset(padding)
+            maker.left.equalTo(containerView.snp.left).offset(padding)
+            maker.right.equalTo(containerView.snp.right).offset(-padding)
+            maker.bottom.equalTo(containerView.snp.bottom).offset(-padding)
+        }
+        buttonStackView.spacing = 10
+        buttonStackView.distribution = .fillEqually
     }
     
     fileprivate func showInitialState() {
         titleLabel.text = "Calculate your impact"
-        clearButtons()
+        removeButtons()
         actionContentView.outputStackView.removeFromSuperview()
         actionContentView.configureTextField()
         configureInitialButtons()
@@ -147,13 +142,13 @@ class OutputCalculationVC: UIViewController{
     
     private func showImpactState(){
         titleLabel.text = "Your donation may fund"
-        clearButtons()
+        removeButtons()
         actionContentView.donationTextField.removeFromSuperview()
-        actionContentView.configureImpactStackView  (output: output)
+        actionContentView.configureImpactStackView(output: output)
         configureExitButtons()
     }
     
-    fileprivate func clearButtons(){
+    fileprivate func removeButtons(){
         dismissButten?.removeFromSuperview()
         dismissButten = nil
         actionButton?.removeFromSuperview()
