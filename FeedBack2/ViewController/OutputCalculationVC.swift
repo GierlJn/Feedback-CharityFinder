@@ -12,9 +12,7 @@ class OutputCalculationVC: UIViewController{
     var titleLabel = FBTitleLabel(textAlignment: .center)
     
     var actionContentView = ActionContentView()
-    
     var messageLabel = FBSubTitleLabel(textAlignment: .center)
-    
     var buttonStackView = UIStackView()
     
     let padding: CGFloat = 15
@@ -42,6 +40,7 @@ class OutputCalculationVC: UIViewController{
         configureContainerView()
         configureTitleLabel()
         configureActionContentView()
+        configureButtonStackView()
         configureInitialButtons()
     }
     
@@ -57,10 +56,11 @@ class OutputCalculationVC: UIViewController{
     
     fileprivate func configureTitleLabel() {
         containerView.addSubview(titleLabel)
-        
+
         titleLabel.textColor = .secondaryLabel
         titleLabel.font = .preferredFont(forTextStyle: .body)
         titleLabel.text = "Calculate your impact"
+        
         titleLabel.snp.makeConstraints { (maker) in
             maker.top.equalTo(containerView.snp.top).offset(padding)
             maker.left.equalTo(containerView.snp.left).offset(padding)
@@ -71,7 +71,6 @@ class OutputCalculationVC: UIViewController{
     
     fileprivate func configureActionContentView(){
         containerView.addSubview(actionContentView)
-        
         actionContentView.snp.makeConstraints { (maker) in
             maker.top.equalTo(titleLabel.snp.bottom).offset(12)
             maker.left.equalTo(containerView.snp.left).offset(padding)
@@ -81,8 +80,6 @@ class OutputCalculationVC: UIViewController{
     }
     
     fileprivate func configureInitialButtons() {
-        configureButtonStackView()
-        
         let dismissButten = FBButton()
         dismissButten.setTitle("Cancel", for: .normal)
         dismissButten.addTarget(self, action: #selector(dismissButtonPressed), for: .touchUpInside)
@@ -92,13 +89,9 @@ class OutputCalculationVC: UIViewController{
         actionButton.setTitle("Go", for: .normal)
         actionButton.addTarget(self, action: #selector(actionButtonPressed), for: .touchUpInside)
         buttonStackView.addArrangedSubview(actionButton)
-
-        
     }
     
     fileprivate func configureExitButtons(){
-        configureButtonStackView()
-        
         let dismissButten = FBButton()
         dismissButten.setTitle("Return", for: .normal)
         dismissButten.addTarget(self, action: #selector(backButtonPressed), for: .touchUpInside)
@@ -143,7 +136,6 @@ class OutputCalculationVC: UIViewController{
         for subview in buttonStackView.arrangedSubviews{
             subview.removeFromSuperview()
         }
-        buttonStackView.removeFromSuperview()
     }
     
     @objc func dismissButtonPressed(){
