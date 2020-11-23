@@ -58,13 +58,13 @@ class DonationHistoryVC: UIViewController{
     fileprivate func configureHeaderView() {
         view.addSubview(headerView)
         headerView.backgroundColor = .init(white: 0, alpha: 0)
-        headerView.applyViewShadow()
         headerView.snp.makeConstraints { (maker) in
-            maker.height.equalTo(140)
+            maker.height.equalTo(120)
             maker.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             maker.left.equalTo(view.snp.left)
             maker.right.equalTo(view.snp.right)
         }
+        
     }
     
     fileprivate func configureTableView() {

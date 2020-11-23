@@ -33,7 +33,8 @@ class HistoryHeaderView: UIView{
     private func configure(){
         configureTitleLabel()
         configureNumberStackView()
-        configureToggleButton()
+        //configureToggleButton()
+        configureSeperator()
     }
     
     private func configureTitleLabel(){
@@ -72,5 +73,18 @@ class HistoryHeaderView: UIView{
         }
         
         toggleButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .footnote)
+    }
+    
+    private func configureSeperator(){
+        let seperator = UIView()
+        seperator.backgroundColor = .label
+        seperator.alpha = 0.5
+        addSubview(seperator)
+        seperator.snp.makeConstraints { (maker) in
+            maker.top.equalTo(snp.bottom)
+            maker.width.equalTo(snp.width)
+            maker.height.equalTo(0.5)
+            maker.centerX.equalTo(snp.centerX)
+        }
     }
 }
