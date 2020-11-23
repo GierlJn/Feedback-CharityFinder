@@ -31,8 +31,14 @@ class DonationHistoryVC: UIViewController{
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = true
         getDonations()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        view.setGradientBackgroundColor(colors: [.lightBlueBackgroundGradientStart, .lightBlueBackgroundGradientEnd], axis: .horizontal)
     }
     
     fileprivate func getDonations() {
@@ -51,7 +57,8 @@ class DonationHistoryVC: UIViewController{
     
     fileprivate func configureHeaderView() {
         view.addSubview(headerView)
-        
+        headerView.backgroundColor = .init(white: 0, alpha: 0)
+        headerView.applyViewShadow()
         headerView.snp.makeConstraints { (maker) in
             maker.height.equalTo(140)
             maker.top.equalTo(view.safeAreaLayoutGuide.snp.top)
@@ -64,6 +71,7 @@ class DonationHistoryVC: UIViewController{
         tableView.dataSource = self
         tableView.register(DonationCell.self, forCellReuseIdentifier: DonationCell.reuseIdentifier)
         tableView.rowHeight = 80
+        tableView.backgroundColor = .init(white: 0, alpha: 0)
         view.addSubview(tableView)
         tableView.snp.makeConstraints { (maker) in
             maker.top.equalTo(headerView.snp.bottom)

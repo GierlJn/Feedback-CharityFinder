@@ -26,6 +26,7 @@ class DonationCell: UITableViewCell{
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        backgroundColor = .init(white: 0, alpha: 0)
         configure()
     }
     
