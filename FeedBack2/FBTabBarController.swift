@@ -32,7 +32,7 @@ class FBTabBarController: UITabBarController{
     private func createDonationHistoryVC() -> UINavigationController{
         let donationHistoryVC = DonationHistoryVC()
         donationHistoryVC.title = "Donations"
-        donationHistoryVC.tabBarItem = UITabBarItem(title: "Favorites", image: Images.bookMark, selectedImage: Images.bookMarkFill)
+        donationHistoryVC.tabBarItem = UITabBarItem(title: "Donations", image: Images.scroll, selectedImage: Images.scrollFill)
         return UINavigationController(rootViewController: donationHistoryVC)
     }
     
