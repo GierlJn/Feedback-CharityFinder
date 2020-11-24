@@ -11,6 +11,7 @@ import UIKit
 class EmptyStateView: UIView{
     
     var titleLabel = FBTitleLabel(textAlignment: .center)
+    let id = "EmptyStateView"
     
     override init(frame: CGRect) {
         super.init(frame: .zero)

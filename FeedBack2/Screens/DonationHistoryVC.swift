@@ -32,12 +32,19 @@ class DonationHistoryVC: UIViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = true
+        clearSubviews()
         getDonations()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         view.setGradientBackgroundColor(colors: [.lightBlueBackgroundGradientStart, .lightBlueBackgroundGradientEnd], axis: .horizontal)
+    }
+    
+    private func clearSubviews(){
+        for subview in view.subviews{
+            subview.removeFromSuperview()
+        }
     }
     
     fileprivate func getDonations() {
