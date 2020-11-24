@@ -27,7 +27,6 @@ class DonationHistoryVC: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.isNavigationBarHidden = true
-        configure()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -49,10 +48,21 @@ class DonationHistoryVC: UIViewController{
                 self.presentErrorAlert(error)
             case .success(let donations):
                 self.donations = donations
-                self.tableView.reloadData()
-                self.headerView.updateUI(with: donations)
+                if(donations.isEmpty){
+                    self.view.showEmptyView("No donations recorded")
+                }else{
+                    self.view.hideEmptyView()
+                    self.configure()
+                    self.tableView.reloadData()
+                    self.headerView.updateUI(with: donations)
+                }
             }
         }
+    }
+    
+    private func configure(){
+        configureHeaderView()
+        configureTableView()
     }
     
     fileprivate func configureHeaderView() {
@@ -81,11 +91,7 @@ class DonationHistoryVC: UIViewController{
         }
         tableView.removeExcessCells()
     }
-    
-    private func configure(){
-        configureHeaderView()
-        configureTableView()
-    }
+
     
 }
 
@@ -98,6 +104,18 @@ extension DonationHistoryVC: UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: DonationCell.reuseIdentifier) as! DonationCell
         cell.set(donation: donations[indexPath.row])
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        guard editingStyle == .delete else { return }
+        let donation = donations[indexPath.row]
+        
+        PersistenceManager.updateDonations(donation: donation, persistenceActionType: .remove) { [weak self](error) in
+            guard let self = self else { return }
+            if(error != nil){self.presentErrorAlert(error!)}
+            self.getDonations()
+        }
+        
     }
 }
 

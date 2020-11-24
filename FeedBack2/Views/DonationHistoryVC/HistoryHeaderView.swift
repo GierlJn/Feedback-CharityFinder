@@ -87,4 +87,5 @@ class HistoryHeaderView: UIView{
             maker.centerX.equalTo(snp.centerX)
         }
     }
+    
 }
