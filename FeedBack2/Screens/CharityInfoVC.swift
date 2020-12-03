@@ -326,7 +326,8 @@ class CharityInfoVC: UIViewController{
     }
     
     @objc private func donateButtonPressed() {
-        presentDonationAlertVC()
+        //presentDonationAlertVC()
+        presentSafariVC()
     }
     
     @objc func accessoryButtonPressed(){
@@ -483,6 +484,9 @@ extension CharityInfoVC: OutputCalculationVCDelegate{
 extension CharityInfoVC: DonationAlertVCDelegate{
     func saveDonationTriggered(enteredAmount: Float) {
         saveDonation(enteredAmount: enteredAmount)
+        calculationVC?.dismiss(animated: true, completion: {
+            self.presentGFAlertOnMainThread(title: "Saved", message: "Your donation was saved", buttonTitle: "Ok")
+        })
     }
     
     func showSafari() {

@@ -4,6 +4,7 @@ import UIKit
 
 protocol OutputCalculationVCDelegate{
     func currencyButtonPressedFromOutputCalculationVC()
+    func saveDonationTriggered(enteredAmount: Float)
 }
 
 class OutputCalculationVC: UIViewController{
@@ -100,6 +101,11 @@ class OutputCalculationVC: UIViewController{
         dismissButten.addTarget(self, action: #selector(backButtonPressed), for: .touchUpInside)
         buttonStackView.addArrangedSubview(dismissButten)
         
+        let saveButton = FBButton()
+        saveButton.setTitle("Save", for: .normal)
+        saveButton.addTarget(self, action: #selector(saveButtonPressed), for: .touchUpInside)
+        buttonStackView.addArrangedSubview(saveButton)
+        
         let actionButton = FBButton()
         actionButton.setTitle("Ok", for: .normal)
         actionButton.addTarget(self, action: #selector(dismissButtonPressed), for: .touchUpInside)
@@ -147,6 +153,10 @@ class OutputCalculationVC: UIViewController{
     
     @objc func backButtonPressed(){
         showInitialState()
+    }
+    
+    @objc func saveButtonPressed(){
+        delegate?.saveDonationTriggered(enteredAmount: actionContentView.enteredAmount)
     }
     
     @objc func actionButtonPressed(){
