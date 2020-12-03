@@ -9,6 +9,7 @@
 import Foundation
 
 enum FBError: Error, Equatable {
+    
     static var titleMessage = "Something went wrong!"
     
     case unableToConnect

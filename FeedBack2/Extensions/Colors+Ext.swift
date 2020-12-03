@@ -10,17 +10,6 @@ import UIKit
 
 extension UIColor {
     
-    //static var pineApplePurple: UIColor { return UIColor(rgb: 0x413C58)}
-    //static var columbiaBlue: UIColor { return UIColor(rgb: 0xC4D7F2)}
-    //static var cambridgeBlue: UIColor { return UIColor(rgb: 0xA3C4BC)}
-    //static var turquoiseGreen: UIColor { return UIColor(rgb: 0xBFD7B5)}
-    static var lightBlueBackground: UIColor { return UIColor(rgb: 0xEAD7ED)}
-    static var buttonDarkBlue: UIColor { return UIColor(rgb: 0x5637D1)}
-    static var buttonDarkBlueGradientStart: UIColor { return UIColor(rgb: 0xAE71E0)}
-    static var buttonDarkBlueGradientEnd: UIColor { return UIColor(rgb: 0x7573FF)}
-    static var mainTextColor: UIColor { return UIColor(rgb: 0x676568)}
-    static var iconColor: UIColor { return UIColor(rgb: 0xFF797A)}
-    
     static var navigationBarTint = UIColor { traitCollection in
         switch traitCollection.userInterfaceStyle {
         case .dark:

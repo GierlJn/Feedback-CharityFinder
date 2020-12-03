@@ -30,7 +30,7 @@ class FBImpactImageView: UIImageView{
         //clipsToBounds = true
         contentMode = .scaleAspectFit
         backgroundColor = .systemGray6
-        self.image = Images.image_placeholder!//.withAlignmentRectInsets(UIEdgeInsets(top: insetValue, left: insetValue*4, bottom: insetValue, right: insetValue*4))
+        self.image = Images.imagePlaceholder!//.withAlignmentRectInsets(UIEdgeInsets(top: insetValue, left: insetValue*4, bottom: insetValue, right: insetValue*4))
     }
     
     func setImage(imageUrl: String?, completed: @escaping () -> ()){

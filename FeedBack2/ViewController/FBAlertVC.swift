@@ -39,11 +39,6 @@ class FBAlertVC: UIViewController{
         self.actionClosure = actionClosure
     }
     
-    override func viewDidLayoutSubviews() {
-        //dismissButten.applyGradient(colors: [UIColor.headerButtonGradientStart.cgColor, UIColor.headerButtonGradientEnd.cgColor])
-        //actionButton?.applyGradient(colors: [UIColor.headerButtonGradientStart.cgColor, UIColor.headerButtonGradientEnd.cgColor])
-    }
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

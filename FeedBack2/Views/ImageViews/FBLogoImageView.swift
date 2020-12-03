@@ -35,7 +35,7 @@ class FBLogoImageView: UIImageView{
     func setLogoImage(urlString: String?){
         guard let logoString = urlString else { return }
         guard let logoUrl = URL(string: logoString) else { return }
-        self.sd_setImage(with: logoUrl, placeholderImage: Images.image_placeholder!, completed: { (image, error, cache, url) in
+        self.sd_setImage(with: logoUrl, placeholderImage: Images.imagePlaceholder!, completed: { (image, error, cache, url) in
         })
 
         }
