@@ -327,7 +327,12 @@ class CharityInfoVC: UIViewController{
     
     @objc private func donateButtonPressed() {
         //presentDonationAlertVC()
-        presentSafariVC()
+        //presentSafariVC()
+        let safariAlert = FBAlertVC(title: "Donate", message: "Do want to open Safari to donate?", actionButtonTitle: "Yes", dismissButtonTitle: "No") {
+            self.presentSafariVC()
+        }
+        present(safariAlert, animated: true)
+        
     }
     
     @objc func accessoryButtonPressed(){
