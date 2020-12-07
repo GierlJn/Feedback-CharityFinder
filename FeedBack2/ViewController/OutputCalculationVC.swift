@@ -7,7 +7,7 @@ protocol OutputCalculationVCDelegate{
     func saveDonationTriggered(enteredAmount: Float)
 }
 
-class OutputCalculationVC: UIViewController{
+final class OutputCalculationVC: UIViewController{
     
     var containerView = AlertContainerView()
     var titleLabel = FBTitleLabel(textAlignment: .center)
@@ -83,6 +83,19 @@ class OutputCalculationVC: UIViewController{
         }
     }
     
+    fileprivate func configureButtonStackView() {
+        containerView.addSubview(buttonStackView)
+        buttonStackView.snp.makeConstraints { (maker) in
+            maker.height.equalTo(44)
+            maker.top.equalTo(actionContentView.snp.bottom).offset(padding)
+            maker.left.equalTo(containerView.snp.left).offset(padding)
+            maker.right.equalTo(containerView.snp.right).offset(-padding)
+            maker.bottom.equalTo(containerView.snp.bottom).offset(-padding)
+        }
+        buttonStackView.spacing = 10
+        buttonStackView.distribution = .fillEqually
+    }
+    
     fileprivate func configureInitialButtons() {
         let dismissButten = FBButton()
         dismissButten.setTitle("Cancel", for: .normal)
@@ -112,19 +125,6 @@ class OutputCalculationVC: UIViewController{
         buttonStackView.addArrangedSubview(actionButton)
     }
     
-    fileprivate func configureButtonStackView() {
-        containerView.addSubview(buttonStackView)
-        buttonStackView.snp.makeConstraints { (maker) in
-            maker.height.equalTo(44)
-            maker.top.equalTo(actionContentView.snp.bottom).offset(padding)
-            maker.left.equalTo(containerView.snp.left).offset(padding)
-            maker.right.equalTo(containerView.snp.right).offset(-padding)
-            maker.bottom.equalTo(containerView.snp.bottom).offset(-padding)
-        }
-        buttonStackView.spacing = 10
-        buttonStackView.distribution = .fillEqually
-    }
-    
     fileprivate func showInitialState() {
         titleLabel.text = "Calculate your impact"
         removeButtons()
@@ -133,7 +133,7 @@ class OutputCalculationVC: UIViewController{
         configureInitialButtons()
     }
     
-    private func showImpactState(){
+    fileprivate func showResultState(){
         titleLabel.text = "Your donation may fund"
         removeButtons()
         actionContentView.donationTextField.removeFromSuperview()
@@ -164,17 +164,14 @@ class OutputCalculationVC: UIViewController{
               !text.isEmpty,
               text.isNumeric else { return }
         actionContentView.enteredAmount = Float(String(text)) ?? 1.0
-        showImpactState()
+        showResultState()
     }
-    
 }
 
 extension OutputCalculationVC: ActionContentViewDelegate{
     func currencyButtonPressed() {
         delegate?.currencyButtonPressedFromOutputCalculationVC()
     }
-    
-    
 }
 
 

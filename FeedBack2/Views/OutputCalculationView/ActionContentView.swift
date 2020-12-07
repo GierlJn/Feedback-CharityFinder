@@ -12,7 +12,7 @@ protocol ActionContentViewDelegate {
     func currencyButtonPressed()
 }
 
-class ActionContentView: UIView{
+final class ActionContentView: UIView{
     
     var donationTextField = DonationTextContentView()
     var outputStackView = UIStackView()
@@ -32,7 +32,6 @@ class ActionContentView: UIView{
     
     func configureTextField(){
         addSubview(donationTextField)
-
         donationTextField.snp.makeConstraints { (maker) in
             maker.height.equalTo(40)
             maker.centerY.equalTo(snp.centerY)
@@ -65,5 +64,4 @@ extension ActionContentView: UITextFieldDelegate{
         enteredAmount = Float(String(text)) ?? 1.0
         return true
     }
-    
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DonationTextContentView: UIView{
+final class DonationTextContentView: UIView{
     
     var textField = FBTextField()
     var currencyLabel = UIButton()
@@ -30,7 +30,7 @@ class DonationTextContentView: UIView{
             maker.bottom.equalTo(snp.bottom)
             maker.width.equalTo(15)
         }
-
+        
         textField.returnKeyType = .go
         textField.clearButtonMode = .never
         textField.placeholder = "Enter donation"

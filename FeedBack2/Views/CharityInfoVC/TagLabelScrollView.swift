@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TagLabelScrollView: UIView{
+final class TagLabelScrollView: UIView{
     
     var scrollView = UIScrollView()
     var stackView = UIStackView()
@@ -31,7 +31,14 @@ class TagLabelScrollView: UIView{
     
     func set(tags: String){
         self.tags = seperateTags(tags: tags)
-        updateUI()
+        for tag in self.tags{
+            if(tag.isEmpty){return}
+            let textLabel = TagLabel()
+            textLabel.text = tag
+            textLabel.sizeToFit()
+            textLabel.backgroundColor = color
+            stackView.addArrangedSubview(textLabel)
+        }
     }
     
     private func configure(){
@@ -42,18 +49,6 @@ class TagLabelScrollView: UIView{
         scrollView.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: -30, right: 0)
         stackView.pinToEdges(of: scrollView)
         stackView.spacing = 12
-    }
-    
-    private func updateUI(){
-        for tag in tags{
-            if(tag.isEmpty){return}
-            let textLabel = TagLabel()
-            textLabel.text = tag
-            textLabel.sizeToFit()
-            textLabel.backgroundColor = color
-            stackView.addArrangedSubview(textLabel)
-        }
-        
     }
     
     private func seperateTags(tags: String)->[String]{

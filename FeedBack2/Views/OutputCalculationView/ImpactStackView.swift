@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ImpactStackView: UIStackView{
+final class ImpactStackView: UIStackView{
 
     var output: SimpleImpact!
     var enteredAmount: Float!
@@ -29,21 +29,19 @@ class ImpactStackView: UIStackView{
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     private func configure() {
         let impactNumberLabel = FBTitleLabel(textAlignment: .center)
         let impactNameLabel = FBSubTitleLabel(textAlignment: .center)
-        self.addArrangedSubview(impactNumberLabel)
-        self.addArrangedSubview(impactNameLabel)
+        addArrangedSubview(impactNumberLabel)
+        addArrangedSubview(impactNameLabel)
         self.axis = .vertical
-        self.distribution = .fillEqually
+        distribution = .fillEqually
         
         let value = output.costPerBeneficiary?.value ?? "1.0"
         var floatValue = Float(value) ?? 1.0
         floatValue = floatValue / currency.relativeValueToPound
         
         let impact = enteredAmount / floatValue
-        
         let formatted = String(format: "%.0f", impact)
         
         impactNumberLabel.text = "\(formatted)"

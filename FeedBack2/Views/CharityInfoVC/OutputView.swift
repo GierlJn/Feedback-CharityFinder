@@ -8,18 +8,17 @@
 
 import UIKit
 
-class OutputView: UIView{
+final class OutputView: UIView{
     
     var output: SimpleImpact?
     var iconImageView = UIImageView()
     var mayFundLabel = UILabel()
     var impactLabel = UILabel()
     var labelsStackView = UIStackView()
+    
     var viewColor: UIColor = UIColor.outputColor
     let currency = PersistenceManager.retrieveCurrency()
-    
     let padding: CGFloat = 10
-    
     
     private override init(frame: CGRect) {
         super.init(frame: .zero)
@@ -32,10 +31,6 @@ class OutputView: UIView{
     init(output: SimpleImpact?) {
         self.init()
         self.output = output
-        
-        //addTopSeperatorView()
-        //addBottomSeperatorView()
-        
         if output == nil {
             configurePlaceholder()
             return
@@ -69,9 +64,8 @@ class OutputView: UIView{
     }
 
     private func configure(){
-
         addSubview(iconImageView)
-        iconImageView.image = UIImage(named: "outputlogo1")
+        iconImageView.image = Images.outputLogoIcon
         iconImageView.tintColor = viewColor
         iconImageView.snp.makeConstraints { (maker) in
             maker.left.equalTo(self.snp.left).offset(padding)
@@ -79,7 +73,6 @@ class OutputView: UIView{
             maker.centerY.equalTo(self.snp.centerY)
         }
         
-                
         addSubview(labelsStackView)
         labelsStackView.axis = .vertical
         labelsStackView.distribution = .fill
@@ -93,18 +86,13 @@ class OutputView: UIView{
             maker.top.equalTo(self.snp.top).offset(padding).offset(10)
             maker.bottom.equalTo(self.snp.bottom).offset(-padding).offset(-10)
         }
-        
     }
     
     func updateUI(){
         mayFundLabel.font = .boldSystemFont(ofSize: 12)
         let valueLabelText = "1 \(output!.name!.formatSingularOutputName(with: currency))"
-        print(output!.name!)
-        
         mayFundLabel.text = valueLabelText
         mayFundLabel.textColor = viewColor
-        
-        let currency = PersistenceManager.retrieveCurrency()
         
         let value = output!.costPerBeneficiary!.value
         var floatValue = Float(value!) ?? 1.0
@@ -115,30 +103,6 @@ class OutputView: UIView{
         impactLabel.font = .systemFont(ofSize: 12)
         impactLabel.textColor = viewColor
         impactLabel.alpha = 0.8
-    }
-    
-    fileprivate func addTopSeperatorView() {
-        let seperatorView = UIView()
-        addSubview(seperatorView)
-        seperatorView.backgroundColor = viewColor
-        seperatorView.snp.makeConstraints { (maker) in
-            maker.height.equalTo(0.5)
-            maker.left.equalTo(self.snp.left)
-            maker.right.equalTo(self.snp.right)
-            maker.top.equalTo(self.snp.top)
-        }
-    }
-    
-    fileprivate func addBottomSeperatorView() {
-        let seperatorView = UIView()
-        addSubview(seperatorView)
-        seperatorView.backgroundColor = viewColor
-        seperatorView.snp.makeConstraints { (maker) in
-            maker.height.equalTo(0.5)
-            maker.left.equalTo(self.snp.left)
-            maker.right.equalTo(self.snp.right)
-            maker.bottom.equalTo(self.snp.bottom)
-        }
     }
     
 }

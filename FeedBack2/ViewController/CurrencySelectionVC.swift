@@ -14,7 +14,7 @@ protocol CurrencySelectionDelegate {
     func startDonationAlertVC()
 }
 
-class CurrencySelectionVC: UIViewController{
+final class CurrencySelectionVC: UIViewController{
     
     var containerView = AlertContainerView()
     var currencies = Currency.allCases

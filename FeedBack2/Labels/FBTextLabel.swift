@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FBTextLabel: UILabel{
+final class FBTextLabel: UILabel{
     
     override init(frame: CGRect) {
         super.init(frame: .zero)

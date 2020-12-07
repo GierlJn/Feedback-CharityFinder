@@ -12,7 +12,8 @@ protocol SocialMediaStackViewDelegate{
     func buttonPressed(type: SocialMediaType)
 }
 
-class SocialMediaStackView: UIStackView{
+
+final class SocialMediaStackView: UIStackView{
     
     var delegate: SocialMediaStackViewDelegate?
     
@@ -45,10 +46,11 @@ class SocialMediaStackView: UIStackView{
     @objc func buttonPressed(sender: SocialMediaButton){
         delegate?.buttonPressed(type: sender.type)
     }
-
 }
 
+
 class SocialMediaButton: UIButton{
+    
     var type: SocialMediaType!
     
     override init(frame: CGRect) {
@@ -78,9 +80,4 @@ class SocialMediaButton: UIButton{
         }
         imageView?.sizeToFit()
     }
-}
-
-
-enum SocialMediaType: CaseIterable{
-    case facebook, twitter, whatsapp
 }

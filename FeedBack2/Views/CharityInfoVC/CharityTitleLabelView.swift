@@ -12,7 +12,7 @@ protocol TitleLabelViewDelegate{
     func favouriteButtonPressed()
 }
 
-class CharityTitleLabelView: UIView{
+final class CharityTitleLabelView: UIView{
     
     let titleLabel = FBTitleLabel(textAlignment: .left)
     let favoriteButton = UIButton()
@@ -45,7 +45,7 @@ class CharityTitleLabelView: UIView{
     
     private func configure(){
         addSubview(favoriteButton)
-        favoriteButton.setImage(isFavourite ? UIImage(systemName: "bookmark.fill") : UIImage(systemName: "bookmark"), for: .normal)
+        favoriteButton.setImage(isFavourite ? Images.bookMarkFill : Images.bookMark, for: .normal)
         favoriteButton.setTitleColor(.favoriteButton, for: .normal)
         favoriteButton.imageView?.tintColor = .favoriteButton
         favoriteButton.addTarget(self, action: #selector(favouriteButtonPressed), for: .touchUpInside)
@@ -68,5 +68,4 @@ class CharityTitleLabelView: UIView{
     @objc func favouriteButtonPressed(){
         delegate?.favouriteButtonPressed()
     }
-    
 }

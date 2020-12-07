@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NumbersStackView: UIStackView{
+final class NumbersStackView: UIStackView{
     
     let totalLabelView = FBTitleLabel(textAlignment: .center)
     let totalDonationsSumLabel = FBSubTitleLabel(textAlignment: .center)
@@ -36,8 +36,8 @@ class NumbersStackView: UIStackView{
         })
         
         totalDonationsSumLabel.text = String(Int(donationsSumForDollar)) + currency.symbol
-        
     }
+    
     private func configure(){
         totalLabelView.textColor = .outputColor
         self.addArrangedSubview(totalLabelView)

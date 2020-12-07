@@ -12,7 +12,7 @@ protocol CategoryButtonDelegate{
     func categoryButtonPressed(category: Category)
 }
 
-class CategoryButton: UIButton{
+final class CategoryButton: UIButton{
     var category: Category?
     var delegate: CategoryButtonDelegate?
     
@@ -78,7 +78,6 @@ class CategoryButton: UIButton{
         layer.shadowOffset = CGSize(width: 3, height: 0.0)
         layer.shadowRadius = 3
         clipsToBounds = true
-        
     }
 
     

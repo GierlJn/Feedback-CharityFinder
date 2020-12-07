@@ -15,7 +15,7 @@ protocol ShowCaseVCDelegate{
 }
 
 
-class ShowCaseVC: UIViewController{
+final class ShowCaseVC: UIViewController{
     
     let charityController = CharityController()
     var collectionView: UICollectionView! = nil
@@ -40,18 +40,10 @@ class ShowCaseVC: UIViewController{
     }
 }
 
-extension ShowCaseVC: TitleSupplementaryViewDelegate{
-    func viewAllButtonPressed(category: Category) {
-        delegate?.showCategories(category: category)
-    }
-    
-    
-}
-
 extension ShowCaseVC {
     func createLayout() -> UICollectionViewLayout {
         let sectionProvider = { [self] (sectionIndex: Int,
-                                 layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
+                                        layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                                   heightDimension: .fractionalHeight(1.0))
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
@@ -75,11 +67,12 @@ extension ShowCaseVC {
             
             if(sectionIndex == self.charityController.collections.count-1){
                 let footerSupplementary = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                                                                                         heightDimension: .estimated(60)), elementKind: ShowCaseVC.footerElementKind, alignment: .bottom)
+                                                                                                                         heightDimension: .estimated(60)),
+                                                                                      elementKind: ShowCaseVC.footerElementKind,
+                                                                                      alignment: .bottom)
                 section.boundarySupplementaryItems.append(footerSupplementary)
             }
-            
-            
+
             return section
         }
         
@@ -94,6 +87,7 @@ extension ShowCaseVC {
 
 
 extension ShowCaseVC {
+    
     func configureHierarchy() {
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
         collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -104,26 +98,22 @@ extension ShowCaseVC {
     }
     
     func configureDataSource() {
-        
         let cellRegistration = UICollectionView.CellRegistration
         <ExploreCharityCell, Charity> { (cell, indexPath, charity) in
             cell.titleLabel.text = charity.name
             cell.imageView.setLogoImage(urlString: charity.logoUrl)
-            
         }
         
         dataSource = UICollectionViewDiffableDataSource
         <CharityController.CharityCollection, Charity>(collectionView: collectionView) {
             (collectionView: UICollectionView, indexPath: IndexPath, charity: Charity) -> UICollectionViewCell? in
-            // Return the cell.
             return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: charity)
         }
         
-        let supplementaryRegistration = UICollectionView.SupplementaryRegistration
+        let headerSupplementaryRegistration = UICollectionView.SupplementaryRegistration
         <TitleSupplementaryView>(elementKind: "Header") {
             (supplementaryView, string, indexPath) in
             if let snapshot = self.currentSnapshot {
-                // Populate the view with our section's description.
                 let charityCollection = snapshot.sectionIdentifiers[indexPath.section]
                 supplementaryView.label.text = charityCollection.title
                 supplementaryView.category = charityCollection.category
@@ -131,24 +121,21 @@ extension ShowCaseVC {
             }
         }
         
-        let supplementaryRegistration2 = UICollectionView.SupplementaryRegistration
+        let footerSupplementaryRegistration = UICollectionView.SupplementaryRegistration
         <FooterView>(elementKind: "Footer") {
             (supplementaryView, string, indexPath) in
             supplementaryView.delegate = self
         }
         
         dataSource.supplementaryViewProvider = { (view, kind, index) in
-            
             if(kind == ShowCaseVC.titleElementKind){
                 return self.collectionView.dequeueConfiguredReusableSupplementary(
-                    using: supplementaryRegistration, for: index)
+                    using: headerSupplementaryRegistration, for: index)
             }else{
                 return self.collectionView.dequeueConfiguredReusableSupplementary(
-                    using: supplementaryRegistration2, for: index)
+                    using: footerSupplementaryRegistration, for: index)
             }
-            
         }
-        
     }
     
     func applyCurrentSnapshot() {
@@ -165,7 +152,7 @@ extension ShowCaseVC {
     fileprivate func loadCharities() {
         charityController.loadInitialCharities { [weak self] (error) in
             guard let self = self else { return }
-                self.delegate?.finishedLoading()
+            self.delegate?.finishedLoading()
             guard let error = error else {
                 self.applyCurrentSnapshot()
                 return
@@ -197,6 +184,12 @@ extension ShowCaseVC: FooterViewDelegate{
     }
 }
 
+extension ShowCaseVC: TitleSupplementaryViewDelegate{
+    func viewAllButtonPressed(category: Category) {
+        delegate?.showCategories(category: category)
+    }
+}
+
 
 protocol TitleSupplementaryViewDelegate{
     func viewAllButtonPressed(category: Category)
@@ -221,6 +214,7 @@ class TitleSupplementaryView: UICollectionReusableView {
 
 
 extension TitleSupplementaryView {
+    
     func configure() {
         addSubview(label)
         label.translatesAutoresizingMaskIntoConstraints = false

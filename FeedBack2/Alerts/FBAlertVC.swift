@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FBAlertVC: UIViewController{
+final class FBAlertVC: UIViewController{
     
     var containerView = AlertContainerView()
     var titleLabel = FBTitleLabel(textAlignment: .center)

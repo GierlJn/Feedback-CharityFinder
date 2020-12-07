@@ -9,7 +9,7 @@
 import UIKit
 import AnimatedGradientView
 
-class SearchHeaderView: UIView{
+final class SearchHeaderView: UIView{
     
     var backgroundView: AnimatedGradientView!
     let label = FBTitleLabel(textAlignment: .left)
@@ -27,6 +27,13 @@ class SearchHeaderView: UIView{
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        actionButton.setGradientBackgroundColor(colors: [.headerButtonGradientStart, .headerButtonGradientEnd], axis: .custom(angle: CGFloat(90)))
+        DispatchQueue.main.async {
+            self.backgroundView.startAnimating()
+        }
     }
 
     private func configure(){
@@ -46,7 +53,6 @@ class SearchHeaderView: UIView{
         backgroundView.type = .conic
         backgroundView.drawsAsynchronously = false
         backgroundView.autoAnimate = false
-        
     }
     
     fileprivate func configureLabel() {
@@ -86,16 +92,6 @@ class SearchHeaderView: UIView{
         actionButton.layer.cornerRadius = 7
         actionButton.clipsToBounds = true
         actionButton.tintColor = .white
-
-    }
-    
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        actionButton.setGradientBackgroundColor(colors: [.headerButtonGradientStart, .headerButtonGradientEnd], axis: .custom(angle: CGFloat(90)))
-        
-        DispatchQueue.main.async {
-            self.backgroundView.startAnimating()
-        }
-        
     }
     
     func configureTextField(){
@@ -105,7 +101,6 @@ class SearchHeaderView: UIView{
     @objc private func actionButtonTabbed(){
         delegate?.actionButtonPressed()
     }
-    
 }
 
 

@@ -4,25 +4,25 @@
 //
 //  Created by Julian Gierl on 14.10.20.
 //  Copyright © 2020 Julian Gierl. All rights reserved.
-//6
+//
 
 import UIKit
 
 
-class SearchCategoriesStackView: UIView, CategoryButtonDelegate{
+final class SearchCategoriesStackView: UIView, CategoryButtonDelegate{
 
     var scrollView = UIScrollView()
     var stackView = UIStackView()
     var categories = Categories.allCategories
     
-    var searchVCdelegate: HeaderViewDelegate?
-    
+    var delegate: HeaderViewDelegate?
     var categoryButtons = [CategoryButton]()
+    
     var selectedCategory: Category? {
         didSet {
             if(selectedCategory != nil){
                 setInitialButtonAsSelected()
-                searchVCdelegate?.categoryChanged(category: selectedCategory!)
+                delegate?.categoryChanged(category: selectedCategory!)
             }else{
                 updateCategorySelection()
             }
@@ -102,7 +102,6 @@ class SearchCategoriesStackView: UIView, CategoryButtonDelegate{
         }else{
             clearAllSelections()
         }
-        
     }
     
 }

@@ -88,7 +88,7 @@ extension SearchVC{
     }
     
     private func configureCategoriesView(){
-        categoriesView.searchVCdelegate = self
+        categoriesView.delegate = self
         view.addSubview(categoriesView)
         categoriesView.snp.makeConstraints { (maker) in
             maker.top.equalTo(headerView.snp.bottom).offset(50)

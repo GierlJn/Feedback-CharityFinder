@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TagLabel: UILabel{
+final class TagLabel: UILabel{
     
     var edgeInsets: UIEdgeInsets
     

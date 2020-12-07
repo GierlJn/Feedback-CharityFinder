@@ -8,7 +8,7 @@ protocol DonationAlertVCDelegate {
     func presentCurrencySelectionFromDonationAlertVC()
 }
 
-class DonationAlertVC: UIViewController{
+final class DonationAlertVC: UIViewController{
     
     var containerView = AlertContainerView()
     var titleLabel = FBTitleLabel(textAlignment: .center)

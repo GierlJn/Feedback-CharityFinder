@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AlertContainerView: UIView{
+final class AlertContainerView: UIView{
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
@@ -30,6 +30,5 @@ class AlertContainerView: UIView{
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         layer.borderColor = UIColor.standardButton.cgColor
     }
-    
 }
 

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HistoryHeaderView: UIView{
+final class HistoryHeaderView: UIView{
     
     var titleLabel = FBTitleLabel(textAlignment: .center)
     var numbersStackView = NumbersStackView()
@@ -33,7 +33,6 @@ class HistoryHeaderView: UIView{
     private func configure(){
         configureTitleLabel()
         configureNumberStackView()
-        //configureToggleButton()
         configureSeperator()
     }
     
@@ -58,21 +57,6 @@ class HistoryHeaderView: UIView{
             maker.right.lessThanOrEqualTo(snp.right).offset(-padding)
             maker.centerX.equalTo(snp.centerX)
         }
-    
-    }
-    
-    private func configureToggleButton(){
-        addSubview(toggleButton)
-        toggleButton.setTitle("Toggle View", for: .normal)
-        
-        toggleButton.snp.makeConstraints { (maker) in
-            maker.top.equalTo(numbersStackView.snp.bottom)
-            maker.left.equalTo(snp.left).offset(padding)
-            maker.right.equalTo(snp.right).offset(-padding)
-            maker.bottom.equalTo(snp.bottom)
-        }
-        
-        toggleButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .footnote)
     }
     
     private func configureSeperator(){
@@ -87,5 +71,4 @@ class HistoryHeaderView: UIView{
             maker.centerX.equalTo(snp.centerX)
         }
     }
-    
 }

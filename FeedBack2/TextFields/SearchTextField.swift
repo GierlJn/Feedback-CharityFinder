@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchTextField: FBTextField{
+final class SearchTextField: FBTextField{
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
