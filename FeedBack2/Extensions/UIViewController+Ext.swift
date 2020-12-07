@@ -94,7 +94,6 @@ extension UIViewController{
             containerView!.alpha = 1
             
             let loadingIndicator = UIActivityIndicatorView(style: .large)
-            loadingIndicator.tag = 1
             containerView!.addSubview(loadingIndicator)
             loadingIndicator.snp.makeConstraints { (maker) in
                 maker.centerX.equalTo(containerView!.snp.centerX)

@@ -8,15 +8,11 @@
 
 import UIKit
 
-enum Wording{
-    case singular, plural
-}
-
 extension String{
     
     var firstUppercased: String { prefix(1).uppercased() + dropFirst() }
     
-    var condensed: String { replacingOccurrences(of: "[\\s\n]+", with: " ", options: .regularExpression)}
+    var condensed: String { replacingOccurrences(of: "[\\s\n]+", with: " ", options: .regularExpression) }
     
     var withoutParanthesis: String { self.replacingOccurrences(of: "\\([^()]*\\)", with: "", options: .regularExpression) }
     
@@ -25,24 +21,16 @@ extension String{
         return String(self.suffix(from: index))
     }
     
-    func tail(s: String) -> String {
-        return String(s.suffix(from: s.index(s.startIndex, offsetBy: 1)))
+    func formatPluralOutputName(with currency: Currency)->String{
+        getPluralWording().replaceCurrencyWording(with: currency).withoutParanthesis.lowercased().condensed
     }
     
-    func formatOutputName(with currency: Currency, wording: Wording)->String{
-        
-        switch(wording){
-        case .plural:
-            return getPluralWording().replaceCurrencyWording(with: currency).withoutParanthesis.lowercased().condensed
-        case .singular:
-            return getSingularWording().replaceCurrencyWording(with: currency).withoutParanthesis.lowercased().firstUppercased.condensed
-        }
+    func formatSingularOutputName(with currency: Currency)->String{
+        getSingularWording().replaceCurrencyWording(with: currency).withoutParanthesis.lowercased().firstUppercased.condensed
     }
     
     func getSingularWording()->String{
-        
         let fullString = self
-        
         guard let parenthesisRange = fullString.range(of: #"(?<=\()(.*?)(?=\))"#, options: .regularExpression) else {
             return self
         }

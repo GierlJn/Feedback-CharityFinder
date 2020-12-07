@@ -50,7 +50,7 @@ class ImpactStackView: UIStackView{
         impactNumberLabel.textColor = .outputColor
         impactNumberLabel.font = UIFont.boldSystemFont(ofSize: 25)
         
-        impactNameLabel.text = "\(output.name?.formatOutputName(with: currency, wording: .plural) ?? "")"
+        impactNameLabel.text = "\(output.name?.formatPluralOutputName(with: currency) ?? "")"
         impactNameLabel.font = UIFont.preferredFont(forTextStyle: .title3)
         impactNameLabel.textColor = .label
         impactNameLabel.numberOfLines = 2
