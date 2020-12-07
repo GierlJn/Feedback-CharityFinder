@@ -46,15 +46,15 @@ extension String{
         guard let parenthesisRange = fullString.range(of: #"(?<=\()(.*?)(?=\))"#, options: .regularExpression) else {
             return self
         }
-
+        
         var paranthesisContent = fullString[parenthesisRange]
-
+        
         if(paranthesisContent.hasPrefix("singular: ")){
             paranthesisContent.removeFirst("singular: ".count)
         }else{
             return self
         }
-
+        
         let withoutParenthesis = fullString.withoutParanthesis.condensed
         
         var array = withoutParenthesis.components(separatedBy: " ")
@@ -68,12 +68,10 @@ extension String{
         
         var fullString = self
         
-        guard let parenthesisRange = fullString.range(of: #"(?<=\()(.*?)(?=\))"#, options: .regularExpression) else {
-            return self
-        }
-
+        guard let parenthesisRange = fullString.range(of: #"(?<=\()(.*?)(?=\))"#, options: .regularExpression) else { return self }
+        
         var paranthesisContent = fullString[parenthesisRange]
-
+        
         if(paranthesisContent.hasPrefix("plural: ")){
             paranthesisContent.removeFirst("plural: ".count)
         }else if(paranthesisContent == "s"){
@@ -84,7 +82,7 @@ extension String{
         else{
             return self
         }
-
+        
         let withoutParenthesis = fullString.withoutParanthesis.condensed
         
         var array = withoutParenthesis.components(separatedBy: " ")
@@ -101,7 +99,7 @@ extension String{
         let actualSize = self.boundingRect(with: maxSize, options: [.usesLineFragmentOrigin], attributes: [.font : font], context: nil)
         return actualSize.height
     }
-
+    
     var isNumeric: Bool{
         CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: self))
     }
