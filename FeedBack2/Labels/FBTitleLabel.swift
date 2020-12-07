@@ -9,6 +9,7 @@
 import UIKit
 
 class FBTitleLabel: UILabel{
+    
     override init(frame: CGRect) {
         super.init(frame: .zero)
         configure()

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DonationTextField: UITextField{
+class DonationTextContentView: UIView{
     
     var textField = FBTextField()
     var currencyLabel = UIButton()
@@ -24,16 +24,13 @@ class DonationTextField: UITextField{
     
     private func configure(){
         addSubview(currencyLabel)
-        //currencyLabel.text = currency.symbol
         currencyLabel.snp.makeConstraints { (maker) in
             maker.right.equalTo(snp.right).offset(-3)
             maker.top.equalTo(snp.top)
             maker.bottom.equalTo(snp.bottom)
             maker.width.equalTo(15)
         }
-        
-        
-        
+
         textField.returnKeyType = .go
         textField.clearButtonMode = .never
         textField.placeholder = "Enter donation"

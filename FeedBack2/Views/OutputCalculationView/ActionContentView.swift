@@ -14,7 +14,7 @@ protocol ActionContentViewDelegate {
 
 class ActionContentView: UIView{
     
-    var donationTextField = DonationTextField()
+    var donationTextField = DonationTextContentView()
     var outputStackView = UIStackView()
     let currency = PersistenceManager.retrieveCurrency()
     var delegate: ActionContentViewDelegate?
@@ -40,7 +40,6 @@ class ActionContentView: UIView{
             maker.right.equalTo(snp.right).offset(-padding)
         }
         
-        donationTextField.delegate = self
         donationTextField.currencyLabel.setTitle(currency.symbol, for: .normal)
         donationTextField.currencyLabel.setTitleColor(.label, for: .normal)
         donationTextField.currencyLabel.addTarget(self, action: #selector(currencyButtonPressed), for: .touchUpInside)
@@ -59,12 +58,12 @@ class ActionContentView: UIView{
 
 
 extension ActionContentView: UITextFieldDelegate{
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         guard let text = donationTextField.textField.text else { return false}
         guard !text.isEmpty else { return false}
         enteredAmount = Float(String(text)) ?? 1.0
         return true
     }
-    
     
 }

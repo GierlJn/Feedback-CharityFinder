@@ -9,6 +9,7 @@
 import UIKit
 
 class FBTextLabel: UILabel{
+    
     override init(frame: CGRect) {
         super.init(frame: .zero)
         configure()
@@ -26,12 +27,10 @@ class FBTextLabel: UILabel{
             font = UIFont.preferredFont(forTextStyle: .footnote)
         }
         
-        
         isOpaque = false
         numberOfLines = 0
         textAlignment = .left
         lineBreakMode = .byWordWrapping
         backgroundColor = .init(white: 0, alpha: 0)
-        
     }
 }

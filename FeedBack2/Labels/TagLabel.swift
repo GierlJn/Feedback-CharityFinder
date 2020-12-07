@@ -39,5 +39,4 @@ class TagLabel: UILabel{
         font = UIFont.preferredFont(forTextStyle: .footnote)
         textColor = .white
     }
-    
 }
