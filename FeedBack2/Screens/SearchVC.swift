@@ -28,7 +28,7 @@ class SearchVC: UIViewController{
     let showcaseVC = ShowCaseVC()
     var searchCategory: Category?
     
-    var copyRightLabel = FooterView()
+    var copyRightLabel = FooterSupplementaryView()
     
     var loadingVC: LoadingVC?
     

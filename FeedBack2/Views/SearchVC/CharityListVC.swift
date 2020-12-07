@@ -10,10 +10,6 @@ import UIKit
 
 class CharityListVC: UIViewController{
     
-    enum Section{
-        case main
-    }
-    
     var tableView = UITableView()
     var contentView = UIView()
     let emptyStateView = EmptyStateView(title: "Your search didn't find anything")
@@ -46,7 +42,7 @@ class CharityListVC: UIViewController{
         tableView.dataSource = self
         tableView.delegate = self
         tableView.rowHeight = 120
-        let footerView = FooterView()
+        let footerView = FooterSupplementaryView()
         footerView.delegate = self
         tableView.tableFooterView = footerView
     }
@@ -221,7 +217,7 @@ extension CharityListVC: UITableViewDelegate{
     }
 }
 
-extension CharityListVC: FooterViewDelegate{
+extension CharityListVC: FooterSupplementaryViewDelegate{
     func buttonPressed() {
         DispatchQueue.main.async {
             let fbAlertVC = FBAlertVC(title: "Notice", message: "This will open a link in your browser", actionButtonTitle: "Ok", dismissButtonTitle: "Cancel"){ [weak self] in

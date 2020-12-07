@@ -8,15 +8,15 @@
 
 import UIKit
 
-protocol FooterViewDelegate{
+protocol FooterSupplementaryViewDelegate{
     func buttonPressed()
 }
 
-class FooterView: UICollectionReusableView{
+class FooterSupplementaryView: UICollectionReusableView{
     
     var actionButton = UIButton()
     let padding = 20
-    var delegate: FooterViewDelegate?
+    var delegate: FooterSupplementaryViewDelegate?
     static let reuseIdentifier = "FooterView"
     
     override init(frame: CGRect) {
@@ -59,7 +59,7 @@ class FooterUIView: UIView{
     
     var actionButton = UIButton()
     let padding = 20
-    var delegate: FooterViewDelegate?
+    var delegate: FooterSupplementaryViewDelegate?
     static let reuseIdentifier = "FooterView"
     
     override init(frame: CGRect) {

@@ -24,8 +24,6 @@ final class ShowCaseVC: UIViewController{
     static let titleElementKind = "title-element-kind"
     static let footerElementKind = "footer-element-kind"
     
-    var firstCharityDataReceived = false
-    
     var delegate: ShowCaseVCDelegate?
     
     override func viewDidLoad() {
@@ -85,7 +83,6 @@ extension ShowCaseVC {
     }
 }
 
-
 extension ShowCaseVC {
     
     func configureHierarchy() {
@@ -98,34 +95,15 @@ extension ShowCaseVC {
     }
     
     func configureDataSource() {
-        let cellRegistration = UICollectionView.CellRegistration
-        <ExploreCharityCell, Charity> { (cell, indexPath, charity) in
-            cell.titleLabel.text = charity.name
-            cell.imageView.setLogoImage(urlString: charity.logoUrl)
-        }
+        let cellRegistration = createCellRegistration()
         
-        dataSource = UICollectionViewDiffableDataSource
-        <CharityController.CharityCollection, Charity>(collectionView: collectionView) {
+        dataSource = UICollectionViewDiffableDataSource<CharityController.CharityCollection, Charity>(collectionView: collectionView) {
             (collectionView: UICollectionView, indexPath: IndexPath, charity: Charity) -> UICollectionViewCell? in
             return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: charity)
         }
         
-        let headerSupplementaryRegistration = UICollectionView.SupplementaryRegistration
-        <TitleSupplementaryView>(elementKind: "Header") {
-            (supplementaryView, string, indexPath) in
-            if let snapshot = self.currentSnapshot {
-                let charityCollection = snapshot.sectionIdentifiers[indexPath.section]
-                supplementaryView.label.text = charityCollection.title
-                supplementaryView.category = charityCollection.category
-                supplementaryView.delegate = self
-            }
-        }
-        
-        let footerSupplementaryRegistration = UICollectionView.SupplementaryRegistration
-        <FooterView>(elementKind: "Footer") {
-            (supplementaryView, string, indexPath) in
-            supplementaryView.delegate = self
-        }
+        let headerSupplementaryRegistration = createHeaderSupplementary()
+        let footerSupplementaryRegistration = createFooterSupplementary()
         
         dataSource.supplementaryViewProvider = { (view, kind, index) in
             if(kind == ShowCaseVC.titleElementKind){
@@ -138,7 +116,36 @@ extension ShowCaseVC {
         }
     }
     
-    func applyCurrentSnapshot() {
+    fileprivate func createCellRegistration() -> UICollectionView.CellRegistration<ExploreCharityCell, Charity> {
+        return UICollectionView.CellRegistration
+        <ExploreCharityCell, Charity> { (cell, indexPath, charity) in
+            cell.titleLabel.text = charity.name
+            cell.imageView.setLogoImage(urlString: charity.logoUrl)
+        }
+    }
+    
+    fileprivate func createHeaderSupplementary() -> UICollectionView.SupplementaryRegistration<HeaderSupplementaryView> {
+        return UICollectionView.SupplementaryRegistration
+        <HeaderSupplementaryView>(elementKind: "Header") {
+            (supplementaryView, string, indexPath) in
+            if let snapshot = self.currentSnapshot {
+                let charityCollection = snapshot.sectionIdentifiers[indexPath.section]
+                supplementaryView.label.text = charityCollection.title
+                supplementaryView.category = charityCollection.category
+                supplementaryView.delegate = self
+            }
+        }
+    }
+    
+    fileprivate func createFooterSupplementary() -> UICollectionView.SupplementaryRegistration<FooterSupplementaryView> {
+        return UICollectionView.SupplementaryRegistration
+        <FooterSupplementaryView>(elementKind: "Footer") {
+            (supplementaryView, string, indexPath) in
+            supplementaryView.delegate = self
+        }
+    }
+    
+    fileprivate func applyCurrentSnapshot() {
         currentSnapshot = NSDiffableDataSourceSnapshot
         <CharityController.CharityCollection, Charity>()
         charityController.collections.forEach {
@@ -163,6 +170,7 @@ extension ShowCaseVC {
 }
 
 extension ShowCaseVC: UICollectionViewDelegate{
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let collections = charityController.collections[indexPath.section]
         let charity = collections.charities[indexPath.row]
@@ -170,7 +178,8 @@ extension ShowCaseVC: UICollectionViewDelegate{
     }
 }
 
-extension ShowCaseVC: FooterViewDelegate{
+extension ShowCaseVC: FooterSupplementaryViewDelegate{
+    
     func buttonPressed() {
         DispatchQueue.main.async {
             let fbAlertVC = FBAlertVC(title: "Notice", message: "This will open a link in your browser", actionButtonTitle: "Ok", dismissButtonTitle: "Cancel"){ [weak self] in
@@ -184,61 +193,13 @@ extension ShowCaseVC: FooterViewDelegate{
     }
 }
 
-extension ShowCaseVC: TitleSupplementaryViewDelegate{
+extension ShowCaseVC: HeaderSupplementaryViewDelegate{
+    
     func viewAllButtonPressed(category: Category) {
         delegate?.showCategories(category: category)
     }
 }
 
 
-protocol TitleSupplementaryViewDelegate{
-    func viewAllButtonPressed(category: Category)
-}
 
 
-class TitleSupplementaryView: UICollectionReusableView {
-    let label = UILabel()
-    let viewAllButton = UIButton()
-    var category: Category!
-    static let reuseIdentifier = "title-supplementary-reuse-identifier"
-    var delegate: TitleSupplementaryViewDelegate?
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        configure()
-    }
-    required init?(coder: NSCoder) {
-        fatalError()
-    }
-}
-
-
-extension TitleSupplementaryView {
-    
-    func configure() {
-        addSubview(label)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        let inset = CGFloat(10)
-        NSLayoutConstraint.activate([
-            label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: inset),
-            label.topAnchor.constraint(equalTo: topAnchor, constant: inset),
-            label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -inset)
-        ])
-        label.font = UIFont.boldSystemFont(ofSize: 20)
-        
-        addSubview(viewAllButton)
-        viewAllButton.setTitle("View All", for: .normal)
-        viewAllButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .footnote)
-        viewAllButton.setTitleColor(.textTitleLabel, for: .normal)
-        viewAllButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
-        viewAllButton.snp.makeConstraints { (maker) in
-            maker.top.equalTo(snp.top).offset(inset)
-            maker.right.equalTo(snp.right).offset(-inset)
-            maker.bottom.equalTo(snp.bottom).offset(-inset)
-        }
-    }
-    
-    @objc func buttonPressed(){
-        delegate?.viewAllButtonPressed(category: category)
-    }
-}
