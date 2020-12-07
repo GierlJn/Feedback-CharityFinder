@@ -9,6 +9,7 @@
 import UIKit
 
 extension UIButton {
+    
     func applyGradient(colors: [CGColor], radius: CGFloat?) {
             self.backgroundColor = nil
             self.layoutIfNeeded()
@@ -17,10 +18,7 @@ extension UIButton {
             gradientLayer.startPoint = CGPoint(x: 0.5, y: 0)
             gradientLayer.endPoint = CGPoint(x: 0.5, y: 1)
             gradientLayer.frame = self.bounds
-            if let radius = radius {
-            gradientLayer.cornerRadius = radius
-                }
-
+            if let radius = radius { gradientLayer.cornerRadius = radius }
             gradientLayer.shadowColor = UIColor.darkGray.cgColor
             gradientLayer.shadowOffset = CGSize(width: 0, height: 2.5)
             gradientLayer.shadowRadius = 1.0

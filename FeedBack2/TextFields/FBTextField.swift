@@ -38,17 +38,6 @@ class FBTextField: UITextField{
         autocorrectionType = .no
         returnKeyType = .search
         clearButtonMode = .whileEditing
-    
-    }
-    
-    func addSearchPlaceholder() {
-        let magnifyingGlassAttachment = NSTextAttachment(data: nil, ofType: nil)
-        magnifyingGlassAttachment.image = UIImage(systemName: "magnifyingglass")?.withTintColor(.systemGray)
-        let magnifyingGlassString = NSAttributedString(attachment: magnifyingGlassAttachment)
-        let attributedText = NSMutableAttributedString(attributedString: magnifyingGlassString)
-        let searchString = NSAttributedString(string: "  Search Charity here")
-        attributedText.append(searchString)
-        attributedPlaceholder = attributedText
     }
     
     func clearTextField(){

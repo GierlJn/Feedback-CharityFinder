@@ -15,7 +15,7 @@ class SearchHeaderView: UIView{
     let label = FBTitleLabel(textAlignment: .left)
     
     let searchStackView = UIStackView()
-    let textfield = FBTextField()
+    let textfield = SearchTextField()
     let actionButton = UIButton()
     
     var delegate: HeaderViewDelegate?
@@ -100,7 +100,6 @@ class SearchHeaderView: UIView{
     
     func configureTextField(){
         textfield.delegate = self
-        textfield.addSearchPlaceholder()
     }
 
     @objc private func actionButtonTabbed(){

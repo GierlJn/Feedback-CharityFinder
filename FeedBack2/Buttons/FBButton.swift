@@ -10,7 +10,6 @@ import UIKit
 
 class FBButton: UIButton{
     
-
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
@@ -22,7 +21,6 @@ class FBButton: UIButton{
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        //self.applyGradient(colors: [UIColor.headerButtonGradientStart.cgColor, UIColor.headerButtonGradientEnd.cgColor], radius: 7)
         self.applyShadow()
     }
     

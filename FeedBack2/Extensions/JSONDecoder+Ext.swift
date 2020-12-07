@@ -9,15 +9,6 @@
 import Foundation
 
 extension JSONDecoder{
-    func decodeReceivedCharitiyDataToCharities(data: Data) throws -> [Charity] {
-        do{
-            let rawServerResponse = try decode(SearchResponse.self, from: data)
-            let charities = try decodeRawServerResponse(rawServerResponse)
-            return charities
-        }catch{
-            throw FBError.unableToDecodeData
-        }
-    }
     
     func decodeReceivedDataToInfoCharity(data: Data) throws -> InfoCharity {
         do{
@@ -34,10 +25,20 @@ extension JSONDecoder{
             { charity.singleImpact = singleImpact }
             
             charity.filterBadImages()
-            
             return charity
+            
         }catch{
             throw FBError.invalidData
+        }
+    }
+    
+    func decodeReceivedCharitiyDataToCharities(data: Data) throws -> [Charity] {
+        do{
+            let rawServerResponse = try decode(SearchResponse.self, from: data)
+            let charities = try decodeRawServerResponse(rawServerResponse)
+            return charities
+        }catch{
+            throw FBError.unableToDecodeData
         }
     }
     
@@ -48,8 +49,8 @@ extension JSONDecoder{
         
         for hit in hits {
             if let name = hit.displayName ?? hit.name{
-                //guard let logoUrl = hit.logo else { continue }
                 guard let url = hit.url else { continue }
+                
                 var charity = Charity(name: name.withoutStartingWhiteSpace, id: hit.id, logoUrl: hit.logo, url: url)
                 if let estimatedImpact = hit.estimatedImpact, estimatedImpact != "more-info-needed"{
                     charity.impactEstimation = estimatedImpact
