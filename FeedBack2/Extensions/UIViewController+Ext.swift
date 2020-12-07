@@ -36,10 +36,10 @@ extension UIViewController{
     }
     
     func presentSafariVC(with url: URL){
-           let safariVC = SFSafariViewController(url: url)
-           safariVC.preferredControlTintColor = .systemBlue
-           present(safariVC, animated: true)
-       }
+        let safariVC = SFSafariViewController(url: url)
+        safariVC.preferredControlTintColor = .systemBlue
+        present(safariVC, animated: true)
+    }
     
     func add(childVC: UIViewController, to containerView: UIView){
         addChild(childVC)
@@ -72,37 +72,35 @@ extension UIViewController{
     
     func hideLoadingSubView(in view: UIView){
         DispatchQueue.main.async {
-            view.subviews.forEach { (view) in
-                if(view.tag == 13){
-                    view.removeFromSuperview()
-                }
-            }
             if(containerView != nil){
                 containerView!.removeFromSuperview()
                 containerView = nil
-                
             }
-            
+            view.subviews.forEach { (view) in
+                if(view.tag == 1){
+                    view.removeFromSuperview()
+                }
+            }
         }
     }
     
     func showLoadingSubView(in view: UIView){
         DispatchQueue.main.async {
-        guard  containerView == nil else { return }
-        
-        containerView = UIView()
-        containerView.tag = 13
-        view.addSubview(containerView!)
-        containerView!.pinToEdges(of: view)
-        containerView!.alpha = 1
-        let loadingIndicator = UIActivityIndicatorView(style: .large)
-        loadingIndicator.tag = 13
-        containerView!.addSubview(loadingIndicator)
-        loadingIndicator.snp.makeConstraints { (maker) in
-            maker.centerX.equalTo(containerView!.snp.centerX)
-            maker.centerY.equalTo(containerView!.snp.centerY)
-        }
-        loadingIndicator.startAnimating()
+            guard  containerView == nil else { return }
+            containerView = UIView()
+            containerView.tag = 1
+            view.addSubview(containerView!)
+            containerView!.pinToEdges(of: view)
+            containerView!.alpha = 1
+            
+            let loadingIndicator = UIActivityIndicatorView(style: .large)
+            loadingIndicator.tag = 1
+            containerView!.addSubview(loadingIndicator)
+            loadingIndicator.snp.makeConstraints { (maker) in
+                maker.centerX.equalTo(containerView!.snp.centerX)
+                maker.centerY.equalTo(containerView!.snp.centerY)
+            }
+            loadingIndicator.startAnimating()
         }
     }
     
