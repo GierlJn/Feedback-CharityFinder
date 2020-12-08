@@ -15,22 +15,18 @@ protocol HeaderViewDelegate{
     func actionButtonPressed()
 }
 
-class SearchVC: UIViewController{
+final class SearchVC: UIViewController{
     
     let headerView = SearchHeaderView()
     let categoriesView = SearchCategoriesStackView()
-    
     let showCaseView = UIView()
     let listView = UIView()
     let contentView = UIView()
-    
     let charityListVC = CharityListVC()
     let showcaseVC = ShowCaseVC()
-    var searchCategory: Category?
-    
-    var copyRightLabel = FooterSupplementaryView()
     
     var loadingVC: LoadingVC?
+    var searchCategory: Category?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +37,11 @@ class SearchVC: UIViewController{
         configureCategoriesView()
         configureContentView()
         configureShowCaseVC()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        view.setGradientBackgroundColor(colors: [.lightBlueBackgroundGradientStart, .lightBlueBackgroundGradientEnd], axis: .horizontal)
     }
     
     fileprivate func showSplashLoadingSreen() {
@@ -65,12 +66,6 @@ class SearchVC: UIViewController{
         navigationController?.navigationBar.isTranslucent = true
         navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.barStyle = .black
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        view.setGradientBackgroundColor(colors: [.lightBlueBackgroundGradientStart, .lightBlueBackgroundGradientEnd], axis: .horizontal)
-        
     }
 }
 
@@ -131,41 +126,13 @@ extension SearchVC{
             showCaseView.pinToEdges(of: contentView)
             add(childVC: showcaseVC, to: showCaseView)
         }
-    }}
+    }
+}
+
 
 extension SearchVC: HeaderViewDelegate{
     func actionButtonPressed() {
-        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let showOverViewAction = UIAlertAction(title: "Show Overview", style: .default) { (action) in
-            self.headerView.textfield.clearTextField()
-            self.showShowCaseVC()
-        }
-        
-        let sortActionTitle = PersistenceManager.isSortActivated ?    "Turn Off Sort for Impact" : "Turn On Sort for Impact"
-        
-        let sortAction = UIAlertAction(title: sortActionTitle, style: .default) { (action) in
-            PersistenceManager.toggleSort()
-            if(self.listView.isDescendant(of: self.contentView)){
-                self.charityListVC.sortForImpact()
-                self.charityListVC.updateTableView()
-            }
-        }
-        
-        if(listView.isDescendant(of: contentView)){
-            alertController.addAction(showOverViewAction)
-        }
-        alertController.addAction(sortAction)
-        alertController.addAction(UIAlertAction(title: "Cancel",
-                                                style: .cancel,
-                                                handler: nil))
-        self.present(alertController, animated: true, completion: nil)
-
-        
-        if let popoverController = alertController.popoverPresentationController {
-                popoverController.sourceView = self.view
-                popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
-                popoverController.permittedArrowDirections = []
-            }
+        presentAlertSheet()
     }
     
     func categoryChanged(category: Category) {
@@ -180,6 +147,39 @@ extension SearchVC: HeaderViewDelegate{
         categoriesView.selectedCategory = nil
         categoriesView.updateCategorySelection()
         charityListVC.loadInitialCharities(searchParameter: "q=\(searchInput)")
+    }
+    
+    fileprivate func presentAlertSheet() {
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let showOverViewAction = UIAlertAction(title: "Show Overview", style: .default) { (action) in
+            self.headerView.textfield.clearTextField()
+            self.showShowCaseVC()
+        }
+        
+        let sortActionTitle = PersistenceManager.isSortActivated ?    "Turn Off Sort for Impact" : "Turn On Sort for Impact"
+        let sortAction = UIAlertAction(title: sortActionTitle, style: .default) { (action) in
+            PersistenceManager.toggleSort()
+            if(self.listView.isDescendant(of: self.contentView)){
+                self.charityListVC.sortForImpact()
+                self.charityListVC.updateTableView()
+            }
+        }
+        if(listView.isDescendant(of: contentView)){
+            alertController.addAction(showOverViewAction)
+        }
+        
+        alertController.addAction(sortAction)
+        alertController.addAction(UIAlertAction(title: "Cancel",
+                                                style: .cancel,
+                                                handler: nil))
+        self.present(alertController, animated: true, completion: nil)
+        
+        
+        if let popoverController = alertController.popoverPresentationController {
+            popoverController.sourceView = self.view
+            popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+            popoverController.permittedArrowDirections = []
+        }
     }
 }
 
@@ -205,10 +205,7 @@ extension SearchVC: ShowCaseVCDelegate{
         DispatchQueue.main.async {
             self.loadingVC?.dismiss(animated: true)
         }
-        
     }
-    
-    
 }
 
 

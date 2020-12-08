@@ -8,12 +8,12 @@
 
 import UIKit
 
-class DonationHistoryVC: UIViewController{
+final class DonationHistoryVC: UIViewController{
     
     let headerView = HistoryHeaderView()
-    let padding = 20
-    
     var tableView = UITableView()
+    
+    let padding = 20
     var donations = [Donation]()
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -81,7 +81,6 @@ class DonationHistoryVC: UIViewController{
             maker.left.equalTo(view.snp.left)
             maker.right.equalTo(view.snp.right)
         }
-        
     }
     
     fileprivate func configureTableView() {
@@ -98,9 +97,8 @@ class DonationHistoryVC: UIViewController{
         }
         tableView.removeExcessCells()
     }
-
-    
 }
+
 
 extension DonationHistoryVC: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -122,7 +120,6 @@ extension DonationHistoryVC: UITableViewDataSource{
             if(error != nil){self.presentErrorAlert(error!)}
             self.getDonations()
         }
-        
     }
 }
 

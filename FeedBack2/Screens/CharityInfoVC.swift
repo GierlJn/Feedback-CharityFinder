@@ -389,7 +389,6 @@ final class CharityInfoVC: UIViewController{
 }
 
 extension CharityInfoVC: CurrencySelectionDelegate{
-    
     func currencyChanged() {
         outputView?.updateUI()
     }
@@ -399,7 +398,6 @@ extension CharityInfoVC: CurrencySelectionDelegate{
 }
 
 extension CharityInfoVC: TitleLabelViewDelegate{
-    
     func favouriteButtonPressed() {
         PersistenceManager.isCharityFavorite(charity: charity) { [weak self] (isFavourite) in
             guard let self = self else { return }
@@ -480,7 +478,6 @@ extension CharityInfoVC: SocialMediaStackViewDelegate{
     }
     
     func buttonPressed(type: SocialMediaType) {
-        
         switch type {
         case .facebook:
             shareTextOnFaceBook()
