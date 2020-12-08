@@ -12,7 +12,6 @@ final class HistoryHeaderView: UIView{
     
     var titleLabel = FBTitleLabel(textAlignment: .center)
     var numbersStackView = NumbersStackView()
-    var toggleButton = UIButton()
     
     let padding = 20
     

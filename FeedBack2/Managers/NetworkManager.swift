@@ -94,28 +94,4 @@ final class NetworkManager{
             }
         }.resume()
     }
-    
-    func downloadImage(urlString: String, completed: @escaping(Result<UIImage, FBError>) -> Void){
-        guard let url = URL(string: urlString) else {
-            completed(.failure(.unableToConnect))
-            return
-        }
-        
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-            guard error == nil else {
-                completed(.failure(.invalidData))
-                return
-            }
-            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                completed(.failure(.invalidResponse))
-                return
-            }
-            guard let data = data,
-                  let image = UIImage(data: data) else {
-                completed(.failure(.invalidData))
-                return
-            }
-            completed(.success(image))
-        }.resume()
-    }
 }

@@ -14,7 +14,6 @@ final class CharityCell: UITableViewCell{
     let subTitleLabel = FBSubTitleLabel(frame: .zero)
     let logoImageView = FBLogoImageView(frame: .zero)
     let imageContentView = UIView()
-    let favouriteButton = UIButton()
     
     static let reuseIdentifier = "CharityCell"
     

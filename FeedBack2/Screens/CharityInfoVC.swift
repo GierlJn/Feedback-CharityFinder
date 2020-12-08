@@ -26,7 +26,6 @@ final class CharityInfoVC: UIViewController{
     var locationTagView = TagLabelScrollView(color: .locationTagView)
     var contentSuperView = UIView()
     var calculationVC: OutputCalculationVC?
-    var donationAlertVC: DonationAlertVC?
     let scrollView = UIScrollView()
     let contentView = UIView()
     var socialMediaStackView = SocialMediaStackView()

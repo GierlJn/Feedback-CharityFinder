@@ -9,16 +9,6 @@
 import UIKit
 
 extension UIColor {
-    
-    static var navigationBarTint = UIColor { traitCollection in
-        switch traitCollection.userInterfaceStyle {
-        case .dark:
-            return .white
-        default:
-            return .black
-        }
-    }
-    
     static var standardButton = UIColor { traitCollection in
         switch traitCollection.userInterfaceStyle {
         case .dark:
