@@ -7,13 +7,11 @@
 //
 
 import UIKit
-import SwiftSVG
 
-class NetworkManager{
+final class NetworkManager{
     
     var baseSearchUrl = "https://app.sogive.org/search.json?"
     var baseCharityInfoUrl = "https://app.sogive.org/charity/"
-    
     
     func cancelCurrentTasks(){
         URLSession.shared.getTasksWithCompletionHandler { (dataTasks, uploadTasks, downloadTasks) in
@@ -24,26 +22,24 @@ class NetworkManager{
     }
     
     func getCharities(searchParameter: String, size: Int, startFrom: Int, completed: @escaping (Result<[Charity], FBError>) -> Void){
-        let cleanedSpacesParameter = searchParameter.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? searchParameter
+        let stringUrl = "\(baseSearchUrl)\(searchParameter)&size=\(size)&from=\(startFrom)"
         
-        let stringUrl = "\(baseSearchUrl)\(cleanedSpacesParameter)&size=\(size)&from=\(startFrom)"
-        guard let url = URL(string: stringUrl) else {
-            completed(.failure(.unvalidSearchParameter))
+        guard let url = URL(string: stringUrl.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? stringUrl) else {
+            completed(.failure(.invalidSearchParameter))
             return
         }
         
-        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
             if error != nil{
                 if(error?.localizedDescription == "cancelled"){
                     completed(.failure(.userCancelled))
                 }else{
                     completed(.failure(.unableToConnect))
                 }
-                
             }
             
             guard let response = response as? HTTPURLResponse else{
-                completed(.failure(.userCancelled))
+                completed(.failure(.invalidResponse))
                 return
             }
             guard response.statusCode == 200 else{
@@ -56,16 +52,14 @@ class NetworkManager{
             }
             do{
                 let decoder = JSONDecoder()
-                let charities = try decoder.decodeReceivedCharitiyDataToCharities(data: data)
-                
+                let charities = try decoder.decodeDataToCharities(data: data)
                 completed(.success(charities))
                 return
             }catch{
                 completed(.failure(.unableToDecodeData))
                 return
             }
-        }
-        task.resume()
+        }.resume()
     }
     
     func getCharityInfo(charityId: String, completed: @escaping (Result<InfoCharity, FBError>) -> Void){
@@ -73,7 +67,7 @@ class NetworkManager{
             completed(.failure(.unableToConnect))
             return
         }
-        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
             if error != nil{
                 completed(.failure(.invalidData))
             }
@@ -91,18 +85,15 @@ class NetworkManager{
             }
             do{
                 let decoder = JSONDecoder()
-                let charity = try decoder.decodeReceivedDataToInfoCharity(data: data)
+                let charity = try decoder.decodeInfoCharity(data: data)
                 completed(.success(charity))
                 return
             }catch{
                 completed(.failure(.invalidData))
                 return
             }
-        }
-        task.resume()
+        }.resume()
     }
-    
-    
     
     func downloadImage(urlString: String, completed: @escaping(Result<UIImage, FBError>) -> Void){
         guard let url = URL(string: urlString) else {
@@ -110,28 +101,21 @@ class NetworkManager{
             return
         }
         
-        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
             guard error == nil else {
-                completed(.failure(.invalidResponse))
+                completed(.failure(.invalidData))
                 return
             }
             guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
                 completed(.failure(.invalidResponse))
                 return
             }
-            guard let data = data else {
+            guard let data = data,
+                  let image = UIImage(data: data) else {
                 completed(.failure(.invalidData))
                 return
             }
-            
-            guard let image = UIImage(data: data) else {
-                completed(.failure(.invalidData))
-                return
-            }
-            
             completed(.success(image))
-        }
-        task.resume()
+        }.resume()
     }
-    
 }

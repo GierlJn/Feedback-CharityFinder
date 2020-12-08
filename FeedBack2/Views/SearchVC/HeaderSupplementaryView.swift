@@ -12,34 +12,43 @@ protocol HeaderSupplementaryViewDelegate{
     func viewAllButtonPressed(category: Category)
 }
 
-
-class HeaderSupplementaryView: UICollectionReusableView {
+final class HeaderSupplementaryView: UICollectionReusableView {
     
     let label = UILabel()
     let viewAllButton = UIButton()
-    var category: Category!
+    
     static let reuseIdentifier = "title-supplementary-reuse-identifier"
+    let inset = CGFloat(10)
+    
+    var category: Category!
     var delegate: HeaderSupplementaryViewDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
     }
+    
     required init?(coder: NSCoder) {
         fatalError()
     }
     
     func configure() {
+        configureLabel()
+        configureButton()
+    }
+    
+    private func configureLabel(){
         addSubview(label)
         label.translatesAutoresizingMaskIntoConstraints = false
-        let inset = CGFloat(10)
-        NSLayoutConstraint.activate([
-            label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: inset),
-            label.topAnchor.constraint(equalTo: topAnchor, constant: inset),
-            label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -inset)
-        ])
+        label.snp.makeConstraints { (maker) in
+            maker.left.equalTo(snp.left).offset(inset)
+            maker.top.equalTo(snp.top).offset(inset)
+            maker.bottom.equalTo(snp.bottom).offset(-inset)
+        }
         label.font = UIFont.boldSystemFont(ofSize: 20)
-        
+    }
+    
+    private func configureButton(){
         addSubview(viewAllButton)
         viewAllButton.setTitle("View All", for: .normal)
         viewAllButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .footnote)

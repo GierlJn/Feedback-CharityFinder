@@ -141,11 +141,10 @@ extension SearchVC: HeaderViewDelegate{
             self.showShowCaseVC()
         }
         
-        let sortIsOn = PersistenceManager.getImpactSort()
-        let sortActionTitle = sortIsOn ?    "Turn Off Sort for Impact" : "Turn On Sort for Impact"
+        let sortActionTitle = PersistenceManager.isSortActivated ?    "Turn Off Sort for Impact" : "Turn On Sort for Impact"
         
         let sortAction = UIAlertAction(title: sortActionTitle, style: .default) { (action) in
-            PersistenceManager.setImpactSort(!sortIsOn)
+            PersistenceManager.toggleSort()
             if(self.listView.isDescendant(of: self.contentView)){
                 self.charityListVC.sortForImpact()
                 self.charityListVC.updateTableView()

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CharityController {
+final class CharityCollectionManager {
     
     var initialCategories = [Categories.highImpact, Categories.animals, Categories.environment]
     
@@ -25,7 +25,6 @@ class CharityController {
     
     var collections = [CharityCollection]()
     let networkManager = NetworkManager()
-    typealias Handler = (Result<[Charity], FBError>) -> Void
     
     func loadInitialCharities(completed: @escaping (FBError?) -> ()){
         var responses = 0
@@ -44,12 +43,11 @@ class CharityController {
                     completed(nil)
                 }
             }
-            
         }
         
         for index in 0..<initialCategories.count{
             loadCharities(category: initialCategories[index].category, size: 4, positionIndex: index) { (error) in
-                    completeIfLoaded(nil)
+                completeIfLoaded(nil)
             }
         }
     }
@@ -67,12 +65,8 @@ class CharityController {
         }
     }
     
-}
-
-
-extension CharityController {
     func generateCharityCollections(for charities: [Charity], category: Category, positionIndex: Int){
         collections.append(CharityCollection(title: category.name, charities: charities, position: positionIndex, category: category))
-        
     }
 }
+

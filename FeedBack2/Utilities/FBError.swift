@@ -20,11 +20,11 @@ enum FBError: Error, Equatable {
     case alreadyFavorite
     case noValidURL
     case unableToDecodeData
-    case unvalidSearchParameter
+    case invalidSearchParameter
     case userCancelled
     case donationAlreadySaved
     case donationsCouldNotBeRetrieved
-    case donationCantBeSaved
+    case donationsCouldNotBeSaved
     
     var errorMessage: String{
         switch self {
@@ -44,7 +44,7 @@ enum FBError: Error, Equatable {
             return "It seems like we don't have a valid url to this charity."
         case .unableToDecodeData:
             return "No charity data could be decoded"
-        case .unvalidSearchParameter:
+        case .invalidSearchParameter:
             return "The entered search is not a valid url"
         case .userCancelled:
             return "The user cancelled the task"
@@ -52,7 +52,7 @@ enum FBError: Error, Equatable {
             return "Donation is already saved"
         case .donationsCouldNotBeRetrieved:
             return "Donations could not be retrieved"
-        case .donationCantBeSaved:
+        case .donationsCouldNotBeSaved:
             return "Donatin could not be saved"
             
         }

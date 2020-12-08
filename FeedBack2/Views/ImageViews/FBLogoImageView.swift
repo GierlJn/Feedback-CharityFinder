@@ -9,9 +9,8 @@
 import UIKit
 import SDWebImage
 
-class FBLogoImageView: UIImageView{
+final class FBLogoImageView: UIImageView{
     
-    let insetValue: CGFloat = -16
     let networkManager = NetworkManager()
     
     override init(frame: CGRect) {
@@ -35,8 +34,6 @@ class FBLogoImageView: UIImageView{
     func setLogoImage(urlString: String?){
         guard let logoString = urlString else { return }
         guard let logoUrl = URL(string: logoString) else { return }
-        self.sd_setImage(with: logoUrl, placeholderImage: Images.imagePlaceholder!, completed: { (image, error, cache, url) in
-        })
-
-        }
+        self.sd_setImage(with: logoUrl, placeholderImage: Images.imagePlaceholder!)
+    }
 }

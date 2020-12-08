@@ -53,6 +53,4 @@ final class ImpactStackView: UIStackView{
         impactNameLabel.textColor = .label
         impactNameLabel.numberOfLines = 2
     }
-    
-    
 }

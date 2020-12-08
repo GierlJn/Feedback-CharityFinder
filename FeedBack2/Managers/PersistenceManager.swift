@@ -13,24 +13,23 @@ enum PersistenceActionType: String{
     case remove = "Removed"
 }
 
-class PersistenceManager {
+final class PersistenceManager {
     
     static private let defaults = UserDefaults.standard
     
-    enum Keys {
+    private enum Keys {
         static let currency = "currency"
         static let favourites = "favourites"
         static let sort = "sort"
         static let donations = "donations"
     }
     
-    static func setImpactSort(_ setOn: Bool){
-        defaults.setValue(setOn, forKey: Keys.sort)
+    static func toggleSort(){
+        PersistenceManager.setImpactSort(!PersistenceManager.isSortActivated)
     }
     
-    static func getImpactSort()->Bool{
-        let isOn = defaults.value(forKey: Keys.sort) as? Bool ?? false
-        return isOn
+    static func setImpactSort(_ setOn: Bool){
+        defaults.setValue(setOn, forKey: Keys.sort)
     }
     
     static var isSortActivated: Bool{
@@ -103,7 +102,7 @@ class PersistenceManager {
                     
                 }
                 completed(saveCharities(charities: charities))
-            
+                
             case .failure(let error):
                 completed(error)
             }
@@ -172,7 +171,7 @@ class PersistenceManager {
             defaults.set(encodedFavoruites, forKey: Keys.donations)
             return nil
         }catch{
-            return .donationCantBeSaved
+            return .donationsCouldNotBeSaved
         }
     }
 }

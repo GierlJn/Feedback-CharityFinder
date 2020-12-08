@@ -17,10 +17,10 @@ protocol ShowCaseVCDelegate{
 
 final class ShowCaseVC: UIViewController{
     
-    let charityController = CharityController()
+    let charityController = CharityCollectionManager()
     var collectionView: UICollectionView! = nil
-    var dataSource: UICollectionViewDiffableDataSource<CharityController.CharityCollection, Charity>! = nil
-    var currentSnapshot: NSDiffableDataSourceSnapshot<CharityController.CharityCollection, Charity>! = nil
+    var dataSource: UICollectionViewDiffableDataSource<CharityCollectionManager.CharityCollection, Charity>! = nil
+    var currentSnapshot: NSDiffableDataSourceSnapshot<CharityCollectionManager.CharityCollection, Charity>! = nil
     static let titleElementKind = "title-element-kind"
     static let footerElementKind = "footer-element-kind"
     
@@ -97,7 +97,7 @@ extension ShowCaseVC {
     func configureDataSource() {
         let cellRegistration = createCellRegistration()
         
-        dataSource = UICollectionViewDiffableDataSource<CharityController.CharityCollection, Charity>(collectionView: collectionView) {
+        dataSource = UICollectionViewDiffableDataSource<CharityCollectionManager.CharityCollection, Charity>(collectionView: collectionView) {
             (collectionView: UICollectionView, indexPath: IndexPath, charity: Charity) -> UICollectionViewCell? in
             return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: charity)
         }
@@ -147,7 +147,7 @@ extension ShowCaseVC {
     
     fileprivate func applyCurrentSnapshot() {
         currentSnapshot = NSDiffableDataSourceSnapshot
-        <CharityController.CharityCollection, Charity>()
+        <CharityCollectionManager.CharityCollection, Charity>()
         charityController.collections.forEach {
             let collection = $0
             currentSnapshot.appendSections([collection])

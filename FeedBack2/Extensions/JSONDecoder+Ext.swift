@@ -10,7 +10,7 @@ import Foundation
 
 extension JSONDecoder{
     
-    func decodeReceivedDataToInfoCharity(data: Data) throws -> InfoCharity {
+    func decodeInfoCharity(data: Data) throws -> InfoCharity {
         do{
             let decoder = JSONDecoder()
             let rawServerResponse = try decoder.decode(InfoResponse.self, from: data)
@@ -32,7 +32,7 @@ extension JSONDecoder{
         }
     }
     
-    func decodeReceivedCharitiyDataToCharities(data: Data) throws -> [Charity] {
+    func decodeDataToCharities(data: Data) throws -> [Charity] {
         do{
             let rawServerResponse = try decode(SearchResponse.self, from: data)
             let charities = try decodeRawServerResponse(rawServerResponse)

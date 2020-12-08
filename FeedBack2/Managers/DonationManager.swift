@@ -8,7 +8,7 @@
 
 import Foundation
 
-class DonationManager{
+final class DonationManager{
     static func calculateValue(for donation: Float, impactValue: Float)->Int{
         if(donation == 0.0){
             return 0

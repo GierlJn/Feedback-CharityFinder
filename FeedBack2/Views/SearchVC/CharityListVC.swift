@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CharityListVC: UIViewController{
+final class CharityListVC: UIViewController{
     
     var tableView = UITableView()
     var contentView = UIView()
@@ -60,6 +60,8 @@ class CharityListVC: UIViewController{
                     self.hideLoadingSubView(in: self.contentView)
                     self.presentErrorAlert(error)
                 case .userCancelled:
+                    return
+                case .invalidResponse:
                     return
                 default:
                     DispatchQueue.main.async {
