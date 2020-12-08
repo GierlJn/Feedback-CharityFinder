@@ -30,7 +30,7 @@ final class CharityCollectionManager {
         var responses = 0
         var successfulResponses = 0
         
-        func completeIfLoaded(_ error: FBError?){
+        func completeLoading(_ error: FBError?){
             responses += 1
             if error == nil{
                 successfulResponses += 1
@@ -47,7 +47,7 @@ final class CharityCollectionManager {
         
         for index in 0..<initialCategories.count{
             loadCharities(category: initialCategories[index].category, size: 4, positionIndex: index) { (error) in
-                completeIfLoaded(nil)
+                completeLoading(error)
             }
         }
     }

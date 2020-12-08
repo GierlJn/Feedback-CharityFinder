@@ -8,11 +8,12 @@
 
 import UIKit
 
-class FavoriteCell: UITableViewCell{
-    static let reuseIdentifier = "FavoriteCell"
+final class FavoriteCell: UITableViewCell{
     
     let titleLabel = FBTitleLabel(frame: .zero)
     let logoImageView = FBLogoImageView(frame: .zero)
+    
+    static let reuseIdentifier = "FavoriteCell"
     let padding = 20
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -43,16 +44,13 @@ class FavoriteCell: UITableViewCell{
     
     private func configureLabels(){
         contentView.addSubview(titleLabel)
-        //titleLabel.textAlignment = .right
         titleLabel.snp.makeConstraints { (maker) in
             maker.top.equalTo(snp.top).offset(padding)
             maker.left.equalTo(logoImageView.snp.right).offset(15)
             maker.right.equalTo(-25)
             maker.height.equalTo(40)
         }
-        
     }
-    
 }
 
 

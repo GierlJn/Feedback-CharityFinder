@@ -8,21 +8,18 @@
 
 import UIKit
 
-class DonationCell: UITableViewCell{
-    
-    static let reuseIdentifier = "DonationCell"
-    let padding = 15
-    
+final class DonationCell: UITableViewCell{
+
     var titleLabel = FBTitleLabel(textAlignment: .left)
     var dateLabel = FBSubTitleLabel(textAlignment: .left)
-    
     var donationAmountLabel = FBTitleLabel(textAlignment: .right)
-    var relatieToCurrencyAmountLabel = FBSubTitleLabel(textAlignment: .right)
-    
+    var relativeAmountLabel = FBSubTitleLabel(textAlignment: .right)
     var labelStackView = UIStackView()
     var amountStackView = UIStackView()
     
+    static let reuseIdentifier = "DonationCell"
     let selectedCurrency = PersistenceManager.retrieveCurrency()
+    let padding = 15
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -45,7 +42,7 @@ class DonationCell: UITableViewCell{
         donationAmountLabel.text = String(Int(amount)) + donation.currency.symbol
         
         if(selectedCurrency != donation.currency){
-            relatieToCurrencyAmountLabel.text = "≈" + String(Int(amountInSelectedCurrency)) + selectedCurrency.symbol
+            relativeAmountLabel.text = "≈" + String(Int(amountInSelectedCurrency)) + selectedCurrency.symbol
         }
     }
     
@@ -80,8 +77,6 @@ class DonationCell: UITableViewCell{
         }
         
         amountStackView.addArrangedSubview(donationAmountLabel)
-        amountStackView.addArrangedSubview(relatieToCurrencyAmountLabel)
+        amountStackView.addArrangedSubview(relativeAmountLabel)
     }
-    
-
 }

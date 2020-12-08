@@ -9,6 +9,7 @@
 import Foundation
 
 enum Categories: CaseIterable {
+    
     case highImpact, animals, environment, health, education, poverty
     
     var category: Category{

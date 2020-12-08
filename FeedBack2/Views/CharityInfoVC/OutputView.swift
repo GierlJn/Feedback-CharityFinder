@@ -17,7 +17,6 @@ final class OutputView: UIView{
     var labelsStackView = UIStackView()
     
     var viewColor: UIColor = UIColor.outputColor
-    let currency = PersistenceManager.retrieveCurrency()
     let padding: CGFloat = 10
     
     private override init(frame: CGRect) {
@@ -89,6 +88,7 @@ final class OutputView: UIView{
     }
     
     func updateUI(){
+        let currency = PersistenceManager.retrieveCurrency()
         mayFundLabel.font = .boldSystemFont(ofSize: 12)
         let valueLabelText = "1 \(output!.name!.formatSingularOutputName(with: currency))"
         mayFundLabel.text = valueLabelText

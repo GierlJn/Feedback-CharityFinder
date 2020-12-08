@@ -41,10 +41,11 @@ final class PersistenceManager {
             let encoder = JSONEncoder()
             let encodedCurrency = try encoder.encode(curency)
             defaults.set(encodedCurrency, forKey: Keys.currency)
+            return nil
         }catch{
             return .invalidData
         }
-        return nil
+        
     }
     
     static func retrieveCurrency()->Currency{

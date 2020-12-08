@@ -11,7 +11,6 @@ import UIKit
 protocol CurrencySelectionDelegate {
     func currencyChanged()
     func startCalculationVC()
-    func startDonationAlertVC()
 }
 
 final class CurrencySelectionVC: UIViewController{
@@ -28,7 +27,6 @@ final class CurrencySelectionVC: UIViewController{
     var delegate: CurrencySelectionDelegate?
     
     var startOutputCalculationVCOnDismiss = false
-    var startDonationAlertVCOnDismiss = false
     
     init(){
         super.init(nibName: nil, bundle: nil)
@@ -105,14 +103,9 @@ final class CurrencySelectionVC: UIViewController{
             self.delegate?.currencyChanged()
             if(self.startOutputCalculationVCOnDismiss){
                 self.delegate?.startCalculationVC()
-            }else if(self.startDonationAlertVCOnDismiss){
-                self.delegate?.startDonationAlertVC()
             }
         })
-        
-       
     }
-    
 }
 
 

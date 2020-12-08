@@ -14,8 +14,8 @@ protocol DonationBarViewDelegate {
     func donationButtonPressed()
 }
 
-class CharityInfoVC: UIViewController{
-
+final class CharityInfoVC: UIViewController{
+    
     var impactImageView = FBImpactImageView(frame: .zero)
     var descriptionLabel = FBTextLabel()
     var charityTitleLabelView = CharityTitleLabelView()
@@ -25,46 +25,39 @@ class CharityInfoVC: UIViewController{
     var tagView = TagLabelScrollView(color: .whyTagView)
     var locationTagView = TagLabelScrollView(color: .locationTagView)
     var contentSuperView = UIView()
-    
     var calculationVC: OutputCalculationVC?
     var donationAlertVC: DonationAlertVC?
     let scrollView = UIScrollView()
     let contentView = UIView()
-    
     var socialMediaStackView = SocialMediaStackView()
-    
-    var contentHeight: CGFloat = 70.0
-    let padding: CGFloat = 20
     
     var infoCharity: InfoCharity?
     var charity: Charity!
     var charityId: String!
     
     let networkManager = NetworkManager()
+    var contentHeight: CGFloat = 70.0
+    let padding: CGFloat = 20
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavigationBar()
         getCharityInfo()
-        
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        view.setGradientBackgroundColor(colors: [.lightBlueBackgroundGradientStart, .lightBlueBackgroundGradientEnd], axis: .horizontal)
-        if(DeviceType.isiPad){
-            donateButton.applyGradient(colors: [UIColor.headerButtonGradientStart.cgColor, UIColor.headerButtonGradientEnd.cgColor], radius: 7)
-        }else{
-            donateButton.applyGradient(colors: [UIColor.headerButtonGradientStart.cgColor, UIColor.headerButtonGradientEnd.cgColor], radius: nil)
-        }
-        
+        updateGradients()
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        if(DeviceType.isiPad){
-            donateButton.applyGradient(colors: [UIColor.headerButtonGradientStart.cgColor, UIColor.headerButtonGradientEnd.cgColor], radius: 7)
-        }else{
-            donateButton.applyGradient(colors: [UIColor.headerButtonGradientStart.cgColor, UIColor.headerButtonGradientEnd.cgColor], radius: nil)
-        }
+        super.traitCollectionDidChange(previousTraitCollection)
+        updateGradients()
+    }
+    
+    fileprivate func updateGradients() {
+        view.setGradientBackgroundColor(colors: [.lightBlueBackgroundGradientStart, .lightBlueBackgroundGradientEnd], axis: .horizontal)
+        donateButton.applyGradient(colors: [UIColor.headerButtonGradientStart.cgColor, UIColor.headerButtonGradientEnd.cgColor], radius: 7)
     }
     
     private func configureNavigationBar(){
@@ -75,12 +68,53 @@ class CharityInfoVC: UIViewController{
         navigationController?.navigationBar.tintColor = .white
     }
     
+    private func getCharityInfo(){
+        showLoadingView()
+        networkManager.getCharityInfo(charityId: charityId) { [weak self] (result) in
+            guard let self = self else { return }
+            switch(result){
+            case .failure(let error):
+                self.presentGFAlertOnMainThread(title: "Something went wrong!", message: error.errorMessage, buttonTitle: "Ok")
+            case .success(let infoCharity):
+                DispatchQueue.main.async {
+                    self.impactImageView.setImage(imageUrl: infoCharity.imageUrl) { 
+                        self.hideLoadingView()
+                        self.infoCharity = infoCharity
+                        self.configureViews()
+                    }
+                }
+            }
+        }
+    }
+    
+    //MARK: Views Setup
+    
+    private func configureViews() {
+        guard self.infoCharity != nil else { return }
+        addRightBarButtonItem()
+        configureDonationButton()
+        configureImpactImageView()
+        configureScrollView()
+        configureTitleLabelView()
+        configureTagView()
+        configureLocationTagView()
+        configureOutputView()
+        configureAboutHeaderLabel()
+        configureDescriptionLabel()
+        configureSocialMediaStackView()
+        setContentViewHeight()
+    }
+    
+    private func addRightBarButtonItem(){
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.horizontal.3"), style: .plain, target: self, action: #selector(accessoryButtonPressed))
+    }
+    
     private func configureDonationButton(){
         view.addSubview(donateButton)
         donateButton.addTarget(self, action: #selector(donateButtonPressed), for: .touchUpInside)
         donateButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .title1)
         donateButton.setTitle("Donate", for: .normal)
-
+        
         if(DeviceType.isiPad){
             donateButton.snp.makeConstraints { (maker) in
                 maker.left.equalTo(self.view.snp.left).offset(200)
@@ -92,18 +126,16 @@ class CharityInfoVC: UIViewController{
             }
         }else{
             donateButton.snp.makeConstraints { (maker) in
-                maker.left.equalTo(self.view.snp.left)
-                maker.right.equalTo(self.view.snp.right)
-                maker.bottom.equalTo(self.view.snp.bottom)
-                maker.height.equalTo(70)
+                maker.left.equalTo(self.view.snp.left).offset(padding)
+                maker.right.equalTo(self.view.snp.right).offset(-padding)
+                maker.bottom.equalTo(self.view.snp.bottom).offset(-10)
+                maker.height.equalTo(50)
             }
         }
-
     }
     
     private func configureScrollView(){
         view.addSubview(contentSuperView)
-        
         contentSuperView.snp.makeConstraints { (maker) in
             maker.top.equalTo(impactImageView.snp.bottom)
             maker.left.equalTo(self.view.snp.left)
@@ -113,7 +145,6 @@ class CharityInfoVC: UIViewController{
         
         contentSuperView.addSubview(scrollView)
         scrollView.addSubview(contentView)
-        
         scrollView.snp.makeConstraints { (maker) in
             maker.top.equalTo(impactImageView.snp.bottom)
             maker.left.equalTo(self.view.snp.left)
@@ -125,65 +156,22 @@ class CharityInfoVC: UIViewController{
         contentView.snp.makeConstraints { (maker) in
             maker.width.equalTo(contentSuperView.snp.width)
         }
-        
         view.bringSubviewToFront(donateButton)
     }
-    
-    private func getCharityInfo() {
-        showLoadingView()
-        networkManager.getCharityInfo(charityId: charityId) { [weak self] (result) in
-            guard let self = self else { return }
-            switch(result){
-            case .failure(let error):
-                self.presentGFAlertOnMainThread(title: "Something went wrong!", message: error.errorMessage, buttonTitle: "Ok")
-            case .success(let infoCharity):
-                DispatchQueue.main.async {
-                    self.impactImageView.setImage(imageUrl: infoCharity.imageUrl) { 
-                            self.hideLoadingView()
-                            self.infoCharity = infoCharity
-                            self.configureViews()
-                        }
-                }
-            }
-        }
-    }
-    
-    private func configureViews() {
-        guard let infoCharity = infoCharity else { return }
-        addRightBarButtonItem()
-        configureDonationButton()
-        configureImpactImageView(infoCharity)
-        configureScrollView()
-        configureTitleLabelView(infoCharity)
-        configureTagView(infoCharity)
-        configureLocationTagView(infoCharity)
-        configureOutputView(infoCharity)
-        configureAboutHeaderLabel()
-        configureDescriptionLabel(infoCharity)
-        configureSocialMediaStackView()
-        setContentViewHeight()
-    }
-    
-    private func addRightBarButtonItem(){
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.horizontal.3"), style: .plain, target: self, action: #selector(accessoryButtonPressed))
-    }
 
-    
-    private func configureImpactImageView(_ infoCharity: InfoCharity){
+    private func configureImpactImageView(){
         self.view.addSubview(self.impactImageView)
-        
         self.impactImageView.snp.makeConstraints { (make) in
             make.left.equalTo(self.view.snp.left)
             make.right.equalTo(self.view.snp.right)
             make.top.equalTo(self.view.snp.top)
             make.height.equalTo(200)
         }
-        
     }
     
-    private func configureTitleLabelView(_ infoCharity: InfoCharity){
+    private func configureTitleLabelView(){
         self.view.addSubview(charityTitleLabelView)
-        charityTitleLabelView.set(title: infoCharity.name)
+        charityTitleLabelView.set(title: infoCharity!.name)
         charityTitleLabelView.delegate = self
         PersistenceManager.isCharityFavorite(charity: charity) { (isFavourite) in
             self.charityTitleLabelView.isFavourite = isFavourite
@@ -196,22 +184,21 @@ class CharityInfoVC: UIViewController{
         }
     }
     
-    private func configureTagView(_ infoCharity: InfoCharity){
+    private func configureTagView(){
         contentView.addSubview(tagView)
-        tagView.set(tags: infoCharity.tags!)
+        tagView.set(tags: infoCharity!.tags!)
         tagView.snp.makeConstraints { (maker) in
             maker.height.equalTo(30)
             maker.top.equalTo(contentView.snp.top).offset(45)
             maker.left.equalTo(contentView.snp.left).offset(20)
             maker.right.equalTo(contentView.snp.right).offset(-20)
         }
-        
         contentHeight += 75
     }
     
-    private func configureLocationTagView(_ infoCharity: InfoCharity){
+    private func configureLocationTagView(){
         contentView.addSubview(locationTagView)
-        locationTagView.set(tags: infoCharity.geoTags!)
+        locationTagView.set(tags: infoCharity!.geoTags!)
         locationTagView.snp.makeConstraints { (maker) in
             maker.height.equalTo(30)
             maker.top.equalTo(tagView.snp.bottom).offset(10)
@@ -221,9 +208,9 @@ class CharityInfoVC: UIViewController{
         contentHeight += 40
     }
     
-    private func configureOutputView(_ infoCharity: InfoCharity){
-        outputView = OutputView(output: infoCharity.singleImpact)
- 
+    private func configureOutputView(){
+        outputView = OutputView(output: infoCharity!.singleImpact)
+        
         contentView.addSubview(outputView!)
         outputView!.snp.makeConstraints { (maker) in
             maker.height.equalTo(50)
@@ -232,11 +219,9 @@ class CharityInfoVC: UIViewController{
             maker.right.lessThanOrEqualTo(contentView.snp.right).offset(-20)
         }
         
-        
-        if(infoCharity.singleImpact != nil){
+        if(infoCharity!.singleImpact != nil){
             let gestureRegocnizer = UITapGestureRecognizer(target: self, action: #selector(outputButtonPressed))
             outputView!.addGestureRecognizer(gestureRegocnizer)
-            
             outputView?.layer.borderWidth = 0.2
             outputView?.layer.cornerRadius = 7
             outputView?.layer.borderColor = UIColor.outputColor.cgColor
@@ -258,9 +243,9 @@ class CharityInfoVC: UIViewController{
         contentHeight += 75
     }
     
-    private func configureDescriptionLabel(_ infoCharity: InfoCharity){
-        let summaryDescription = infoCharity.summaryDescription ?? ""
-        let description = infoCharity.description ?? ""
+    private func configureDescriptionLabel(){
+        let summaryDescription = infoCharity!.summaryDescription ?? ""
+        let description = infoCharity!.description ?? ""
         var labelText = ""
         
         if(!summaryDescription.isEmpty){
@@ -290,11 +275,9 @@ class CharityInfoVC: UIViewController{
         descriptionLabel.sizeToFit()
         descriptionLabel.textColor = .aboutCharityTextColor
         if(DeviceType.isiPad){
-            let height = labelText.height(withWidth: view.bounds.width - 40, font: UIFont.preferredFont(forTextStyle: .body))
-            contentHeight += height
+            contentHeight += labelText.height(withWidth: view.bounds.width - 40, font: UIFont.preferredFont(forTextStyle: .body))
         }else{
-            let height = labelText.height(withWidth: view.bounds.width - 40, font: UIFont.preferredFont(forTextStyle: .footnote))
-            contentHeight += height
+            contentHeight += labelText.height(withWidth: view.bounds.width - 40, font: UIFont.preferredFont(forTextStyle: .footnote))
         }
     }
     
@@ -307,7 +290,6 @@ class CharityInfoVC: UIViewController{
             maker.height.equalTo(30)
             maker.centerX.equalTo(contentView.snp.centerX)
         }
-        
         contentHeight += 30
     }
     
@@ -316,6 +298,8 @@ class CharityInfoVC: UIViewController{
             maker.height.equalTo(contentHeight)
         }
     }
+    
+    //MARK: Buttons & Alerts
     
     @objc func outputButtonPressed(){
         presentCalculationVC()
@@ -326,13 +310,10 @@ class CharityInfoVC: UIViewController{
     }
     
     @objc private func donateButtonPressed() {
-        //presentDonationAlertVC()
-        //presentSafariVC()
         let safariAlert = FBAlertVC(title: "Donate", message: "Do want to open Safari to donate?", actionButtonTitle: "Yes", dismissButtonTitle: "No") {
             self.presentSafariVC()
         }
         present(safariAlert, animated: true)
-        
     }
     
     @objc func accessoryButtonPressed(){
@@ -341,10 +322,9 @@ class CharityInfoVC: UIViewController{
             self.showCurrencyAlertVC()
         }
         actionSheetAC.addAction(action)
-        
         actionSheetAC.addAction(UIAlertAction(title: "Cancel",
-                                                style: .cancel,
-                                                handler: nil))
+                                              style: .cancel,
+                                              handler: nil))
         present(actionSheetAC, animated: true)
         
     }
@@ -372,19 +352,6 @@ class CharityInfoVC: UIViewController{
         }
     }
     
-    func presentCurrencyAlertVCFromDonationVC(){
-        if(donationAlertVC != nil){
-            donationAlertVC?.dismiss(animated: true, completion: {
-                let vc = CurrencySelectionVC()
-                vc.modalPresentationStyle = .overFullScreen
-                vc.modalTransitionStyle = .crossDissolve
-                vc.startDonationAlertVCOnDismiss = true
-                vc.delegate = self
-                self.present(vc, animated: true)
-            })
-        }
-    }
-    
     func presentCalculationVC(){
         calculationVC = OutputCalculationVC()
         calculationVC?.output = infoCharity?.singleImpact
@@ -393,17 +360,6 @@ class CharityInfoVC: UIViewController{
         calculationVC?.delegate = self
         if(calculationVC != nil){
             present(calculationVC!, animated: true)
-        }
-    }
-    
-    func presentDonationAlertVC(){
-        donationAlertVC = DonationAlertVC()
-        donationAlertVC?.output = infoCharity?.singleImpact
-        donationAlertVC?.modalTransitionStyle = .crossDissolve
-        donationAlertVC?.modalPresentationStyle = .overFullScreen
-        donationAlertVC?.delegate = self
-        if(donationAlertVC != nil){
-            present(donationAlertVC!, animated: true)
         }
     }
     
@@ -430,49 +386,46 @@ class CharityInfoVC: UIViewController{
             }
         }
     }
-    
-    
 }
 
 extension CharityInfoVC: CurrencySelectionDelegate{
+    
     func currencyChanged() {
         outputView?.updateUI()
     }
     func startCalculationVC(){
         presentCalculationVC()
     }
-    func startDonationAlertVC(){
-        presentDonationAlertVC()
-    }
 }
 
 extension CharityInfoVC: TitleLabelViewDelegate{
+    
     func favouriteButtonPressed() {
         PersistenceManager.isCharityFavorite(charity: charity) { [weak self] (isFavourite) in
             guard let self = self else { return }
             if(isFavourite){
-                    PersistenceManager.updateFavorites(charity: self.charity, persistenceActionType: .remove) { (error) in
-                        guard let error = error else {
-                            self.presentGFAlertOnMainThread(title: "Removed", message: "\(self.charity.name) has been removed from your favorites", buttonTitle: "Ok")
-                            self.charityTitleLabelView.isFavourite = false
-                            return
-                        }
-                        self.presentErrorAlert(error)
+                PersistenceManager.updateFavorites(charity: self.charity, persistenceActionType: .remove) { (error) in
+                    guard let error = error else {
+                        self.presentGFAlertOnMainThread(title: "Removed", message: "\(self.charity.name) has been removed from your favorites", buttonTitle: "Ok")
+                        self.charityTitleLabelView.isFavourite = false
+                        return
                     }
-                }else{
-                    PersistenceManager.updateFavorites(charity: self.charity, persistenceActionType: .add) { (error) in
-                        guard let error = error else {
-                            self.presentGFAlertOnMainThread(title: "Added", message: "\(self.charity.name) is now in your favorites", buttonTitle: "Ok")
-                            self.charityTitleLabelView.isFavourite = true
-                            return
-                        }
-                        self.presentErrorAlert(error)
-                    }
+                    self.presentErrorAlert(error)
                 }
+            }else{
+                PersistenceManager.updateFavorites(charity: self.charity, persistenceActionType: .add) { (error) in
+                    guard let error = error else {
+                        self.presentGFAlertOnMainThread(title: "Added", message: "\(self.charity.name) is now in your favorites", buttonTitle: "Ok")
+                        self.charityTitleLabelView.isFavourite = true
+                        return
+                    }
+                    self.presentErrorAlert(error)
+                }
+            }
         }
     }
-    
 }
+
 
 extension CharityInfoVC: DonationBarViewDelegate{
     func donationButtonPressed() {
@@ -480,29 +433,19 @@ extension CharityInfoVC: DonationBarViewDelegate{
     }
 }
 
+
 extension CharityInfoVC: OutputCalculationVCDelegate{
+        func saveDonationTriggered(enteredAmount: Float) {
+            saveDonation(enteredAmount: enteredAmount)
+            calculationVC?.dismiss(animated: true, completion: {
+                self.presentGFAlertOnMainThread(title: "Saved", message: "Your donation was saved", buttonTitle: "Ok")
+            })
+        }
+    
     func currencyButtonPressedFromOutputCalculationVC() {
         presentCurrencySelectionInCalculationVC()
     }
 }
-
-extension CharityInfoVC: DonationAlertVCDelegate{
-    func saveDonationTriggered(enteredAmount: Float) {
-        saveDonation(enteredAmount: enteredAmount)
-        calculationVC?.dismiss(animated: true, completion: {
-            self.presentGFAlertOnMainThread(title: "Saved", message: "Your donation was saved", buttonTitle: "Ok")
-        })
-    }
-    
-    func showSafari() {
-        presentSafariVC()
-    }
-    
-    func presentCurrencySelectionFromDonationAlertVC() {
-        presentCurrencyAlertVCFromDonationVC()
-    }
-}
-
 
 
 extension CharityInfoVC: SocialMediaStackViewDelegate{
@@ -532,7 +475,7 @@ extension CharityInfoVC: SocialMediaStackViewDelegate{
         if UIApplication.shared.canOpenURL(url) {
             UIApplication.shared.open(url, options: [: ], completionHandler: nil)
         } else {
-           presentGFAlertOnMainThread(title: "WhatsApp could not be found", message: "Please install WhatsApp first", buttonTitle: "Ok")
+            presentGFAlertOnMainThread(title: "WhatsApp could not be found", message: "Please install WhatsApp first", buttonTitle: "Ok")
         }
     }
     

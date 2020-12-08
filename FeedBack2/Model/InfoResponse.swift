@@ -35,7 +35,6 @@ struct InfoCargo : Decodable {
     let url: String?
     let simpleImpact : SimpleImpact?
     
-    
     enum CodingKeys: String, CodingKey {
         case id = "@id"
         case descriptionField = "summaryDescription"
@@ -102,5 +101,4 @@ struct InfoCostPerBeneficiary : Codable, Hashable {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         value = try values.decodeIfPresent(String.self, forKey: .value)
     }
-    
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FavouritesVC: UIViewController{
+final class FavouritesVC: UIViewController{
     
     var charities = [Charity]()
     var tableView = UITableView()
@@ -52,7 +52,6 @@ class FavouritesVC: UIViewController{
         tableView.rowHeight = 100
         tableView.removeExcessCells()
         tableView.backgroundColor = .init(white: 0, alpha: 0)
-        
     }
     
     private func updateUI(){
@@ -63,7 +62,6 @@ class FavouritesVC: UIViewController{
             view.hideEmptyView()
         }
     }
-    
 }
 
 
@@ -100,10 +98,7 @@ extension FavouritesVC: UITableViewDelegate, UITableViewDataSource{
                 self.tableView.deleteRows(at: [indexPath], with: .left)
                 return
             }
-            
             self.presentGFAlertOnMainThread(title: "Something went wrong", message: error.errorMessage, buttonTitle: "Ok")
         }
-        
     }
-    
 }

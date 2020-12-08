@@ -9,28 +9,27 @@
 import Foundation
 
 struct SearchResponse : Decodable {
-
-        let cargo : Cargo
-        let success : Bool
-
-        enum CodingKeys: String, CodingKey {
-                case cargo = "cargo"
-                case success = "success"
-        }
     
-        init(from decoder: Decoder) throws {
-                let values = try decoder.container(keyedBy: CodingKeys.self)
-                cargo = try values.decode(Cargo.self, forKey: .cargo)
-                success = try values.decode(Bool.self, forKey: .success)
-        }
-
+    let cargo : Cargo
+    let success : Bool
+    
+    enum CodingKeys: String, CodingKey {
+        case cargo = "cargo"
+        case success = "success"
+    }
+    
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        cargo = try values.decode(Cargo.self, forKey: .cargo)
+        success = try values.decode(Bool.self, forKey: .success)
+    }
+    
 }
 
 struct Cargo : Decodable {
     
     let hits : [Hit]
     let total : Int?
-    
     
     enum CodingKeys: String, CodingKey {
         case hits = "hits"
@@ -42,9 +41,7 @@ struct Cargo : Decodable {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         total = try values.decode(Int.self, forKey: .total)
         hits = try values.decode([Hit].self, forKey: .hits)
-        
     }
-    
 }
 
 struct Hit : Decodable {
@@ -81,7 +78,7 @@ struct Hit : Decodable {
 
 
 struct Project : Codable {
-
+    
     let outputs : [Output]?
     
     enum CodingKeys: String, CodingKey {
@@ -96,7 +93,7 @@ struct Project : Codable {
 
 
 struct Output : Codable, Hashable {
-
+    
     let name : String?
     let costPerBeneficiary : CostPerBeneficary?
     
@@ -110,7 +107,6 @@ struct Output : Codable, Hashable {
         name = try values.decodeIfPresent(String.self, forKey: .name)
         costPerBeneficiary = try values.decodeIfPresent(CostPerBeneficary.self, forKey: .costPerBeneficiary)
     }
-    
 }
 
 struct CostPerBeneficary : Codable, Hashable {
@@ -125,6 +121,5 @@ struct CostPerBeneficary : Codable, Hashable {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         value = try values.decodeIfPresent(Float.self, forKey: .value)
     }
-    
 }
 
