@@ -148,7 +148,7 @@ extension SearchVC: HeaderViewDelegate{
             PersistenceManager.setImpactSort(!sortIsOn)
             if(self.listView.isDescendant(of: self.contentView)){
                 self.charityListVC.sortForImpact()
-                self.charityListVC.updateData()
+                self.charityListVC.updateTableView()
             }
         }
         
@@ -172,7 +172,7 @@ extension SearchVC: HeaderViewDelegate{
     func categoryChanged(category: Category) {
         showListVC()
         headerView.textfield.clearTextField()
-        charityListVC.getInitialCharities(searchParameter: category.parameter)
+        charityListVC.loadInitialCharities(searchParameter: category.parameter)
     }
     
     func searchEntered(input: String?){
@@ -180,7 +180,7 @@ extension SearchVC: HeaderViewDelegate{
         showListVC()
         categoriesView.selectedCategory = nil
         categoriesView.updateCategorySelection()
-        charityListVC.getInitialCharities(searchParameter: "q=\(searchInput)")
+        charityListVC.loadInitialCharities(searchParameter: "q=\(searchInput)")
     }
 }
 

@@ -33,6 +33,10 @@ class PersistenceManager {
         return isOn
     }
     
+    static var isSortActivated: Bool{
+        return defaults.value(forKey: Keys.sort) as? Bool ?? false
+    }
+    
     static func setCurrency(curency: Currency)->FBError?{
         do{
             let encoder = JSONEncoder()

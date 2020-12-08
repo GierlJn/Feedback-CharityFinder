@@ -29,7 +29,7 @@ class EmptyStateView: UIView{
     
     private func configure(){
         addSubview(titleLabel)
-        backgroundColor = .systemBackground
+        backgroundColor = UIColor.init().withAlphaComponent(0)
         titleLabel.snp.makeConstraints { (maker) in
             maker.centerY.equalTo(snp.centerY)
             maker.left.equalTo(snp.left).offset(40)

@@ -16,7 +16,6 @@ class NetworkManager{
     
     
     func cancelCurrentTasks(){
-        //URLSession.shared.invalidateAndCancel()
         URLSession.shared.getTasksWithCompletionHandler { (dataTasks, uploadTasks, downloadTasks) in
             for task in dataTasks{
                 task.cancel()
