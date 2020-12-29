@@ -127,7 +127,7 @@ final class CharityInfoVC: UIViewController{
             donateButton.snp.makeConstraints { (maker) in
                 maker.left.equalTo(self.view.snp.left).offset(padding)
                 maker.right.equalTo(self.view.snp.right).offset(-padding)
-                maker.bottom.equalTo(self.view.snp.bottom).offset(-10)
+                maker.bottom.equalTo(self.view.snp.bottom).offset(-20)
                 maker.height.equalTo(50)
             }
         }
